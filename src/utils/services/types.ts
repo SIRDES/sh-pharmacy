@@ -1,0 +1,32 @@
+export type CardType = {
+  cardTypeInstanceId: number;
+  institutionId: number;
+  cardNumber: string;
+  cardTypeId: number;
+  cardPin: string;
+  customerTypeInstanceId: number;
+  cardName: string;
+  cardTypeInstanceStatusId: number;
+  cardExpiryDate: string;
+  createdByUserId: number;
+  createdDateTime: string;
+  modifiedByUserId: number;
+  modifiedDateTime: string;
+  card_AccountId: number;
+  currentBalance: string;
+};
+export type ChurchType = {
+  merchantId: number;
+  institutionId: number;
+  merchantName: string;
+  merchantLogin: string;
+  merchantPassword: string;
+  emailAddress: string;
+  contactTel: string;
+  languagePreferenceId: number;
+  active: boolean;
+  createdByUserId: number;
+  createdDateTime: string;
+  modifiedByUserId: number;
+  modifiedDateTime: string;
+};

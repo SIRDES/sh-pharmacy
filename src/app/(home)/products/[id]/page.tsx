@@ -105,7 +105,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       console.log(error)
     }
   }
-  console.log("selectedShop", selectedShopProduct)
+  // console.log("selectedShop", selectedShopProduct)
   useEffect(() => {
     if (!selectedShopId || !id) return
     handleFetchShopProducts()
@@ -246,7 +246,6 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       }
 
       // // product_stock_updates
-      // await product_stock_updates.add({ productId: Number(id), initial_quantity: orderData.current_quantity, added_quantity: stockOperation === "ADD" ? Number(stockValue) : -Number(stockValue) })
       showAlert({
         title: "Success",
         text: "Stock updated successfully",

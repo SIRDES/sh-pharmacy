@@ -7,6 +7,7 @@ import {
   InputAdornment,
   ListItem,
   Menu,
+  MenuItem,
   Paper,
   Table,
   TableBody,
@@ -29,8 +30,11 @@ import LoadingAlert from "@/components/LoadingAlert";
 import { USER_ROLES } from "@/types/constants";
 import Link from "next/link";
 import { currencyFormatter } from "@/utils/services/utils";
-import { getAllProducts } from "@/utils/serverActions/Product";
+import { getAllProducts, updateMultipleProducts } from "@/utils/serverActions/Product";
 import dayjs from "dayjs";
+import ManageShopsStockModal from "@/components/ManageShopsStockModal";
+import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
+import ManageProductStockModal from "@/components/ManageProductStockModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   padding: "9px 8px",
@@ -57,25 +61,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   // },
 }));
 
-// Initialize Firestore
 
 export default function Products() {
   const router = useRouter();
   const { data: session } = useSession();
   const currentUser = session?.user;
-  console.log("currentUser", currentUser)
+  // console.log("currentUser", currentUser)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [loading, setLoading] = useState(false);
 
-  const [sortAsc, setSortAsc] = useState(false);
-  const [sortAmountAsc, setSortAmountAsc] = useState(false);
+  const [openManageShopStockModal, setOpenManageShopStockModal] =
+    useState(false);
+  const [openManageProductStockModal, setOpenManageProductStockModal] =
+    useState(false);
+  const [selectedProducts, setSelectedProducts] = useState<Array<any>>([]);
 
   const [fetchedOrders, setFetchedOrders] = useState<any>(null);
   const [orders, setOrders] = useState<Array<any>>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
+  const [selectedShopId, setSelectedShopId] = useState<string | null>(null);
+  const [stockValue, setStockValue] = useState<number | string>("");
+  const [stockOperation, setStockOperation] = useState<"ADD" | "SUBTRACT">("ADD");
+  const open = Boolean(anchorEl);
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -128,6 +137,39 @@ export default function Products() {
     fetchProductsData();
   }, []);
 
+  const handleProductStockConfirm = async () => {
+    setOpenManageProductStockModal(false);
+    setLoading(true);
+    // console.log("selectedProducts", selectedProducts)
+    const products = selectedProducts.map((product: any) => ({ _id: product._id, currentStock: product.currentStock }))
+    try {
+      const res = await updateMultipleProducts(products)
+      if (!res.success) {
+        showAlert({
+          title: "Error",
+          text: res?.message || "An error occurred while fetching products",
+          severity: "error",
+        })
+        return
+      }
+      showAlert({
+        title: "Success",
+        text: "Product stock updated successfully",
+        severity: "success",
+      })
+      fetchProductsData();
+    } catch (error: any) {
+      console.log("error", error);
+      showAlert({
+        title: "Error",
+        text: error?.message || "An error occurred while fetching products",
+        severity: "error",
+      })
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const handleSearchByProductNameOrOrderNumber = (e: any) => {
     const value = e.target.value;
     const filteredOrders = fetchedOrders.filter(
@@ -137,10 +179,55 @@ export default function Products() {
     );
     setOrders(filteredOrders);
   };
+
+  const handleCloseManageShopStockModal = () => {
+    setOpenManageShopStockModal(false);
+    setStockValue("");
+    setStockOperation("ADD");
+    // setSelectedShopProduct(null);
+    setSelectedShopId(null);
+  };
+  const handleCloseManageProductStockModal = () => {
+    setOpenManageProductStockModal(false);
+    setStockValue("");
+    setStockOperation("ADD");
+    // setSelectedShopProduct(null);
+    // setSelectedShopId(null);
+  };
+  const handleOpenManageProductStockModal = () => {
+    setSelectedProducts([]);
+    handleClose()
+    setOpenManageProductStockModal(true)
+  };
   const isAdmin = currentUser?.role === USER_ROLES.ADMIN
   return (
     <>
       <LoadingAlert open={loading} />
+      <ManageShopsStockModal
+        open={openManageShopStockModal}
+        onClose={handleCloseManageShopStockModal}
+        setOpen={setOpenManageShopStockModal}
+        handleConfirmation={fetchProductsData}
+        students={orders}
+        setSelectedProducts={setSelectedProducts}
+        setStockValue={setStockValue}
+        setStockOperation={setStockOperation}
+        stockValue={stockValue}
+        stockOperation={stockOperation}
+        selectedShopId={selectedShopId}
+        selectedShopProduct={null}
+        setSelectedShopId={setSelectedShopId}
+      />
+      <ManageProductStockModal
+        open={openManageProductStockModal}
+        onClose={handleCloseManageProductStockModal}
+        handleConfirmation={handleProductStockConfirm}
+        students={orders}
+        setSelectedProducts={setSelectedProducts}
+        selectedProducts={selectedProducts}
+        setStockOperation={setStockOperation}
+        stockOperation={stockOperation}
+      />
       <Box>
         <Box
           display={"flex"}
@@ -167,51 +254,56 @@ export default function Products() {
           </Box>
           {currentUser?.role === USER_ROLES.ADMIN && (
             <Box>
+
               <Button
-                component={Link}
-                href={"/products/add-product"}
                 variant="contained"
+                disableElevation
+                onClick={(event) =>
+                  handleMenuClick(event)
+                }
+
                 size="small"
-                startIcon={<AddIcon />}
-                sx={{
-                  borderRadius: "4px",
-                  // background: "#5812B3",
-                  width: "fit-content",
-                  color: "white",
-                  fontWeight: 700,
-                }}
               >
-                Product
+                Action
               </Button>
-              {/* <Menu
-                id="menu-batch"
+
+              <Menu
+                id="basic-menu"
                 anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                keepMounted
+                open={open}
                 transformOrigin={{
-                  vertical: "top",
                   horizontal: "right",
+                  vertical: "top",
                 }}
-                open={Boolean(anchorEl)}
+                anchorOrigin={{
+                  horizontal: "right",
+                  vertical: "bottom",
+                }}
                 onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
               >
-                <ListItem
-                  component={Link}
-                  href={"/products/add-product"}
-                  sx={{ color: "text.primary" }}
+                <MenuItem component={Link}
+                  href={"/products/add-product"}>
+                  Add Products
+                </MenuItem>
+                <MenuItem
+                  // component={Link}
+                  onClick={handleOpenManageProductStockModal}
                 >
-                  Single
-                </ListItem>
-                <ListItem
-                // sx={{ fontSize: "12px" }}
-                // onClick={handleExcelClick}
+                  Manage stock
+                </MenuItem>
+                {/* <MenuItem
+                  // component={Link}
+                  onClick={() => {
+                    handleClose();
+                    setOpenManageShopStockModal(true)
+                  }}
                 >
-                  From excel
-                </ListItem>
-              </Menu> */}
+                  Manage Shop Qty
+                </MenuItem> */}
+              </Menu>
             </Box>
           )}
 

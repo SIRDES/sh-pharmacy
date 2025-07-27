@@ -58,12 +58,13 @@ export const addProduct = async (data: {
     }
 
     // Get the latest SKU to continue numbering
-    const lastProduct = await Product.findOne().sort({ createdAt: -1 });
+    const lastProduct = await Product.findOne().sort({ _id: -1 });
+    console.log("lastProduct", lastProduct)
     let nextSku = lastProduct?.sku ? lastProduct.sku + 1 : 1;
-
     const productsToInsert = [];
 
     for (const item of data) {
+      console.log("nextSku", nextSku)
       const { name, costPrice, sellingPrice, currentStock, expiryDate } = item;
 
       if (!name || !costPrice || !sellingPrice || !expiryDate) {
@@ -197,6 +198,26 @@ export const updateProduct = async ({ productId, productData }: { productId: str
       return { success: false, message: "Product not found" };
     }
     return { success: true, data: JSON.parse(JSON.stringify(updatedProduct)) };
+  } catch (err: any) {
+    console.log(err);
+    return { success: false, message: err?.message || "An error occurred" };
+  }
+}
+
+// update multiple products
+export const updateMultipleProducts = async (products: any[]) => {
+  try {
+    await connectDB();
+    //  prepare update operations
+    const updateOperations = products.map((product) => ({
+      updateOne: {
+        filter: { _id: product._id },
+        update: { $set: product }
+      }
+    }))
+
+    const updatedProducts = await Product.bulkWrite(updateOperations);
+    return { success: true, data: JSON.parse(JSON.stringify(updatedProducts)) };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };

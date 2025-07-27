@@ -59,12 +59,10 @@ export const addProduct = async (data: {
 
     // Get the latest SKU to continue numbering
     const lastProduct = await Product.findOne().sort({ _id: -1 });
-    console.log("lastProduct", lastProduct)
     let nextSku = lastProduct?.sku ? lastProduct.sku + 1 : 1;
     const productsToInsert = [];
 
     for (const item of data) {
-      console.log("nextSku", nextSku)
       const { name, costPrice, sellingPrice, currentStock, expiryDate } = item;
 
       if (!name || !costPrice || !sellingPrice || !expiryDate) {

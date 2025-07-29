@@ -176,9 +176,9 @@ export default function Products() {
   const handleShopProductStockConfirm = async () => {
     setOpenManageShopStockModal(false);
     setLoading(true);
-    // console.log("selectedProducts", selectedProducts)
+    console.log("selectedShopProducts", selectedShopProducts)
     const shopProducts = selectedShopProducts.map((product: any) => ({ _id: product._id, quantity: product.quantity }))
-    const products = selectedShopProducts.map((product: any) => ({ _id: product._id, currentStock: product.product.currentStock }))
+    const products = selectedShopProducts.map((product: any) => ({ _id: product.product._id, currentStock: product.product.currentStock }))
     try {
       const res = await updateMultipleShopProduct(shopProducts)
       await updateMultipleProducts(products)

@@ -45,7 +45,12 @@ export const getAllShopProducts = async ({ shopId, productId }: { shopId?: strin
         }
       },
       { $unwind: "$shop" },
-      { $unwind: "$product" }
+      { $unwind: "$product" },
+      {
+        $sort: {
+          "product.name": 1, // A–Z
+        },
+      },
     ]);
 
     if (!products || products.length === 0) {

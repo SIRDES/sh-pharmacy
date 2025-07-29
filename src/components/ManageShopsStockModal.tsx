@@ -29,6 +29,7 @@ import { CustomizedSelect } from "./CustomizedSelect";
 import { useShops } from "@/hooks/useShops";
 import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
 import { showAlert } from "./Alerts";
+import LoadingAlert from "./LoadingAlert";
 
 export default function ManageShopsStockModal({
   open,
@@ -52,22 +53,26 @@ export default function ManageShopsStockModal({
   const [selectedShopId, setSelectedShopId] = useState<string | null>(null);
   const [stockOperation, setStockOperation] = useState<"ADD" | "SUBTRACT">("ADD");
   const [stockValues, setStockValues] = useState<any[]>([]);
-
+  const [loading, setLoading] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>("");
   const handleModalClose = () => {
     onClose();
     // setSelectedStudentsIds([]);
+    setStockOperation("ADD");
     setFetchedStudents([]);
     setFilteredStudents([]);
     setSelectedShopProducts([]);
     setStockValues([]);
     setSelectedShopId(null);
+    setSearchValue("");
   };
 
   const handleSearch = (e: any) => {
     const value = e.target.value;
+    setSearchValue(value);
     const filteredStudents = fetchedStudents.filter(
       (student: any) =>
-        `${student?.name}`
+        `${student?.product?.name}`
           .toLowerCase()
           .includes(value.toLowerCase())
     );
@@ -78,9 +83,10 @@ export default function ManageShopsStockModal({
     try {
       setFetchedStudents([]);
       setFilteredStudents([]);
+      setLoading(true);
       // if (!selectedShopId) return
       const shopProducts = await getAllShopProducts({ shopId: shopId });
-      console.log("shopProducts", shopProducts)
+      // console.log("shopProducts", shopProducts)
       if (shopProducts.success) {
         const lists = shopProducts?.data
         setFetchedStudents(lists);
@@ -88,6 +94,8 @@ export default function ManageShopsStockModal({
       }
     } catch (error) {
       console.log(error)
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -164,196 +172,200 @@ export default function ManageShopsStockModal({
     handleModalClose()
   };
   return (
-    <Backdrop
-      aria-labelledby="select-students-dialog"
-      open={open}
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-    >
-      <Box
-        component={Paper}
-        sx={{ minHeight: "25vh", width: isMobile ? "90vw" : "65vw" }}
+    <>
+      <LoadingAlert open={loading} />
+      <Backdrop
+        aria-labelledby="select-students-dialog"
+        open={open}
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Box
-          display={"flex"}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          sx={{ px: isMobile ? 1 : 2 }}
+          component={Paper}
+          sx={{ minHeight: "25vh", width: isMobile ? "90vw" : "65vw" }}
         >
-          {/* <Box /> */}
-          <Typography variant="body1" fontWeight={700}>
-            Manage shops stock
-          </Typography>
-          <IconButton
-            aria-label="close"
-            onClick={handleModalClose}
-            sx={{
-              // position: "absolute",
-              // right: 8,
-              // top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </Box>
-        <Divider />
-        <Box>
-          <Box sx={{ width: "100%", p: isMobile ? 1 : 2 }}>
-
-            <Grid container spacing={1} sx={{ mb: 1 }}>
-              <Grid size={{ xs: 12, md: 4 }}>
-                <TextField
-                  name={"search"}
-                  fullWidth
-                  size="small"
-                  placeholder="Search product"
-                  onChange={handleSearch}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid size={{ xs: 12, md: 4 }}>
-                <Select
-                  fullWidth
-                  displayEmpty
-                  input={<CustomizedSelect />}
-                  renderValue={() => {
-                    if (selectedShopId === null || selectedShopId === "") {
-                      return (
-                        <em style={{ color: "#ABB3BF" }}>Select shop</em>
-                      );
-                    } else {
-                      return <em>{shops?.find((shop: any) => shop._id === selectedShopId)?.name?.toUpperCase()}</em>;
-                    }
-                  }}
-                  value={selectedShopId || ""}
-                  onChange={(e) => {
-                    setSelectedShopId(e.target.value)
-                    handleFetchShopProducts(e.target.value)
-                  }}
-
-                >
-                  {shops && shops?.map((shop: any) => (
-                    <MenuItem key={shop._id} value={shop._id}>
-                      {shop?.name?.toUpperCase()}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </Grid>
-              <Grid size={{ xs: 12, md: 4 }}>
-                <Select
-                  fullWidth
-                  displayEmpty
-                  input={<CustomizedSelect />}
-                  value={stockOperation || "ADD"}
-                  onChange={(e) => {
-                    const operationValue = e.target.value as "ADD" | "SUBTRACT";
-                    // setOperation(operationValue);
-                    setStockOperation(operationValue);
-                  }}
-                >
-                  <MenuItem value={"ADD"}>ADD</MenuItem>
-                  <MenuItem value={"SUBTRACT"}>SUBTRACT</MenuItem>
-                </Select>
-              </Grid>
-            </Grid>
-
-            <TableContainer component={Paper} sx={{ height: "350px" }}>
-              <Table
-                stickyHeader
-                sx={{ minWidth: 550 }}
-                aria-label="students table"
-              >
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Name</StyledTableCell>
-
-                    <StyledTableCell>Product Qty</StyledTableCell>
-                    <StyledTableCell>Shop Qty</StyledTableCell>
-                    <StyledTableCell align="center">Qty</StyledTableCell>
-
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {filteredStudents?.length > 0 &&
-                    filteredStudents?.map((student: any, index: number) => (
-                      <StyledTableRow
-                        key={student?._id}
-
-                      // sx={{ cursor: "pointer" }}
-                      >
-
-                        <StyledTableCell>
-                          {student?.product?.name?.toUpperCase()}
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          {student?.product?.currentStock}
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          {student?.quantity}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          <TextField
-                            size="small"
-                            // fullWidth
-                            variant="outlined"
-                            type={"number"}
-                            placeholder="0"
-                            value={stockValues?.find((item: any) => item._id === student._id)?.value || ""}
-                            onChange={(e) => {
-                              handleChange(e, student);
-                            }}
-                            inputProps={{
-                              style: {
-                                border: "1px solid #ABB3BF",
-                                padding: "2px",
-                                textAlign: "center",
-                                // paddingTop: "17px",
-                                // borderRadius: "5px",
-                                width: "40px",
-                              },
-                            }}
-                          />
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Box>
-          <Divider />
           <Box
             display={"flex"}
             justifyContent={"space-between"}
-            sx={{ width: "100%", p: isMobile ? 1 : 2 }}
+            alignItems={"center"}
+            sx={{ px: isMobile ? 1 : 2 }}
           >
-            <Button
-              variant="outlined"
+            {/* <Box /> */}
+            <Typography variant="body1" fontWeight={700}>
+              Manage shops stock
+            </Typography>
+            <IconButton
+              aria-label="close"
               onClick={handleModalClose}
               sx={{
-                width: "fit-content",
+                // position: "absolute",
+                // right: 8,
+                // top: 8,
+                color: (theme) => theme.palette.grey[500],
               }}
             >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              onClick={handleSave}
-              disabled={selectedShopProducts.length === 0}
-              sx={{
-                width: "fit-content",
-              }}
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          <Divider />
+          <Box>
+            <Box sx={{ width: "100%", p: isMobile ? 1 : 2 }}>
+
+              <Grid container spacing={1} sx={{ mb: 1 }}>
+                <Grid size={{ xs: 12, md: 4 }}>
+                  <TextField
+                    name={"search"}
+                    fullWidth
+                    size="small"
+                    placeholder="Search product"
+                    value={searchValue}
+                    onChange={handleSearch}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <Grid size={{ xs: 12, md: 4 }}>
+                  <Select
+                    fullWidth
+                    displayEmpty
+                    input={<CustomizedSelect />}
+                    renderValue={() => {
+                      if (selectedShopId === null || selectedShopId === "") {
+                        return (
+                          <em style={{ color: "#ABB3BF" }}>Select shop</em>
+                        );
+                      } else {
+                        return <em>{shops?.find((shop: any) => shop._id === selectedShopId)?.name?.toUpperCase()}</em>;
+                      }
+                    }}
+                    value={selectedShopId || ""}
+                    onChange={(e) => {
+                      setSelectedShopId(e.target.value)
+                      handleFetchShopProducts(e.target.value)
+                    }}
+
+                  >
+                    {shops && shops?.map((shop: any) => (
+                      <MenuItem key={shop._id} value={shop._id}>
+                        {shop?.name?.toUpperCase()}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Grid>
+                <Grid size={{ xs: 12, md: 4 }}>
+                  <Select
+                    fullWidth
+                    displayEmpty
+                    input={<CustomizedSelect />}
+                    value={stockOperation || "ADD"}
+                    onChange={(e) => {
+                      const operationValue = e.target.value as "ADD" | "SUBTRACT";
+                      // setOperation(operationValue);
+                      setStockOperation(operationValue);
+                    }}
+                  >
+                    <MenuItem value={"ADD"}>ADD</MenuItem>
+                    <MenuItem value={"SUBTRACT"}>SUBTRACT</MenuItem>
+                  </Select>
+                </Grid>
+              </Grid>
+
+              <TableContainer component={Paper} sx={{ height: "350px" }}>
+                <Table
+                  stickyHeader
+                  sx={{ minWidth: 550 }}
+                  aria-label="students table"
+                >
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>Name</StyledTableCell>
+
+                      <StyledTableCell>Product Qty</StyledTableCell>
+                      <StyledTableCell>Shop Qty</StyledTableCell>
+                      <StyledTableCell align="center">Qty</StyledTableCell>
+
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {filteredStudents?.length > 0 &&
+                      filteredStudents?.map((student: any, index: number) => (
+                        <StyledTableRow
+                          key={student?._id}
+
+                        // sx={{ cursor: "pointer" }}
+                        >
+
+                          <StyledTableCell>
+                            {student?.product?.name?.toUpperCase()}
+                          </StyledTableCell>
+                          <StyledTableCell>
+                            {student?.product?.currentStock}
+                          </StyledTableCell>
+                          <StyledTableCell>
+                            {student?.quantity}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <TextField
+                              size="small"
+                              // fullWidth
+                              variant="outlined"
+                              type={"number"}
+                              placeholder="0"
+                              value={stockValues?.find((item: any) => item._id === student._id)?.value || ""}
+                              onChange={(e) => {
+                                handleChange(e, student);
+                              }}
+                              inputProps={{
+                                style: {
+                                  border: "1px solid #ABB3BF",
+                                  padding: "2px",
+                                  textAlign: "center",
+                                  // paddingTop: "17px",
+                                  // borderRadius: "5px",
+                                  width: "40px",
+                                },
+                              }}
+                            />
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
+            <Divider />
+            <Box
+              display={"flex"}
+              justifyContent={"space-between"}
+              sx={{ width: "100%", p: isMobile ? 1 : 2 }}
             >
-              save
-            </Button>
+              <Button
+                variant="outlined"
+                onClick={handleModalClose}
+                sx={{
+                  width: "fit-content",
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleSave}
+                disabled={selectedShopProducts.length === 0}
+                sx={{
+                  width: "fit-content",
+                }}
+              >
+                save
+              </Button>
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </Backdrop>
+      </Backdrop>
+    </>
   );
 }

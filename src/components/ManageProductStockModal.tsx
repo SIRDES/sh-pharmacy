@@ -85,11 +85,11 @@ export default function ManageProductStockModal({
     const currentStock = producttoUpdate.currentStock;
 
     if (currentStock < value && stockOperation === "SUBTRACT") {
-      showAlert({
-        title: "Error",
-        text: "Quantity to be subtracted is more than the available stock",
-        severity: "error",
-      })
+      // showAlert({
+      //   title: "Error",
+      //   text: "Quantity to be subtracted is more than the available stock",
+      //   severity: "error",
+      // })
       return
     }
     let newStockValue = 0;

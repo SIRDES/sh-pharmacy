@@ -33,7 +33,7 @@ import { currencyFormatter } from "@/utils/services/utils";
 import { getAllProducts, updateMultipleProducts } from "@/utils/serverActions/Product";
 import dayjs from "dayjs";
 import ManageShopsStockModal from "@/components/ManageShopsStockModal";
-import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
+import { getAllShopProducts, updateMultipleShopProduct } from "@/utils/serverActions/ShopProduct";
 import ManageProductStockModal from "@/components/ManageProductStockModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -77,11 +77,12 @@ export default function Products() {
   const [openManageProductStockModal, setOpenManageProductStockModal] =
     useState(false);
   const [selectedProducts, setSelectedProducts] = useState<Array<any>>([]);
+  const [selectedShopProducts, setSelectedShopProducts] = useState<Array<any>>([]);
 
   const [fetchedOrders, setFetchedOrders] = useState<any>(null);
   const [orders, setOrders] = useState<Array<any>>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedShopId, setSelectedShopId] = useState<string | null>(null);
+  // const [selectedShopId, setSelectedShopId] = useState<string | null>(null);
   const [stockValue, setStockValue] = useState<number | string>("");
   const [stockOperation, setStockOperation] = useState<"ADD" | "SUBTRACT">("ADD");
   const open = Boolean(anchorEl);
@@ -118,7 +119,7 @@ export default function Products() {
         })
         return
       }
-      console.log("all products", res?.data)
+      // console.log("all products", res?.data)
       setFetchedOrders(res?.data);
       setOrders(res?.data);
     } catch (error: any) {
@@ -170,6 +171,44 @@ export default function Products() {
     }
   }
 
+
+
+  const handleShopProductStockConfirm = async () => {
+    setOpenManageShopStockModal(false);
+    setLoading(true);
+    // console.log("selectedProducts", selectedProducts)
+    const shopProducts = selectedShopProducts.map((product: any) => ({ _id: product._id, quantity: product.quantity }))
+    const products = selectedShopProducts.map((product: any) => ({ _id: product._id, currentStock: product.product.currentStock }))
+    try {
+      const res = await updateMultipleShopProduct(shopProducts)
+      await updateMultipleProducts(products)
+      if (!res.success) {
+        showAlert({
+          title: "Error",
+          text: res?.message || "An error occurred while fetching products",
+          severity: "error",
+        })
+        return
+      }
+      showAlert({
+        title: "Success",
+        text: "Shop product stock updated successfully",
+        severity: "success",
+      })
+      fetchProductsData();
+    } catch (error: any) {
+      // console.log("error", error);
+      showAlert({
+        title: "Error",
+        text: error?.message || "An error occurred while fetching products",
+        severity: "error",
+      })
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
   const handleSearchByProductNameOrOrderNumber = (e: any) => {
     const value = e.target.value;
     const filteredOrders = fetchedOrders.filter(
@@ -182,10 +221,10 @@ export default function Products() {
 
   const handleCloseManageShopStockModal = () => {
     setOpenManageShopStockModal(false);
-    setStockValue("");
-    setStockOperation("ADD");
+    // setStockValue("");
+    // setStockOperation("ADD");
     // setSelectedShopProduct(null);
-    setSelectedShopId(null);
+    // setSelectedShopId(null);
   };
   const handleCloseManageProductStockModal = () => {
     setOpenManageProductStockModal(false);
@@ -206,17 +245,10 @@ export default function Products() {
       <ManageShopsStockModal
         open={openManageShopStockModal}
         onClose={handleCloseManageShopStockModal}
-        setOpen={setOpenManageShopStockModal}
-        handleConfirmation={fetchProductsData}
-        students={orders}
-        setSelectedProducts={setSelectedProducts}
-        setStockValue={setStockValue}
-        setStockOperation={setStockOperation}
-        stockValue={stockValue}
-        stockOperation={stockOperation}
-        selectedShopId={selectedShopId}
-        selectedShopProduct={null}
-        setSelectedShopId={setSelectedShopId}
+        handleConfirmation={handleShopProductStockConfirm}
+        selectedShopProducts={selectedShopProducts}
+        setSelectedShopProducts={setSelectedShopProducts}
+      // setStockValue={setStockValue}
       />
       <ManageProductStockModal
         open={openManageProductStockModal}
@@ -294,7 +326,7 @@ export default function Products() {
                 >
                   Manage stock
                 </MenuItem>
-                {/* <MenuItem
+                <MenuItem
                   // component={Link}
                   onClick={() => {
                     handleClose();
@@ -302,7 +334,7 @@ export default function Products() {
                   }}
                 >
                   Manage Shop Qty
-                </MenuItem> */}
+                </MenuItem>
               </Menu>
             </Box>
           )}

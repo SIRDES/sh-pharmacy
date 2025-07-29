@@ -110,6 +110,25 @@ export const updateShopProduct = async ({ shopProductId, productData }: { shopPr
   }
 }
 
+
+export const updateMultipleShopProduct = async (shopProducts: any[]) => {
+  try {
+    await connectDB();
+    //  prepare update operations
+    const updateOperations = shopProducts.map((product) => ({
+      updateOne: {
+        filter: { _id: product._id },
+        update: { $set: product }
+      }
+    }))
+
+    const updatedProducts = await ShopProduct.bulkWrite(updateOperations);
+    return { success: true, data: JSON.parse(JSON.stringify(updatedProducts)) };
+  } catch (err: any) {
+    console.log(err);
+    return { success: false, message: err?.message || "An error occurred" };
+  }
+}
 // delete a product
 export const deleteUser = async (productId: string) => {
   try {

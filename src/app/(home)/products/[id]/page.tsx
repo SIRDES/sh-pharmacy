@@ -235,7 +235,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         orderResponse = await updateShopProduct({ shopProductId: selectedShopProduct?._id, productData: { quantity: Number(newQuantity) } })
       }
       await updateProduct({ productId: id as string, productData })
-      console.log("ProductDetailsResponse", orderResponse)
+      // console.log("ProductDetailsResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",

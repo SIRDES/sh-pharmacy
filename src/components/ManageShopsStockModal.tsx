@@ -28,52 +28,39 @@ import { StyledTableCell, StyledTableRow } from "@/theme/table";
 import { CustomizedSelect } from "./CustomizedSelect";
 import { useShops } from "@/hooks/useShops";
 import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
+import { showAlert } from "./Alerts";
 
 export default function ManageShopsStockModal({
   open,
-  setOpen,
   onClose,
   handleConfirmation,
-  students,
-  setSelectedProducts,
-  setStockValue,
-  setStockOperation,
-  stockValue,
-  stockOperation,
-  selectedShopId,
-  selectedShopProduct,
-  setSelectedShopId
+  setSelectedShopProducts,
+  selectedShopProducts,
 }: {
   open: boolean;
   onClose: () => void;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  students: any[];
-  setSelectedProducts: Dispatch<React.SetStateAction<any[]>>;
+  selectedShopProducts: any[];
+  setSelectedShopProducts: Dispatch<React.SetStateAction<any[]>>;
   handleConfirmation: () => void;
-  setStockValue: React.Dispatch<React.SetStateAction<number | string>>;
-  setStockOperation: React.Dispatch<React.SetStateAction<"ADD" | "SUBTRACT">>;
-  stockValue: number | string;
-  stockOperation: "ADD" | "SUBTRACT";
-  selectedShopId: string | null,
-  selectedShopProduct: any;
-  setSelectedShopId: React.Dispatch<React.SetStateAction<string | null>>
 }) {
   const theme = useTheme();
   const { shops } = useShops()
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [fetchedStudents, setFetchedStudents] = useState<any[]>([]);
   const [filteredStudents, setFilteredStudents] = useState<any[]>([]);
-  const [selectedStudentsIds, setSelectedStudentsIds] = useState<string[]>([]);
-  useEffect(() => {
-    setFetchedStudents(students);
-    setFilteredStudents(students);
-  }, [students]);
-  // const handleModalClose = () => {
-  //   setOpen(false);
-  // };
+  // const [selectedStudentsIds, setSelectedStudentsIds] = useState<string[]>([]);
+  const [selectedShopId, setSelectedShopId] = useState<string | null>(null);
+  const [stockOperation, setStockOperation] = useState<"ADD" | "SUBTRACT">("ADD");
+  const [stockValues, setStockValues] = useState<any[]>([]);
+
   const handleModalClose = () => {
     onClose();
-    setSelectedStudentsIds([]);
+    // setSelectedStudentsIds([]);
+    setFetchedStudents([]);
+    setFilteredStudents([]);
+    setSelectedShopProducts([]);
+    setStockValues([]);
+    setSelectedShopId(null);
   };
 
   const handleSearch = (e: any) => {
@@ -86,30 +73,93 @@ export default function ManageShopsStockModal({
     );
     setFilteredStudents(filteredStudents);
   };
-  useMemo(() => {
-    let selectedStudents: any[] = [];
-    for (const student of students) {
-      if (selectedStudentsIds.includes(student._id)) {
-        selectedStudents.push(student);
-      }
-    }
-    // console.log(selectedStudents);
-    // console.log(selectedStudents.length);
-    setSelectedProducts(selectedStudents);
-  }, [selectedStudentsIds]);
 
-  const handleFetchShopProducts = async () => {
+  const handleFetchShopProducts = async (shopId: string) => {
     try {
-      if (!selectedShopId) return
-      const shopProducts = await getAllShopProducts({ shopId: selectedShopId });
+      setFetchedStudents([]);
+      setFilteredStudents([]);
+      // if (!selectedShopId) return
+      const shopProducts = await getAllShopProducts({ shopId: shopId });
       console.log("shopProducts", shopProducts)
-      // setShopProducts(shopProducts?.data?.[0] || null)
-      // setSelectedShopProduct(shopProducts?.data?.[0] || null)
+      if (shopProducts.success) {
+        const lists = shopProducts?.data
+        setFetchedStudents(lists);
+        setFilteredStudents(lists);
+      }
     } catch (error) {
       console.log(error)
     }
   }
-  const handleSendResultsClick = () => {
+
+
+  const handleChange = (e: any, product: any) => {
+    const value = +e.target.value;
+    const productId = product._id;
+    const producttoUpdate = fetchedStudents.find((student: any) => student._id === productId);
+    if (!producttoUpdate) return;
+    const currentStock = producttoUpdate?.quantity;
+    const productCurrentStock = producttoUpdate?.product?.currentStock;
+
+    if (currentStock < value && stockOperation === "SUBTRACT") {
+      // showAlert({
+      //   title: "Error",
+      //   text: "Quantity to be subtracted is more than the available stock",
+      //   severity: "error",
+      // })
+      return
+    }
+    if (productCurrentStock < value && stockOperation === "ADD") {
+      // showAlert({
+      //   title: "Error",
+      //   text: "Quantity to be subtracted is more than the available stock",
+      //   severity: "error",
+      // })
+      return
+    }
+    let newStockValue = 0;
+    let newProductStockValue = 0;
+    if (stockOperation === "ADD") {
+      newStockValue = currentStock + value;
+      newProductStockValue = productCurrentStock - value
+
+    } else if (stockOperation === "SUBTRACT") {
+      newStockValue = currentStock - value;
+      newProductStockValue = productCurrentStock + value
+    }
+    setSelectedShopProducts(prevProducts => {
+      const index = prevProducts.findIndex((item: any) => item._id === product._id);
+      if (index > -1) {
+        // Already exists, update
+        const updated = [...prevProducts];
+        // updated[index] = { ...updated[index], product.quantity: newStockValue };
+        updated[index] = { ...updated[index], quantity: newStockValue, product: { ...updated[index].product, currentStock: newProductStockValue } };
+        return updated;
+      } else {
+        // Not in list yet
+        return [...prevProducts, { ...product, quantity: newStockValue, product: { ...product.product, currentStock: newProductStockValue } }];
+      }
+    });
+    setStockValues(prevProducts => {
+      const index = prevProducts?.findIndex((item: any) => item._id === product._id);
+      if (index > -1) {
+        // Already exists, update
+        const updated = [...prevProducts];
+        updated[index] = { ...updated[index], value: value };
+        return updated;
+      } else {
+        // Not in list yet
+        return [...prevProducts, { _id: product._id, value: value }];
+      }
+    });
+    const updatedStudents = filteredStudents?.map((student: any) => {
+      if (student._id === product._id) {
+        return { ...student, quantity: newStockValue, product: { ...student.product, currentStock: newProductStockValue } };
+      }
+      return student;
+    });
+    setFilteredStudents(updatedStudents);
+  };
+  const handleSave = () => {
     handleConfirmation();
     handleModalClose()
   };
@@ -184,6 +234,7 @@ export default function ManageShopsStockModal({
                   value={selectedShopId || ""}
                   onChange={(e) => {
                     setSelectedShopId(e.target.value)
+                    handleFetchShopProducts(e.target.value)
                   }}
 
                 >
@@ -222,7 +273,8 @@ export default function ManageShopsStockModal({
                   <TableRow>
                     <StyledTableCell>Name</StyledTableCell>
 
-                    <StyledTableCell>Current Qty</StyledTableCell>
+                    <StyledTableCell>Product Qty</StyledTableCell>
+                    <StyledTableCell>Shop Qty</StyledTableCell>
                     <StyledTableCell align="center">Qty</StyledTableCell>
 
                   </TableRow>
@@ -237,10 +289,13 @@ export default function ManageShopsStockModal({
                       >
 
                         <StyledTableCell>
-                          {student?.name?.toUpperCase()}
+                          {student?.product?.name?.toUpperCase()}
                         </StyledTableCell>
                         <StyledTableCell>
-                          {student?.currentStock}
+                          {student?.product?.currentStock}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          {student?.quantity}
                         </StyledTableCell>
                         <StyledTableCell align="center">
                           <TextField
@@ -249,11 +304,9 @@ export default function ManageShopsStockModal({
                             variant="outlined"
                             type={"number"}
                             placeholder="0"
-                            value={stockValue === 0 ? "" : stockValue}
+                            value={stockValues?.find((item: any) => item._id === student._id)?.value || ""}
                             onChange={(e) => {
-                              const value = e.target.value;
-                              // setValue(value);
-                              setStockValue(value);
+                              handleChange(e, student);
                             }}
                             inputProps={{
                               style: {
@@ -290,8 +343,8 @@ export default function ManageShopsStockModal({
             </Button>
             <Button
               variant="contained"
-              onClick={handleSendResultsClick}
-              disabled={selectedStudentsIds.length === 0}
+              onClick={handleSave}
+              disabled={selectedShopProducts.length === 0}
               sx={{
                 width: "fit-content",
               }}

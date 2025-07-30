@@ -82,7 +82,7 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
     try {
 
       const orderResponse = await getSaleById(id as string)
-      console.log("orderResponse", orderResponse)
+      // console.log("orderResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -193,52 +193,6 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
             <>
               <Card sx={{ p: 2 }}>
                 <Grid container spacing={2}>
-                  {/* <Grid
-                    size={{
-                      xs: 12,
-                      sm: 6,
-                      md: 4
-                    }}
-
-                    sx={{
-                      display: "flex",
-                      gap: "5px",
-                    }}
-                  >
-                    <Typography variant="body1">Sales #:</Typography>
-                    <Typography variant="body1" fontWeight={700}>
-                      {orderData?.id}
-                    </Typography>
-                  </Grid> */}
-
-                  {/* Customer name */}
-                  {/* <Grid
-                    size={{
-                      xs: 12,
-                      sm: 6,
-                      md: 4
-                    }}
-                    sx={{ display: "flex", gap: "10px" }}
-                  >
-                    <Typography variant="body1">Name:</Typography>
-                    <Typography variant="body1" fontWeight={700}>
-                      {orderData?.customer_name?.toUpperCase()}
-                    </Typography>
-                  </Grid> */}
-
-                  {/* phone number */}
-                  {/* <Grid
-                    size={{ xs: 12, sm: 6, md: 4 }}
-
-                    sx={{ display: "flex", gap: "10px" }}
-                  >
-                    <Typography variant="body1">Phone number:</Typography>
-                    <Typography variant="body1" fontWeight={700}>
-                      {orderData?.customer_phoneNumber}
-                    </Typography>
-                  </Grid> */}
-
-
                   {/* Amount Paid */}
                   <Grid
                     size={{ xs: 12, sm: 6, md: 4 }}
@@ -319,6 +273,9 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                         <StyledTableCell align="center">
                           Total Price
                         </StyledTableCell>
+                        <StyledTableCell align="center">
+                          Profit
+                        </StyledTableCell>
                         {/* <StyledTableCell align="center"></StyledTableCell> */}
                       </TableRow>
                     </TableHead>
@@ -371,10 +328,13 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                               </StyledTableCell>
 
                               <StyledTableCell align="center">
-                                {currencyFormatter(product?.product_price || 0)}
+                                {currencyFormatter(product?.product?.sellingPrice || 0)}
                               </StyledTableCell>
                               <StyledTableCell align="center">
                                 {currencyFormatter(product?.total_amount || 0)}
+                              </StyledTableCell>
+                              <StyledTableCell align="center">
+                                {currencyFormatter(product?.profit || 0)}
                               </StyledTableCell>
                               {/* <StyledTableCell>
                                 {editResult.show &&

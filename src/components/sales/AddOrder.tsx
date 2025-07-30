@@ -191,7 +191,7 @@ function AddNewOrder() {
       })
       return;
     }
-    console.log("selectedProduct", selectedProduct)
+    // console.log("selectedProduct", selectedProduct)
     setOrderProducts((prev: any) => [...prev, selectedProduct]);
     setSelectedOrderProductsSKU((prev: number[]) => [
       ...prev,
@@ -219,7 +219,7 @@ function AddNewOrder() {
   const Submit = async (e: any) => {
     e.preventDefault();
     try {
-      console.log("orderProducts", orderProducts)
+      // console.log("orderProducts", orderProducts)
 
       // add order
       const orderData = {
@@ -231,7 +231,7 @@ function AddNewOrder() {
 
       setLoading(true);
       const orderResponse = await addNewSale({ ...orderData })
-      console.log("orderResponse", orderResponse)
+      // console.log("orderResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -273,7 +273,7 @@ function AddNewOrder() {
       setOrderProducts([]);
       setSelectedOrderProductsSKU([]);
       setSelectedProduct(null);
-      
+
       showAlert({
         title: "Success",
         text: "Sales saved successfully",

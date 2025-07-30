@@ -10,6 +10,8 @@ export const addNewSale = async (sale: { total_amount: number, profit: number, c
         const newSale = await Sale.create({
             shopId,
             total_amount,
+            sub_total: total_amount,
+            discount: 0,
             profit,
             createdBy,
             updatedBy: []

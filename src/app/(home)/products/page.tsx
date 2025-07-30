@@ -30,7 +30,7 @@ import LoadingAlert from "@/components/LoadingAlert";
 import { USER_ROLES } from "@/types/constants";
 import Link from "next/link";
 import { currencyFormatter } from "@/utils/services/utils";
-import { getAllProducts, updateMultipleProducts } from "@/utils/serverActions/Product";
+import { getAllProducts, updateMultipleProducts, updateProduct } from "@/utils/serverActions/Product";
 import dayjs from "dayjs";
 import ManageShopsStockModal from "@/components/ManageShopsStockModal";
 import { getAllShopProducts, updateMultipleShopProduct } from "@/utils/serverActions/ShopProduct";
@@ -239,6 +239,37 @@ export default function Products() {
     setOpenManageProductStockModal(true)
   };
   const isAdmin = currentUser?.role === USER_ROLES.ADMIN
+
+  // const handleUpdateProductName = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const products = orders.map((product: any) => ({ _id: product._id, name: product.name.toLowerCase() }))
+  //     const res = await updateMultipleProducts(products)
+  //     if (!res.success) {
+  //       showAlert({
+  //         title: "Error",
+  //         text: res?.message || "An error occurred while fetching products",
+  //         severity: "error",
+  //       })
+  //       return
+  //     }
+  //     showAlert({
+  //       title: "Success",
+  //       text: "Product name updated successfully",
+  //       severity: "success",
+  //     })
+  //     fetchProductsData();
+  //   } catch (error: any) {
+  //     console.log("error", error);
+  //     showAlert({
+  //       title: "Error",
+  //       text: error?.message || "An error occurred while fetching products",
+  //       severity: "error",
+  //     })
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
   return (
     <>
       <LoadingAlert open={loading} />
@@ -268,6 +299,7 @@ export default function Products() {
           mt={2}
           px={{ xs: 1, sm: 2, md: 3 }}
         >
+          {/* <Button variant="contained" onClick={handleUpdateProductName}>handleUpdateProductName</Button> */}
           <Box display={"flex"} gap={3}>
             <TextField
               fullWidth

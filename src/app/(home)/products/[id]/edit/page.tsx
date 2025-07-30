@@ -84,7 +84,7 @@ export default function EditProduct({ params }: { params: Promise<{ id: string }
     setProductData({});
     try {
       const orderResponse = await getProuctById(id as string)
-      console.log("ProductDetailsResponse", orderResponse)
+      // console.log("ProductDetailsResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -116,7 +116,7 @@ export default function EditProduct({ params }: { params: Promise<{ id: string }
   useEffect(() => {
     if (Object.keys(productData).length > 0) {
 
-      setValue("name", productData?.name || "", {
+      setValue("name", productData?.name?.toUpperCase() || "", {
         shouldDirty: true,
         shouldTouch: true,
         shouldValidate: true,
@@ -165,13 +165,13 @@ export default function EditProduct({ params }: { params: Promise<{ id: string }
     setLoading(true);
     try {
       const productData = {
-        name: dat?.name?.trim()?.toUpperCase(),
+        name: dat?.name?.trim()?.toLowerCase(),
         sellingPrice: Number(dat?.sellingPrice),
         costPrice: Number(dat?.costPrice),
         expiryDate: dat?.expiryDate
       }
       const orderResponse = await updateProduct({ productId: id as string, productData })
-      console.log("ProductDetailsResponse", orderResponse)
+      // console.log("ProductDetailsResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",

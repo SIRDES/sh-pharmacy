@@ -126,7 +126,7 @@ export default function Orders() {
       setFetchedOrders(orderResponse?.data || []);
       setOrders(orderResponse?.data || []);
     } catch (error: any) {
-      console.log("error", error);
+      // console.log("error", error);
       showAlert({
         title: "Error",
         text: error?.message || "An error occurred while fetching orders",

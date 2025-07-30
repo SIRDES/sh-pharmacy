@@ -5,6 +5,8 @@ export type ISale = mongoose.Document & {
   shopId: Types.ObjectId;
   total_amount: number;
   profit: number;
+  sub_total?: number;
+  discount?: number;
   createdBy: Types.ObjectId | null;
   updatedBy: Types.ObjectId[] | null;
   isDeleted: boolean;
@@ -16,6 +18,8 @@ export type ISale = mongoose.Document & {
 const saleSchema = new mongoose.Schema(
   {
     total_amount: { type: Number, required: true },
+    sub_total: { type: Number, required: true },
+    discount: { type: Number, required: true },
     shopId: { type: Types.ObjectId, ref: "Shop", required: true },
     profit: { type: Number, required: true },
     createdBy: {

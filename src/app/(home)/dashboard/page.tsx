@@ -156,26 +156,26 @@ export default function Dashboard() {
   return (
     <>
       <LoadingAlert open={loading} />
-      <Box sx={{ flexGrow: 1, p: 3 }}>
+      <Box sx={{ flexGrow: 1, py: 2 }} px={{ xs: 1, sm: 2, md: 3 }}>
         <form>
-          <Grid container spacing={3} alignItems={"flex-end"}>
+          <Grid container spacing={2} alignItems={"flex-end"}>
             <Grid size={{ xs: 12, sm: 4, }}>
-              <Typography variant="body2" gutterBottom>
+              <Typography variant="body1" gutterBottom>
                 Start Date
               </Typography>
               <TextField fullWidth type="date" required value={startDate} onChange={(e) => setStartDate(e.target.value)} inputProps={{
                 style: {
-                  padding: 10
+                  padding: 5
                 }
               }} />
             </Grid>
             <Grid size={{ xs: 12, sm: 4, }}>
-              <Typography variant="body2" gutterBottom>
+              <Typography variant="body1" gutterBottom>
                 End Date
               </Typography>
               <TextField fullWidth type="date" required value={endDate} onChange={(e) => setEndDate(e.target.value)} inputProps={{
                 style: {
-                  padding: 10
+                  padding: 5
                 }
               }} />
             </Grid>
@@ -183,7 +183,7 @@ export default function Dashboard() {
               <Button type="submit" disableElevation disabled={startDate === "" || endDate === ""} onClick={(e) => {
                 e.preventDefault()
                 fetchOrderData()
-              }} variant="contained">Submit</Button>
+              }} size="small" variant="contained">Submit</Button>
             </Grid>
           </Grid>
         </form>

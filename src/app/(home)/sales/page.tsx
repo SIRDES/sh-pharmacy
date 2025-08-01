@@ -152,26 +152,26 @@ export default function Orders() {
     <>
       <LoadingAlert open={loading} />
       <Box>
-        <Box px={{ xs: 1, sm: 2, md: 3 }} mb={1} mt={1}>
+        <Box px={{ xs: 1, sm: 2, md: 3 }} pt={2} mb={1}>
           <form>
-            <Grid container spacing={3} alignItems={"flex-end"}>
+            <Grid container spacing={2} alignItems={"flex-end"}>
               <Grid size={{ xs: 12, sm: 4, }}>
-                <Typography variant="body2" gutterBottom>
+                <Typography variant="body1" gutterBottom>
                   Start Date
                 </Typography>
                 <TextField fullWidth type="date" required value={startDate} onChange={(e) => setStartDate(e.target.value)} inputProps={{
                   style: {
-                    padding: 10
+                    padding: 5
                   }
                 }} />
               </Grid>
               <Grid size={{ xs: 12, sm: 4, }}>
-                <Typography variant="body2" gutterBottom>
+                <Typography variant="body1" gutterBottom>
                   End Date
                 </Typography>
                 <TextField fullWidth type="date" required value={endDate} onChange={(e) => setEndDate(e.target.value)} inputProps={{
                   style: {
-                    padding: 10
+                    padding: 5
                   }
                 }} />
               </Grid>
@@ -179,14 +179,14 @@ export default function Orders() {
                 <Button type="submit" disableElevation disabled={startDate === "" || endDate === ""} onClick={(e) => {
                   e.preventDefault()
                   fetchOrderData()
-                }} variant="contained">Submit</Button>
+                }} size="small" variant="contained">Submit</Button>
               </Grid>
             </Grid>
           </form>
 
 
         </Box>
-        <Divider />
+
         <Box
           display={"flex"}
           justifyContent={"space-between"}
@@ -195,31 +195,6 @@ export default function Orders() {
           px={{ xs: 1, sm: 2, md: 3 }}
         >
           <Box display={"flex"} gap={3}>
-            {/* <TextField
-              fullWidth
-              size="small"
-              placeholder="Search by Order Number or Customer Name"
-              onChange={handleSearchByCustomerNameOrOrderNumber}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-            /> */}
-
-            {/* <Select
-              fullWidth
-              displayEmpty
-              input={<CustomizedSelect />}
-              value={selectedPaymentType}
-              onChange={filterByStatus}
-            >
-              <MenuItem value={"ALL"}>ALL</MenuItem>
-              <MenuItem value={"PENDING"}>PENDING</MenuItem>
-              <MenuItem value={"DELIVERED"}>DELIVERED</MenuItem>
-            </Select> */}
 
           </Box>
           {currentUser?.role !== "admin" && (

@@ -297,9 +297,11 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                         <StyledTableCell align="center">
                           Total Price
                         </StyledTableCell>
-                        <StyledTableCell align="center">
-                          Profit
-                        </StyledTableCell>
+                        {currentUser?.role === USER_ROLES.ADMIN && (
+                          <StyledTableCell align="center">
+                            Profit
+                          </StyledTableCell>
+                        )}
                         {/* <StyledTableCell align="center"></StyledTableCell> */}
                       </TableRow>
                     </TableHead>
@@ -357,52 +359,13 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                               <StyledTableCell align="center">
                                 {currencyFormatter(product?.total_amount || 0)}
                               </StyledTableCell>
-                              <StyledTableCell align="center">
-                                {currencyFormatter(product?.profit || 0)}
-                              </StyledTableCell>
-                              {/* <StyledTableCell>
-                                {editResult.show &&
-                              editResult?.product?.name === product?.name ? (
-                                <>
-                                  <Tooltip title="save score">
-                                    <IconButton
-                                      disabled={
-                                        product?.score === "" ||
-                                        product?.score === null
-                                      }
-                                      onClick={() => handleSaveOne(product)}
-                                    >
-                                      <SaveIcon sx={{ fontSize: "16px" }} />
-                                    </IconButton>
-                                  </Tooltip>
-                                  <Tooltip title="cancel">
-                                    <IconButton
-                                      onClick={() =>
-                                        setEditResult({
-                                          show: false,
-                                          product: null,
-                                        })
-                                      }
-                                    >
-                                      <ClearIcon sx={{ fontSize: "16px" }} />
-                                    </IconButton>
-                                  </Tooltip>
-                                </>
-                              ) : (
-                                <Tooltip title="edit score">
-                                  <IconButton
-                                    onClick={() =>
-                                      setEditResult({
-                                        show: true,
-                                        product: product,
-                                      })
-                                    }
-                                  >
-                                    <EditIcon sx={{ fontSize: "16px" }} />
-                                  </IconButton>
-                                </Tooltip>
+
+                              {currentUser?.role === USER_ROLES.ADMIN && (
+                                <StyledTableCell align="center">
+                                  {currencyFormatter(product?.profit || 0)}
+                                </StyledTableCell>
                               )}
-                              </StyledTableCell> */}
+
                             </StyledTableRow>
                           )
                         )}

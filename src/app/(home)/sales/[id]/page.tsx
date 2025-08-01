@@ -82,7 +82,7 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
     try {
 
       const orderResponse = await getSaleById(id as string)
-      // console.log("orderResponse", orderResponse)
+      console.log("orderResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -201,6 +201,30 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                       gap: "5px",
                     }}
                   >
+                    <Typography variant="body1">Sub Total:</Typography>
+                    <Typography variant="body1" fontWeight={700}>
+                      {currencyFormatter(orderData?.sub_total || 0)}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    size={{ xs: 12, sm: 6, md: 4 }}
+                    sx={{
+                      display: "flex",
+                      gap: "5px",
+                    }}
+                  >
+                    <Typography variant="body1">Discount:</Typography>
+                    <Typography variant="body1" fontWeight={700}>
+                      {currencyFormatter(orderData?.discount || 0)}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    size={{ xs: 12, sm: 6, md: 4 }}
+                    sx={{
+                      display: "flex",
+                      gap: "5px",
+                    }}
+                  >
                     <Typography variant="body1">Total Amount:</Typography>
                     <Typography variant="body1" fontWeight={700}>
                       {currencyFormatter(orderData?.total_amount || 0)}
@@ -227,7 +251,7 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                     size={{ xs: 12, sm: 12, md: 6 }}
                     sx={{ display: "flex", gap: "10px" }}
                   >
-                    <Typography variant="body1">Date ordered:</Typography>
+                    <Typography variant="body1">Date created:</Typography>
                     <Typography variant="body1" fontWeight={700}>
                       {formatDate(orderData?.createdAt)}
                     </Typography>

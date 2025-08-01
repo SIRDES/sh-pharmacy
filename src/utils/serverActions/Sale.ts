@@ -3,15 +3,15 @@
 import { connectDB } from "@/lib/mongodb";
 import Sale from "@/models/Sale";
 import mongoose from "mongoose";
-export const addNewSale = async (sale: { total_amount: number, profit: number, createdBy: string, shopId: string, }) => {
+export const addNewSale = async (sale: { total_amount: number, profit: number, createdBy: string, shopId: string, discount: number, sub_total: number }) => {
     try {
-        const { shopId, total_amount, profit, createdBy } = sale;
+        const { shopId, total_amount, profit, createdBy, discount, sub_total } = sale;
         await connectDB();
         const newSale = await Sale.create({
             shopId,
             total_amount,
-            sub_total: total_amount,
-            discount: 0,
+            sub_total,
+            discount,
             profit,
             createdBy,
             updatedBy: []
@@ -219,6 +219,8 @@ export const getSaleById = async (id: string) => {
                     total_amount: { $first: "$total_amount" },
                     updatedBy: { $first: "$updatedBy" },
                     profit: { $first: "$profit" },
+                    sub_total: { $first: "$sub_total" },
+                    discount: { $first: "$discount" },
                     shopId: { $first: "$shopId" },
                     // Include any other Sale fields you want here!
                     salesItems: { $push: "$salesItems" }

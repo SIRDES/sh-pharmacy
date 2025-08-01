@@ -54,7 +54,18 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
-
+const StyledTotalTableCell = styled(TableCell)(({ theme }) => ({
+  padding: "6px 4px",
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.white,
+    fontSize: 12,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+}));
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
@@ -102,9 +113,11 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
   const [orderProducts, setOrderProducts] = useState<Array<any>>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [selectOrderProductsSKU, setSelectedOrderProductsSKU] = useState<
-    Array<string>
+    Array<number>
   >([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [discount, setDiscount] = useState("")
+
   const menuRef = useRef(null);
   const handleMenuClick = () => {
     setAnchorEl(menuRef.current);
@@ -156,6 +169,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
         items.push({ ...item })
       }
       setOrderProducts(items);
+      setDiscount(orderDetails?.discount || "")
       setSelectedOrderProductsSKU(
         orderDetails?.salesItems?.map((product: any) => product?.shopProductId) || []
       );
@@ -198,7 +212,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
 
   const handleSelectProductChange = (
     event: SyntheticEvent<Element, Event>,
-    value: ProductType | null,
+    value: any,
     reason: AutocompleteChangeReason,
     details?: AutocompleteChangeDetails<any> | undefined
   ) => {
@@ -211,7 +225,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
       setSelectedProduct(null);
       return;
     }
-    setSelectedProduct({ ...value, total_amount: 0, qty: 0 });
+    setSelectedProduct({ ...value, total_amount: 0, qty: 0, profilt: 0 });
   };
   const handleAddProduct = () => {
     if (
@@ -224,7 +238,6 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
         text: "Please select a product and enter quantity greater than 0 first",
         severity: "error"
       })
-
       return;
     }
     if (selectedProduct.qty > selectedProduct.quantity) {
@@ -233,29 +246,44 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
         text: "Quantity cannot be greater than available stock",
         severity: "error"
       })
-
       return;
     }
+    // console.log("selectedProduct", selectedProduct)
     setOrderProducts((prev: any) => [...prev, selectedProduct]);
-    setSelectedOrderProductsSKU((prev: string[]) => [
+    setSelectedOrderProductsSKU((prev: number[]) => [
       ...prev,
       selectedProduct?._id,
     ]);
     setSelectedProduct(null);
   };
 
-  const generateOrderTotalAmount = () => {
+  const generateOrderSubTotalAmount = () => {
     let total = 0;
     orderProducts?.forEach((product: any) => {
       total += product?.total_amount;
     });
     return total;
   };
+  const generateOrderTotalAmount = () => {
+    let total = 0;
+    let discountValue = +discount
+    orderProducts?.forEach((product: any) => {
+      total += product?.total_amount;
+    });
+    if (total > 0 && discountValue > 0 && discountValue <= total) {
+      total -= discountValue
+    }
+    return total;
+  };
   const generateOrderProfit = () => {
     let total = 0;
+    let discountValue = +discount
     orderProducts?.forEach((product: any) => {
       total += product?.profit;
     });
+    if (total > 0 && discountValue > 0 && discountValue <= total) {
+      total -= discountValue
+    }
     return total;
   };
 
@@ -273,6 +301,8 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
       const orderData = {
         total_amount: generateOrderTotalAmount(),
         profit: generateOrderProfit(),
+        discount: +discount,
+        sub_total: generateOrderSubTotalAmount(),
         updatedBy: currentUser?._id || "",
         // shopId: currentUser?.assignedShop?._id as string,
       };
@@ -288,8 +318,8 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
       }
 
 
-      const deletePrevOrderItemsRes = await deleteSalesItems(orderDetails.orderItems)
-      console.log("deletePrevOrderItemsRes", deletePrevOrderItemsRes)
+      const deletePrevsalesItemsRes = await deleteSalesItems(orderDetails.salesItems)
+      console.log("deletePrevsalesItemsRes", deletePrevsalesItemsRes)
 
       // add order items
       // orderId, productId, quantity, totalAmount
@@ -306,7 +336,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
           createdBy: currentUser?._id || ""
         })
       }
-
+      console.log("addSalesItems>>>>", items)
       const orderItemsResponse = await addSalesItems({ saleId: orderResponse?.data?._id as string, salesItems: items })
       console.log("orderItemsResponse", orderItemsResponse)
 
@@ -361,7 +391,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
                 padding: "10px 20px",
               }}
             >
-              <Typography fontWeight="bold">Edit Order</Typography>
+              <Typography fontWeight="bold">Edit sale</Typography>
 
               <Grid container spacing={1}>
                 {/* Select products */}
@@ -475,7 +505,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
                             return {
                               ...prev,
                               qty: +e.target.value,
-                              totalAmount: totalSellingPrice,
+                              total_amount: totalSellingPrice,
                               profit: totalSellingPrice - totalCostPrice
                             };
                           });
@@ -503,6 +533,36 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
                     >
                       Add
                     </Button>
+                  </Grid>
+                  <Grid size={{ xs: 12, sm: 12, md: 6 }}>
+                    <Box>
+                      <Typography gutterBottom>Discount</Typography>
+                      <TextField
+                        type="number"
+                        fullWidth
+                        variant="standard"
+                        placeholder="Enter discount"
+                        value={discount}
+                        onChange={(e) => {
+                          // console.log(e.target.value);
+                          if (+e.target.value < 0 || isNaN(+e.target.value)) {
+                            return;
+                          }
+                          setDiscount(e.target.value)
+                        }}
+                        slotProps={{
+                          htmlInput: {
+                            style: {
+                              border: "2px solid #ABB3BF",
+                              padding: "10px",
+                              // paddingTop: "17px",
+                              borderRadius: "5px",
+                            },
+                          },
+                        }}
+
+                      />
+                    </Box>
                   </Grid>
                 </Grid>
               </Grid>
@@ -585,10 +645,10 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
                                   product._id
                               )
                             );
-                            setSelectedOrderProductsSKU((prev: string[]) =>
+                            setSelectedOrderProductsSKU((prev: number[]) =>
                               prev.filter(
-                                (selectedProduct: string) =>
-                                  selectedProduct !== product._id
+                                (selectedProduct: number) =>
+                                  selectedProduct !== product.shopProductId
                               )
                             );
                           }}
@@ -599,26 +659,64 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
                     </StyledTableRow>
                   ))}
                   {orderProducts?.length !== 0 && (
-                    <TableRow
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <TableCell
-                        colSpan={3}
-                        align="right"
-                        sx={{ fontWeight: "bold" }}
+                    <>
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
                       >
-                        Total
-                      </TableCell>
-                      <TableCell
-                        colSpan={1}
-                        align="center"
-                        sx={{ fontWeight: "bold" }}
+                        <StyledTotalTableCell
+                          colSpan={3}
+                          align="right"
+                        // sx={{ fontSize: "10px" }}
+                        >
+                          Sub Total
+                        </StyledTotalTableCell>
+                        <StyledTotalTableCell
+                          colSpan={1}
+                          align="center"
+                        // sx={{ fontSize: "10px" }}
+                        >
+                          {currencyFormatter(generateOrderSubTotalAmount())}
+                        </StyledTotalTableCell>
+                      </TableRow>
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
                       >
-                        {currencyFormatter(generateOrderTotalAmount())}
-                      </TableCell>
-                    </TableRow>
+                        <StyledTotalTableCell
+                          colSpan={3}
+                          align="right"
+                        >
+                          Discount
+                        </StyledTotalTableCell>
+                        <StyledTotalTableCell
+                          colSpan={1}
+                          align="center"
+                        >
+                          {currencyFormatter(+discount)}
+                        </StyledTotalTableCell>
+                      </TableRow>
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <StyledTotalTableCell
+                          colSpan={3}
+                          align="right"
+                        >
+                          Total
+                        </StyledTotalTableCell>
+                        <StyledTotalTableCell
+                          colSpan={1}
+                          align="center"
+                        >
+                          {currencyFormatter(generateOrderTotalAmount())}
+                        </StyledTotalTableCell>
+                      </TableRow>
+                    </>
                   )}
                 </TableBody>
               </Table>

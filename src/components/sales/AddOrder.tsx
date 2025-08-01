@@ -47,6 +47,18 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
+const StyledTotalTableCell = styled(TableCell)(({ theme }) => ({
+  padding: "6px 4px",
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.white,
+    fontSize: 12,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+}));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -87,6 +99,7 @@ function AddNewOrder() {
   const [selectOrderProductsSKU, setSelectedOrderProductsSKU] = useState<
     Array<number>
   >([]);
+  const [discount, setDiscount] = useState("")
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menuRef = useRef(null);
   const handleMenuClick = () => {
@@ -200,18 +213,33 @@ function AddNewOrder() {
     setSelectedProduct(null);
   };
 
-  const generateOrderTotalAmount = () => {
+  const generateOrderSubTotalAmount = () => {
     let total = 0;
     orderProducts?.forEach((product: any) => {
       total += product?.total_amount;
     });
     return total;
   };
+  const generateOrderTotalAmount = () => {
+    let total = 0;
+    let discountValue = +discount
+    orderProducts?.forEach((product: any) => {
+      total += product?.total_amount;
+    });
+    if (total > 0 && discountValue > 0 && discountValue <= total) {
+      total -= discountValue
+    }
+    return total;
+  };
   const generateOrderProfit = () => {
     let total = 0;
+    let discountValue = +discount
     orderProducts?.forEach((product: any) => {
       total += product?.profit;
     });
+    if (total > 0 && discountValue > 0 && discountValue <= total) {
+      total -= discountValue
+    }
     return total;
   };
 
@@ -225,6 +253,8 @@ function AddNewOrder() {
       const orderData = {
         total_amount: generateOrderTotalAmount(),
         profit: generateOrderProfit(),
+        discount: +discount,
+        sub_total: generateOrderSubTotalAmount(),
         createdBy: currentUser?._id || "",
         shopId: currentUser?.assignedShop?._id as string,
       };
@@ -462,6 +492,36 @@ function AddNewOrder() {
                       Add
                     </Button>
                   </Grid>
+                  <Grid size={{ xs: 12, sm: 12, md: 6 }}>
+                    <Box>
+                      <Typography gutterBottom>Discount</Typography>
+                      <TextField
+                        type="number"
+                        fullWidth
+                        variant="standard"
+                        placeholder="Enter discount"
+                        value={discount}
+                        onChange={(e) => {
+                          // console.log(e.target.value);
+                          if (+e.target.value < 0 || isNaN(+e.target.value)) {
+                            return;
+                          }
+                          setDiscount(e.target.value)
+                        }}
+                        slotProps={{
+                          htmlInput: {
+                            style: {
+                              border: "2px solid #ABB3BF",
+                              padding: "10px",
+                              // paddingTop: "17px",
+                              borderRadius: "5px",
+                            },
+                          },
+                        }}
+
+                      />
+                    </Box>
+                  </Grid>
                 </Grid>
               </Grid>
               {/* Buttons */}
@@ -559,26 +619,64 @@ function AddNewOrder() {
                     </StyledTableRow>
                   ))}
                   {orderProducts?.length !== 0 && (
-                    <TableRow
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <TableCell
-                        colSpan={3}
-                        align="right"
-                        sx={{ fontWeight: "bold" }}
+                    <>
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
                       >
-                        Total
-                      </TableCell>
-                      <TableCell
-                        colSpan={1}
-                        align="center"
-                        sx={{ fontWeight: "bold" }}
+                        <StyledTotalTableCell
+                          colSpan={3}
+                          align="right"
+                        // sx={{ fontSize: "10px" }}
+                        >
+                          Sub Total
+                        </StyledTotalTableCell>
+                        <StyledTotalTableCell
+                          colSpan={1}
+                          align="center"
+                        // sx={{ fontSize: "10px" }}
+                        >
+                          {currencyFormatter(generateOrderSubTotalAmount())}
+                        </StyledTotalTableCell>
+                      </TableRow>
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
                       >
-                        {currencyFormatter(generateOrderTotalAmount())}
-                      </TableCell>
-                    </TableRow>
+                        <StyledTotalTableCell
+                          colSpan={3}
+                          align="right"
+                        >
+                          Discount
+                        </StyledTotalTableCell>
+                        <StyledTotalTableCell
+                          colSpan={1}
+                          align="center"
+                        >
+                          {currencyFormatter(+discount)}
+                        </StyledTotalTableCell>
+                      </TableRow>
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <StyledTotalTableCell
+                          colSpan={3}
+                          align="right"
+                        >
+                          Total
+                        </StyledTotalTableCell>
+                        <StyledTotalTableCell
+                          colSpan={1}
+                          align="center"
+                        >
+                          {currencyFormatter(generateOrderTotalAmount())}
+                        </StyledTotalTableCell>
+                      </TableRow>
+                    </>
                   )}
                 </TableBody>
               </Table>

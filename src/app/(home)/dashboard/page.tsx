@@ -23,7 +23,7 @@ import {
 import { startOfWeek, endOfWeek, startOfMonth, endOfMonth, isWithinInterval, addDays, format } from 'date-fns';
 import { showAlert } from "@/components/Alerts";
 import LoadingAlert from "@/components/LoadingAlert";
-import { currencyFormatter, formatDate, getTotalOrderAmount, getTotalOrderProfit } from "@/utils/services/utils";
+import { currencyFormatter, formatDate, getTotalOrderAmount, getTotalOrderDiscount, getTotalOrderProfit } from "@/utils/services/utils";
 import { StyledTableCell, StyledTableRow } from "@/theme/table";
 import { useSession } from "next-auth/react";
 import { getAllSales, getAllShopSales } from "@/utils/serverActions/Sale";
@@ -200,6 +200,10 @@ export default function Dashboard() {
                 {currentUser?.role === "admin" && (
                   <>
                     <Typography variant="body2">
+                      Discount
+                    </Typography>
+                    <Typography variant="h6">{currencyFormatter(getTotalOrderDiscount(orders))}</Typography>
+                    <Typography variant="body2">
                       Profit
                     </Typography>
                     <Typography variant="h6">{currencyFormatter(getTotalOrderProfit(orders))}</Typography>
@@ -219,6 +223,10 @@ export default function Dashboard() {
                 {currentUser?.role === "admin" && (
                   <>
                     <Typography variant="body2">
+                      Discount
+                    </Typography>
+                    <Typography variant="h6" >{currencyFormatter(getTotalOrderDiscount(thisWeekOrders))}</Typography>
+                    <Typography variant="body2">
                       Profit
                     </Typography>
                     <Typography variant="h6" >{currencyFormatter(getTotalOrderProfit(thisWeekOrders))}</Typography>
@@ -236,6 +244,10 @@ export default function Dashboard() {
                 <Typography variant="h6">{currencyFormatter(getTotalOrderAmount(thisMonthOrders))}</Typography>
                 {currentUser?.role === "admin" && (
                   <>
+                    <Typography variant="body2">
+                      Discount
+                    </Typography>
+                    <Typography variant="h6">{currencyFormatter(getTotalOrderDiscount(thisMonthOrders))}</Typography>
                     <Typography variant="body2">
                       Profit
                     </Typography>

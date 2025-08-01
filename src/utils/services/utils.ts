@@ -62,3 +62,9 @@ export const getTotalOrderProfit = (orders: any[]) => {
     return acc + orderAmount;
   }, 0);
 }
+export const getTotalOrderDiscount = (orders: any[]) => {
+  return orders.reduce((acc, order) => {
+    const orderAmount = order?.discount || 0;
+    return acc + orderAmount;
+  }, 0);
+}

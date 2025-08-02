@@ -19,6 +19,7 @@ const salesItemSchema = new mongoose.Schema(
       type: Types.ObjectId,
       ref: "Sale",
       required: true,
+      index: true,
     },
     productId: {
       type: Types.ObjectId,
@@ -29,6 +30,7 @@ const salesItemSchema = new mongoose.Schema(
       type: Types.ObjectId,
       ref: "ShopProduct",
       required: true,
+      index: true,
     },
     total_amount: { type: Number, required: true },
     profit: { type: Number, required: true },

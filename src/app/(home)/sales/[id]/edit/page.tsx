@@ -105,8 +105,6 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const { data: session } = useSession()
   const currentUser = session?.user
-  const posOrders = (window as any)?.pos?.orders
-  const posOrderItems = (window as any)?.pos?.orderItems
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [orderDetails, setOrderDetails] = useState<any>({});
@@ -303,7 +301,10 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
         profit: generateOrderProfit(),
         discount: +discount,
         sub_total: generateOrderSubTotalAmount(),
-        updatedBy: currentUser?._id || "",
+        updatedBy: [
+          ...(orderDetails.updatedBy || []),
+          ...(currentUser?._id ? [currentUser._id] : []),
+        ],
         // shopId: currentUser?.assignedShop?._id as string,
       };
       const orderResponse = await updateSale({ saleId: orderDetails._id, saleData: orderData })

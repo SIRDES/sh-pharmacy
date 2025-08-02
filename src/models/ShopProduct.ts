@@ -16,6 +16,7 @@ const shopProductSchema = new mongoose.Schema(
       type: Types.ObjectId,
       ref: "Shop",
       required: true,
+      index: true,
     },
     productId: {
       type: Types.ObjectId,

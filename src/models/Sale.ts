@@ -20,7 +20,7 @@ const saleSchema = new mongoose.Schema(
     total_amount: { type: Number, required: true },
     sub_total: { type: Number, required: true },
     discount: { type: Number, required: true },
-    shopId: { type: Types.ObjectId, ref: "Shop", required: true },
+    shopId: { type: Types.ObjectId, ref: "Shop", required: true, index: true },
     profit: { type: Number, required: true },
     createdBy: {
       type: Types.ObjectId,

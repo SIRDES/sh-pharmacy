@@ -226,6 +226,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
     setSelectedProduct({ ...value, total_amount: 0, qty: 0, profilt: 0 });
   };
   const handleAddProduct = () => {
+    console.log("selectedProduct", selectedProduct)
     if (
       selectedProduct === null ||
       !selectedProduct.quantity ||
@@ -290,7 +291,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
     setLoading(true);
     try {
 
-      console.log("orderProducts", orderProducts)
+      // console.log("orderProducts", orderProducts)
 
 
       // add order
@@ -308,7 +309,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
         // shopId: currentUser?.assignedShop?._id as string,
       };
       const orderResponse = await updateSale({ saleId: orderDetails._id, saleData: orderData })
-      console.log("orderResponse", orderResponse)
+      // console.log("orderResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -320,7 +321,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
 
 
       const deletePrevsalesItemsRes = await deleteSalesItems(orderDetails.salesItems)
-      console.log("deletePrevsalesItemsRes", deletePrevsalesItemsRes)
+      // console.log("deletePrevsalesItemsRes", deletePrevsalesItemsRes)
 
       // add order items
       // orderId, productId, quantity, totalAmount
@@ -337,9 +338,9 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
           createdBy: currentUser?._id || ""
         })
       }
-      console.log("addSalesItems>>>>", items)
+      // console.log("addSalesItems>>>>", items)
       const orderItemsResponse = await addSalesItems({ saleId: orderResponse?.data?._id as string, salesItems: items })
-      console.log("orderItemsResponse", orderItemsResponse)
+      // console.log("orderItemsResponse", orderItemsResponse)
 
       if (!orderItemsResponse.success) {
         showAlert({

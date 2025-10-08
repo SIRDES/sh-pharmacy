@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography, Button, Dialog, TextField, MenuItem, Select, Grid } from "@mui/material";
+import React from "react";
+import { Box, Typography, Button, Dialog, TextField, MenuItem, Select, Grid, CircularProgress } from "@mui/material";
 import { CustomizedSelect } from "../CustomizedSelect";
 import { useShops } from "@/hooks/useShops";
-import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
-import { set } from "mongoose";
 
 interface ManageShopStockModalProps {
   open: boolean;
@@ -16,7 +14,9 @@ interface ManageShopStockModalProps {
   selectedShopId: string | null,
   selectedShopProduct: any;
   setSelectedShopId: React.Dispatch<React.SetStateAction<string | null>>
+  loadingShopProducts: boolean
 }
+
 
 const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
   open,
@@ -28,29 +28,11 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
   selectedShopProduct,
   setSelectedShopId,
   stockValue,
-  stockOperation
+  stockOperation,
+  loadingShopProducts
 }) => {
   const { shops } = useShops()
-  // const [operation, setOperation] = useState<"ADD" | "SUBTRACT">("ADD");
-  // const [value, setValue] = useState<number | string>(0);
-  // const [shopId, setShopId] = useState<string>("");
-  // const [shopProducts, setShopProducts] = useState<any>(null);
-  // const handleFetchShopProducts = async () => {
-  //   try {
-  //     const shopProducts = await getAllShopProducts({ shopId: shopId, productId: productId });
-  //     // console.log("shopProducts", shopProducts)
-  //     setShopProducts(shopProducts?.data?.[0] || null)
-  //     setSelectedShopProduct(shopProducts?.data?.[0] || null)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-  // console.log("selectedShop", shopProducts)
-  // useEffect(() => {
-  //   if (!shopId || !productId) return
-  //   handleFetchShopProducts()
-  // }, [shopId, productId])
-
+// console.log("selectedShopProduct", selectedShopProduct)
   return (
     <Dialog
       open={open}
@@ -62,9 +44,9 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
         sx={{
           bgcolor: "background.paper",
           boxShadow: 24,
-          p: 3,
-          pt: 2,
-          minWidth: 400,
+          p: {xs: 2, sm: 3},
+          pt: {xs: 2, sm: 3},
+          // minWidth: 400,
           // minWidth: "100%",
         }}
       >
@@ -79,7 +61,7 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
         <Grid container spacing={2}>
 
           {/* Shop */}
-          <Grid size={{ xs: 12, sm: 12, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 12, md: 6 }}>
             <Box>
               <Typography gutterBottom>
                 Shop
@@ -119,7 +101,10 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 6 }}>
+          <Grid size={{ xs: 6, sm: 6, md: 6 }}>
+           <Typography gutterBottom>
+                Current Qty
+              </Typography>
             <TextField
               size="small"
               fullWidth
@@ -143,6 +128,9 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
             />
           </Grid>
           <Grid size={{ xs: 6 }}>
+             <Typography gutterBottom>
+                Operation
+              </Typography>
             <Select
               fullWidth
               displayEmpty
@@ -159,6 +147,9 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
             </Select>
           </Grid>
           <Grid size={{ xs: 6 }}>
+             <Typography gutterBottom>
+                Qty to {stockOperation?.toLowerCase()}
+              </Typography>
             <TextField
               size="small"
               fullWidth
@@ -196,14 +187,12 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
           <Button
             onClick={() => {
               onConfirm();
-              // setValue(0);
-              // setOperation("ADD");
             }}
-            disabled={stockValue === 0 || selectedShopId === null}
+            disabled={stockValue === 0 || selectedShopId === null || loadingShopProducts}
             color="primary"
             variant="contained"
           >
-            Submit
+            {loadingShopProducts ? <CircularProgress size={20} /> : "Submit"}
           </Button>
         </Box>
       </Box>

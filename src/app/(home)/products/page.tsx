@@ -33,7 +33,7 @@ import { currencyFormatter } from "@/utils/services/utils";
 import { getAllProducts, updateMultipleProducts, updateProduct } from "@/utils/serverActions/Product";
 import dayjs from "dayjs";
 import ManageShopsStockModal from "@/components/ManageShopsStockModal";
-import { getAllShopProducts, updateMultipleShopProduct } from "@/utils/serverActions/ShopProduct";
+import {  updateMultipleShopProduct } from "@/utils/serverActions/ShopProduct";
 import ManageProductStockModal from "@/components/ManageProductStockModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

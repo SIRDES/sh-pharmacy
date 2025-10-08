@@ -7,8 +7,6 @@ import {
   Card,
   Grid,
   IconButton,
-  ListItem,
-  Menu,
   Table,
   TableBody,
   TableCell,
@@ -20,15 +18,11 @@ import {
   Typography,
 } from "@mui/material";
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
-import { InferType, object, string } from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { styled, useTheme } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { showAlert } from "../Alerts";
-import { ORDER_STATUS } from "@/types/constants";
 import LoadingAlert from "../LoadingAlert";
 import { currencyFormatter } from "@/utils/services/utils";
 import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
@@ -112,27 +106,6 @@ function AddNewOrder() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  // const form = useForm({
-  //   defaultValues: {
-  //     //   receiverAccountNumber: "",
-  //     //   saveBeneficiary: false,
-  //     //   selectedExistingBeneficiary: "placeholder",
-  //     //   amount: 0.0,
-  //     //   reference: "",
-  //   },
-  //   resolver: yupResolver(schema),
-  //   mode: "all",
-  // });
-
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   reset,
-  //   formState: { errors, isDirty, isValid },
-  //   // control,
-  //   setValue,
-  // } = form;
 
 
   const fetchProductsData = async () => {

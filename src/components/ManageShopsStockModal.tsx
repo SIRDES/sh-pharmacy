@@ -28,7 +28,6 @@ import { StyledTableCell, StyledTableRow } from "@/theme/table";
 import { CustomizedSelect } from "./CustomizedSelect";
 import { useShops } from "@/hooks/useShops";
 import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
-import { showAlert } from "./Alerts";
 import LoadingAlert from "./LoadingAlert";
 
 export default function ManageShopsStockModal({

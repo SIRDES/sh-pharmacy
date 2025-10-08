@@ -41,6 +41,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
   const router = useRouter();
   const [orderData, setOrderData] = useState<any>({});
   const [loading, setLoading] = useState(false);
+  const [loadingShopProducts, setLoadingShopProducts] = useState(false);
 
   const [openManageStockModal, setOpenManageStockModal] = useState(false);
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false);
@@ -64,7 +65,6 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
     setOrderData({});
     try {
       const orderResponse = await getProuctById(id as string)
-      console.log("ProductDetailsResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -97,12 +97,15 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
   const handleFetchShopProducts = async () => {
     try {
       if (!selectedShopId || !id) return
+      setLoadingShopProducts(true);
       const shopProducts = await getAllShopProducts({ shopId: selectedShopId, productId: id });
       // console.log("shopProducts", shopProducts)
       // setShopProducts(shopProducts?.data?.[0] || null)
       setSelectedShopProduct(shopProducts?.data?.[0] || null)
     } catch (error) {
       console.log(error)
+    } finally {
+      setLoadingShopProducts(false);
     }
   }
   // console.log("selectedShop", selectedShopProduct)
@@ -155,7 +158,6 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         currentStock: newQuantity
       }
       const orderResponse = await updateProduct({ productId: id as string, productData })
-      console.log("ProductDetailsResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -235,7 +237,6 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         orderResponse = await updateShopProduct({ shopProductId: selectedShopProduct?._id, productData: { quantity: Number(newQuantity) } })
       }
       await updateProduct({ productId: id as string, productData })
-      // console.log("ProductDetailsResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -270,7 +271,6 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
     try {
       setLoading(true);
       const orderResponse = await deletedProduct(id as string)
-      // console.log("ProductDetailsResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -309,7 +309,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         stockOperation={stockOperation}
       />
       <ManageShopStockModal onClose={handleCloseManageShopStockModal} open={openManageShopStockModal} onConfirm={handleManageShopStock} selectedShopId={selectedShopId} setSelectedShopId={setSelectedShopId} selectedShopProduct={selectedShopProduct} setStockValue={setStockValue} setStockOperation={setStockOperation} stockValue={stockValue}
-        stockOperation={stockOperation} />
+        stockOperation={stockOperation} loadingShopProducts={loadingShopProducts} />
       <ConfirmationModal open={openConfirmDeleteModal} onClose={handleCloseDeleteProductModal} onConfirm={handleDeleteProduct} message="Are you sure you want to delete this product?" title="Delete Product" />
       <LoadingAlert open={loading} />
 
@@ -576,23 +576,20 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                           <TableRow>
                             <StyledTableCell>Name</StyledTableCell>
                             <StyledTableCell>Qty</StyledTableCell>
-                            {/* <StyledTableCell>Date</StyledTableCell> */}
                           </TableRow>
                         </TableHead>
                         <TableBody>
                           {orderData?.shopProducts?.length !== 0 &&
                             orderData?.shopProducts?.map(
                               (ordetItem: any, index: number) => (
-                                <StyledTableRow key={ordetItem?.id + index}>
+                                <StyledTableRow key={index}>
                                   <StyledTableCell>
                                     {ordetItem?.shopDetails?.name?.toUpperCase()}
                                   </StyledTableCell>
                                   <StyledTableCell>
                                     {ordetItem?.quantity}
                                   </StyledTableCell>
-                                  {/* <StyledTableCell>
-                                    {ordetItem?.createdAt}
-                                  </StyledTableCell> */}
+                                 
                                 </StyledTableRow>
                               )
                             )}
@@ -601,44 +598,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                     </TableContainer>
                   </Paper>
                 </Grid>
-                {/* <Grid size={{ xs: 12, sm: 12, md: 6 }}>
-                  <Typography variant="body1" fontWeight={700} mb={2}>
-                    Stock History
-                  </Typography>
-                  <Paper sx={{ width: "100%", overflow: "hidden" }}>
-                    <TableContainer sx={{ maxHeight: 500 }}>
-                      <Table aria-label="results table">
-                        <TableHead>
-                          <TableRow>
-                            <StyledTableCell>Date</StyledTableCell>
-                            <StyledTableCell>Initial Qty</StyledTableCell>
-                            <StyledTableCell>Added Qty</StyledTableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {orderData?.product_stock_updates
-                            ?.length !== 0 &&
-                            orderData?.product_stock_updates
-                              ?.map(
-                                (history: any, index: number) => (
-                                  <StyledTableRow key={index}>
-                                    <StyledTableCell>
-                                      {history?.createdAt}
-                                    </StyledTableCell>
-                                    <StyledTableCell>
-                                      {history?.initial_quantity}
-                                    </StyledTableCell>
-                                    <StyledTableCell>
-                                      {history?.added_quantity}
-                                    </StyledTableCell>
-                                  </StyledTableRow>
-                                )
-                              )}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </Paper>
-                </Grid> */}
+                
               </Grid>
             </>
           )}

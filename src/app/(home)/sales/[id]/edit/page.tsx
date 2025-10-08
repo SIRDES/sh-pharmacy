@@ -189,7 +189,7 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
         })
         return
       }
-      console.log("all products", res?.data)
+      // console.log("all products", res?.data)
       setProducts(res?.data);
     } catch (error: any) {
       console.log("error", error);

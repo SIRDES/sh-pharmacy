@@ -1,7 +1,6 @@
 "use server";
 
 import { connectDB } from "@/lib/mongodb";
-import Product from "@/models/Product";
 import ShopProduct from "@/models/ShopProduct";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";

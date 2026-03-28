@@ -28,6 +28,28 @@ export const getSaleItemsBySaleId = async (saleId: string) => {
     }
 };
 
+export const getSalesItemsByProductId = async (productId: string) => {
+    try {
+        await connectDB();
+        const salesItems = await SalesItem.aggregate([
+            { $match: { productId: new mongoose.Types.ObjectId(productId) } },
+            {
+                $lookup: {
+                    from: "sales",
+                    localField: "saleId",
+                    foreignField: "_id",
+                    as: "saleId",
+                },
+            },
+            { $unwind: "$saleId" },
+        ]);
+        return { success: true, data: JSON.parse(JSON.stringify(salesItems)) };
+    } catch (err: any) {
+        console.log(err);
+        return { success: false, message: err?.message || "An error occurred" };
+    }
+}
+
 
 // add multiple salesItem
 interface SalesItemInput {

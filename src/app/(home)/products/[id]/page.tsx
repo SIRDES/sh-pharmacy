@@ -32,6 +32,7 @@ import { useRouter } from "next/navigation";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import ManageShopStockModal from "@/components/products/ManageShopStockModal";
 import { addShopProduct, getAllShopProducts, updateShopProduct } from "@/utils/serverActions/ShopProduct";
+import { getSalesItemsByProductId } from "@/utils/serverActions/SalesItem";
 
 
 
@@ -86,10 +87,41 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       setLoading(false);
     }
   };
+  const fetchProductSalesHistory = async () => {
+    setLoading(true);
+    setOrderData({});
+    try {
+      const orderResponse = await getSalesItemsByProductId(id as string)
+      // if (!orderResponse.success) {
+      //   showAlert({
+      //     title: "Error",
+      //     text: orderResponse?.message || "An error occurred while fetching product details",
+      //     severity: "error",
+      //   })
+      //   return
+      // }
+      console.log("fetchProductSalesHistory details", orderResponse?.data)
+      // setOrderData(orderResponse?.data || {});
+    } catch (error: any) {
+      // console.log("error", error);
+      showAlert({
+        title: "Error",
+        text: error?.message || "An error occurred while fetching product details",
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (!id) return
     fetchProductData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+  useEffect(() => {
+    if (!id) return
+    fetchProductSalesHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -589,7 +621,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                                   <StyledTableCell>
                                     {ordetItem?.quantity}
                                   </StyledTableCell>
-                                 
+
                                 </StyledTableRow>
                               )
                             )}
@@ -598,7 +630,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                     </TableContainer>
                   </Paper>
                 </Grid>
-                
+
               </Grid>
             </>
           )}

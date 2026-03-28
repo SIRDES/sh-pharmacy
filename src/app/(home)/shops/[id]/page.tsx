@@ -39,6 +39,7 @@ import { StyledTableCell, StyledTableRow } from "@/theme/table";
 import { currencyFormatter } from "@/utils/services/utils";
 import { getAllShops, getAShopById } from "@/utils/serverActions/Shop";
 import { signOut, useSession } from "next-auth/react";
+// import { deleteShopProduct } from "@/utils/serverActions/ShopProduct";
 export default function CategoryDetails({ params }: { params: Promise<{ id: string }> }) {
   // const theme = useTheme();
   const { id } = use(params);
@@ -112,44 +113,45 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
   const handleCloseDeleteConfirmationModal = () => {
     setOpenDeleteConfirmationModal(false);
   };
-  // const handleDeleteCategory = async () => {
-  //   try {
-  //     const res = await posCategories?.delete({ id: Number(id) });
-  //     if (res?.status === "error") {
-  //       showAlert({
-  //         title: "Error",
-  //         text: res?.message || "An error occurred",
-  //         severity: "error",
-  //       });
-  //       return;
-  //     }
-  //     showAlert({
-  //       title: "Success",
-  //       text: res?.message || "Category deleted successfully",
-  //       severity: "success",
-  //       handleConfirmButtonClick: () => {
-  //         router.back();
-  //       }
-  //     });
+  const handleDeleteCategory = async () => {
+    try {
+      // const res = await deleteShopProduct(id as string);
+      // if (!res.success) {
+      //   showAlert({
+      //     title: "Error",
+      //     text: res?.message || "An error occurred",
+      //     severity: "error",
+      //   });
+      //   return;
+      // }
+      // showAlert({
+      //   title: "Success",
+      //   text: res?.message || "Category deleted successfully",
+      //   severity: "success",
+      //   handleConfirmButtonClick: () => {
+      //     router.back();
+      //   }
+      // });
 
-  //   } catch (error: any) {
-  //     console.log("error", error);
-  //     showAlert({
-  //       title: "Error",
-  //       text: error.message || error.data || "An error occurred",
-  //       severity: "error",
-  //     });
-  //   } finally {
-  //     setOpenDeleteConfirmationModal(false);
-  //   }
-  // };
+    } catch (error: any) {
+      console.log("error", error);
+      showAlert({
+        title: "Error",
+        text: error.message || error.data || "An error occurred",
+        severity: "error",
+      });
+    } finally {
+      setOpenDeleteConfirmationModal(false);
+    }
+  };
   const handleSearchByProductNameOrProductSKU = (e: any) => {
     const value = e.target.value;
     console.log("value", value);
+    console.log("fetchedCategoryData", fetchedCategoryData);
     const filteredOrders = fetchedCategoryData?.shopProducts?.filter(
-      (order: any) =>
-        order?.product?.name?.toLowerCase()?.includes(value.toLowerCase()) ||
-        order?.product?.sku?.toString()?.includes(value)
+      (product: any) =>
+        product?.product?.name?.toLowerCase()?.includes(value.toLowerCase()) ||
+        product?.product?.sku?.toString()?.includes(value)
     );
     console.log("filteredOrders", filteredOrders);
     setCategoryData({ ...categoryData, shopProducts: filteredOrders });
@@ -169,7 +171,7 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
         onClose={handleCloseDeleteConfirmationModal}
         onConfirm={handleDeleteCategory}
         title="Delete Shop"
-        message="Are you sure you want to delete this shop?"
+        message="Are you sure you want to delete this shop product?"
         confirmButtonText="Delete"
       /> */}
       <Box mb={10}>
@@ -297,11 +299,19 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
               </Box>
               <Divider />
               <Box mt={2} mb={4} px={{ xs: 1, sm: 2, md: 3 }}>
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper} sx={{
+                  maxHeight: "calc(100vh - 250px)", // Adjust this value based on your layout
+                  overflow: "auto",
+                  // "& .MuiTable-stickyHeader": {
+                  //   "& th": {
+                  //     zIndex: 1,
+                  //   },
+                  // },
+                }}>
                   <Table
                     stickyHeader
                     sx={{ minWidth: 650 }}
-                    aria-label="students table"
+                    aria-label="shop products table"
                   >
                     <TableHead>
                       <TableRow>
@@ -315,10 +325,10 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
                     <TableBody>
                       {categoryData?.shopProducts &&
                         categoryData?.shopProducts
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
+                          // .slice(
+                          //   page * rowsPerPage,
+                          //   page * rowsPerPage + rowsPerPage
+                          // )
                           .map((product: any, index: number) => (
                             <StyledTableRow
                               key={product?._id}
@@ -335,12 +345,13 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
                               <StyledTableCell>
                                 {product?.quantity || 0}
                               </StyledTableCell>
+
                             </StyledTableRow>
                           ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
-                <TablePagination
+                {/* <TablePagination
                   rowsPerPageOptions={[10, 25, 100]}
                   component="div"
                   count={categoryData?.shopProducts?.length || 0}
@@ -348,7 +359,7 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
                   page={page}
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
-                />
+                /> */}
               </Box>
             </>
           )}

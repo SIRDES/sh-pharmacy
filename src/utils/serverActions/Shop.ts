@@ -83,6 +83,9 @@ export const getAShopById = async (id: string) => {
                 }
             },
             {
+                $sort: { "shopProducts.product.name": 1 }
+            },
+            {
                 $group: {
                     _id: "$_id",
                     name: { $first: "$name" },

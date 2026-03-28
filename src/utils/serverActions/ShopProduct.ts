@@ -134,14 +134,14 @@ export const updateMultipleShopProduct = async (shopProducts: any[]) => {
   }
 }
 // delete a product
-export const deleteUser = async (productId: string) => {
+export const deleteShopProduct = async (shopProductId: string) => {
   try {
     await connectDB();
-    const deletedProduct = await ShopProduct.findByIdAndDelete(productId);
+    const deletedProduct = await ShopProduct.findByIdAndDelete(shopProductId);
     if (!deletedProduct) {
-      return { success: false, message: "Product not found" };
+      return { success: false, message: "Shop Product not found" };
     }
-    return { success: true, data: JSON.parse(JSON.stringify(deletedProduct)), message: "Product deleted successfully" };
+    return { success: true, message: "Shop Product deleted successfully" };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };

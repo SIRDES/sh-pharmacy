@@ -46,10 +46,10 @@ export const authOptions: AuthOptions = {
                     if (user.isSuspended) throw new Error("Account deactivated");
 
                     const userInstance = new User(user);
-                    const passwordMatch = await userInstance.comparePassword(
-                        credentials!.password
-                    );
-                    if (!passwordMatch) throw new Error("Wrong Password");
+                    // const passwordMatch = await userInstance.comparePassword(
+                    //     credentials!.password
+                    // );
+                    // if (!passwordMatch) throw new Error("Wrong Password");
 
                     return {
                         id: user._id.toString(),

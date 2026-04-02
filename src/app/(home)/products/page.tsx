@@ -30,10 +30,10 @@ import LoadingAlert from "@/components/LoadingAlert";
 import { USER_ROLES } from "@/types/constants";
 import Link from "next/link";
 import { currencyFormatter } from "@/utils/services/utils";
-import { getAllProducts, updateMultipleProducts, updateProduct } from "@/utils/serverActions/Product";
+import { getAllProducts, updateMultipleProductsStock, updateProduct } from "@/utils/serverActions/Product";
 import dayjs from "dayjs";
 import ManageShopsStockModal from "@/components/ManageShopsStockModal";
-import {  updateMultipleShopProduct } from "@/utils/serverActions/ShopProduct";
+import { updateMultipleShopProduct } from "@/utils/serverActions/ShopProduct";
 import ManageProductStockModal from "@/components/ManageProductStockModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -142,9 +142,13 @@ export default function Products() {
     setOpenManageProductStockModal(false);
     setLoading(true);
     // console.log("selectedProducts", selectedProducts)
-    const products = selectedProducts.map((product: any) => ({ _id: product._id, currentStock: product.currentStock }))
+    const products = selectedProducts.map((product: any) => ({ productId: product._id, currentStock: product.currentStock, initialQuantity: product.initialQuantity, addedQuantity: product.addedQuantity, operation: stockOperation === "ADD" ? "add" : "subtract" as "add" | "subtract", userId: currentUser?._id as string }))
+
+    // console.log("products", products)
+
+
     try {
-      const res = await updateMultipleProducts(products)
+      const res = await updateMultipleProductsStock(products)
       if (!res.success) {
         showAlert({
           title: "Error",
@@ -176,23 +180,32 @@ export default function Products() {
   const handleShopProductStockConfirm = async () => {
     setOpenManageShopStockModal(false);
     setLoading(true);
-    console.log("selectedShopProducts", selectedShopProducts)
-    const shopProducts = selectedShopProducts.map((product: any) => ({ _id: product._id, quantity: product.quantity }))
-    const products = selectedShopProducts.map((product: any) => ({ _id: product.product._id, currentStock: product.product.currentStock }))
+    // console.log("selectedShopProducts", selectedShopProducts)
+    // const shopProducts = selectedShopProducts.map((product: any) => ({ _id: product._id, quantity: product.quantity }))
+
+    const shopProducts = selectedShopProducts.map((product: any) => ({ shopId: product.shopId, productId: product.productId, shopProductId: product._id, initialQuantity: product.initialQuantity, addedQuantity: product.addedQuantity, operation: stockOperation === "ADD" ? "add" : "subtract" as "add" | "subtract", userId: currentUser?._id as string, quantity: product.quantity }))
+
+    // console.log("shopProducts", shopProducts)
+
+
+    const products = selectedShopProducts.map((product: any) => ({ productId: product.productId, currentStock: product.product.currentStock, initialQuantity: product.product.initialQuantity, addedQuantity: product.product.addedQuantity, operation: stockOperation === "ADD" ? "subtract" : "add" as "add" | "subtract", userId: currentUser?._id as string }))
+
+    // console.log("products", products)
+
     try {
       const res = await updateMultipleShopProduct(shopProducts)
-      await updateMultipleProducts(products)
-      if (!res.success) {
+      const res2 = await updateMultipleProductsStock(products)
+      if (!res.success || !res2.success) {
         showAlert({
           title: "Error",
-          text: res?.message || "An error occurred while fetching products",
+          text: res?.message || res2?.message || "An error occurred while fetching products",
           severity: "error",
         })
         return
       }
       showAlert({
         title: "Success",
-        text: "Shop product stock updated successfully",
+        text: "Shop products stock updated successfully",
         severity: "success",
       })
       fetchProductsData();
@@ -240,36 +253,6 @@ export default function Products() {
   };
   const isAdmin = currentUser?.role === USER_ROLES.ADMIN
 
-  // const handleUpdateProductName = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const products = orders.map((product: any) => ({ _id: product._id, name: product.name.toLowerCase() }))
-  //     const res = await updateMultipleProducts(products)
-  //     if (!res.success) {
-  //       showAlert({
-  //         title: "Error",
-  //         text: res?.message || "An error occurred while fetching products",
-  //         severity: "error",
-  //       })
-  //       return
-  //     }
-  //     showAlert({
-  //       title: "Success",
-  //       text: "Product name updated successfully",
-  //       severity: "success",
-  //     })
-  //     fetchProductsData();
-  //   } catch (error: any) {
-  //     console.log("error", error);
-  //     showAlert({
-  //       title: "Error",
-  //       text: error?.message || "An error occurred while fetching products",
-  //       severity: "error",
-  //     })
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
   return (
     <>
       <LoadingAlert open={loading} />
@@ -279,6 +262,8 @@ export default function Products() {
         handleConfirmation={handleShopProductStockConfirm}
         selectedShopProducts={selectedShopProducts}
         setSelectedShopProducts={setSelectedShopProducts}
+        setStockOperation={setStockOperation}
+        stockOperation={stockOperation}
       // setStockValue={setStockValue}
       />
       <ManageProductStockModal

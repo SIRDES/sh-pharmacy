@@ -36,12 +36,16 @@ export default function ManageShopsStockModal({
   handleConfirmation,
   setSelectedShopProducts,
   selectedShopProducts,
+  setStockOperation,
+  stockOperation,
 }: {
   open: boolean;
   onClose: () => void;
   selectedShopProducts: any[];
   setSelectedShopProducts: Dispatch<React.SetStateAction<any[]>>;
   handleConfirmation: () => void;
+  setStockOperation: React.Dispatch<React.SetStateAction<"ADD" | "SUBTRACT">>;
+  stockOperation: "ADD" | "SUBTRACT";
 }) {
   const theme = useTheme();
   const { shops } = useShops()
@@ -50,7 +54,7 @@ export default function ManageShopsStockModal({
   const [filteredStudents, setFilteredStudents] = useState<any[]>([]);
   // const [selectedStudentsIds, setSelectedStudentsIds] = useState<string[]>([]);
   const [selectedShopId, setSelectedShopId] = useState<string | null>(null);
-  const [stockOperation, setStockOperation] = useState<"ADD" | "SUBTRACT">("ADD");
+  // const [stockOperation, setStockOperation] = useState<"ADD" | "SUBTRACT">("ADD");
   const [stockValues, setStockValues] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState<string>("");
@@ -101,11 +105,14 @@ export default function ManageShopsStockModal({
 
   const handleChange = (e: any, product: any) => {
     const value = +e.target.value;
+    if (value < 0) return;
     const productId = product._id;
     const producttoUpdate = fetchedStudents.find((student: any) => student._id === productId);
     if (!producttoUpdate) return;
     const currentStock = producttoUpdate?.quantity;
+    console.log("currentStock", currentStock)
     const productCurrentStock = producttoUpdate?.product?.currentStock;
+    console.log("productCurrentStock", productCurrentStock)
 
     if (currentStock < value && stockOperation === "SUBTRACT") {
       // showAlert({
@@ -139,11 +146,11 @@ export default function ManageShopsStockModal({
         // Already exists, update
         const updated = [...prevProducts];
         // updated[index] = { ...updated[index], product.quantity: newStockValue };
-        updated[index] = { ...updated[index], quantity: newStockValue, product: { ...updated[index].product, currentStock: newProductStockValue } };
+        updated[index] = { ...updated[index], quantity: newStockValue, initialQuantity: currentStock, addedQuantity: value, product: { ...updated[index].product, currentStock: newProductStockValue, initialQuantity: productCurrentStock, addedQuantity: value } };
         return updated;
       } else {
         // Not in list yet
-        return [...prevProducts, { ...product, quantity: newStockValue, product: { ...product.product, currentStock: newProductStockValue } }];
+        return [...prevProducts, { ...product, quantity: newStockValue, initialQuantity: currentStock, addedQuantity: value, product: { ...product.product, currentStock: newProductStockValue, initialQuantity: productCurrentStock, addedQuantity: value } }];
       }
     });
     setStockValues(prevProducts => {
@@ -318,7 +325,9 @@ export default function ManageShopsStockModal({
                               onChange={(e) => {
                                 handleChange(e, student);
                               }}
+                              onWheel={(e) => (e.target as HTMLInputElement).blur()}
                               inputProps={{
+                                min: 0,
                                 style: {
                                   border: "1px solid #ABB3BF",
                                   padding: "2px",

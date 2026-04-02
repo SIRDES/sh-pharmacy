@@ -2,6 +2,7 @@
 
 import { connectDB } from "@/lib/mongodb";
 import Sale from "@/models/Sale";
+import SalesItem from "@/models/SalesItem";
 import mongoose from "mongoose";
 export const addNewSale = async (sale: { total_amount: number, profit: number, createdBy: string, shopId: string, discount: number, sub_total: number }) => {
     try {
@@ -272,6 +273,9 @@ export const deleteSale = async (saleId: string) => {
         if (!deletedSale) {
             return { success: false, message: "Sale not found" };
         }
+        // delete all salesItems that has this saleId
+        const deletedSalesItems = await SalesItem.deleteMany({ saleId });
+
         return { success: true, data: JSON.parse(JSON.stringify(deletedSale)), message: "Sale deleted successfully" };
     } catch (err: any) {
         console.log(err);

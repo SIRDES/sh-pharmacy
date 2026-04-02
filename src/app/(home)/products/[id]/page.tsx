@@ -26,13 +26,13 @@ import LoadingAlert from "@/components/LoadingAlert";
 import Link from "next/link";
 import { currencyFormatter } from "@/utils/services/utils";
 import { StyledTableCell, StyledTableRow } from "@/theme/table";
-import { deletedProduct, getProuctById, updateProduct } from "@/utils/serverActions/Product";
+import { deletedProduct, getProuctById, updateProduct, updateProductsStock } from "@/utils/serverActions/Product";
 import dayjs from "dayjs";
 import ManageStockModal from "@/components/products/ManageStockModal";
 import { useRouter } from "next/navigation";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import ManageShopStockModal from "@/components/products/ManageShopStockModal";
-import { addShopProduct, getAllShopProducts, updateShopProduct } from "@/utils/serverActions/ShopProduct";
+import { addShopProduct, getAllShopProducts, updateShopProduct, updateShopProductStock } from "@/utils/serverActions/ShopProduct";
 import { getSalesItemsByProductId } from "@/utils/serverActions/SalesItem";
 import { addAProductStockHistory } from "@/utils/serverActions/ProductStockHistory";
 import { useSession } from "next-auth/react";
@@ -228,18 +228,18 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       const stockHistoryResponse = await addAProductStockHistory({
         productId: id as string,
         initialQuantity: orderData.currentStock,
-        addedQuantity: stockOperation === "ADD" ? Number(stockValue) : -Number(stockValue),
+        addedQuantity: Number(stockValue),
         operation: stockOperation === "ADD" ? "add" : "subtract",
         userId: currentUser?._id as string,
       })
-      if (!stockHistoryResponse.success) {
-        showAlert({
-          title: "Error",
-          text: stockHistoryResponse?.message || "An error occurred while adding product stock history",
-          severity: "error",
-        })
-        return
-      }
+      // if (!stockHistoryResponse.success) {
+      //   showAlert({
+      //     title: "Error",
+      //     text: stockHistoryResponse?.message || "An error occurred while adding product stock history",
+      //     severity: "error",
+      //   })
+      //   return
+      // }
       // await product_stock_updates.add({ productId: Number(id), initial_quantity: orderData.current_quantity, added_quantity: stockOperation === "ADD" ? Number(stockValue) : -Number(stockValue) })
       showAlert({
         title: "Success",
@@ -302,11 +302,17 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         currentStock: newProductQuantity
       }
       let orderResponse
+      let initialShopProductQuantity = 0
+
       if (selectedShopProduct === null) {
-        orderResponse = await addShopProduct({ shopId: selectedShopId as string, productId: id as string, quantity: Number(stockValue) })
+        orderResponse = await addShopProduct({ shopId: selectedShopId as string, productId: id as string, quantity: Number(stockValue), userId: currentUser?._id as string })
       } else {
+        initialShopProductQuantity = selectedShopProduct.quantity
         const newQuantity = stockOperation === "ADD" ? selectedShopProduct.quantity + Number(stockValue) : selectedShopProduct.quantity - Number(stockValue)
-        orderResponse = await updateShopProduct({ shopProductId: selectedShopProduct?._id, productData: { quantity: Number(newQuantity) } })
+
+        orderResponse = await updateShopProductStock({ shopProductId: selectedShopProduct?._id, quantity: Number(newQuantity), shopId: selectedShopId as string, productId: id as string, initialQuantity: selectedShopProduct.quantity, addedQuantity: Number(stockValue), operation: stockOperation === "ADD" ? "add" : "subtract", userId: currentUser?._id as string })
+
+        // orderResponse = await updateShopProductStock({ shopProductId: selectedShopProduct?._id,  productData: { quantity: Number(newQuantity) } })
       }
       if (!orderResponse.success) {
         showAlert({
@@ -316,26 +322,53 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         })
         return
       }
-      await updateProduct({ productId: id as string, productData })
-
-      // // add addShopProductStockHistory
-      const stockHistoryResponse = await addShopProductStockHistory({
-        shopId: selectedShopId as string,
+      // await updateProduct({ productId: id as string, productData })
+      const productStockUpdateResponse = await updateProductsStock({
         productId: id as string,
-        shopProductId: orderResponse.shopProductId as string,
+        currentStock: newProductQuantity,
         initialQuantity: orderData.currentStock,
-        addedQuantity: stockOperation === "ADD" ? Number(stockValue) : -Number(stockValue),
-        operation: stockOperation === "ADD" ? "add" : "subtract",
+        addedQuantity: Number(stockValue),
+        operation: stockOperation === "ADD" ? "subtract" : "add",
         userId: currentUser?._id as string,
       })
-      if (!stockHistoryResponse.success) {
-        showAlert({
-          title: "Error",
-          text: stockHistoryResponse?.message || "An error occurred while adding product stock history",
-          severity: "error",
-        })
-        return
-      }
+      // if (!productStockUpdateResponse.success) {
+      //   showAlert({
+      //     title: "Error",
+      //     text: productStockUpdateResponse?.message || "An error occurred while updating product stock",
+      //     severity: "error",
+      //   })
+      //   return
+      // }
+
+      // // add addShopProductStockHistory
+      // console.log("orderResponse", orderResponse)
+      // console.log("addShopProductStockHistory", {
+      //   shopId: selectedShopId as string,
+      //   productId: id as string,
+      //   shopProductId: orderResponse.shopProductId as string,
+      //   initialQuantity: initialShopProductQuantity,
+      //   addedQuantity: Number(stockValue),
+      //   operation: stockOperation === "ADD" ? "add" : "subtract",
+      //   userId: currentUser?._id as string,
+      // })
+      // const stockHistoryResponse = await addShopProductStockHistory({
+      //   shopId: selectedShopId as string,
+      //   productId: id as string,
+      //   shopProductId: orderResponse.shopProductId as string,
+      //   initialQuantity: initialShopProductQuantity,
+      //   addedQuantity: Number(stockValue),
+      //   operation: stockOperation === "ADD" ? "add" : "subtract",
+      //   userId: currentUser?._id as string,
+      // })
+      // console.log("stockHistoryResponse", stockHistoryResponse)
+      // if (!stockHistoryResponse.success) {
+      //   showAlert({
+      //     title: "Error",
+      //     text: stockHistoryResponse?.message || "An error occurred while adding product stock history",
+      //     severity: "error",
+      //   })
+      //   return
+      // }
 
       showAlert({
         title: "Success",

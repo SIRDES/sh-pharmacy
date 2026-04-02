@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../authOptions";
 import { addAProductStockHistory, addMultipleProductStockHistories, getAllProductStockHistoriesByProductId } from "./ProductStockHistory";
+import ShopProduct from "@/models/ShopProduct";
 
 // get the cuurently logined user from the session in server side
 
@@ -256,19 +257,53 @@ export const updateProduct = async ({
   }
 };
 
-// update multiple products
-export const updateMultipleProducts = async (products: any[]) => {
+// update a products stock
+export const updateProductsStock = async (product: {
+  productId: string;
+  currentStock: number;
+  initialQuantity: number;
+  addedQuantity: number;
+  operation: "add" | "subtract";
+  userId: string;
+}) => {
   try {
     await connectDB();
-    //  prepare update operations
+    //  prepare stock update operations
+    // const updateOperations = products.map((product) => ({
+    //   updateOne: {
+    //     filter: { _id: product.productId },
+    //     update: { $set: { currentStock: product.currentStock } },
+    //   },
+    // }));
+
+    const updatedProducts = await Product.findByIdAndUpdate(product.productId, { currentStock: product.currentStock });
+    await addAProductStockHistory(product)
+    return { success: true, data: JSON.parse(JSON.stringify(updatedProducts)) };
+  } catch (err: any) {
+    console.log(err);
+    return { success: false, message: err?.message || "An error occurred" };
+  }
+};
+export const updateMultipleProductsStock = async (products: {
+  productId: string;
+  currentStock: number;
+  initialQuantity: number;
+  addedQuantity: number;
+  operation: "add" | "subtract";
+  userId: string;
+}[]) => {
+  try {
+    await connectDB();
+    //  prepare stock update operations
     const updateOperations = products.map((product) => ({
       updateOne: {
-        filter: { _id: product._id },
-        update: { $set: product },
+        filter: { _id: product.productId },
+        update: { $set: { currentStock: product.currentStock } },
       },
     }));
 
     const updatedProducts = await Product.bulkWrite(updateOperations);
+    await addMultipleProductStockHistories(products)
     return { success: true, data: JSON.parse(JSON.stringify(updatedProducts)) };
   } catch (err: any) {
     console.log(err);
@@ -287,6 +322,8 @@ export const deletedProduct = async (productId: string) => {
     if (!deletedProduct) {
       return { success: false, message: "Product not found" };
     }
+    // delete all shopProducts that has this productId
+    const deletedShopProducts = await ShopProduct.deleteMany({ productId });
     return {
       success: true,
       data: JSON.parse(JSON.stringify(deletedProduct)),

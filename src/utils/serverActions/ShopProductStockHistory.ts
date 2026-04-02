@@ -172,12 +172,19 @@ export const addShopProductStockHistory = async (data: {
   try {
     await connectDB();
     const { shopId, productId, shopProductId, initialQuantity, addedQuantity, operation, userId } = data;
+    console.log("data", data)
 
-    if (!shopId || !productId || !shopProductId || !initialQuantity || !addedQuantity || !operation || !userId) {
+    if (!shopId || !productId || !shopProductId || !operation || !userId) {
       return { success: false, message: "All fields are required" };
     }
+    if (initialQuantity === undefined || initialQuantity === null) {
+      return { success: false, message: "Initial quantity is required" };
+    }
+    if (addedQuantity === undefined || addedQuantity === null) {
+      return { success: false, message: "Added quantity is required" };
+    }
 
-    await ProductStockHistory.insertOne({
+    await ShopProductStockHistory.insertOne({
       shopId,
       productId,
       shopProductId,
@@ -190,6 +197,45 @@ export const addShopProductStockHistory = async (data: {
     return {
       success: true,
       message: "Shop product stock history added successfully",
+    };
+  } catch (err: any) {
+    console.error(err);
+    return { success: false, message: err?.message || "An error occurred" };
+  }
+};
+
+export const addMultipleShopProductStockHistories = async (data: {
+  shopId: string;
+  productId: string;
+  shopProductId: string;
+  initialQuantity: number;
+  addedQuantity: number;
+  operation: "add" | "subtract";
+  userId: string;
+}[]) => {
+  try {
+    await connectDB();
+    // const { shopId, productId, shopProductId, initialQuantity, addedQuantity, operation, userId } = data;
+    // console.log("data", data)
+
+    if (!Array.isArray(data) || data.length === 0) {
+      return { success: false, message: "No product stock histories to add" };
+    }
+
+    const insertOperations = data.map((item) => ({
+      shopId: item.shopId,
+      productId: item.productId,
+      shopProductId: item.shopProductId,
+      initialQuantity: item.initialQuantity,
+      addedQuantity: item.addedQuantity,
+      operation: item.operation,
+      userId: item.userId,
+    }));
+    await ShopProductStockHistory.insertMany(insertOperations);
+
+    return {
+      success: true,
+      message: "Shop product stock histories added successfully",
     };
   } catch (err: any) {
     console.error(err);

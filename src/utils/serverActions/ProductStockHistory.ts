@@ -101,8 +101,17 @@ export const addAProductStockHistory = async (data: {
     await connectDB();
     const { productId, initialQuantity, addedQuantity, operation, userId } = data;
 
-    if (!productId || !initialQuantity || !addedQuantity || !operation) {
+    if (!productId || !operation) {
       return { success: false, message: "All fields are required" };
+    }
+    if (initialQuantity === undefined || initialQuantity === null) {
+      return { success: false, message: "Initial quantity is required" };
+    }
+    if (addedQuantity === undefined || addedQuantity === null) {
+      return { success: false, message: "Added quantity is required" };
+    }
+    if (userId === undefined || userId === null) {
+      return { success: false, message: "User ID is required" };
     }
 
     await ProductStockHistory.insertOne({
@@ -159,6 +168,7 @@ export const addMultipleProductStockHistories = async (
   }
 };
 
+// not in use
 export const updateAProductStockHistory = async (
   id: string,
   data: {
@@ -191,6 +201,7 @@ export const updateAProductStockHistory = async (
   }
 };
 
+// not in use
 export const deleteAProductStockHistory = async (id: string) => {
   try {
     await connectDB();

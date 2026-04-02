@@ -5,6 +5,7 @@ import ShopProduct from "@/models/ShopProduct";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../authOptions";
+import { addMultipleShopProductStockHistories, addShopProductStockHistory } from "./ShopProductStockHistory";
 
 // get the cuurently logined user from the session in server side
 
@@ -68,11 +69,12 @@ export const addShopProduct = async (data: {
   shopId: string;
   productId: string;
   quantity: number;
+  userId: string;
 }) => {
   try {
     await connectDB();
     // console.log("data", data);
-    const { shopId, productId, quantity } = data;
+    const { shopId, productId, quantity, userId } = data;
 
     if (!shopId || !productId || !quantity) {
       return { success: false, message: "All fields are required" };
@@ -83,8 +85,26 @@ export const addShopProduct = async (data: {
       productId,
       quantity
     });
-    // console.log("subjects", subjects);
-    return { success: true, shopProductId: result._id, message: "Product quantity added successfullu" };
+    console.log("result", result);
+
+    // shopId: string;
+    // productId: string;
+    // shopProductId: string;
+    // initialQuantity: number;
+    // addedQuantity: number;
+    // operation: "add" | "subtract";
+    // userId: string;
+
+    await addShopProductStockHistory({
+      shopProductId: JSON.parse(JSON.stringify(result))._id,
+      shopId: shopId,
+      productId: productId,
+      initialQuantity: 0,
+      addedQuantity: quantity,
+      operation: "add",
+      userId: userId,
+    })
+    return { success: true, shopProductId: JSON.parse(JSON.stringify(result))._id, message: "Product quantity added successfullu" };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };
@@ -107,7 +127,7 @@ export const updateShopProduct = async ({ shopProductId, productData }: { shopPr
     if (!updatedProduct) {
       return { success: false, message: "Shop Product not found" };
     }
-    return { success: true, shopProductId: updatedProduct._id, data: JSON.parse(JSON.stringify(updatedProduct)) };
+    return { success: true, shopProductId: JSON.parse(JSON.stringify(updatedProduct))._id, data: JSON.parse(JSON.stringify(updatedProduct)) };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };
@@ -115,18 +135,87 @@ export const updateShopProduct = async ({ shopProductId, productData }: { shopPr
 }
 
 
-export const updateMultipleShopProduct = async (shopProducts: any[]) => {
+export const updateShopProductStock = async (shopProducts: {
+  shopId: string;
+  productId: string;
+  shopProductId: string;
+  initialQuantity: number;
+  addedQuantity: number;
+  operation: "add" | "subtract";
+  userId: string;
+  quantity: number;
+}) => {
+  try {
+    await connectDB();
+    //  prepare update operations
+    // const updateOperations = shopProducts.map((product) => ({
+    //   updateOne: {
+    //     filter: { _id: product.shopProductId },
+    //     update: { $set: { quantity: product.quantity } }
+    //   }
+    // }))
+
+    // updateOne: {
+    //   filter: { _id: product.productId },
+    //   update: { $set: { currentStock: product.currentStock } },
+    // },
+
+    const updatedProduct = await ShopProduct.findByIdAndUpdate(
+      shopProducts.shopProductId,
+      {
+        quantity: shopProducts.quantity,
+      },
+      { new: true }
+    )
+
+    await addShopProductStockHistory({
+      shopProductId: shopProducts.shopProductId,
+      shopId: shopProducts.shopId,
+      productId: shopProducts.productId,
+      initialQuantity: shopProducts.initialQuantity,
+      addedQuantity: shopProducts.addedQuantity,
+      operation: shopProducts.operation,
+      userId: shopProducts.userId,
+    })
+
+    return { success: true, data: JSON.parse(JSON.stringify(updatedProduct)) };
+  } catch (err: any) {
+    console.log(err);
+    return { success: false, message: err?.message || "An error occurred" };
+  }
+}
+
+
+
+export const updateMultipleShopProduct = async (shopProducts: {
+  shopId: string;
+  productId: string;
+  shopProductId: string;
+  initialQuantity: number;
+  addedQuantity: number;
+  operation: "add" | "subtract";
+  userId: string;
+  quantity: number;
+}[]) => {
   try {
     await connectDB();
     //  prepare update operations
     const updateOperations = shopProducts.map((product) => ({
       updateOne: {
-        filter: { _id: product._id },
-        update: { $set: product }
+        filter: { _id: product.shopProductId },
+        update: { $set: { quantity: product.quantity } }
       }
     }))
 
+    // updateOne: {
+    //   filter: { _id: product.productId },
+    //   update: { $set: { currentStock: product.currentStock } },
+    // },
+
     const updatedProducts = await ShopProduct.bulkWrite(updateOperations);
+
+    await addMultipleShopProductStockHistories(shopProducts)
+
     return { success: true, data: JSON.parse(JSON.stringify(updatedProducts)) };
   } catch (err: any) {
     console.log(err);

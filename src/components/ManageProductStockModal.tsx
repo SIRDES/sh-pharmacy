@@ -79,6 +79,7 @@ export default function ManageProductStockModal({
 
   const handleChange = (e: any, product: any) => {
     const value = +e.target.value;
+    if (value < 0) return;
     const productId = product._id;
     const producttoUpdate = fetchedStudents.find((student: any) => student._id === productId);
     if (!producttoUpdate) return;
@@ -103,11 +104,11 @@ export default function ManageProductStockModal({
       if (index > -1) {
         // Already exists, update
         const updated = [...prevProducts];
-        updated[index] = { ...updated[index], currentStock: newStockValue };
+        updated[index] = { ...updated[index], currentStock: newStockValue, initialQuantity: currentStock, addedQuantity: value };
         return updated;
       } else {
         // Not in list yet
-        return [...prevProducts, { ...product, currentStock: newStockValue }];
+        return [...prevProducts, { ...product, currentStock: newStockValue, initialQuantity: currentStock, addedQuantity: value }];
       }
     });
     setStockValues(prevProducts => {
@@ -249,7 +250,9 @@ export default function ManageProductStockModal({
                             onChange={(e) => {
                               handleChange(e, student);
                             }}
+                            onWheel={(e) => (e.target as HTMLInputElement).blur()}
                             inputProps={{
+                              min: 0,
                               style: {
                                 border: "1px solid #ABB3BF",
                                 padding: "2px",

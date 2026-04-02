@@ -32,7 +32,7 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
   loadingShopProducts
 }) => {
   const { shops } = useShops()
-// console.log("selectedShopProduct", selectedShopProduct)
+  // console.log("selectedShopProduct", selectedShopProduct)
   return (
     <Dialog
       open={open}
@@ -44,8 +44,8 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
         sx={{
           bgcolor: "background.paper",
           boxShadow: 24,
-          p: {xs: 2, sm: 3},
-          pt: {xs: 2, sm: 3},
+          p: { xs: 2, sm: 3 },
+          pt: { xs: 2, sm: 3 },
           // minWidth: 400,
           // minWidth: "100%",
         }}
@@ -102,9 +102,9 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
           </Grid>
 
           <Grid size={{ xs: 6, sm: 6, md: 6 }}>
-           <Typography gutterBottom>
-                Current Qty
-              </Typography>
+            <Typography gutterBottom>
+              Current Qty
+            </Typography>
             <TextField
               size="small"
               fullWidth
@@ -128,9 +128,9 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
             />
           </Grid>
           <Grid size={{ xs: 6 }}>
-             <Typography gutterBottom>
-                Operation
-              </Typography>
+            <Typography gutterBottom>
+              Operation
+            </Typography>
             <Select
               fullWidth
               displayEmpty
@@ -147,9 +147,9 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
             </Select>
           </Grid>
           <Grid size={{ xs: 6 }}>
-             <Typography gutterBottom>
-                Qty to {stockOperation?.toLowerCase()}
-              </Typography>
+            <Typography gutterBottom>
+              Qty to {stockOperation?.toLowerCase()}
+            </Typography>
             <TextField
               size="small"
               fullWidth
@@ -162,7 +162,9 @@ const ManageShopStockModal: React.FC<ManageShopStockModalProps> = ({
                 // setValue(value);
                 setStockValue(value);
               }}
+              onWheel={(e) => (e.target as HTMLInputElement).blur()}
               inputProps={{
+                min: 0,
                 style: {
                   border: "2px solid #ABB3BF",
                   padding: "9px",

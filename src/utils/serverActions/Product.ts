@@ -5,7 +5,7 @@ import Product from "@/models/Product";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../authOptions";
-import { getAllProductStockHistoriesByProductId } from "./ProductStockHistory";
+import { addAProductStockHistory, addMultipleProductStockHistories, getAllProductStockHistoriesByProductId } from "./ProductStockHistory";
 
 // get the cuurently logined user from the session in server side
 
@@ -61,11 +61,20 @@ export const addProduct = async (
     if (!Array.isArray(data) || data.length === 0) {
       return { success: false, message: "No products to add" };
     }
+    const currentUser = await getCurrentUser();
+
 
     // Get the latest SKU to continue numbering
     const lastProduct = await Product.findOne().sort({ _id: -1 });
     let nextSku = lastProduct?.sku ? lastProduct.sku + 1 : 1;
     const productsToInsert = [];
+    const stockHistoriesToInsert: {
+      productId: string;
+      initialQuantity: number;
+      addedQuantity: number;
+      operation: "add";
+      userId: string;
+    }[] = [];
 
     for (const item of data) {
       const { name, costPrice, sellingPrice, currentStock, expiryDate } = item;
@@ -94,7 +103,23 @@ export const addProduct = async (
       });
     }
 
-    await Product.insertMany(productsToInsert);
+    const addedProducts = await Product.insertMany(productsToInsert);
+
+    if (!addedProducts || addedProducts.length === 0) {
+      return { success: false, message: "No products added" };
+    }
+
+    for (const product of addedProducts) {
+      stockHistoriesToInsert.push({
+        productId: product._id as string,
+        initialQuantity: 0,
+        addedQuantity: product.currentStock,
+        operation: "add",
+        userId: currentUser?._id as string,
+      })
+    }
+
+    await addMultipleProductStockHistories(stockHistoriesToInsert)
 
     return {
       success: true,
@@ -255,6 +280,9 @@ export const updateMultipleProducts = async (products: any[]) => {
 export const deletedProduct = async (productId: string) => {
   try {
     await connectDB();
+
+    // find all shopProducts that has this productId and delete them as well
+
     const deletedProduct = await Product.findByIdAndDelete(productId);
     if (!deletedProduct) {
       return { success: false, message: "Product not found" };

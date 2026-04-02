@@ -28,22 +28,64 @@ export const getSaleItemsBySaleId = async (saleId: string) => {
     }
 };
 
-export const getSalesItemsByProductId = async (productId: string) => {
+export const getSalesItemsByProductId = async ({ productId, page = 1 }: { productId: string, page?: number }) => {
     try {
         await connectDB();
-        const salesItems = await SalesItem.aggregate([
+        const skip = (page - 1) * 50;
+        const result = await SalesItem.aggregate([
             { $match: { productId: new mongoose.Types.ObjectId(productId) } },
+            { $sort: { createdAt: -1 } },
             {
-                $lookup: {
-                    from: "sales",
-                    localField: "saleId",
-                    foreignField: "_id",
-                    as: "saleId",
-                },
-            },
-            { $unwind: "$saleId" },
+                $facet: {
+                    metadata: [{ $count: "total" }],
+                    data: [
+                        { $skip: skip },
+                        { $limit: 50 },
+                        {
+                            $lookup: {
+                                from: "products",
+                                localField: "productId",
+                                foreignField: "_id",
+                                as: "productId",
+                            },
+                        },
+                        { $unwind: "$productId" },
+                        {
+                            $lookup: {
+                                from: "sales",
+                                localField: "saleId",
+                                foreignField: "_id",
+                                as: "saleId",
+                            },
+                        },
+                        { $unwind: "$saleId" },
+                        {
+                            $lookup: {
+                                from: "shops",
+                                localField: "saleId.shopId",
+                                foreignField: "_id",
+                                as: "saleId.shopId",
+                            },
+                        },
+                        { $unwind: "$saleId.shopId" },
+                        {
+                            $lookup: {
+                                from: "shopproducts",
+                                localField: "shopProductId",
+                                foreignField: "_id",
+                                as: "shopProductId",
+                            },
+                        },
+                        { $unwind: { path: "$shopProductId", preserveNullAndEmptyArrays: true } },
+                    ]
+                }
+            }
         ]);
-        return { success: true, data: JSON.parse(JSON.stringify(salesItems)) };
+
+        const total = result[0]?.metadata[0]?.total || 0;
+        const salesItems = result[0]?.data || [];
+
+        return { success: true, data: JSON.parse(JSON.stringify(salesItems)), total, page };
     } catch (err: any) {
         console.log(err);
         return { success: false, message: err?.message || "An error occurred" };
@@ -57,6 +99,7 @@ interface SalesItemInput {
     shopProductId: string;
     productId: string;
     total_amount: number;
+    unit_price: number;
     profit: number;
     qty: number;
     createdBy: string;
@@ -78,6 +121,7 @@ export const addSalesItems = async ({
             shopProductId: item.shopProductId,
             productId: item.productId,
             total_amount: item.total_amount,
+            unit_price: item.unit_price,
             profit: item.profit,
             qty: item.qty,
             createdBy: item.createdBy,

@@ -17,6 +17,7 @@ import {
   Typography,
   styled,
   tableCellClasses,
+  TablePagination,
 } from "@mui/material";
 import React, { use, useEffect, useState } from "react";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowBack";
@@ -33,16 +34,27 @@ import ConfirmationModal from "@/components/ConfirmationModal";
 import ManageShopStockModal from "@/components/products/ManageShopStockModal";
 import { addShopProduct, getAllShopProducts, updateShopProduct } from "@/utils/serverActions/ShopProduct";
 import { getSalesItemsByProductId } from "@/utils/serverActions/SalesItem";
+import { addAProductStockHistory } from "@/utils/serverActions/ProductStockHistory";
+import { useSession } from "next-auth/react";
+import { addShopProductStockHistory } from "@/utils/serverActions/ShopProductStockHistory";
 
 
 
 export default function ProductDetails({ params }: { params: Promise<{ id: string }> }) {
   // const theme = useTheme();
   const { id } = use(params);
+  const { data: session } = useSession();
+  const currentUser = session?.user;
   const router = useRouter();
   const [orderData, setOrderData] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [loadingShopProducts, setLoadingShopProducts] = useState(false);
+  const [fetchShopProductsHasError, setFetchShopProductsHasError] = useState(false);
+  const [salesHistory, setSalesHistory] = useState<any[]>([]);
+  const [salesTotal, setSalesTotal] = useState(0);
+  const [salesPage, setSalesPage] = useState(0);
+  // const [salesRowsPerPage, setSalesRowsPerPage] = useState(10);
+  const [loadingSales, setLoadingSales] = useState(false);
 
   const [openManageStockModal, setOpenManageStockModal] = useState(false);
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false);
@@ -74,7 +86,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         })
         return
       }
-      // console.log("Product details", orderResponse?.data)
+      console.log("Product details", orderResponse?.data)
       setOrderData(orderResponse?.data || {});
     } catch (error: any) {
       // console.log("error", error);
@@ -88,29 +100,26 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
     }
   };
   const fetchProductSalesHistory = async () => {
-    setLoading(true);
-    setOrderData({});
+    setLoadingSales(true);
     try {
-      const orderResponse = await getSalesItemsByProductId(id as string)
-      // if (!orderResponse.success) {
-      //   showAlert({
-      //     title: "Error",
-      //     text: orderResponse?.message || "An error occurred while fetching product details",
-      //     severity: "error",
-      //   })
-      //   return
-      // }
-      console.log("fetchProductSalesHistory details", orderResponse?.data)
-      // setOrderData(orderResponse?.data || {});
+      const orderResponse = await getSalesItemsByProductId({
+        productId: id as string,
+        page: salesPage + 1,
+        // limit: salesRowsPerPage,
+      });
+      if (orderResponse.success) {
+        console.log("salesHistory", orderResponse.data)
+        setSalesHistory(orderResponse.data || []);
+        setSalesTotal(orderResponse.total || 0);
+      }
     } catch (error: any) {
-      // console.log("error", error);
       showAlert({
         title: "Error",
-        text: error?.message || "An error occurred while fetching product details",
+        text: error?.message || "An error occurred while fetching product sales history",
         severity: "error",
       });
     } finally {
-      setLoading(false);
+      setLoadingSales(false);
     }
   };
 
@@ -120,22 +129,38 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
   useEffect(() => {
-    if (!id) return
+    if (!id) return;
     fetchProductSalesHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, salesPage]);
 
 
   const handleFetchShopProducts = async () => {
     try {
       if (!selectedShopId || !id) return
+      setSelectedShopProduct(null)
       setLoadingShopProducts(true);
       const shopProducts = await getAllShopProducts({ shopId: selectedShopId, productId: id });
       // console.log("shopProducts", shopProducts)
       // setShopProducts(shopProducts?.data?.[0] || null)
+      if (!shopProducts?.success) {
+        handleCloseManageShopStockModal()
+        showAlert({
+          title: "Error",
+          text: "An error occurred while getting shop products",
+          severity: "error",
+        })
+        return
+      }
       setSelectedShopProduct(shopProducts?.data?.[0] || null)
     } catch (error) {
       console.log(error)
+      handleCloseManageShopStockModal()
+      showAlert({
+        title: "Error",
+        text: "An error occurred while getting shop products",
+        severity: "error",
+      })
     } finally {
       setLoadingShopProducts(false);
     }
@@ -200,6 +225,21 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       }
 
       // // product_stock_updates
+      const stockHistoryResponse = await addAProductStockHistory({
+        productId: id as string,
+        initialQuantity: orderData.currentStock,
+        addedQuantity: stockOperation === "ADD" ? Number(stockValue) : -Number(stockValue),
+        operation: stockOperation === "ADD" ? "add" : "subtract",
+        userId: currentUser?._id as string,
+      })
+      if (!stockHistoryResponse.success) {
+        showAlert({
+          title: "Error",
+          text: stockHistoryResponse?.message || "An error occurred while adding product stock history",
+          severity: "error",
+        })
+        return
+      }
       // await product_stock_updates.add({ productId: Number(id), initial_quantity: orderData.current_quantity, added_quantity: stockOperation === "ADD" ? Number(stockValue) : -Number(stockValue) })
       showAlert({
         title: "Success",
@@ -268,7 +308,6 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         const newQuantity = stockOperation === "ADD" ? selectedShopProduct.quantity + Number(stockValue) : selectedShopProduct.quantity - Number(stockValue)
         orderResponse = await updateShopProduct({ shopProductId: selectedShopProduct?._id, productData: { quantity: Number(newQuantity) } })
       }
-      await updateProduct({ productId: id as string, productData })
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -277,8 +316,27 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         })
         return
       }
+      await updateProduct({ productId: id as string, productData })
 
-      // // product_stock_updates
+      // // add addShopProductStockHistory
+      const stockHistoryResponse = await addShopProductStockHistory({
+        shopId: selectedShopId as string,
+        productId: id as string,
+        shopProductId: orderResponse.shopProductId as string,
+        initialQuantity: orderData.currentStock,
+        addedQuantity: stockOperation === "ADD" ? Number(stockValue) : -Number(stockValue),
+        operation: stockOperation === "ADD" ? "add" : "subtract",
+        userId: currentUser?._id as string,
+      })
+      if (!stockHistoryResponse.success) {
+        showAlert({
+          title: "Error",
+          text: stockHistoryResponse?.message || "An error occurred while adding product stock history",
+          severity: "error",
+        })
+        return
+      }
+
       showAlert({
         title: "Success",
         text: "Stock updated successfully",
@@ -342,6 +400,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       />
       <ManageShopStockModal onClose={handleCloseManageShopStockModal} open={openManageShopStockModal} onConfirm={handleManageShopStock} selectedShopId={selectedShopId} setSelectedShopId={setSelectedShopId} selectedShopProduct={selectedShopProduct} setStockValue={setStockValue} setStockOperation={setStockOperation} stockValue={stockValue}
         stockOperation={stockOperation} loadingShopProducts={loadingShopProducts} />
+
       <ConfirmationModal open={openConfirmDeleteModal} onClose={handleCloseDeleteProductModal} onConfirm={handleDeleteProduct} message="Are you sure you want to delete this product?" title="Delete Product" />
       <LoadingAlert open={loading} />
 
@@ -630,7 +689,50 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                     </TableContainer>
                   </Paper>
                 </Grid>
-
+                <Grid size={{ xs: 12, sm: 12, md: 6 }}>
+                  <Typography variant="body1" fontWeight={700} mb={2}>
+                    Sales History
+                  </Typography>
+                  <Paper sx={{ width: "100%", overflow: "hidden" }}>
+                    <TableContainer sx={{ maxHeight: 500 }}>
+                      <Table stickyHeader aria-label="sales history table">
+                        <TableHead>
+                          <TableRow>
+                            <StyledTableCell>Date</StyledTableCell>
+                            <StyledTableCell>Shop</StyledTableCell>
+                            <StyledTableCell>Qty</StyledTableCell>
+                            <StyledTableCell>Total</StyledTableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {salesHistory?.length !== 0 &&
+                            salesHistory?.map((item: any, index: number) => (
+                              <StyledTableRow key={index}>
+                                <StyledTableCell>
+                                  {dayjs(item?.createdAt).format("DD MMM YYYY")}
+                                </StyledTableCell>
+                                <StyledTableCell>
+                                  {item?.saleId?.shopId?.name?.toUpperCase()}
+                                </StyledTableCell>
+                                <StyledTableCell>{item?.qty}</StyledTableCell>
+                                <StyledTableCell>
+                                  {currencyFormatter(item?.total_amount || 0)}
+                                </StyledTableCell>
+                              </StyledTableRow>
+                            ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                    <TablePagination
+                      rowsPerPageOptions={[]}
+                      component="div"
+                      count={salesTotal}
+                      rowsPerPage={50}
+                      page={salesPage}
+                      onPageChange={(e, newPage) => setSalesPage(newPage)}
+                    />
+                  </Paper>
+                </Grid>
               </Grid>
             </>
           )}

@@ -5,6 +5,7 @@ export type IShopProduct = mongoose.Document & {
   shopId: Types.ObjectId;
   productId: Types.ObjectId;
   quantity: number;
+  
   isDeleted: boolean;
   isSuspended: boolean;
 };
@@ -41,6 +42,24 @@ const shopProductSchema = new mongoose.Schema(
     toObject: {
       getters: true,
     },
+  }
+);
+
+shopProductSchema.index({ shopId: 1, productId: 1 }, { unique: true, name: "shopProductId" });
+
+shopProductSchema.post(
+  "save",
+  function (error: any, doc: any, next: any) {
+    if (
+      error.name === "MongoServerError" &&
+      error.code === 11000 &&
+      error.keyPattern &&
+      error.keyPattern.shopProductId
+    ) {
+      next(new Error("Shop product already exists for this shop and product"));
+    } else {
+      next(error);
+    }
   }
 );
 

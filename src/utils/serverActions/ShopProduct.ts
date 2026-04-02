@@ -53,11 +53,11 @@ export const getAllShopProducts = async ({ shopId, productId }: { shopId?: strin
     ]);
 
     if (!products || products.length === 0) {
-      return { success: false, message: "No product found", data: [] };
+      return { success: true, message: "No product found", data: [] };
     }
     return { success: true, data: JSON.parse(JSON.stringify(products)) };
   } catch (err: any) {
-    return { success: false, message: err?.message || "An error occurred", data: [] }
+    return { success: false, message: err?.message || "An error occurred" }
   }
 };
 
@@ -84,7 +84,7 @@ export const addShopProduct = async (data: {
       quantity
     });
     // console.log("subjects", subjects);
-    return { success: true, message: "Product quantity added successfullu" };;
+    return { success: true, shopProductId: result._id, message: "Product quantity added successfullu" };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };
@@ -107,7 +107,7 @@ export const updateShopProduct = async ({ shopProductId, productData }: { shopPr
     if (!updatedProduct) {
       return { success: false, message: "Shop Product not found" };
     }
-    return { success: true, data: JSON.parse(JSON.stringify(updatedProduct)) };
+    return { success: true, shopProductId: updatedProduct._id, data: JSON.parse(JSON.stringify(updatedProduct)) };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };

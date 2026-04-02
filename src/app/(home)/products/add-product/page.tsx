@@ -23,6 +23,7 @@ import { showAlert } from "@/components/Alerts";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import LoadingAlert from "@/components/LoadingAlert";
+import { addAProductStockHistory } from "@/utils/serverActions/ProductStockHistory";
 
 // ✅ Yup schema for a single product
 const productSchema = yup.object().shape({

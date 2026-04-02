@@ -254,6 +254,7 @@ function AddNewOrder() {
           shopProductId: item._id,
           productId: item.product._id,
           total_amount: item.total_amount,
+          unit_price: item?.product?.sellingPrice,
           profit: item.profit,
           qty: item.qty,
           createdBy: currentUser?._id || ""

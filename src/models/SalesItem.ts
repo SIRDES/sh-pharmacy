@@ -6,6 +6,7 @@ export type ISalesItem = mongoose.Document & {
   productId: Types.ObjectId;
   qty: number;
   total_amount: number;
+  unit_price: number;
   profit: number;
   shopProductId: Types.ObjectId;
   isDeleted: boolean;
@@ -33,6 +34,7 @@ const salesItemSchema = new mongoose.Schema(
       index: true,
     },
     total_amount: { type: Number, required: true },
+    unit_price: { type: Number, required: true },
     profit: { type: Number, required: true },
     qty: { type: Number, required: true },
     isDeleted: {

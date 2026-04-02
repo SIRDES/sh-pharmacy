@@ -95,10 +95,11 @@ export const addAProductStockHistory = async (data: {
   initialQuantity: number;
   addedQuantity: number;
   operation: "add" | "subtract";
+  userId: string;
 }) => {
   try {
     await connectDB();
-    const { productId, initialQuantity, addedQuantity, operation } = data;
+    const { productId, initialQuantity, addedQuantity, operation, userId } = data;
 
     if (!productId || !initialQuantity || !addedQuantity || !operation) {
       return { success: false, message: "All fields are required" };
@@ -109,6 +110,7 @@ export const addAProductStockHistory = async (data: {
       initialQuantity,
       addedQuantity,
       operation,
+      userId,
     });
 
     return {
@@ -127,6 +129,7 @@ export const addMultipleProductStockHistories = async (
     initialQuantity: number;
     addedQuantity: number;
     operation: "add" | "subtract";
+    userId: string;
   }[]
 ) => {
   try {
@@ -141,6 +144,7 @@ export const addMultipleProductStockHistories = async (
       initialQuantity: item.initialQuantity,
       addedQuantity: item.addedQuantity,
       operation: item.operation,
+      userId: item.userId,
     }));
 
     await ProductStockHistory.insertMany(insertOperations);

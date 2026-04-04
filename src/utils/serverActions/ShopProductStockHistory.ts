@@ -96,13 +96,13 @@ export const getAllShopProductStockHistoryByProductId = async (
 };
 
 export const getAllShopProductStockHistoriesByShopIdAndProductId = async (
-  shopId: string,
-  productId: string
+  { shopId, productId, page = 1 }: { shopId: string, productId: string, page?: number }
 ) => {
   try {
     await connectDB();
+    const skip = (page - 1) * 50;
 
-    const histories = await ShopProductStockHistory.aggregate([
+    const result = await ShopProductStockHistory.aggregate([
       {
         $match: {
           shopId: new mongoose.Types.ObjectId(shopId),
@@ -110,49 +110,61 @@ export const getAllShopProductStockHistoriesByShopIdAndProductId = async (
         },
       },
       {
-        $lookup: {
-          from: "products",
-          localField: "productId",
-          foreignField: "_id",
-          as: "product",
+        $facet: {
+          metadata: [{ $count: "total" }],
+          data: [
+            { $sort: { createdAt: -1 } },
+            { $skip: skip },
+            { $limit: 50 },
+            {
+              $lookup: {
+                from: "products",
+                localField: "productId",
+                foreignField: "_id",
+                as: "product",
+              },
+            },
+            { $unwind: "$product" },
+            {
+              $lookup: {
+                from: "shops",
+                localField: "shopId",
+                foreignField: "_id",
+                as: "shop",
+              },
+            },
+            { $unwind: "$shop" },
+            {
+              $lookup: {
+                from: "shopproducts",
+                localField: "shopProductId",
+                foreignField: "_id",
+                as: "shopProduct",
+              },
+            },
+            { $unwind: "$shopProduct" },
+            {
+              $lookup: {
+                from: "users",
+                localField: "userId",
+                foreignField: "_id",
+                as: "user",
+              },
+            },
+            { $unwind: "$user" },
+          ],
         },
-      },
-      { $unwind: "$product" },
-      {
-        $lookup: {
-          from: "shops",
-          localField: "shopId",
-          foreignField: "_id",
-          as: "shop",
-        },
-      },
-      { $unwind: "$shop" },
-      {
-        $lookup: {
-          from: "shopproducts",
-          localField: "shopProductId",
-          foreignField: "_id",
-          as: "shopProduct",
-        },
-      },
-      { $unwind: "$shopProduct" },
-      {
-        $lookup: {
-          from: "users",
-          localField: "userId",
-          foreignField: "_id",
-          as: "user",
-        },
-      },
-      { $unwind: "$user" },
-      {
-        $sort: { createdAt: -1 },
       },
     ]);
 
+    const summaries = result[0].data;
+    const totalCount = result[0].metadata[0]?.total || 0;
+
     return {
       success: true,
-      data: JSON.parse(JSON.stringify(histories)),
+      data: JSON.parse(JSON.stringify(summaries)),
+      total: totalCount,
+      page: page,
     };
   } catch (err: any) {
     console.error(err);

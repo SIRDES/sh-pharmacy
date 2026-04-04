@@ -14,37 +14,46 @@ export const getCurrentUser = async () => {
   return session?.user || null;
 };
 
-export const getAllProductStockHistories = async () => {
+export const getAllProductStockHistories = async ({ page = 1, limit = 10 }: { page?: number, limit?: number }) => {
   try {
     await connectDB();
-    // const currentUser = await getCurrentUser();
-    const ProductStockHistories = await ProductStockHistory.aggregate([
+    const skip = (page - 1) * limit;
+
+    const result = await ProductStockHistory.aggregate([
       {
-        $lookup: {
-          from: "products",
-          localField: "productId",
-          foreignField: "_id",
-          as: "product",
+        $facet: {
+          metadata: [{ $count: "total" }],
+          data: [
+            { $sort: { createdAt: -1 } },
+            { $skip: skip },
+            { $limit: limit },
+            {
+              $lookup: {
+                from: "products",
+                localField: "productId",
+                foreignField: "_id",
+                as: "product",
+              },
+            },
+            { $unwind: "$product" },
+          ],
         },
-      },
-      {
-        $unwind: "$product",
-      },
-      {
-        $sort: { createdAt: -1 },
       },
     ]);
 
-    if (!ProductStockHistories || ProductStockHistories.length === 0) {
-      return {
-        success: false,
-        message: "No product stock history found",
-        data: [],
-      };
-    }
+    const histories = result[0].data;
+    const totalCount = result[0].metadata[0]?.total || 0;
+    const totalPages = Math.ceil(totalCount / limit);
+
     return {
       success: true,
-      data: JSON.parse(JSON.stringify(ProductStockHistories)),
+      data: JSON.parse(JSON.stringify(histories)),
+      pagination: {
+        totalCount,
+        totalPages,
+        currentPage: page,
+        limit,
+      },
     };
   } catch (err: any) {
     console.log(err);
@@ -56,33 +65,68 @@ export const getAllProductStockHistories = async () => {
   }
 };
 
-export const getAllProductStockHistoriesByProductId = async (
-  productId: string
-) => {
+export const getAllProductStockHistoriesByProductId = async ({
+  productId,
+  page = 1,
+  // limit = 10
+}: {
+  productId: string;
+  page?: number;
+  // limit?: number;
+}) => {
   try {
     await connectDB();
+    const skip = (page - 1) * 50;
 
-    const histories = await ProductStockHistory.aggregate([
+    const result = await ProductStockHistory.aggregate([
       {
         $match: { productId: new mongoose.Types.ObjectId(productId) },
       },
       {
-        $lookup: {
-          from: "products",
-          localField: "productId",
-          foreignField: "_id",
-          as: "product",
+        $facet: {
+          metadata: [{ $count: "total" }],
+          data: [
+            { $sort: { createdAt: -1 } },
+            { $skip: skip },
+            { $limit: 50 },
+            {
+              $lookup: {
+                from: "products",
+                localField: "productId",
+                foreignField: "_id",
+                as: "product",
+              },
+            },
+            { $unwind: "$product" },
+            {
+              $lookup: {
+                from: "users",
+                localField: "userId",
+                foreignField: "_id",
+                as: "user",
+              },
+            },
+            { $unwind: "$user" },
+          ],
         },
       },
-      { $unwind: "$product" },
-      {
-        $sort: { createdAt: -1 },
-      },
     ]);
+
+    const histories = result[0].data;
+    const totalCount = result[0].metadata[0]?.total || 0;
+    const totalPages = Math.ceil(totalCount / 50);
 
     return {
       success: true,
       data: JSON.parse(JSON.stringify(histories)),
+      total: totalCount,
+      page: page,
+      pagination: {
+        totalCount,
+        totalPages,
+        currentPage: page,
+        limit: 50,
+      },
     };
   } catch (err: any) {
     console.error(err);

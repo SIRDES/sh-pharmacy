@@ -23,14 +23,17 @@ import {
 import React, { use, useEffect, useState } from "react";
 
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowBack";
 import { useSession } from "next-auth/react";
 import { showAlert } from "@/components/Alerts";
 import LoadingAlert from "@/components/LoadingAlert";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { checkIfSameDayAsToday, currencyFormatter, formatDate } from "@/utils/services/utils";
 import { USER_ROLES } from "@/types/constants";
-import { getSaleById } from "@/utils/serverActions/Sale";
+import { deleteSale, getSaleById } from "@/utils/serverActions/Sale";
+import ConfirmationModal from "@/components/ConfirmationModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   padding: "9px 8px",
@@ -59,13 +62,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function OrderDetails({ params }: { params: Promise<{ id: string }> }) {
   // const theme = useTheme();
   const { id } = use(params);
+  const router = useRouter();
   const { data: session } = useSession()
   const currentUser = session?.user
   const posOrders = (window as any)?.pos?.orders
   const [orderData, setOrderData] = useState<any>({});
-  const [openRejectionModal, setOpenRejectionModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [openConfirmApproveModal, setOpenConfirmApproveModal] = useState(false);
+  const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [rejectionReason, setRejectionReason] = useState("");
@@ -113,26 +116,57 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const handleOpenConfirmApproveModal = () => {
-    setOpenConfirmApproveModal(true);
-    handleClose();
+  const handleOpenConfirmDeleteModal = () => {
+    setOpenConfirmDeleteModal(true);
   };
 
-  const hanldeCloseConfirmApproveModal = () => {
-    setOpenConfirmApproveModal(false);
+  const hanldeCloseConfirmDeleteModal = () => {
+    setOpenConfirmDeleteModal(false);
+  };
+
+  const handleDeleteSale = async () => {
+    hanldeCloseConfirmDeleteModal();
+    setLoading(true);
+    try {
+      const response = await deleteSale(id as string);
+      if (response.success) {
+        showAlert({
+          title: "Success",
+          text: response.message || "Sale deleted successfully",
+          severity: "success",
+          handleConfirmButtonClick: () => {
+            router.push("/sales");
+          },
+        });
+      } else {
+        showAlert({
+          title: "Error",
+          text: response.message || "An error occurred while deleting the sale",
+          severity: "error",
+        });
+      }
+    } catch (error: any) {
+      showAlert({
+        title: "Error",
+        text: error.message || "An error occurred",
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
       <LoadingAlert open={loading} />
 
-      {/* <ConfirmationModal
-        open={openConfirmApproveModal}
-        onClose={hanldeCloseConfirmApproveModal}
-        onConfirm={handleApproveOrder}
-        message="Are you sure you want to approve this order?"
-        title="Approve Order"
-      /> */}
+      <ConfirmationModal
+        open={openConfirmDeleteModal}
+        onClose={hanldeCloseConfirmDeleteModal}
+        onConfirm={handleDeleteSale}
+        message="Are you sure you want to delete this sale? This action will revert the product stock."
+        title="Delete Sale"
+      />
       <Box mb={10}>
         <Box mb={1} mt={1} px={{ xs: 1, sm: 2, md: 3 }}>
           <Link
@@ -175,16 +209,28 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
             <Box display="flex" gap={1}>
               {((checkIfSameDayAsToday(orderData?.createdAt) &&
                 currentUser?.role === USER_ROLES.SALES_PERSONEL) || currentUser?.role === USER_ROLES.ADMIN) && (
-                  <Button
-                    variant="contained"
-                    disableElevation
-                    component={Link}
-                    href={`/sales/${id}/edit`}
-                    size="small"
-                    startIcon={<EditIcon />}
-                  >
-                    Edit
-                  </Button>
+                  <Box display="flex" gap={1}>
+                    <Button
+                      variant="contained"
+                      disableElevation
+                      component={Link}
+                      href={`/sales/${id}/edit`}
+                      size="small"
+                      startIcon={<EditIcon />}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      disableElevation
+                      onClick={handleOpenConfirmDeleteModal}
+                      size="small"
+                      startIcon={<DeleteIcon />}
+                    >
+                      Delete
+                    </Button>
+                  </Box>
                 )}
 
             </Box>

@@ -28,10 +28,16 @@ import { InferType, object, string } from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AddIcon from "@mui/icons-material/Add";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 
-import { styled, useTheme } from "@mui/material/styles";
+import { styled, useTheme, alpha } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { showAlert } from "@/components/Alerts";
@@ -44,62 +50,48 @@ import { addSalesItems, deleteSalesItems } from "@/utils/serverActions/SalesItem
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  padding: "6px 4px",
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
+    fontWeight: 600,
     fontSize: 12,
+    padding: "2px 8px",
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 12,
+    padding: "2px 8px",
   },
 }));
+
 const StyledTotalTableCell = styled(TableCell)(({ theme }) => ({
-  padding: "6px 4px",
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
-    fontSize: 12,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-    fontWeight: "bold",
-  },
+  padding: "2px 8px",
+  fontSize: 12,
+  fontWeight: "bold",
+  borderBottom: "none",
 }));
+
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
+  "&:nth-of-type(even)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
-  // "&:hover": {
-  //   cursor: "pointer",
-  // },
+  transition: theme.transitions.create("background-color"),
+  "&:hover": {
+    backgroundColor: theme.palette.action.selected,
+  },
 }));
-// const schema = object().shape({
-//   customerName: string().required("Customer name is required"),
-//   customerPhoneNumber: string().required("Phone number is required"),
-//   customerAddress: string().required("Customer address is required")
-// });
-
-// type FormData = InferType<typeof schema>;
 
 type ProductType = {
   id: string;
   name: string;
   price: number;
-  // image: string;
   quantity: number;
   available_stock: number;
 };
-type OrderProductType = ProductType & {
-  quantity: number;
-  totalAmount: number;
-};
 
-function EditDraft({ params }: { params: Promise<{ id: string }> }) {
+function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
   const theme = useTheme()
   const router = useRouter();
   const { id } = use(params)
@@ -379,345 +371,235 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
   };
 
   return (
-    <Box>
+    <Box sx={{ p: 2 }}>
       <LoadingAlert open={loading} />
-      <Grid container spacing={1}>
-        <Grid size={{ xs: 12, sm: 12, md: 6 }}>
-          <Card>
-            <form
-              onSubmit={Submit}
-              // noValidate
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "20px",
-                padding: "10px 20px",
-              }}
-            >
-              <Typography fontWeight="bold">Edit sale</Typography>
 
-              <Grid container spacing={1}>
-                {/* Select products */}
-                <Grid size={12}>
-                  <Typography
-                    variant="body1"
-                    gutterBottom
-                    fontWeight={"bold"}
-                  >
-                    Select products{" "}
-                    <span
-                      style={{
-                        color: "red",
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                      }}
-                    >
-                      *
-                    </span>
+      <Box sx={{ mb: 2, display: "flex", alignItems: "center", gap: 2 }}>
+        <IconButton
+          onClick={() => router.back()}
+          sx={{
+            bgcolor: "background.paper",
+            boxShadow: 1,
+            "&:hover": { bgcolor: "grey.100" }
+          }}
+        >
+          <ArrowBackIcon fontSize="small" />
+        </IconButton>
+        <Box>
+          <Typography variant="h6" fontWeight="bold" color="primary" sx={{ fontSize: { xs: "1.0rem", md: "1.1rem" } }}>
+            Edit Sale
+          </Typography>
+          {/* <Typography variant="body2" color="text.secondary" sx={{ fontSize: "14px" }}>
+            Order ID: {orderDetails?.orderId || id}
+          </Typography> */}
+        </Box>
+      </Box>
+
+      <Grid container spacing={{ xs: 2, md: 3 }}>
+        <Grid size={{ xs: 12, md: 5 }}>
+          <Card elevation={0} sx={{ p: { xs: 2, md: 3 }, border: "1px solid", borderColor: "divider", borderRadius: 3 }}>
+            <form onSubmit={Submit}>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: { xs: 2, md: 3 } }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <ShoppingCartIcon color="primary" fontSize="small" />
+                  <Typography variant="body2" fontWeight="600">
+                    Sale Details
                   </Typography>
-                </Grid>
-                <Grid
-                  container
-                  size={12}
-                  spacing={2}
-                  alignItems={"flex-end"}
-                >
-                  <Grid size={{ xs: 12, sm: 12, md: 7 }}>
-                    <Box>
-                      <Typography gutterBottom>Product</Typography>
-                      <Autocomplete
-                        // multiple
-                        fullWidth
-                        id="add-order-select-product"
-                        options={
-                          products?.filter(
-                            (item: any) =>
-                              !selectOrderProductsSKU?.includes(
-                                item?._id
-                              )
-                          ) || []
-                        }
-                        renderOption={(prop, option: any) => (
-                          <li {...prop} key={option._id}>
-                            <Box
-                              sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                // alignItems: "center",
-                                width: "100%",
-                                // gap: "5px",
-                              }}
-                            >
+                </Box>
 
-                              <Typography variant="caption" fontSize={12}>{option?.product?.name?.toUpperCase()}</Typography>
-                              <Box display={"flex"} flexDirection={"column"}>
-                                <Typography variant="caption" fontWeight={"bold"} fontSize={8}>
-                                  Stock: {option?.quantity}
-                                </Typography>
-                                <Typography variant="caption" fontWeight={"bold"} fontSize={8}>
-                                  {currencyFormatter(option?.product?.sellingPrice)}
-                                </Typography>
-                              </Box>
-                            </Box>
-                          </li>
-                        )}
-                        onChange={handleSelectProductChange}
-                        filterSelectedOptions
-                        autoFocus={false}
-                        sx={{
-                          border: "1px solid #ABB3BF",
-                        }}
-                        getOptionLabel={(option: any) => option?.product?.name?.toUpperCase() || ""}
-                        value={selectedProduct}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            placeholder="product"
+                <Divider />
 
-                            inputProps={{
-                              ...params.inputProps,
-                              style: {
-                                border: "none",
-                                padding: "2px 10px",
-                              },
-                            }}
-                          />
-                        )}
-                      />
-                    </Box>
+                <Box>
+                  <Typography variant="body1" fontWeight="600" sx={{ mb: 1 }}>
+                    Select Product
+                  </Typography>
+                  <Autocomplete
+                    fullWidth
+                    id="edit-order-select-product"
+                    options={products?.filter((item: any) => !selectOrderProductsSKU?.includes(item?._id)) || []}
+                    renderOption={(prop, option: any) => (
+                      <li {...prop} key={option._id}>
+                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", py: 0.5 }}>
+                          <Box sx={{ minWidth: 0, flex: 1 }}>
+                            <Typography variant="caption" fontWeight="600" sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                              {option?.product?.name?.toUpperCase()}
+                            </Typography>
+                            <Typography variant="caption" sx={{
+                              bgcolor: option?.quantity > 0 ? "success.light" : "error.light",
+                              color: option?.quantity > 0 ? "success.main" : "error.main",
+                              borderRadius: 0.5, ml: 1
+                            }}>
+                              Stock: {option?.quantity}
+                            </Typography>
+                          </Box>
+                          <Typography variant="caption" fontWeight="bold" color="primary" sx={{ ml: 1, whiteSpace: "nowrap" }}>
+                            {currencyFormatter(option?.product?.sellingPrice)}
+                          </Typography>
+                        </Box>
+                      </li>
+                    )}
+                    onChange={handleSelectProductChange}
+                    filterSelectedOptions
+                    getOptionLabel={(option: any) => option?.product?.name?.toUpperCase() || ""}
+                    value={selectedProduct}
+                    renderInput={(params) => (
+                      <TextField {...params} placeholder="Search product..." variant="outlined" />
+                    )}
+                  />
+                </Box>
+
+                <Grid container spacing={2}>
+                  <Grid size={12}>
+                    <Typography variant="body1" fontWeight="600" sx={{ mb: 1 }}>
+                      Quantity
+                    </Typography>
+                    <TextField
+                      type="number"
+                      fullWidth
+                      variant="outlined"
+                      placeholder="Enter quantity"
+                      value={selectedProduct?.qty || ""}
+                      onWheel={(e) => (e.target as HTMLInputElement).blur()}
+                      onChange={(e) => {
+                        if (+e.target.value < 0 || isNaN(+e.target.value)) return;
+                        setSelectedProduct((prev: any) => {
+                          if (!prev) return null;
+                          const totalSellingPrice = +e.target.value * +prev?.product?.sellingPrice;
+                          const totalCostPrice = +e.target.value * +prev?.product?.costPrice;
+                          return {
+                            ...prev,
+                            qty: +e.target.value,
+                            total_amount: totalSellingPrice,
+                            profit: totalSellingPrice - totalCostPrice,
+                          };
+                        });
+                      }}
+                    />
                   </Grid>
-                  {/* Quantity */}
-                  <Grid size={{ xs: 12, sm: 12, md: 3 }}>
-                    <Box>
-                      <Typography gutterBottom>Quantity</Typography>
-                      <TextField
-                        type="number"
-                        fullWidth
-                        variant="standard"
-                        placeholder="Enter quantity"
-                        value={selectedProduct?.qty || ""}
-                        onChange={(e) => {
-                          // console.log(e.target.value);
-                          if (+e.target.value < 0 || isNaN(+e.target.value)) {
-                            return;
-                          }
-                          setSelectedProduct((prev: any) => {
-                            if (!prev) return null;
-                            const totalSellingPrice = +e.target.value * +prev?.product?.sellingPrice;
-                            const totalCostPrice = +e.target.value * +prev?.product?.costPrice;
-                            return {
-                              ...prev,
-                              qty: +e.target.value,
-                              total_amount: totalSellingPrice,
-                              profit: totalSellingPrice - totalCostPrice
-                            };
-                          });
-                        }}
-                        slotProps={{
-                          htmlInput: {
-                            style: {
-                              border: "2px solid #ABB3BF",
-                              padding: "10px",
-                              // paddingTop: "17px",
-                              borderRadius: "5px",
-                            },
-                          },
-                        }}
 
-                      />
-                    </Box>
-                  </Grid>
-                  <Grid size={2}>
+                  <Grid size={12}>
                     <Button
+                      fullWidth
                       variant="contained"
-                      color="success"
-                      disableElevation
+                      color="secondary"
+                      startIcon={<AddIcon />}
                       onClick={handleAddProduct}
+                      sx={{ py: 1.2, borderRadius: 2, boxShadow: 1 }}
                     >
-                      Add
+                      Add to List
                     </Button>
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 12, md: 6 }}>
-                    <Box>
-                      <Typography gutterBottom>Discount</Typography>
-                      <TextField
-                        type="number"
-                        fullWidth
-                        variant="standard"
-                        placeholder="Enter discount"
-                        value={discount}
-                        onChange={(e) => {
-                          // console.log(e.target.value);
-                          if (+e.target.value < 0 || isNaN(+e.target.value)) {
-                            return;
-                          }
-                          setDiscount(e.target.value)
-                        }}
-                        slotProps={{
-                          htmlInput: {
-                            style: {
-                              border: "2px solid #ABB3BF",
-                              padding: "10px",
-                              // paddingTop: "17px",
-                              borderRadius: "5px",
-                            },
-                          },
-                        }}
 
-                      />
-                    </Box>
+                  <Grid size={12}>
+                    <Typography variant="body2" fontWeight="600" sx={{ mb: 1 }}>
+                      Discount
+                    </Typography>
+                    <TextField
+                      type="number"
+                      fullWidth
+                      variant="outlined"
+                      placeholder="Enter discount"
+                      onWheel={(e) => (e.target as HTMLInputElement).blur()}
+                      value={discount}
+                      onChange={(e) => {
+                        if (+e.target.value < 0 || isNaN(+e.target.value)) return;
+                        setDiscount(e.target.value);
+                      }}
+                    />
                   </Grid>
                 </Grid>
-              </Grid>
-              {/* Buttons */}
-              <Box display="flex" gap={1} justifyContent={"flex-end"}>
-                <Button
-                  variant="outlined"
-                  sx={{ width: "fit-content" }}
-                  onClick={() => router.back()}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  sx={{ width: "fit-content" }}
-                  disabled={
-                    loading ||
-                    !orderProducts ||
-                    orderProducts?.length === 0
-                  }
-                >
-                  Save
-                </Button>
+
+                <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
+                  <Button fullWidth variant="outlined" onClick={() => router.back()} sx={{ py: 1.5, borderRadius: 2 }}>
+                    Cancel
+                  </Button>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    type="submit"
+                    disabled={loading || !orderProducts?.length}
+                    sx={{ py: 1.5, borderRadius: 2, boxShadow: 2 }}
+                  >
+                    Save Changes
+                  </Button>
+                </Box>
               </Box>
             </form>
           </Card>
         </Grid>
-        {/* Selected products */}
-        <Grid size={{ xs: 12, sm: 12, md: 6 }}>
-          <Card>
-            <Typography
-              variant="body1"
-              gutterBottom
-              fontWeight={"bold"}
-              sx={{ padding: "10px" }}
-            >
-              Selected products
-            </Typography>
-            <TableContainer>
-              <Table sx={{ minWidth: 250 }} aria-label="simple table">
+
+        <Grid size={{ xs: 12, md: 7 }}>
+          <Card elevation={0} sx={{ border: "1px solid", borderColor: "divider", borderRadius: 3, overflow: "hidden" }}>
+            <Box sx={{ p: 2, display: "flex", alignItems: "center", gap: 1, bgcolor: "grey.50", borderBottom: "1px solid", borderColor: "divider" }}>
+              <ShoppingCartIcon fontSize="small" color="primary" />
+              <Typography variant="subtitle1" fontWeight="bold">
+                Sale Items ({orderProducts?.length || 0})
+              </Typography>
+            </Box>
+            <TableContainer sx={{ minHeight: { xs: 200, md: 300 }, overflowX: "auto" }}>
+              <Table aria-label="selected products table" sx={{ minWidth: { xs: 450, md: "100%" } }}>
                 <TableHead>
-                  <StyledTableRow>
+                  <TableRow>
                     <StyledTableCell>Product</StyledTableCell>
-                    <StyledTableCell align="center">Qty.</StyledTableCell>
-                    <StyledTableCell align="center">
-                      Unit Price
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      Total Price
-                    </StyledTableCell>
-                    <StyledTableCell align="center"></StyledTableCell>
-                  </StyledTableRow>
+                    <StyledTableCell align="center">Qty</StyledTableCell>
+                    <StyledTableCell align="right">Unit Price</StyledTableCell>
+                    <StyledTableCell align="right">Total</StyledTableCell>
+                    <StyledTableCell align="center">Action</StyledTableCell>
+                  </TableRow>
                 </TableHead>
                 <TableBody>
-                  {orderProducts?.map((product) => (
-                    <StyledTableRow
-                      key={product._id}
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <StyledTableCell>{product?.product?.name?.toUpperCase()}</StyledTableCell>
-                      <StyledTableCell align="center">
-                        {product.qty}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {product?.product?.sellingPrice}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {product.total_amount}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        <IconButton
-                          onClick={() => {
-                            setOrderProducts((prev: any) =>
-                              prev.filter(
-                                (selectedProduct: any) =>
-                                  selectedProduct?._id !==
-                                  product._id
-                              )
-                            );
-                            setSelectedOrderProductsSKU((prev: number[]) =>
-                              prev.filter(
-                                (selectedProduct: number) =>
-                                  selectedProduct !== product.shopProductId
-                              )
-                            );
-                          }}
-                        >
-                          <DeleteIcon fontSize="small" color="error" />
-                        </IconButton>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                  {orderProducts?.length !== 0 && (
+                  {orderProducts.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={5} align="center" sx={{ py: 8 }}>
+                        <Typography color="text.secondary">No products selected yet</Typography>
+                      </TableCell>
+                    </TableRow>
+                  ) : (
                     <>
-                      <TableRow
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <StyledTotalTableCell
-                          colSpan={3}
-                          align="right"
-                        // sx={{ fontSize: "10px" }}
-                        >
-                          Sub Total
-                        </StyledTotalTableCell>
-                        <StyledTotalTableCell
-                          colSpan={1}
-                          align="center"
-                        // sx={{ fontSize: "10px" }}
-                        >
-                          {currencyFormatter(generateOrderSubTotalAmount())}
-                        </StyledTotalTableCell>
+                      {orderProducts.map((product) => (
+                        <StyledTableRow key={product._id}>
+                          <StyledTableCell>
+                            <Typography variant="caption" fontWeight="600">
+                              {product?.product?.name?.toUpperCase()}
+                            </Typography>
+                          </StyledTableCell>
+                          <StyledTableCell align="center">{product.qty}</StyledTableCell>
+                          <StyledTableCell align="right">{currencyFormatter(product?.product?.sellingPrice)}</StyledTableCell>
+                          <StyledTableCell align="right" sx={{ fontWeight: "bold" }}>{currencyFormatter(product.total_amount)}</StyledTableCell>
+                          <StyledTableCell align="center">
+                            <IconButton
+                              size="small"
+                              color="error"
+                              onClick={() => {
+                                setOrderProducts((prev: any) => prev.filter((p: any) => p._id !== product._id));
+                                setSelectedOrderProductsSKU((prev: any) => prev.filter((id: any) => id !== product._id));
+                              }}
+                            >
+                              <DeleteIcon fontSize="small" />
+                            </IconButton>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                      <TableRow>
+                        <StyledTotalTableCell colSpan={3} align="right">Sub Total</StyledTotalTableCell>
+                        <StyledTotalTableCell align="right">{currencyFormatter(generateOrderSubTotalAmount())}</StyledTotalTableCell>
+                        <StyledTotalTableCell />
                       </TableRow>
-                      <TableRow
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <StyledTotalTableCell
-                          colSpan={3}
-                          align="right"
-                        >
-                          Discount
-                        </StyledTotalTableCell>
-                        <StyledTotalTableCell
-                          colSpan={1}
-                          align="center"
-                        >
-                          {currencyFormatter(+discount)}
-                        </StyledTotalTableCell>
+                      <TableRow>
+                        <StyledTotalTableCell colSpan={3} align="right">Discount</StyledTotalTableCell>
+                        <StyledTotalTableCell align="right" sx={{ color: "error.main" }}>- {currencyFormatter(+discount)}</StyledTotalTableCell>
+                        <StyledTotalTableCell />
                       </TableRow>
-                      <TableRow
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <StyledTotalTableCell
-                          colSpan={3}
-                          align="right"
-                        >
-                          Total
+                      <TableRow>
+                        <StyledTotalTableCell colSpan={3} align="right">
+                          <Typography fontWeight="bold" color="primary">Total</Typography>
                         </StyledTotalTableCell>
-                        <StyledTotalTableCell
-                          colSpan={1}
-                          align="center"
-                        >
-                          {currencyFormatter(generateOrderTotalAmount())}
+                        <StyledTotalTableCell align="right">
+                          <Typography fontWeight="bold" color="primary">
+                            {currencyFormatter(generateOrderTotalAmount())}
+                          </Typography>
                         </StyledTotalTableCell>
+                        <StyledTotalTableCell />
                       </TableRow>
                     </>
                   )}
@@ -731,4 +613,4 @@ function EditDraft({ params }: { params: Promise<{ id: string }> }) {
   );
 }
 
-export default EditDraft;
+export default EditSalePage;

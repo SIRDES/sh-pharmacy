@@ -407,10 +407,11 @@ export default function Products() {
                       <StyledTableRow
                         key={index}
                         onClick={() =>
-                          isAdmin &&
+                          // isAdmin &&
                           router.push(`/products/${order?._id}`)
                         }
-                        sx={{ cursor: isAdmin ? "pointer" : "default" }}
+                        // sx={{ cursor: isAdmin ? "pointer" : "default" }}
+                        sx={{ cursor: "pointer" }}
                       >
 
                         <StyledTableCell align="center">

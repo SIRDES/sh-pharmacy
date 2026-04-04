@@ -28,12 +28,31 @@ export const getSaleItemsBySaleId = async (saleId: string) => {
     }
 };
 
-export const getSalesItemsByProductId = async ({ productId, page = 1 }: { productId: string, page?: number }) => {
+export const getSalesItemsByProductId = async ({ productId, page = 1, shopId }: { productId: string, page?: number, shopId?: string }) => {
     try {
         await connectDB();
         const skip = (page - 1) * 50;
-        const result = await SalesItem.aggregate([
+
+        const pipeline: any[] = [
             { $match: { productId: new mongoose.Types.ObjectId(productId) } },
+        ];
+
+        if (shopId) {
+            pipeline.push(
+                {
+                    $lookup: {
+                        from: "sales",
+                        localField: "saleId",
+                        foreignField: "_id",
+                        as: "saleId",
+                    },
+                },
+                { $unwind: "$saleId" },
+                { $match: { "saleId.shopId": new mongoose.Types.ObjectId(shopId) } }
+            );
+        }
+
+        pipeline.push(
             { $sort: { createdAt: -1 } },
             {
                 $facet: {
@@ -50,15 +69,17 @@ export const getSalesItemsByProductId = async ({ productId, page = 1 }: { produc
                             },
                         },
                         { $unwind: "$productId" },
-                        {
-                            $lookup: {
-                                from: "sales",
-                                localField: "saleId",
-                                foreignField: "_id",
-                                as: "saleId",
+                        ...(shopId ? [] : [
+                            {
+                                $lookup: {
+                                    from: "sales",
+                                    localField: "saleId",
+                                    foreignField: "_id",
+                                    as: "saleId",
+                                },
                             },
-                        },
-                        { $unwind: "$saleId" },
+                            { $unwind: "$saleId" }
+                        ]),
                         {
                             $lookup: {
                                 from: "shops",
@@ -80,7 +101,9 @@ export const getSalesItemsByProductId = async ({ productId, page = 1 }: { produc
                     ]
                 }
             }
-        ]);
+        );
+
+        const result = await SalesItem.aggregate(pipeline);
 
         const total = result[0]?.metadata[0]?.total || 0;
         const salesItems = result[0]?.data || [];

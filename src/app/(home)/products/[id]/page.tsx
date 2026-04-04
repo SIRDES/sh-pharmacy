@@ -34,9 +34,10 @@ import ConfirmationModal from "@/components/ConfirmationModal";
 import ManageShopStockModal from "@/components/products/ManageShopStockModal";
 import { addShopProduct, getAllShopProducts, updateShopProduct, updateShopProductStock } from "@/utils/serverActions/ShopProduct";
 import { getSalesItemsByProductId } from "@/utils/serverActions/SalesItem";
-import { addAProductStockHistory } from "@/utils/serverActions/ProductStockHistory";
+import { addAProductStockHistory, getAllProductStockHistoriesByProductId } from "@/utils/serverActions/ProductStockHistory";
 import { useSession } from "next-auth/react";
-import { addShopProductStockHistory } from "@/utils/serverActions/ShopProductStockHistory";
+import { addShopProductStockHistory, getAllShopProductStockHistoriesByShopIdAndProductId } from "@/utils/serverActions/ShopProductStockHistory";
+import { USER_ROLES } from "@/types/constants";
 
 
 
@@ -45,6 +46,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
   const { id } = use(params);
   const { data: session } = useSession();
   const currentUser = session?.user;
+  const isAdmin = currentUser?.role === USER_ROLES.ADMIN;
   const router = useRouter();
   const [orderData, setOrderData] = useState<any>({});
   const [loading, setLoading] = useState(false);
@@ -53,6 +55,12 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
   const [salesHistory, setSalesHistory] = useState<any[]>([]);
   const [salesTotal, setSalesTotal] = useState(0);
   const [salesPage, setSalesPage] = useState(0);
+  const [productStockHistory, setProductStockHistory] = useState<any[]>([]);
+  const [productStockHistoryTotal, setProductStockHistoryTotal] = useState(0);
+  const [productStockHistoryPage, setProductStockHistoryPage] = useState(0);
+  const [shopProductStockHistory, setShopProductStockHistory] = useState<any[]>([]);
+  const [shopProductStockHistoryTotal, setShopProductStockHistoryTotal] = useState(0);
+  const [shopProductStockHistoryPage, setShopProductStockHistoryPage] = useState(0);
   // const [salesRowsPerPage, setSalesRowsPerPage] = useState(10);
   const [loadingSales, setLoadingSales] = useState(false);
 
@@ -106,11 +114,59 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         productId: id as string,
         page: salesPage + 1,
         // limit: salesRowsPerPage,
+        ...(!isAdmin ? { shopId: currentUser?.assignedShop?._id } : {})
       });
       if (orderResponse.success) {
         console.log("salesHistory", orderResponse.data)
         setSalesHistory(orderResponse.data || []);
         setSalesTotal(orderResponse.total || 0);
+      }
+    } catch (error: any) {
+      showAlert({
+        title: "Error",
+        text: error?.message || "An error occurred while fetching product sales history",
+        severity: "error",
+      });
+    } finally {
+      setLoadingSales(false);
+    }
+  };
+  const fetchProductStockHistory = async () => {
+    setLoadingSales(true);
+    try {
+      const orderResponse = await getAllProductStockHistoriesByProductId({
+        productId: id as string,
+        page: productStockHistoryPage + 1,
+        // limit: salesRowsPerPage,
+      });
+      if (orderResponse.success) {
+        console.log("salesHistory", orderResponse.data)
+        setProductStockHistory(orderResponse.data || []);
+        setProductStockHistoryTotal(orderResponse.total || 0);
+      }
+    } catch (error: any) {
+      showAlert({
+        title: "Error",
+        text: error?.message || "An error occurred while fetching product sales history",
+        severity: "error",
+      });
+    } finally {
+      setLoadingSales(false);
+    }
+  };
+  const fetchShopProductStockHistory = async () => {
+    setLoadingSales(true);
+    try {
+      const orderResponse = await getAllShopProductStockHistoriesByShopIdAndProductId({
+        productId: id as string,
+        shopId: currentUser?.assignedShop?._id as string,
+        page: shopProductStockHistoryPage + 1,
+        // limit: salesRowsPerPage,
+      });
+      if (orderResponse.success) {
+        console.log("fetchShopProductStockHistory", orderResponse.data)
+        setShopProductStockHistory(orderResponse.data || []);
+        setShopProductStockHistoryTotal(orderResponse.total || 0);
       }
     } catch (error: any) {
       showAlert({
@@ -133,6 +189,17 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
     fetchProductSalesHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, salesPage]);
+
+  useEffect(() => {
+    if (!id) return;
+    fetchProductStockHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, productStockHistoryPage]);
+  useEffect(() => {
+    if (!id) return;
+    fetchShopProductStockHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, shopProductStockHistoryPage]);
 
 
   const handleFetchShopProducts = async () => {
@@ -248,6 +315,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       })
 
       fetchProductData();
+      fetchProductStockHistory();
     } catch (error: any) {
       // console.log("error", error);
       showAlert({
@@ -331,44 +399,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
         operation: stockOperation === "ADD" ? "subtract" : "add",
         userId: currentUser?._id as string,
       })
-      // if (!productStockUpdateResponse.success) {
-      //   showAlert({
-      //     title: "Error",
-      //     text: productStockUpdateResponse?.message || "An error occurred while updating product stock",
-      //     severity: "error",
-      //   })
-      //   return
-      // }
 
-      // // add addShopProductStockHistory
-      // console.log("orderResponse", orderResponse)
-      // console.log("addShopProductStockHistory", {
-      //   shopId: selectedShopId as string,
-      //   productId: id as string,
-      //   shopProductId: orderResponse.shopProductId as string,
-      //   initialQuantity: initialShopProductQuantity,
-      //   addedQuantity: Number(stockValue),
-      //   operation: stockOperation === "ADD" ? "add" : "subtract",
-      //   userId: currentUser?._id as string,
-      // })
-      // const stockHistoryResponse = await addShopProductStockHistory({
-      //   shopId: selectedShopId as string,
-      //   productId: id as string,
-      //   shopProductId: orderResponse.shopProductId as string,
-      //   initialQuantity: initialShopProductQuantity,
-      //   addedQuantity: Number(stockValue),
-      //   operation: stockOperation === "ADD" ? "add" : "subtract",
-      //   userId: currentUser?._id as string,
-      // })
-      // console.log("stockHistoryResponse", stockHistoryResponse)
-      // if (!stockHistoryResponse.success) {
-      //   showAlert({
-      //     title: "Error",
-      //     text: stockHistoryResponse?.message || "An error occurred while adding product stock history",
-      //     severity: "error",
-      //   })
-      //   return
-      // }
 
       showAlert({
         title: "Success",
@@ -377,6 +408,8 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       })
 
       fetchProductData();
+      fetchProductStockHistory();
+      fetchShopProductStockHistory();
     } catch (error: any) {
       // console.log("error", error);
       showAlert({
@@ -477,7 +510,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
               Product Details
             </Typography>
             <Box>
-              {orderData?._id && (
+              {isAdmin && orderData?._id && (
 
                 <Box>
 
@@ -578,18 +611,21 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                   </Grid>
 
                   { }
-                  <Grid
-                    size={{ xs: 12, sm: 6, md: 4 }}
-                    sx={{
-                      display: "flex",
-                      gap: "5px",
-                    }}
-                  >
-                    <Typography variant="body1">Cost price:</Typography>
-                    <Typography variant="body1" fontWeight={700}>
-                      {currencyFormatter(orderData?.costPrice || 0)}
-                    </Typography>
-                  </Grid>
+                  {isAdmin && (
+                    <Grid
+                      size={{ xs: 12, sm: 6, md: 4 }}
+                      sx={{
+                        display: "flex",
+                        gap: "5px",
+                      }}
+                    >
+                      <Typography variant="body1">Cost price:</Typography>
+                      <Typography variant="body1" fontWeight={700}>
+                        {currencyFormatter(orderData?.costPrice || 0)}
+                      </Typography>
+                    </Grid>)
+                  }
+
                   {/* Selling price */}
                   <Grid
                     size={{ xs: 12, sm: 6, md: 4 }}
@@ -604,37 +640,48 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                     </Typography>
                   </Grid>
                   {/* Profit */}
-                  <Grid
-                    size={{ xs: 12, sm: 6, md: 4 }}
-                    sx={{
-                      display: "flex",
-                      gap: "5px",
-                    }}
-                  >
-                    <Typography variant="body1">Profit:</Typography>
-                    <Typography variant="body1" fontWeight={700}>
-                      {currencyFormatter(orderData?.sellingPrice - orderData?.costPrice || 0)}
-                    </Typography>
-                  </Grid>
+                  {isAdmin && (
+                    <Grid
+                      size={{ xs: 12, sm: 6, md: 4 }}
+                      sx={{
+                        display: "flex",
+                        gap: "5px",
+                      }}
+                    >
+                      <Typography variant="body1">Profit:</Typography>
+                      <Typography variant="body1" fontWeight={700}>
+                        {currencyFormatter(orderData?.sellingPrice - orderData?.costPrice || 0)}
+                      </Typography>
+                    </Grid>
+                  )}
                   <Grid
                     size={{ xs: 12, sm: 6, md: 4 }}
                     sx={{ display: "flex", gap: "10px" }}
                   >
                     <Typography variant="body1">Current Qty:</Typography>
                     <Typography variant="body1" fontWeight={700}>
-                      {orderData?.currentStock || 0}
+                      {orderData?.shopProducts?.filter((shopProduct: any) => shopProduct?.shopDetails?._id?.toString() === currentUser?.assignedShop?._id?.toString())[0]?.quantity || 0}
                     </Typography>
                   </Grid>
-                  <Grid
-                    size={{ xs: 12, sm: 6, md: 4 }}
-                    sx={{ display: "flex", gap: "10px" }}
-                  >
-                    <Typography variant="body1">Qty in shops:</Typography>
-                    <Typography variant="body1" fontWeight={700}>
-                      {/* {orderData?.shopProducts?.length > 0 ? orderData?.shopProducts?.length : 0} */}
-                      {orderData?.shopProducts?.length > 0 ? orderData?.shopProducts?.map((shopProduct: any) => shopProduct?.quantity).reduce((a: number, b: number) => a + b, 0) : 0}
-                    </Typography>
-                  </Grid>
+
+                  {isAdmin && (
+                    <>
+
+                      <Grid
+                        size={{ xs: 12, sm: 6, md: 4 }}
+                        sx={{ display: "flex", gap: "10px" }}
+                      >
+                        <Typography variant="body1">Qty in shops:</Typography>
+                        <Typography variant="body1" fontWeight={700}>
+                          {/* {orderData?.shopProducts?.length > 0 ? orderData?.shopProducts?.length : 0} */}
+                          {orderData?.shopProducts?.length > 0 ? orderData?.shopProducts?.map((shopProduct: any) => shopProduct?.quantity).reduce((a: number, b: number) => a + b, 0) : 0}
+                        </Typography>
+                      </Grid>
+                    </>
+                  )}
+
+
+
                   <Grid
                     size={{ xs: 12, sm: 6, md: 4 }}
                     sx={{ display: "flex", gap: "10px" }}
@@ -665,63 +712,72 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                         : ""}
                     </Typography>
                   </Grid>
-                  {/* created at */}
-                  <Grid
-                    size={{ xs: 12, sm: 6, md: 4 }}
-                    sx={{ display: "flex", gap: "10px" }}
-                  >
-                    <Typography variant="body1">Created at:</Typography>
-                    <Typography variant="body1" fontWeight={700}>
-                      {orderData?.updatedAt ? dayjs(orderData.updatedAt).format("ddd DD MMM YYYY HH:mm:ss A") : ""}
-                    </Typography>
-                  </Grid>
-                  {/* Updated at */}
-                  <Grid
-                    size={{ xs: 12, sm: 6, md: 4 }}
-                    sx={{ display: "flex", gap: "10px" }}
-                  >
-                    <Typography variant="body1">Updated at:</Typography>
-                    <Typography variant="body1" fontWeight={700}>
-                      {orderData?.updatedAt ? dayjs(orderData.updatedAt).format("ddd DD MMM YYYY HH:mm:ss A") : ""}
-                    </Typography>
-                  </Grid>
+
+                  {isAdmin && (
+                    <>
+                      {/* created at */}
+                      <Grid
+                        size={{ xs: 12, sm: 6, md: 4 }}
+                        sx={{ display: "flex", gap: "10px" }}
+                      >
+                        <Typography variant="body1">Created at:</Typography>
+                        <Typography variant="body1" fontWeight={700}>
+                          {orderData?.updatedAt ? dayjs(orderData.updatedAt).format("ddd DD MMM YYYY HH:mm:ss A") : ""}
+                        </Typography>
+                      </Grid>
+                      {/* Updated at */}
+                      <Grid
+                        size={{ xs: 12, sm: 6, md: 4 }}
+                        sx={{ display: "flex", gap: "10px" }}
+                      >
+                        <Typography variant="body1">Updated at:</Typography>
+                        <Typography variant="body1" fontWeight={700}>
+                          {orderData?.updatedAt ? dayjs(orderData.updatedAt).format("ddd DD MMM YYYY HH:mm:ss A") : ""}
+                        </Typography>
+                      </Grid>
+                    </>
+                  )}
+
 
                 </Grid>
               </Card>
               <Grid container spacing={2} mb={2}>
-                <Grid size={{ xs: 12, sm: 12, md: 6 }}>
-                  <Typography variant="body1" fontWeight={700} mb={2}>
-                    Shops
-                  </Typography>
-                  <Paper sx={{ width: "100%", overflow: "hidden" }}>
-                    <TableContainer sx={{ maxHeight: 500 }}>
-                      <Table aria-label="results table">
-                        <TableHead>
-                          <TableRow>
-                            <StyledTableCell>Name</StyledTableCell>
-                            <StyledTableCell>Qty</StyledTableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {orderData?.shopProducts?.length !== 0 &&
-                            orderData?.shopProducts?.map(
-                              (ordetItem: any, index: number) => (
-                                <StyledTableRow key={index}>
-                                  <StyledTableCell>
-                                    {ordetItem?.shopDetails?.name?.toUpperCase()}
-                                  </StyledTableCell>
-                                  <StyledTableCell>
-                                    {ordetItem?.quantity}
-                                  </StyledTableCell>
+                {isAdmin && (
+                  < Grid size={{ xs: 12, sm: 12, md: 6 }}>
+                    <Typography variant="body1" fontWeight={700} mb={2}>
+                      Shops
+                    </Typography>
+                    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+                      <TableContainer sx={{ maxHeight: 500 }}>
+                        <Table aria-label="results table">
+                          <TableHead>
+                            <TableRow>
+                              <StyledTableCell>Name</StyledTableCell>
+                              <StyledTableCell>Qty</StyledTableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {orderData?.shopProducts?.length !== 0 &&
+                              orderData?.shopProducts?.map(
+                                (ordetItem: any, index: number) => (
+                                  <StyledTableRow key={index}>
+                                    <StyledTableCell>
+                                      {ordetItem?.shopDetails?.name?.toUpperCase()}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                      {ordetItem?.quantity}
+                                    </StyledTableCell>
 
-                                </StyledTableRow>
-                              )
-                            )}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </Paper>
-                </Grid>
+                                  </StyledTableRow>
+                                )
+                              )}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </Paper>
+                  </Grid>
+                )}
+
                 <Grid size={{ xs: 12, sm: 12, md: 6 }}>
                   <Typography variant="body1" fontWeight={700} mb={2}>
                     Sales History
@@ -767,10 +823,118 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                   </Paper>
                 </Grid>
               </Grid>
+              {isAdmin && (
+                <>
+                  <Typography variant="body1" fontWeight={700} mb={2}>
+                    Stock History
+                  </Typography>
+                  <Paper sx={{ width: "100%", overflow: "hidden", mb: 2 }}>
+                    <TableContainer sx={{ maxHeight: 500 }}>
+                      <Table stickyHeader aria-label="stock history table">
+                        <TableHead>
+                          <TableRow>
+                            <StyledTableCell>Date</StyledTableCell>
+                            <StyledTableCell>User</StyledTableCell>
+                            <StyledTableCell>Initial Qty</StyledTableCell>
+                            <StyledTableCell>Operation</StyledTableCell>
+                            <StyledTableCell>Value</StyledTableCell>
+                            <StyledTableCell>Final Qty</StyledTableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {productStockHistory?.length !== 0 &&
+                            productStockHistory.map((item: any, index: number) => (
+                              <StyledTableRow key={index}>
+                                <StyledTableCell>
+                                  {dayjs(item?.createdAt).format("DD MMM YYYY HH:mm A")}
+                                </StyledTableCell>
+                                <StyledTableCell>
+                                  {item?.user?.name?.toUpperCase() || item?.user?.username?.toUpperCase() || "N/A"}
+                                </StyledTableCell>
+                                <StyledTableCell>{item?.initialQuantity}</StyledTableCell>
+                                <StyledTableCell sx={{ color: item?.operation === "add" ? "green" : "red", fontWeight: 700 }}>
+                                  {item?.operation?.toUpperCase()}
+                                </StyledTableCell>
+                                <StyledTableCell>{item?.addedQuantity}</StyledTableCell>
+                                <StyledTableCell>
+                                  {item?.operation === "add"
+                                    ? item?.initialQuantity + item?.addedQuantity
+                                    : item?.initialQuantity - item?.addedQuantity}
+                                </StyledTableCell>
+                              </StyledTableRow>
+                            ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                    <TablePagination
+                      rowsPerPageOptions={[]}
+                      component="div"
+                      count={productStockHistoryTotal}
+                      rowsPerPage={50}
+                      page={productStockHistoryPage}
+                      onPageChange={(e, newPage) => setProductStockHistoryPage(newPage)}
+                    />
+                  </Paper></>
+              )}
+
+              {!isAdmin && (
+                <>
+                  <Typography variant="body1" fontWeight={700} mb={2}>
+                    Shop Stock History
+                  </Typography>
+                  <Paper sx={{ width: "100%", overflow: "hidden", mb: 2 }}>
+                    <TableContainer sx={{ maxHeight: 500 }}>
+                      <Table stickyHeader aria-label="shop stock history table">
+                        <TableHead>
+                          <TableRow>
+                            <StyledTableCell>Date</StyledTableCell>
+                            <StyledTableCell>User</StyledTableCell>
+                            <StyledTableCell>Initial Qty</StyledTableCell>
+                            <StyledTableCell>Operation</StyledTableCell>
+                            <StyledTableCell>Value</StyledTableCell>
+                            <StyledTableCell>Final Qty</StyledTableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {shopProductStockHistory?.length !== 0 &&
+                            shopProductStockHistory.map((item: any, index: number) => (
+                              <StyledTableRow key={index}>
+                                <StyledTableCell>
+                                  {dayjs(item?.createdAt).format("DD MMM YYYY HH:mm A")}
+                                </StyledTableCell>
+                                <StyledTableCell>
+                                  {item?.user?.name?.toUpperCase() || item?.user?.username?.toUpperCase() || "N/A"}
+                                </StyledTableCell>
+                                <StyledTableCell>{item?.initialQuantity}</StyledTableCell>
+                                <StyledTableCell sx={{ color: item?.operation === "add" ? "green" : "red", fontWeight: 700 }}>
+                                  {item?.operation?.toUpperCase()}
+                                </StyledTableCell>
+                                <StyledTableCell>{item?.addedQuantity}</StyledTableCell>
+                                <StyledTableCell>
+                                  {item?.operation === "add"
+                                    ? item?.initialQuantity + item?.addedQuantity
+                                    : item?.initialQuantity - item?.addedQuantity}
+                                </StyledTableCell>
+                              </StyledTableRow>
+                            ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                    <TablePagination
+                      rowsPerPageOptions={[]}
+                      component="div"
+                      count={shopProductStockHistoryTotal}
+                      rowsPerPage={50}
+                      page={shopProductStockHistoryPage}
+                      onPageChange={(e, newPage) => setShopProductStockHistoryPage(newPage)}
+                    />
+                  </Paper>
+                </>
+              )}
             </>
           )}
         </Box>
-      </Box>
+      </Box >
     </>
   );
 }

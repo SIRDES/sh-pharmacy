@@ -36,21 +36,9 @@ const shopProductStockHistorySchema = new mongoose.Schema(
   }
 );
 
-// shopProductStockHistorySchema.post(
-//   "save",
-//   function (error: any, doc: any, next: any) {
-//     if (
-//       error.name === "MongoServerError" &&
-//       error.code === 11000 &&
-//       error.keyPattern &&
-//       error.keyPattern.shopProductId
-//     ) {
-//       next(new Error("Shop product stock history already exists for this shop and product"));
-//     } else {
-//       next(error);
-//     }
-//   }
-// );
+shopProductStockHistorySchema.index({ shopId: 1, productId: 1 });
+
+
 
 const ShopProductStockHistory: Model<IShopProductStockHistory> =
   mongoose.models.ShopProductStockHistory ||

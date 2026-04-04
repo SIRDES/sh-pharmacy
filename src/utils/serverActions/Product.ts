@@ -5,7 +5,7 @@ import Product from "@/models/Product";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../authOptions";
-import { addAProductStockHistory, addMultipleProductStockHistories, getAllProductStockHistoriesByProductId } from "./ProductStockHistory";
+import { addAProductStockHistory, addMultipleProductStockHistories } from "./ProductStockHistory";
 import ShopProduct from "@/models/ShopProduct";
 
 // get the cuurently logined user from the session in server side
@@ -211,15 +211,11 @@ export const getProuctById = async (id: string) => {
       return { success: false, message: "Product not found" };
     }
 
-    const productHistories = await getAllProductStockHistoriesByProductId(id);
-    if (!productHistories.success) {
-      return { success: false, message: productHistories.message };
-    }
     return {
       success: true,
       data: {
         ...JSON.parse(JSON.stringify(productResult)),
-        stockHistories: JSON.parse(JSON.stringify(productHistories.data)),
+        // stockHistories: JSON.parse(JSON.stringify(productHistories.data)),
       },
     };
   } catch (err: any) {

@@ -41,18 +41,18 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
     fontWeight: 600,
-    fontSize: 13,
-    padding: "12px 16px",
+    fontSize: 12,
+    padding: "2px 8px",
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-    padding: "12px 16px",
+    fontSize: 12,
+    padding: "2px 8px",
   },
 }));
 
 const StyledTotalTableCell = styled(TableCell)(({ theme }) => ({
-  padding: "12px 16px",
-  fontSize: 14,
+  padding: "2px 8px",
+  fontSize: 12,
   fontWeight: "bold",
   borderBottom: "none",
 }));
@@ -325,8 +325,8 @@ function AddNewOrder() {
             <form onSubmit={Submit}>
               <Box sx={{ display: "flex", flexDirection: "column", gap: { xs: 2, md: 3 } }}>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <ShoppingCartIcon color="primary" sx={{ fontSize: { xs: "1.2rem", md: "1.5rem" } }} />
-                  <Typography variant="h6" fontWeight="600" sx={{ fontSize: { xs: "1rem", md: "1.25rem" } }}>
+                  <ShoppingCartIcon color="primary" fontSize="small" />
+                  <Typography variant="body2" fontWeight="600">
                     Sales Details
                   </Typography>
                 </Box>
@@ -334,7 +334,7 @@ function AddNewOrder() {
                 <Divider />
 
                 <Box>
-                  <Typography variant="body2" fontWeight="600" sx={{ mb: 1 }}>
+                  <Typography variant="body1" fontWeight="600" sx={{ mb: 1 }}>
                     Select Product
                   </Typography>
                   <Autocomplete
@@ -349,14 +349,20 @@ function AddNewOrder() {
                       <li {...prop} key={option._id}>
                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", py: 0.5 }}>
                           <Box sx={{ minWidth: 0, flex: 1 }}>
-                            <Typography variant="body2" fontWeight="600" sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                            <Typography variant="caption" fontWeight="600" sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                               {option?.product?.name?.toUpperCase()}
                             </Typography>
-                            <Typography variant="caption" color="text.secondary">
-                              Stock: {option?.quantity}
+
+                            <Typography variant="caption" sx={{
+                              bgcolor: option?.quantity > 0 ? "success.light" : "error.light",
+                              color: option?.quantity > 0 ? "success.main" : "error.main",
+
+                            }}>
+                              {" "}Stock: {option?.quantity}
                             </Typography>
                           </Box>
-                          <Typography variant="body2" fontWeight="bold" color="primary" sx={{ ml: 1, whiteSpace: "nowrap" }}>
+
+                          <Typography variant="caption" fontWeight="bold" color="primary" sx={{ ml: 1, whiteSpace: "nowrap" }}>
                             {currencyFormatter(option?.product?.sellingPrice)}
                           </Typography>
                         </Box>
@@ -378,7 +384,7 @@ function AddNewOrder() {
 
                 <Grid container spacing={2}>
                   <Grid size={12}>
-                    <Typography variant="body2" fontWeight="600" sx={{ mb: 1 }}>
+                    <Typography variant="body1" fontWeight="600" sx={{ mb: 1 }}>
                       Quantity
                     </Typography>
                     <TextField
@@ -387,6 +393,7 @@ function AddNewOrder() {
                       variant="outlined"
                       placeholder="Enter quantity"
                       value={selectedProduct?.qty || ""}
+                      onWheel={(e) => (e.target as HTMLInputElement).blur()}
                       onChange={(e) => {
                         if (+e.target.value < 0 || isNaN(+e.target.value)) return;
                         setSelectedProduct((prev: any) => {
@@ -426,6 +433,7 @@ function AddNewOrder() {
                       fullWidth
                       variant="outlined"
                       placeholder="Enter discount amount"
+                      onWheel={(e) => (e.target as HTMLInputElement).blur()}
                       value={discount}
                       onChange={(e) => {
                         if (+e.target.value < 0 || isNaN(+e.target.value)) return;
@@ -497,7 +505,7 @@ function AddNewOrder() {
                       {orderProducts.map((product) => (
                         <StyledTableRow key={product._id}>
                           <StyledTableCell>
-                            <Typography variant="body2" fontWeight="600">
+                            <Typography variant="caption" fontWeight="600">
                               {product?.product?.name?.toUpperCase()}
                             </Typography>
                           </StyledTableCell>
@@ -546,10 +554,10 @@ function AddNewOrder() {
                       </TableRow>
                       <TableRow>
                         <StyledTotalTableCell colSpan={3} align="right">
-                          <Typography variant="h6" fontWeight="bold">Total</Typography>
+                          <Typography fontWeight="bold">Total</Typography>
                         </StyledTotalTableCell>
                         <StyledTotalTableCell align="right">
-                          <Typography variant="h6" fontWeight="bold" color="primary">
+                          <Typography fontWeight="bold" color="primary">
                             {currencyFormatter(generateOrderTotalAmount())}
                           </Typography>
                         </StyledTotalTableCell>

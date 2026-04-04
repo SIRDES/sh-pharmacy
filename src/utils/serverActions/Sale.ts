@@ -3,6 +3,7 @@
 import { connectDB } from "@/lib/mongodb";
 import Sale from "@/models/Sale";
 import SalesItem from "@/models/SalesItem";
+import ShopProduct from "@/models/ShopProduct";
 import mongoose from "mongoose";
 export const addNewSale = async (sale: { total_amount: number, profit: number, createdBy: string, shopId: string, discount: number, sub_total: number }) => {
     try {
@@ -31,7 +32,10 @@ export const getAllSales = async (body?: { startDate?: string; endDate?: string 
         const { startDate, endDate } = body || {};
         await connectDB();
 
-        const filter: any = {};
+        const filter: any = {
+            isDeleted: false,
+            isSuspended: false
+        };
         if (startDate && endDate) {
             filter.createdAt = {
                 $gte: new Date(startDate),
@@ -92,7 +96,9 @@ export const getAllShopSales = async (body?: { shopId: string; startDate?: strin
         await connectDB();
         const shopIdObjectId = new mongoose.Types.ObjectId(shopId);
         const filter: any = {
-            shopId: shopIdObjectId
+            shopId: shopIdObjectId,
+            isDeleted: false,
+            isSuspended: false
         };
         if (startDate && endDate) {
             filter.createdAt = {
@@ -265,18 +271,47 @@ export const updateSale = async ({ saleId, saleData }: { saleId: string, saleDat
 };
 
 
-// delete sale
+// delete sale (soft delete)
 export const deleteSale = async (saleId: string) => {
     try {
         await connectDB();
-        const deletedSale = await Sale.findByIdAndDelete(saleId);
-        if (!deletedSale) {
+
+        // 1. Fetch all SalesItems for this sale to revert stock
+        const salesItems = await SalesItem.find({ saleId });
+
+        if (salesItems.length > 0) {
+            // 2. Revert stock in ShopProduct
+            const bulkUpdates = salesItems.map((item) => ({
+                updateOne: {
+                    filter: { _id: item.shopProductId },
+                    update: { $inc: { quantity: item.qty } },
+                },
+            }));
+            await ShopProduct.bulkWrite(bulkUpdates);
+
+            // 3. Mark SalesItems as deleted and suspended
+            await SalesItem.updateMany(
+                { saleId },
+                { isDeleted: true, isSuspended: true }
+            );
+        }
+
+        // 4. Mark Sale as deleted and suspended
+        const updatedSale = await Sale.findByIdAndUpdate(
+            saleId,
+            { isDeleted: true, isSuspended: true },
+            { new: true }
+        );
+
+        if (!updatedSale) {
             return { success: false, message: "Sale not found" };
         }
-        // delete all salesItems that has this saleId
-        const deletedSalesItems = await SalesItem.deleteMany({ saleId });
 
-        return { success: true, data: JSON.parse(JSON.stringify(deletedSale)), message: "Sale deleted successfully" };
+        return {
+            success: true,
+            data: JSON.parse(JSON.stringify(updatedSale)),
+            message: "Sale deleted successfully (soft delete)"
+        };
     } catch (err: any) {
         console.log(err);
         return { success: false, message: err?.message || "An error occurred" };

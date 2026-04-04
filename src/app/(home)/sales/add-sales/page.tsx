@@ -47,7 +47,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function FullWidthTabs() {
+export default function AddSalesPage() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [editDraftId, setEditDraftId] = React.useState<number | null>(null)

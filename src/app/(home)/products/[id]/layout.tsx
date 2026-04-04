@@ -17,12 +17,12 @@ export default function ProductDetailsLayout({
         router.push("/login");
         return;
     }
-    if (session?.status === "authenticated") {
-        if (session?.data?.user?.role !== "admin") {
-            signOut();
-            return;
-        }
+    // if (session?.status === "authenticated") {
+    //     if (session?.data?.user?.role !== "admin") {
+    //         signOut();
+    //         return;
+    //     }
 
-    }
+    // }
     return children
 }

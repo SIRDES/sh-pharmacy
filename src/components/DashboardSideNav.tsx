@@ -14,7 +14,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import {  useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MobileNavMenu from "./MobileNavMenu";
 import LoadingAlert from "./LoadingAlert";
@@ -179,7 +179,7 @@ export default function DashboardSideNav({
               color={theme.palette.common.white}
               gutterBottom
             >
-              SNHT-SHOP
+              SH-PHARMACY
             </Typography>
 
             {/* batch dropdown */}

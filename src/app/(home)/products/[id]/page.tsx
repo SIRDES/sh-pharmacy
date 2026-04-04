@@ -659,9 +659,16 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                     sx={{ display: "flex", gap: "10px" }}
                   >
                     <Typography variant="body1">Current Qty:</Typography>
-                    <Typography variant="body1" fontWeight={700}>
-                      {orderData?.shopProducts?.filter((shopProduct: any) => shopProduct?.shopDetails?._id?.toString() === currentUser?.assignedShop?._id?.toString())[0]?.quantity || 0}
-                    </Typography>
+                    {isAdmin && (
+                      <Typography variant="body1" fontWeight={700}>
+                        {orderData?.currentStock}
+                      </Typography>
+                    )}
+                    {!isAdmin && (
+                      <Typography variant="body1" fontWeight={700}>
+                        {orderData?.shopProducts?.filter((shopProduct: any) => shopProduct?.shopDetails?._id?.toString() === currentUser?.assignedShop?._id?.toString())[0]?.quantity || 0}
+                      </Typography>
+                    )}
                   </Grid>
 
                   {isAdmin && (

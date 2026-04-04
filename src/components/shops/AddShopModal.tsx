@@ -29,7 +29,7 @@ const AddShopModal: React.FC<AddShopModalProps> = ({
   const [value, setValue] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const posCategories = (window as any).pos?.categories
+  // const posCategories = (window as any).pos?.categories
   const handleValueChange = (e: any) => {
     setValue(e.target.value);
   };

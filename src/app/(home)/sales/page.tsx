@@ -264,6 +264,7 @@ export default function Orders() {
                   {/* <StyledTableCell>Contact</StyledTableCell>
                   <StyledTableCell>Address</StyledTableCell> */}
                   <StyledTableCell>Date</StyledTableCell>
+                  <StyledTableCell>Sales Number</StyledTableCell>
                   {/* <StyledTableCell>Status</StyledTableCell> */}
                 </TableRow>
               </TableHead>
@@ -296,6 +297,9 @@ export default function Orders() {
                         </StyledTableCell> */}
                         <StyledTableCell>
                           {formatDate(order?.createdAt)}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          {order?.salesNumber || "N/A"}
                         </StyledTableCell>
                         {/* <StyledTableCell>
                           {order?.status}

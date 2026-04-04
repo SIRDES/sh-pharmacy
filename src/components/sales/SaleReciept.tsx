@@ -27,9 +27,8 @@ interface SaleRecieptPDFProps {
         cashReceived?: number;
         changeReturned?: number;
         drawer?: string;
-        internalData?: string;
-        receiptSignature?: string;
         mrc?: string;
+        salesNumber: number;
     };
 }
 
@@ -42,6 +41,7 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
         shopId,
         createdAt,
         createdBy,
+        salesNumber
     } = orderData;
 
     // Ghana Tax Calculations (GETFL 2.5%, NHIL 2.5%, VAT 15%)
@@ -88,7 +88,7 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
                 </div>
                 {/* <div>TIN: {shopId?.tin || "C0003946258"}</div> */}
                 <div>Tel: {shopId?.tel || "0302999979"}</div>
-                <div>Receipt #: {orderData._id?.slice(-10).toUpperCase() || "PS53019103"}</div>
+                <div>Receipt #: {salesNumber || "N/A"}</div>
                 {/* <div>Evat Invoice Number:</div>
                 <div style={{ fontSize: "10px", wordBreak: "break-all" }}>
                     {orderData._id?.toUpperCase() || "PS5301910342202633617PM"}
@@ -134,15 +134,18 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
                 </div> */}
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span>Sub Total:</span>
-                    <span>{sub_total.toFixed(2)}</span>
+                    <span>{currencyFormatter(sub_total)}</span>
+                    {/* <span>{sub_total.toFixed(2)}</span> */}
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span>Discount:</span>
-                    <span>{discount.toFixed(2)}</span>
+                    <span>{currencyFormatter(discount)}</span>
+                    {/* <span>{discount.toFixed(2)}</span> */}
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span>Total:</span>
-                    <span>{total_amount.toFixed(2)}</span>
+                    <span>{currencyFormatter(total_amount)}</span>
+                    {/* <span>{total_amount.toFixed(2)}</span> */}
                 </div>
                 {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span>GETFL 2.5%:</span>

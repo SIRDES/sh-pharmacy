@@ -227,6 +227,7 @@ export const getSaleById = async (id: string) => {
                     updatedBy: { $first: "$updatedBy" },
                     profit: { $first: "$profit" },
                     sub_total: { $first: "$sub_total" },
+                    salesNumber: { $first: "$salesNumber" },
                     discount: { $first: "$discount" },
                     shopId: { $first: "$shopId" },
                     // Include any other Sale fields you want here!
@@ -310,7 +311,7 @@ export const deleteSale = async (saleId: string) => {
         return {
             success: true,
             data: JSON.parse(JSON.stringify(updatedSale)),
-            message: "Sale deleted successfully (soft delete)"
+            message: "Sale deleted successfully"
         };
     } catch (err: any) {
         console.log(err);

@@ -34,6 +34,8 @@ import { currencyFormatter } from "@/utils/services/utils";
 import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
 import { addSalesItems } from "@/utils/serverActions/SalesItem";
 import { addNewSale } from "@/utils/serverActions/Sale";
+import { useReactToPrint } from "react-to-print";
+import SaleRecieptPDF from "./SaleReciept";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -90,7 +92,7 @@ function AddNewOrder() {
   const currentUser = session?.user
   const [loading, setLoading] = useState(false);
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<any[]>([]);
   const [orderProducts, setOrderProducts] = useState<Array<any>>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [selectOrderProductsSKU, setSelectedOrderProductsSKU] = useState<
@@ -99,6 +101,21 @@ function AddNewOrder() {
   const [discount, setDiscount] = useState("")
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menuRef = useRef(null);
+  const componentRef = useRef<HTMLDivElement>(null);
+  const [printingData, setPrintingData] = useState<any>(null);
+
+  const handlePrint = useReactToPrint({
+    contentRef: componentRef,
+  });
+
+  useEffect(() => {
+    if (printingData) {
+      handlePrint();
+      // Optionally clear printing data after a delay or success
+      // setPrintingData(null);
+    }
+  }, [printingData, handlePrint]);
+
   const handleMenuClick = () => {
     setAnchorEl(menuRef.current);
   };
@@ -220,8 +237,8 @@ function AddNewOrder() {
   };
 
 
-  const Submit = async (e: any) => {
-    e.preventDefault();
+  const Submit = async (e: any, shouldPrint: boolean = false) => {
+    if (e) e.preventDefault();
     try {
       // console.log("orderProducts", orderProducts)
 
@@ -275,6 +292,23 @@ function AddNewOrder() {
           severity: "error"
         })
         return
+      }
+
+      if (shouldPrint) {
+        const fullOrderData = {
+          ...orderResponse.data,
+          salesItems: items.map(item => ({
+            ...item,
+            product: products.find((p: any) => p?.product?._id === item.productId)?.product
+          })),
+          shopId: products.find((p: any) => p?.shopId === currentUser?.assignedShop?._id)?.shopId || { 
+            name: currentUser?.assignedShop?.name,
+            tin: (currentUser?.assignedShop as any)?.tin,
+            tel: (currentUser?.assignedShop as any)?.tel 
+          },
+          createdBy: { name: currentUser?.name }
+        };
+        setPrintingData(fullOrderData);
       }
 
       setOrderProducts([]);
@@ -462,11 +496,23 @@ function AddNewOrder() {
                   <Button
                     fullWidth
                     variant="contained"
-                    type="submit"
+                    type="button"
                     disabled={loading || !orderProducts?.length}
+                    onClick={(e) => Submit(e, false)}
                     sx={{ py: 1.5, borderRadius: 2, boxShadow: 2 }}
                   >
-                    Complete Sale
+                    Save
+                  </Button>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="success"
+                    type="button"
+                    disabled={loading || !orderProducts?.length}
+                    onClick={(e) => Submit(e, true)}
+                    sx={{ py: 1.5, borderRadius: 2, boxShadow: 2, whiteSpace: "nowrap" }}
+                  >
+                    Save & Print
                   </Button>
                 </Box>
               </Box>
@@ -571,6 +617,15 @@ function AddNewOrder() {
           </Card>
         </Grid>
       </Grid>
+      
+      {/* Hidden Receipt for Printing */}
+      <Box sx={{ display: "none" }}>
+        {printingData && (
+          <div ref={componentRef}>
+            <SaleRecieptPDF orderData={printingData} />
+          </div>
+        )}
+      </Box>
     </Box>
   );
 }

@@ -30,6 +30,10 @@ import { showAlert } from "@/components/Alerts";
 import LoadingAlert from "@/components/LoadingAlert";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useReactToPrint } from "react-to-print";
+import SaleRecieptPDF from "@/components/sales/SaleReciept";
+import PrintIcon from "@mui/icons-material/Print";
+import { useRef } from "react";
 import { checkIfSameDayAsToday, currencyFormatter, formatDate } from "@/utils/services/utils";
 import { USER_ROLES } from "@/types/constants";
 import { deleteSale, getSaleById } from "@/utils/serverActions/Sale";
@@ -78,6 +82,11 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const componentRef = useRef<HTMLDivElement>(null);
+  const handlePrint = useReactToPrint({
+    contentRef: componentRef,
+  });
 
   const fetchOrderData = async () => {
     setLoading(true);
@@ -232,6 +241,16 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                     </Button>
                   </Box>
                 )}
+
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                startIcon={<PrintIcon />}
+                onClick={() => handlePrint()}
+              >
+                Print
+              </Button>
 
             </Box>
           </Box>
@@ -423,6 +442,15 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
           )}
         </Box>
       </Box >
+
+      {/* Hidden Receipt for Printing */}
+      <Box sx={{ display: "none" }}>
+        {Object.keys(orderData).length !== 0 && (
+          <div ref={componentRef}>
+            <SaleRecieptPDF orderData={orderData} />
+          </div>
+        )}
+      </Box>
     </>
   );
 }

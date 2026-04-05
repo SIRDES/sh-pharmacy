@@ -16,8 +16,8 @@ export type IProduct = mongoose.Document & {
 
 const productSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, unique: true, trim: true, uppercase: true },
-    sku: { type: Number, required: true, unique: true },
+    name: { type: String, required: true, unique: true, trim: true, uppercase: true, index: true },
+    sku: { type: Number, unique: true, index: true },
     costPrice: { type: Number, required: true },
     sellingPrice: { type: Number, required: true },
     currentStock: { type: Number, required: true },

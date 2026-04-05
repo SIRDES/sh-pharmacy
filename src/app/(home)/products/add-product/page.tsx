@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import LoadingAlert from "@/components/LoadingAlert";
 import { addAProductStockHistory } from "@/utils/serverActions/ProductStockHistory";
-
+import stocks from "../../../../utils/stock.json"
 // ✅ Yup schema for a single product
 const productSchema = yup.object().shape({
   name: yup.string().required("Product name is required"),
@@ -115,6 +115,50 @@ export default function AddProductsPage() {
     }
 
   };
+  const handleAddStock = async () => {
+    // console.log("Submitted Products:", data.products);
+
+    const products = stocks.map((product) => ({
+      name: product.NAME?.trim()?.toUpperCase(),
+      sellingPrice: Number(product.PRICE),
+      costPrice: Number(product.PRICE),
+      currentStock: Number(product["QTY "]),
+      expiryDate: new Date(product.DATE),
+    }))
+    setLoading(true);
+    try {
+      const res = await addProduct(products);
+      // console.log("res", res);
+      if (!res.success) {
+        showAlert({
+          title: "Error",
+          text: res?.message || "An error occurred while adding product",
+          severity: "error",
+        })
+        return
+      }
+      showAlert({
+        title: "Success",
+        text: "Products added successfully",
+        severity: "success",
+        handleConfirmButtonClick: () => {
+          router.push("/products");
+        }
+      })
+      reset();
+    } catch (error: any) {
+      console.log("add product error", error);
+      showAlert({
+        title: "Error",
+        text: error?.message || "An error occurred while adding product",
+        severity: "error",
+      })
+
+    } finally {
+      setLoading(false);
+    }
+
+  };
 
   return (
     <>
@@ -123,6 +167,7 @@ export default function AddProductsPage() {
         <Typography variant="body1" gutterBottom>
           Add Products
         </Typography>
+        <Button onClick={handleAddStock}>Add Stock</Button>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           {fields.map((field, index) => (

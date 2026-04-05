@@ -15,28 +15,77 @@ export const getCurrentUser = async () => {
   return session?.user || null;
 };
 
-export const getAllProducts = async () => {
+export const getAllProducts = async ({
+  page = 1,
+  limit = 50,
+  search = "",
+  filter = "all",
+}: {
+  page?: number;
+  limit?: number;
+  search?: string;
+  filter?: "expiringSoon" | "expired" | "all";
+} = {}) => {
   try {
     await connectDB();
-    // const currentUser = await getCurrentUser();
-    const products = await Product.aggregate([
+
+    const skip = (page - 1) * limit;
+    const now = new Date();
+    const thirtyDaysFromNow = new Date();
+    thirtyDaysFromNow.setDate(now.getDate() + 30);
+
+    const matchStage: any = { isDeleted: { $ne: true } };
+
+    if (search) {
+      matchStage.name = { $regex: search, $options: "i" };
+    }
+
+    if (filter === "expired") {
+      matchStage.expiryDate = { $lt: now };
+    } else if (filter === "expiringSoon") {
+      matchStage.expiryDate = { $gte: now, $lte: thirtyDaysFromNow };
+    }
+
+    const result = await Product.aggregate([
+      { $match: matchStage },
       {
-        $lookup: {
-          from: "shopproducts",
-          localField: "_id",
-          foreignField: "productId",
-          as: "shopProducts",
+        $facet: {
+          data: [
+            {
+              $lookup: {
+                from: "shopproducts",
+                localField: "_id",
+                foreignField: "productId",
+                as: "shopProducts",
+              },
+            },
+            { $sort: { name: 1 } },
+            { $skip: skip },
+            { $limit: limit },
+          ],
+          totalCount: [{ $count: "count" }],
         },
-      },
-      {
-        $sort: { name: 1 },
       },
     ]);
 
+    const products = result[0].data || [];
+    const totalCount = result[0].totalCount[0]?.count || 0;
+    const totalPages = Math.ceil(totalCount / limit);
+
     if (!products || products.length === 0) {
-      return { success: false, message: "No product found", data: [] };
+      return {
+        success: true,
+        message: "No product found",
+        data: [],
+        metadata: { totalCount, totalPages, currentPage: page },
+      };
     }
-    return { success: true, data: JSON.parse(JSON.stringify(products)) };
+
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(products)),
+      metadata: { totalCount, totalPages, currentPage: page },
+    };
   } catch (err: any) {
     console.log(err);
     return {
@@ -66,9 +115,9 @@ export const addProduct = async (
 
 
     // Get the latest SKU to continue numbering
-    const lastProduct = await Product.findOne().sort({ _id: -1 });
-    let nextSku = lastProduct?.sku ? lastProduct.sku + 1 : 1;
-    
+    // const lastProduct = await Product.findOne().sort({ _id: -1 });
+    // let nextSku = lastProduct?.sku ? lastProduct.sku + 1 : 1;
+
     const productsToInsert = [];
     const stockHistoriesToInsert: {
       productId: string;
@@ -100,12 +149,12 @@ export const addProduct = async (
         costPrice,
         sellingPrice,
         currentStock,
-        sku: nextSku++,
+        // sku: nextSku++,
         expiryDate,
       });
     }
 
-    const addedProducts = await Product.insertMany(productsToInsert);
+    const addedProducts = await Product.create(productsToInsert);
 
     if (!addedProducts || addedProducts.length === 0) {
       return { success: false, message: "No products added" };

@@ -1,0 +1,7197 @@
+[
+  {
+    "NAME": "Adusa capsule",
+    "QTY ": 2,
+    "PRICE": 35,
+    "DATE": "12/15/2026"
+  },
+  {
+    "NAME": "Living capsule ",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Prostat 60 capsules",
+    "QTY ": 4,
+    "PRICE": 180,
+    "DATE": "1/9/2027"
+  },
+  {
+    "NAME": " Adom W  G capsules ",
+    "QTY ": 3,
+    "PRICE": 55,
+    "DATE": "1/2/2028"
+  },
+  {
+    "NAME": "delay man capsules",
+    "QTY ": 2,
+    "PRICE": 30,
+    "DATE": "2/9/2026"
+  },
+  {
+    "NAME": "Daud 360 capsules",
+    "QTY ": 2,
+    "PRICE": 40,
+    "DATE": "1/6/2027"
+  },
+  {
+    "NAME": "Givers G C capsules",
+    "QTY ": 5,
+    "PRICE": 85,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Taabea capsules",
+    "QTY ": 6,
+    "PRICE": 30,
+    "DATE": "1/5/2027"
+  },
+  {
+    "NAME": "Coa plus mixture ",
+    "QTY ": 5,
+    "PRICE": 180,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "Gifas  P capsules",
+    "QTY ": 4,
+    "PRICE": 45,
+    "DATE": "10/6/2027"
+  },
+  {
+    "NAME": "Prostacure capsules ",
+    "QTY ": 3,
+    "PRICE": 60,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Gynicare syrup",
+    "QTY ": 2,
+    "PRICE": 95,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": " Gaviscon double action ",
+    "QTY ": 9,
+    "PRICE": 180,
+    "DATE": "1/12/2026"
+  },
+  {
+    "NAME": "Gaviscon pepermint ",
+    "QTY ": 10,
+    "PRICE": 160,
+    "DATE": "1/6/2027"
+  },
+  {
+    "NAME": "Pepto bismal 120ml ",
+    "QTY ": 12,
+    "PRICE": 150,
+    "DATE": "1/3/2028"
+  },
+  {
+    "NAME": "Peto bismal 240",
+    "QTY ": 12,
+    "PRICE": 200,
+    "DATE": "1/10/2028"
+  },
+  {
+    "NAME": "Pepto bismal utra ",
+    "QTY ": 1,
+    "PRICE": 250,
+    "DATE": "1/6/2027"
+  },
+  {
+    "NAME": "Magacid suspension",
+    "QTY ": 17,
+    "PRICE": 35,
+    "DATE": "1/6/2028"
+  },
+  {
+    "NAME": "Ancigel o ",
+    "QTY ": 3,
+    "PRICE": 50,
+    "DATE": "1/5/2027"
+  },
+  {
+    "NAME": "Omeprazole capsules",
+    "QTY ": 28,
+    "PRICE": 20,
+    "DATE": "1/3/2028"
+  },
+  {
+    "NAME": " Gelucid o suspension",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "1/5/2028"
+  },
+  {
+    "NAME": "Gelucid suspensin",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "1/4/2028"
+  },
+  {
+    "NAME": "Spasmolex",
+    "QTY ": 18,
+    "PRICE": 20,
+    "DATE": "1/9/2026"
+  },
+  {
+    "NAME": "Buscolex",
+    "QTY ": 24,
+    "PRICE": 20,
+    "DATE": "1/8/2026"
+  },
+  {
+    "NAME": "Menstak",
+    "QTY ": 31,
+    "PRICE": 20,
+    "DATE": "1/12/2027"
+  },
+  {
+    "NAME": "Ovtcyst",
+    "QTY ": 2,
+    "PRICE": 90,
+    "DATE": "1/3/2027"
+  },
+  {
+    "NAME": "Buscomed",
+    "QTY ": 129,
+    "PRICE": 20,
+    "DATE": "1/8/2028"
+  },
+  {
+    "NAME": "Ronfit gel ointement",
+    "QTY ": 12,
+    "PRICE": 30,
+    "DATE": "1/6/2028"
+  },
+  {
+    "NAME": "Pecos tablet",
+    "QTY ": 14,
+    "PRICE": 200,
+    "DATE": "3/3/2027"
+  },
+  {
+    "NAME": "Paingay gel ointement",
+    "QTY ": 7,
+    "PRICE": 20,
+    "DATE": "1/12/2026"
+  },
+  {
+    "NAME": "Memodien",
+    "QTY ": 4,
+    "PRICE": 120,
+    "DATE": "1/8/2028"
+  },
+  {
+    "NAME": "Femistar capsules",
+    "QTY ": 8,
+    "PRICE": 150,
+    "DATE": "1/11/2026"
+  },
+  {
+    "NAME": "Womens Flora",
+    "QTY ": 6,
+    "PRICE": 70,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Chilly white",
+    "QTY ": 5,
+    "PRICE": 140,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Chilly G reen",
+    "QTY ": 22,
+    "PRICE": 120,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Givers g c mixture",
+    "QTY ": 4,
+    "PRICE": 85,
+    "DATE": "1/12/2027"
+  },
+  {
+    "NAME": "Madam Cathrine ",
+    "QTY ": 8,
+    "PRICE": 30,
+    "DATE": "1/6/2027"
+  },
+  {
+    "NAME": "Mensoplax mixture",
+    "QTY ": 8,
+    "PRICE": 40,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "Yakson mixture",
+    "QTY ": 5,
+    "PRICE": 40,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Gifas mixture",
+    "QTY ": 9,
+    "PRICE": 45,
+    "DATE": "10/6/2027"
+  },
+  {
+    "NAME": "Lucky  malaria Heerbal mixture",
+    "QTY ": 4,
+    "PRICE": 40,
+    "DATE": "1/3/2027"
+  },
+  {
+    "NAME": "Lucky koo bitters",
+    "QTY ": 2,
+    "PRICE": 40,
+    "DATE": "1/9/2027"
+  },
+  {
+    "NAME": "Adom koo mixture",
+    "QTY ": 3,
+    "PRICE": 30,
+    "DATE": "1/2/2028"
+  },
+  {
+    "NAME": "Prostat plus mixture",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "9/15/2027"
+  },
+  {
+    "NAME": "Huchun capsules",
+    "QTY ": 6,
+    "PRICE": 100,
+    "DATE": "1/2/2027"
+  },
+  {
+    "NAME": "Bibini toma plus mixture",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "1/10/2026"
+  },
+  {
+    "NAME": "Amuzu pee mixture",
+    "QTY ": 12,
+    "PRICE": 45,
+    "DATE": "1/10/2027"
+  },
+  {
+    "NAME": "Rdox bathing soap small",
+    "QTY ": 9,
+    "PRICE": 100,
+    "DATE": "1/5/2028"
+  },
+  {
+    "NAME": "Sivoderm powder",
+    "QTY ": 8,
+    "PRICE": 30,
+    "DATE": "1/6/2028"
+  },
+  {
+    "NAME": "Sivoderm cream",
+    "QTY ": 8,
+    "PRICE": 30,
+    "DATE": "1/6/2027"
+  },
+  {
+    "NAME": "Joy ointement big  size",
+    "QTY ": 6,
+    "PRICE": 80,
+    "DATE": "1/5/2027"
+  },
+  {
+    "NAME": "Joy ointement small size",
+    "QTY ": 17,
+    "PRICE": 12,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "White cat robb big size",
+    "QTY ": 3,
+    "PRICE": 25,
+    "DATE": "1/10/2027"
+  },
+  {
+    "NAME": "Maame dagomba",
+    "QTY ": 10,
+    "PRICE": 20,
+    "DATE": "12/24/2027"
+  },
+  {
+    "NAME": "Daud ointement",
+    "QTY ": 7,
+    "PRICE": 20,
+    "DATE": "10/16/2027"
+  },
+  {
+    "NAME": "Orthocare gel ",
+    "QTY ": 6,
+    "PRICE": 50,
+    "DATE": "1/8/2026"
+  },
+  {
+    "NAME": "Glycerine big size",
+    "QTY ": 7,
+    "PRICE": 45,
+    "DATE": "1/8/2027"
+  },
+  {
+    "NAME": "Glycerine small  size",
+    "QTY ": 5,
+    "PRICE": 25,
+    "DATE": "1/5/2027"
+  },
+  {
+    "NAME": "Previlage garlic mixture",
+    "QTY ": 13,
+    "PRICE": 200,
+    "DATE": "12/24/2028"
+  },
+  {
+    "NAME": "Previladge koo mixture",
+    "QTY ": 8,
+    "PRICE": 200,
+    "DATE": "6/12/2028"
+  },
+  {
+    "NAME": "Condom container",
+    "QTY ": 4,
+    "PRICE": 170,
+    "DATE": "1/5/2028"
+  },
+  {
+    "NAME": "Sanitizer",
+    "QTY ": 5,
+    "PRICE": 70,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Alcohol rubb",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "4/15/2027"
+  },
+  {
+    "NAME": "FAC kasapharm",
+    "QTY ": 33,
+    "PRICE": 10,
+    "DATE": "1/12/2026"
+  },
+  {
+    "NAME": "FAC Sabb care",
+    "QTY ": 9,
+    "PRICE": 20,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": "Mist trisilicate",
+    "QTY ": 22,
+    "PRICE": 10,
+    "DATE": "1/3/2030"
+  },
+  {
+    "NAME": "Ozin cetrizin",
+    "QTY ": 17,
+    "PRICE": 15,
+    "DATE": "1/9/2028"
+  },
+  {
+    "NAME": "Exforge 10mg \\160mg",
+    "QTY ": 49,
+    "PRICE": 16,
+    "DATE": "1/3/2028"
+  },
+  {
+    "NAME": "Exforge 5mg\\160 ",
+    "QTY ": 56,
+    "PRICE": 16,
+    "DATE": "1/8/2027"
+  },
+  {
+    "NAME": "Exforge HTC 5MG\\160\\12.5",
+    "QTY ": 84,
+    "PRICE": 15,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": " Exforge HTC 10mg \\160\\12.5 ",
+    "QTY ": 161,
+    "PRICE": 15,
+    "DATE": "1/12/2026"
+  },
+  {
+    "NAME": "Amlodipine 10mg Teva",
+    "QTY ": 6,
+    "PRICE": 25,
+    "DATE": "1/5/2030"
+  },
+  {
+    "NAME": "Amlodipine 5mg Teva",
+    "QTY ": 11,
+    "PRICE": 20,
+    "DATE": "1/8/2028"
+  },
+  {
+    "NAME": "Amlonova 10mg",
+    "QTY ": 2,
+    "PRICE": 15,
+    "DATE": "1/5/2028"
+  },
+  {
+    "NAME": "AMLONOVA 5Mg",
+    "QTY ": 1,
+    "PRICE": 15,
+    "DATE": "10/5/2028"
+  },
+  {
+    "NAME": "Twynsta 80mg\\10",
+    "QTY ": 3,
+    "PRICE": 480,
+    "DATE": "1/4/2028"
+  },
+  {
+    "NAME": "Amlodenk 10mg",
+    "QTY ": 24,
+    "PRICE": 32,
+    "DATE": "1/2/2027"
+  },
+  {
+    "NAME": " Atenova 50 atenolol",
+    "QTY ": 10,
+    "PRICE": 50,
+    "DATE": "1/3/2028"
+  },
+  {
+    "NAME": "Lisinova 5mg",
+    "QTY ": 5,
+    "PRICE": 15,
+    "DATE": "1/8/2027"
+  },
+  {
+    "NAME": "O-Pril 10 mg lisinopril",
+    "QTY ": 10,
+    "PRICE": 15,
+    "DATE": "1/8/2028"
+  },
+  {
+    "NAME": "Atacand plus",
+    "QTY ": 1,
+    "PRICE": 550,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "Atacand 16mg ",
+    "QTY ": 2,
+    "PRICE": 550,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": "Atacand 8mg",
+    "QTY ": 2,
+    "PRICE": 420,
+    "DATE": "1/6/2027"
+  },
+  {
+    "NAME": "Inopril lisinopril  hydrochlorithiazid",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "1/12/2027"
+  },
+  {
+    "NAME": "Lisinopril10mg Teva",
+    "QTY ": 8,
+    "PRICE": 45,
+    "DATE": "1/10/2027"
+  },
+  {
+    "NAME": "BDF 2.5 Bendrofluthiazide2.5mg",
+    "QTY ": 8,
+    "PRICE": 15,
+    "DATE": "1/3/2027"
+  },
+  {
+    "NAME": "Bisoprolol fumerate 10mg  sandoz",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "1/10/2027"
+  },
+  {
+    "NAME": "Lossartan potassium 100mg Teva",
+    "QTY ": 9,
+    "PRICE": 60,
+    "DATE": "1/9/2027"
+  },
+  {
+    "NAME": "LOSSARTAN POTASSIUM 50MG TEVA",
+    "QTY ": 16,
+    "PRICE": 50,
+    "DATE": "1/7/2028"
+  },
+  {
+    "NAME": "Lossartan POTASSIUM 25 mg TevA",
+    "QTY ": 20,
+    "PRICE": 40,
+    "DATE": "1/11/2027"
+  },
+  {
+    "NAME": "Losarmed 100",
+    "QTY ": 8,
+    "PRICE": 60,
+    "DATE": "1/11/2028"
+  },
+  {
+    "NAME": "Losarmed 50",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "1/11/2027"
+  },
+  {
+    "NAME": "Rosuvastatin 10mg exeter",
+    "QTY ": 5,
+    "PRICE": 75,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Hydralazine 50 mg accord",
+    "QTY ": 56,
+    "PRICE": 7,
+    "DATE": "1/4/2028"
+  },
+  {
+    "NAME": " Atenalol 50mg ernest 2",
+    "QTY ": 2,
+    "PRICE": 15,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": "Crestor 10mg  rosuvastatin",
+    "QTY ": 14,
+    "PRICE": 12.5,
+    "DATE": "1/11/2026"
+  },
+  {
+    "NAME": "Bisoprolol fumerate 5mg sandoz ",
+    "QTY ": 2,
+    "PRICE": 40,
+    "DATE": "1/5/2028"
+  },
+  {
+    "NAME": "Zestril 5mg",
+    "QTY ": 1,
+    "PRICE": 220,
+    "DATE": "1/6/2026"
+  },
+  {
+    "NAME": " Zestril 20mg",
+    "QTY ": 1,
+    "PRICE": 500,
+    "DATE": "1/6/2028"
+  },
+  {
+    "NAME": " Zestril 10 mg",
+    "QTY ": 1,
+    "PRICE": 360,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "LosarDenk 50mg",
+    "QTY ": 2,
+    "PRICE": 75,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Atorvastatin 40 Teva",
+    "QTY ": 2,
+    "PRICE": 80,
+    "DATE": "1/9/2026"
+  },
+  {
+    "NAME": "Atorvastatin 20mg Teva",
+    "QTY ": 1,
+    "PRICE": 70,
+    "DATE": "1/7/2026"
+  },
+  {
+    "NAME": "Inova 20mg atorvastatin ",
+    "QTY ": 2,
+    "PRICE": 40,
+    "DATE": "1/6/2027"
+  },
+  {
+    "NAME": "Plendil felodipine 10mg",
+    "QTY ": 3,
+    "PRICE": 400,
+    "DATE": "1/11/2026"
+  },
+  {
+    "NAME": "Bendroflumethiazide 2.5 mg accord",
+    "QTY ": 5,
+    "PRICE": 25,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Cardigen retard nefidipine 20mg",
+    "QTY ": 17,
+    "PRICE": 10,
+    "DATE": "1/7/2026"
+  },
+  {
+    "NAME": "Nifemed 20mg",
+    "QTY ": 49,
+    "PRICE": 5,
+    "DATE": "1/6/2028"
+  },
+  {
+    "NAME": "Nifemed xl 30mg",
+    "QTY ": 16,
+    "PRICE": 20,
+    "DATE": "1/3/2027"
+  },
+  {
+    "NAME": "Pinek 20 nefidipine",
+    "QTY ": 47,
+    "PRICE": 5,
+    "DATE": "1/10/2026"
+  },
+  {
+    "NAME": "Pinek 30 nefidipine",
+    "QTY ": 99,
+    "PRICE": 10,
+    "DATE": "1/7/2028"
+  },
+  {
+    "NAME": "Nifecard 30mg",
+    "QTY ": 15,
+    "PRICE": 30,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Propranolol 40mg",
+    "QTY ": 9,
+    "PRICE": 5,
+    "DATE": "1/10/2026"
+  },
+  {
+    "NAME": "Methyldopa 250mg pharm inter",
+    "QTY ": 48,
+    "PRICE": 25,
+    "DATE": "1/2/2028"
+  },
+  {
+    "NAME": "M -dopakant methyldopa 250mg",
+    "QTY ": 27,
+    "PRICE": 25,
+    "DATE": "1/10/2027"
+  },
+  {
+    "NAME": "Hyprofic capsules",
+    "QTY ": 146,
+    "PRICE": 7,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": " Contiflo xl 400mcg",
+    "QTY ": 2,
+    "PRICE": 70,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": "Bisoprolol fumerate 2.5 mg",
+    "QTY ": 2,
+    "PRICE": 30,
+    "DATE": "1/7/2028"
+  },
+  {
+    "NAME": "Tamsulosin hydrochloride 400mcg",
+    "QTY ": 5,
+    "PRICE": 85,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Amitriptylin 10mg accord",
+    "QTY ": 3,
+    "PRICE": 25,
+    "DATE": "1/8/2026"
+  },
+  {
+    "NAME": "Amitriptylin 25mg ernest",
+    "QTY ": 118,
+    "PRICE": 10,
+    "DATE": "1/8/2029"
+  },
+  {
+    "NAME": "Finasteride 5mg exeter",
+    "QTY ": 1,
+    "PRICE": 85,
+    "DATE": "1/5/2026"
+  },
+  {
+    "NAME": "Finasteride 5mg ciple",
+    "QTY ": 3,
+    "PRICE": 50,
+    "DATE": "1/11/2027"
+  },
+  {
+    "NAME": "Xatral 10mg",
+    "QTY ": 3,
+    "PRICE": 700,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Doxazosin 2mg ",
+    "QTY ": 6,
+    "PRICE": 55,
+    "DATE": "1/4/2029"
+  },
+  {
+    "NAME": "Donepezil hydrochloride 5 mg",
+    "QTY ": 1,
+    "PRICE": 55,
+    "DATE": "1/6/2026"
+  },
+  {
+    "NAME": "Digoxin 125",
+    "QTY ": 3,
+    "PRICE": 130,
+    "DATE": "1/8/2027"
+  },
+  {
+    "NAME": "  Levothyroxine",
+    "QTY ": 3,
+    "PRICE": 50,
+    "DATE": "1/8/2026"
+  },
+  {
+    "NAME": "Natrilix SR indapamide 1.5mg",
+    "QTY ": 2,
+    "PRICE": 180,
+    "DATE": "1/10/2026"
+  },
+  {
+    "NAME": "lexotanil bromaziopam 1.5mg",
+    "QTY ": 2,
+    "PRICE": 190,
+    "DATE": "1/7/2028"
+  },
+  {
+    "NAME": "Candesartan",
+    "QTY ": 5,
+    "PRICE": 100,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": "GLIKIT vildagliptine \\ metformin",
+    "QTY ": 100,
+    "PRICE": 5,
+    "DATE": "1/3/2027"
+  },
+  {
+    "NAME": "Baclofen 1o mg",
+    "QTY ": 58,
+    "PRICE": 20,
+    "DATE": "1/11/2027"
+  },
+  {
+    "NAME": "ISOKET isosorbide dinitrate 20 mg",
+    "QTY ": 4,
+    "PRICE": 91,
+    "DATE": "1/10/2027"
+  },
+  {
+    "NAME": "Glibenil 5mg ernest",
+    "QTY ": 149,
+    "PRICE": 2,
+    "DATE": "1/6/2029"
+  },
+  {
+    "NAME": "Foxiga  10mgs",
+    "QTY ": 3,
+    "PRICE": 700,
+    "DATE": "1/9/2027"
+  },
+  {
+    "NAME": "Glibenc 5mg entrance",
+    "QTY ": 10,
+    "PRICE": 2,
+    "DATE": "1/5/2028"
+  },
+  {
+    "NAME": "Enaphage 500 mg metformin",
+    "QTY ": 42,
+    "PRICE": 3,
+    "DATE": "1/9/2029"
+  },
+  {
+    "NAME": "gliclazide 80mg Teva",
+    "QTY ": 3,
+    "PRICE": 65,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "Glimepiride 4mg exeter",
+    "QTY ": 16,
+    "PRICE": 35,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Glimepiride  2mg  exeter",
+    "QTY ": 22,
+    "PRICE": 30,
+    "DATE": "1/2/2028"
+  },
+  {
+    "NAME": "Losartan 50mg ernest",
+    "QTY ": 36,
+    "PRICE": 10,
+    "DATE": "1/9/2028"
+  },
+  {
+    "NAME": "Trevia  siitagliptin 100mg",
+    "QTY ": 2,
+    "PRICE": 250,
+    "DATE": "1/9/2026"
+  },
+  {
+    "NAME": "Glimepiride denk",
+    "QTY ": 6,
+    "PRICE": 46.7,
+    "DATE": "1/10/2028",
+    "__EMPTY_6": 6
+  },
+  {
+    "NAME": " Metformin denk 500",
+    "QTY ": 4,
+    "PRICE": 25,
+    "DATE": "1/6/2027"
+  },
+  {
+    "NAME": "Metformin denk 1000",
+    "QTY ": 2,
+    "PRICE": 200,
+    "DATE": "1/4/2028"
+  },
+  {
+    "NAME": "Glucophage 500mg  ",
+    "QTY ": 4,
+    "PRICE": 95,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Glucophage 850mg ",
+    "QTY ": 1,
+    "PRICE": 140,
+    "DATE": "1/3/2027"
+  },
+  {
+    "NAME": "Galvusmet",
+    "QTY ": 28,
+    "PRICE": 110,
+    "DATE": "10/20/2026"
+  },
+  {
+    "NAME": "Argiman",
+    "QTY ": 1,
+    "PRICE": 350,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "Somazina citicolin 1000",
+    "QTY ": 1,
+    "PRICE": 620,
+    "DATE": "1/9/2027"
+  },
+  {
+    "NAME": " Keppra 500mg",
+    "QTY ": 10,
+    "PRICE": 140,
+    "DATE": "1/2/2027"
+  },
+  {
+    "NAME": "CARDIDE SR",
+    "QTY ": 4,
+    "PRICE": 100,
+    "DATE": "1/5/2028"
+  },
+  {
+    "NAME": "Garbappentin",
+    "QTY ": 1,
+    "PRICE": 40,
+    "DATE": "1/6/2028"
+  },
+  {
+    "NAME": "Frelet 75mg clopidogrel",
+    "QTY ": 9,
+    "PRICE": 70,
+    "DATE": "1/9/2026"
+  },
+  {
+    "NAME": "Parlodel 2,5 mg bromokriptin",
+    "QTY ": 12,
+    "PRICE": 80,
+    "DATE": "1/11/2027"
+  },
+  {
+    "NAME": "Epilim sodium volproate  200mg",
+    "QTY ": 10,
+    "PRICE": 55,
+    "DATE": "1/10/2026"
+  },
+  {
+    "NAME": "Tegretol 200mg carbamazepin",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "1/3/2027"
+  },
+  {
+    "NAME": "Risperidone 2mg",
+    "QTY ": 2,
+    "PRICE": 80,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Olanzipine",
+    "QTY ": 2,
+    "PRICE": 75,
+    "DATE": "1/3/2026"
+  },
+  {
+    "NAME": "Biopanutin phenytoin 100mg",
+    "QTY ": 20,
+    "PRICE": 40,
+    "DATE": "1/9/2026"
+  },
+  {
+    "NAME": "Phenobarbitone 30mg ernest",
+    "QTY ": 25,
+    "PRICE": 5,
+    "DATE": "1/12/2027"
+  },
+  {
+    "NAME": "Phenobarbitone 60mg",
+    "QTY ": 42,
+    "PRICE": 5,
+    "DATE": "1/4/2029"
+  },
+  {
+    "NAME": "Sirdalud tizanidine 2mg",
+    "QTY ": 9,
+    "PRICE": 40,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "Chexol   artane trihexyphenidyl",
+    "QTY ": 457,
+    "PRICE": 5,
+    "DATE": "1/8/2026"
+  },
+  {
+    "NAME": "Carbamazepine 200mg pharm inter",
+    "QTY ": 40,
+    "PRICE": 15,
+    "DATE": "1/9/2029"
+  },
+  {
+    "NAME": "Carbamazepine 200mg exeter",
+    "QTY ": 48,
+    "PRICE": 15,
+    "DATE": "1/10/2028"
+  },
+  {
+    "NAME": "Artane 2mg  neuraxpharm",
+    "QTY ": 5,
+    "PRICE": 320,
+    "DATE": "1/6/2027"
+  },
+  {
+    "NAME": "Livolin",
+    "QTY ": 5,
+    "PRICE": 220,
+    "DATE": "1/20/2027"
+  },
+  {
+    "NAME": "Aciclovir 200mg",
+    "QTY ": 6,
+    "PRICE": 50,
+    "DATE": "1/9/2026"
+  },
+  {
+    "NAME": "Aciclovir 400mg",
+    "QTY ": 4,
+    "PRICE": 90,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "Zyfen 120 tablet fexofenadine",
+    "QTY ": 3,
+    "PRICE": 90,
+    "DATE": "1/3/2028"
+  },
+  {
+    "NAME": "zyfen syrup 150 ml ",
+    "QTY ": 4,
+    "PRICE": 100,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Piriton chlorphenamine tablet",
+    "QTY ": 145,
+    "PRICE": 10,
+    "DATE": "1/5/2028"
+  },
+  {
+    "NAME": "Piriton syrup ",
+    "QTY ": 5,
+    "PRICE": 180,
+    "DATE": "1/5/2028"
+  },
+  {
+    "NAME": "Loratadine  Teva ",
+    "QTY ": 11,
+    "PRICE": 50,
+    "DATE": "1/3/2027"
+  },
+  {
+    "NAME": "Clarityne  loratadine syrup",
+    "QTY ": 2,
+    "PRICE": 260,
+    "DATE": "1/7/2026"
+  },
+  {
+    "NAME": "Tegretol CR 200mg",
+    "QTY ": 5,
+    "PRICE": 80,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": "Cetrizine syrup exeter ",
+    "QTY ": 33,
+    "PRICE": 50,
+    "DATE": "1/8/2027"
+  },
+  {
+    "NAME": "rhizin syrup ",
+    "QTY ": 3,
+    "PRICE": 20,
+    "DATE": "1/11/2028"
+  },
+  {
+    "NAME": "Luex baby dry cough",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "1/10/2027"
+  },
+  {
+    "NAME": "Luex children chesty cough",
+    "QTY ": 21,
+    "PRICE": 60,
+    "DATE": "1/7/2027"
+  },
+  {
+    "NAME": "Luex childrens dry cough",
+    "QTY ": 16,
+    "PRICE": 60,
+    "DATE": "1/10/2026"
+  },
+  {
+    "NAME": "Luex  adult chesty cough",
+    "QTY ": 7,
+    "PRICE": 60,
+    "DATE": "1/11/2028"
+  },
+  {
+    "NAME": "Luex adult dry cough",
+    "QTY ": 1,
+    "PRICE": 60,
+    "DATE": "1/5/2027"
+  },
+  {
+    "NAME": "mucolex adult expectorant",
+    "QTY ": 8,
+    "PRICE": 60,
+    "DATE": "1/11/2027"
+  },
+  {
+    "NAME": "mucolax junior expectorant",
+    "QTY ": 3,
+    "PRICE": 50,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": "Hydrogen in glass",
+    "QTY ": 34,
+    "PRICE": 30,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "Hydrogen in rubber sab care",
+    "QTY ": 9,
+    "PRICE": 20,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": "SENNACO ",
+    "QTY ": 18,
+    "PRICE": 15,
+    "DATE": "1/12/2026"
+  },
+  {
+    "NAME": "Mist pot cit",
+    "QTY ": 13,
+    "PRICE": 20,
+    "DATE": "1/9/2027"
+  },
+  {
+    "NAME": "Expect sed",
+    "QTY ": 11,
+    "PRICE": 20,
+    "DATE": "1/4/2027"
+  },
+  {
+    "NAME": "Lactolose",
+    "QTY ": 4,
+    "PRICE": 85,
+    "DATE": "1/8/2026"
+  },
+  {
+    "NAME": "Lexsporin powder",
+    "QTY ": 3,
+    "PRICE": 70,
+    "DATE": "1/10/2027"
+  },
+  {
+    "NAME": "Kalamin lotion",
+    "QTY ": 6,
+    "PRICE": 30,
+    "DATE": "1/8/2028"
+  },
+  {
+    "NAME": "Drez ointement big size",
+    "QTY ": 6,
+    "PRICE": 50,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Glucose",
+    "QTY ": 5,
+    "PRICE": 20,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "PMF cream",
+    "QTY ": 6,
+    "PRICE": 50,
+    "DATE": "1/6/2028"
+  },
+  {
+    "NAME": "Omintimirin mixture",
+    "QTY ": 8,
+    "PRICE": 40,
+    "DATE": "8/10/2027"
+  },
+  {
+    "NAME": "Kandimix mixture ",
+    "QTY ": 7,
+    "PRICE": 40,
+    "DATE": "8/7/2027"
+  },
+  {
+    "NAME": "Zahara mixture",
+    "QTY ": 7,
+    "PRICE": 45,
+    "DATE": "6/29/2027"
+  },
+  {
+    "NAME": "Gasto mixture",
+    "QTY ": 4,
+    "PRICE": 45,
+    "DATE": "3/20/2027"
+  },
+  {
+    "NAME": "Solak mixture",
+    "QTY ": 7,
+    "PRICE": 35,
+    "DATE": "7/10/2027"
+  },
+  {
+    "NAME": "Rooter tonic mixture",
+    "QTY ": 3,
+    "PRICE": 60,
+    "DATE": "10/17/2027"
+  },
+  {
+    "NAME": "Givers herbal malaria mixture",
+    "QTY ": 7,
+    "PRICE": 40,
+    "DATE": "2/2/2028"
+  },
+  {
+    "NAME": "Hepa plus capsules",
+    "QTY ": 5,
+    "PRICE": 20,
+    "DATE": "1/3/2027"
+  },
+  {
+    "NAME": "Hepa plus hrbal mixture",
+    "QTY ": 4,
+    "PRICE": 20,
+    "DATE": "1/8/2027"
+  },
+  {
+    "NAME": " Plasmox  capsules",
+    "QTY ": 4,
+    "PRICE": 20,
+    "DATE": "1/8/2027"
+  },
+  {
+    "NAME": "Plasmox mixture",
+    "QTY ": 5,
+    "PRICE": 20,
+    "DATE": "10/15/2027"
+  },
+  {
+    "NAME": "Pavi capsules",
+    "QTY ": 5,
+    "PRICE": 20,
+    "DATE": "1/8/2027"
+  },
+  {
+    "NAME": "Pavi mixture",
+    "QTY ": 5,
+    "PRICE": 20,
+    "DATE": "10/27/2029"
+  },
+  {
+    "NAME": "Vilkil",
+    "QTY ": 4,
+    "PRICE": 40,
+    "DATE": "5/18/2026"
+  },
+  {
+    "NAME": "Angel rock mixture",
+    "QTY ": 3,
+    "PRICE": 60,
+    "DATE": "6/13/2026"
+  },
+  {
+    "NAME": "Hi lady mixtures",
+    "QTY ": 4,
+    "PRICE": 75,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "Immulate mixture",
+    "QTY ": 2,
+    "PRICE": 180,
+    "DATE": "1/8/2026"
+  },
+  {
+    "NAME": " Sermens capsules",
+    "QTY ": 6,
+    "PRICE": 65,
+    "DATE": "10/10/2027"
+  },
+  {
+    "NAME": "Sermens mixture",
+    "QTY ": 4,
+    "PRICE": 65,
+    "DATE": "7/20/2027"
+  },
+  {
+    "NAME": "Alpha Garlic capsules",
+    "QTY ": 6,
+    "PRICE": 95,
+    "DATE": "4/27/2026"
+  },
+  {
+    "NAME": "Sparnish mixture",
+    "QTY ": 7,
+    "PRICE": 45,
+    "DATE": "1/28/2026"
+  },
+  {
+    "NAME": "Victory garlic mixture",
+    "QTY ": 9,
+    "PRICE": 40,
+    "DATE": "3/27/2026"
+  },
+  {
+    "NAME": "3P garlic mixture",
+    "QTY ": 6,
+    "PRICE": 45,
+    "DATE": "1/27/2026"
+  },
+  {
+    "NAME": "Zahara man capsules",
+    "QTY ": 3,
+    "PRICE": 40,
+    "DATE": "1/27/2026"
+  },
+  {
+    "NAME": "Prostavite capsules",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "3/20/2026"
+  },
+  {
+    "NAME": "Vivadona",
+    "QTY ": 15,
+    "PRICE": 10,
+    "DATE": "4/27/2026"
+  },
+  {
+    "NAME": "Adutwumwaa capsules",
+    "QTY ": 10,
+    "PRICE": 35,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "Zahara gee capsules",
+    "QTY ": 2,
+    "PRICE": 35,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "Pa=kum ointment",
+    "QTY ": 2,
+    "PRICE": 35,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "Scorpion ointment",
+    "QTY ": 10,
+    "PRICE": 30,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "Otwea powder",
+    "QTY ": 5,
+    "PRICE": 15,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "Mmerema mmpaboa",
+    "QTY ": 1,
+    "PRICE": 40,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "Omega oil",
+    "QTY ": 4,
+    "PRICE": 45,
+    "DATE": "5/1/2026"
+  },
+  {
+    "NAME": "Prostate capsules",
+    "QTY ": 5,
+    "PRICE": 40,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "Silver bird oil",
+    "QTY ": 1,
+    "PRICE": 45,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "Adom koo ointment",
+    "QTY ": 6,
+    "PRICE": 40,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "Adom koo capsules",
+    "QTY ": 3,
+    "PRICE": 70,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "Prostajoy",
+    "QTY ": 3,
+    "PRICE": 55,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "Sibi men capsules",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "3/1/2029"
+  },
+  {
+    "NAME": "Givers p capsules",
+    "QTY ": 6,
+    "PRICE": 75,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "Givers koo capsules",
+    "QTY ": 3,
+    "PRICE": 75,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "Re-zot tab",
+    "QTY ": 191,
+    "PRICE": 15,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "Stomacaine syrup",
+    "QTY ": 9,
+    "PRICE": 70,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "Nugel suspension",
+    "QTY ": 9,
+    "PRICE": 60,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "Nugel O .suspension",
+    "QTY ": 10,
+    "PRICE": 60,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "Gastrone suspension",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "Zerocid suspension",
+    "QTY ": 6,
+    "PRICE": 40,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "Zerocid plus suspension",
+    "QTY ": 8,
+    "PRICE": 60,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "Maalox plus",
+    "QTY ": 5,
+    "PRICE": 160,
+    "DATE": "5/1/2025"
+  },
+  {
+    "NAME": "Nazo cream",
+    "QTY ": 49,
+    "PRICE": 7,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "Abonike cream",
+    "QTY ": 20,
+    "PRICE": 10,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "Ice cold gel",
+    "QTY ": 8,
+    "PRICE": 60,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "Ernest ointment",
+    "QTY ": 6,
+    "PRICE": 12,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Medical ice cool gel",
+    "QTY ": 5,
+    "PRICE": 25,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "Sibi soap",
+    "QTY ": 5,
+    "PRICE": 45,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "Sudocrem",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "Milk of magnesium 360ml",
+    "QTY ": 5,
+    "PRICE": 65,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "Milk of magnesium 120ml",
+    "QTY ": 4,
+    "PRICE": 45,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "Chocho ointment",
+    "QTY ": 25,
+    "PRICE": 15,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "Mercy ointment",
+    "QTY ": 12,
+    "PRICE": 15,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "New bafan mixture",
+    "QTY ": 4,
+    "PRICE": 35,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "Sm bitters",
+    "QTY ": 4,
+    "PRICE": 75,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "Tinatett v. care",
+    "QTY ": 6,
+    "PRICE": 75,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "Adom d &g mixture",
+    "QTY ": 7,
+    "PRICE": 40,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "Heel balm",
+    "QTY ": 6,
+    "PRICE": 30,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "Time mixture",
+    "QTY ": 10,
+    "PRICE": 35,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "Adusa mixture",
+    "QTY ": 2,
+    "PRICE": 35,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "Good morning mixture",
+    "QTY ": 3,
+    "PRICE": 40,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "Taabea herbal mixture",
+    "QTY ": 4,
+    "PRICE": 30,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "Lawson herbal mixture",
+    "QTY ": 4,
+    "PRICE": 40,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "Rooter mixture",
+    "QTY ": 3,
+    "PRICE": 50,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "Law care",
+    "QTY ": 2,
+    "PRICE": 35,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "Living bitters",
+    "QTY ": 5,
+    "PRICE": 60,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "Entera 5",
+    "QTY ": 10,
+    "PRICE": 30,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "Adutwumwaa mixture",
+    "QTY ": 2,
+    "PRICE": 35,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "Imboost",
+    "QTY ": 5,
+    "PRICE": 40,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "Grofynn",
+    "QTY ": 7,
+    "PRICE": 30,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "prostacure tea",
+    "QTY ": 24,
+    "PRICE": 50,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "Aquatab ",
+    "QTY ": 33,
+    "PRICE": 20,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "Agombia capsules",
+    "QTY ": 4,
+    "PRICE": 35,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "Kafefe capsules",
+    "QTY ": 6,
+    "PRICE": 40,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "new bafan capsules",
+    "QTY ": 5,
+    "PRICE": 40,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "Bestman capsules",
+    "QTY ": 2,
+    "PRICE": 40,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "Spironolactone 25mg tab(accord)",
+    "QTY ": 5,
+    "PRICE": 60,
+    "DATE": "1/28/2026"
+  },
+  {
+    "NAME": "Spironolactone 100mg tab( Genesis)",
+    "QTY ": 5,
+    "PRICE": 90,
+    "DATE": "2/28/2026"
+  },
+  {
+    "NAME": "Spironolactone 50mg tab( Teva)",
+    "QTY ": 5,
+    "PRICE": 80,
+    "DATE": "8/27/2026"
+  },
+  {
+    "NAME": "Spironolactone 25mg tab( Teva)",
+    "QTY ": 2,
+    "PRICE": 60,
+    "DATE": "11/28/2026"
+  },
+  {
+    "NAME": "Addyzoa Capsules",
+    "QTY ": 3,
+    "PRICE": 200,
+    "DATE": "3/28/2026"
+  },
+  {
+    "NAME": "Clomid 50 tab",
+    "QTY ": 8,
+    "PRICE": 200,
+    "DATE": "5/30/2026"
+  },
+  {
+    "NAME": "Clomifene clomid tab",
+    "QTY ": 1,
+    "PRICE": 170,
+    "DATE": "9/26/2026"
+  },
+  {
+    "NAME": "Ramipril 5mg capsules",
+    "QTY ": 5,
+    "PRICE": 90,
+    "DATE": "5/27/2026"
+  },
+  {
+    "NAME": "Ramipril 10mg capsules",
+    "QTY ": 5,
+    "PRICE": 100,
+    "DATE": "5/27/2026"
+  },
+  {
+    "NAME": "Colchicine 500mcg tab",
+    "QTY ": 10,
+    "PRICE": 50,
+    "DATE": "10/26/2026"
+  },
+  {
+    "NAME": "M2 Tone tab",
+    "QTY ": 11,
+    "PRICE": 170,
+    "DATE": "10/26/2026"
+  },
+  {
+    "NAME": "Mosegor Pizotifen tab",
+    "QTY ": 10,
+    "PRICE": 220,
+    "DATE": "3/27/2026"
+  },
+  {
+    "NAME": "Clanzas Aceclofenac capsules",
+    "QTY ": 4,
+    "PRICE": 110,
+    "DATE": "3/27/2026"
+  },
+  {
+    "NAME": "Flotac 75mg Diclofenac tab",
+    "QTY ": 3,
+    "PRICE": 230,
+    "DATE": "1/27/2026"
+  },
+  {
+    "NAME": "Doreta 37.5mg/325mg tab",
+    "QTY ": 11,
+    "PRICE": 200,
+    "DATE": "6/28/2026"
+  },
+  {
+    "NAME": "Naklofen Duo 75mg caps",
+    "QTY ": 5,
+    "PRICE": 170,
+    "DATE": "4/28/2026"
+  },
+  {
+    "NAME": "Cataflam",
+    "QTY ": 3,
+    "PRICE": 100,
+    "DATE": "7/27/2026"
+  },
+  {
+    "NAME": "Dormicum Midazolam tab",
+    "QTY ": 5,
+    "PRICE": 230,
+    "DATE": "7/27/2026"
+  },
+  {
+    "NAME": "Naprosyn EC( Naproxen) tab 500mg",
+    "QTY ": 13,
+    "PRICE": 120,
+    "DATE": "5/27/2026"
+  },
+  {
+    "NAME": "Nucleo CMP forte capsules",
+    "QTY ": 5,
+    "PRICE": 300,
+    "DATE": "3/27/2026"
+  },
+  {
+    "NAME": "Phlebodia 600mg",
+    "QTY ": 1,
+    "PRICE": 280,
+    "DATE": "3/30/2026"
+  },
+  {
+    "NAME": "Celebrex (Pfizer)",
+    "QTY ": 2,
+    "PRICE": 220,
+    "DATE": "12/27/2026"
+  },
+  {
+    "NAME": "Daflon 500mg tab",
+    "QTY ": 15,
+    "PRICE": 120,
+    "DATE": "4/29/2026"
+  },
+  {
+    "NAME": "Pregabalin 75mg(Vega) capsules",
+    "QTY ": 17,
+    "PRICE": 40,
+    "DATE": "6/28/2026"
+  },
+  {
+    "NAME": "Renuron Capsules",
+    "QTY ": 1,
+    "PRICE": 350,
+    "DATE": "3/27/2026"
+  },
+  {
+    "NAME": "Renerve plus capsules",
+    "QTY ": 2,
+    "PRICE": 300,
+    "DATE": "7/27/2026"
+  },
+  {
+    "NAME": "Lyrica Pregabalin 75mg(Pfizer)",
+    "QTY ": 2,
+    "PRICE": 350,
+    "DATE": "1/28/2026"
+  },
+  {
+    "NAME": "Exeter Pregabalin capsules",
+    "QTY ": 1,
+    "PRICE": 120,
+    "DATE": "2/28/2026"
+  },
+  {
+    "NAME": "Exeter Celecoxib 200mg",
+    "QTY ": 4,
+    "PRICE": 75,
+    "DATE": "10/28/2026"
+  },
+  {
+    "NAME": "Celecoxib 200mg(Vega)",
+    "QTY ": 8,
+    "PRICE": 35,
+    "DATE": "6/28/2026"
+  },
+  {
+    "NAME": "Xarelto 10mg tab",
+    "QTY ": 2,
+    "PRICE": 300,
+    "DATE": "2/28/2026"
+  },
+  {
+    "NAME": "Xarelto 20mg tab  ",
+    "QTY ": 3,
+    "PRICE": 350,
+    "DATE": "5/28/2026"
+  },
+  {
+    "NAME": "Warfarin tab 5mg",
+    "QTY ": 2,
+    "PRICE": 100,
+    "DATE": "7/26/2026"
+  },
+  {
+    "NAME": "Cox B Celecoxib 200mg",
+    "QTY ": 15,
+    "PRICE": 50,
+    "DATE": "11/27/2026"
+  },
+  {
+    "NAME": "Lamivudine tab 150mg",
+    "QTY ": 3,
+    "PRICE": 300,
+    "DATE": "8/27/2026"
+  },
+  {
+    "NAME": "Tenofovir Disoproxil 300mg tab",
+    "QTY ": 2,
+    "PRICE": 250,
+    "DATE": "4/28/2026"
+  },
+  {
+    "NAME": "Anusol ointment",
+    "QTY ": 3,
+    "PRICE": 70,
+    "DATE": "11/26/2026"
+  },
+  {
+    "NAME": "Mosegor Pizotifen syrup",
+    "QTY ": 5,
+    "PRICE": 200,
+    "DATE": "10/27/2026"
+  },
+  {
+    "NAME": "Carvedilol 6.25mg tab",
+    "QTY ": 5,
+    "PRICE": 60,
+    "DATE": "2/27/2026"
+  },
+  {
+    "NAME": "Carvedilol 12.5mg tab",
+    "QTY ": 5,
+    "PRICE": 60,
+    "DATE": "3/27/2026"
+  },
+  {
+    "NAME": "Cafergot tab(Amdipharm)",
+    "QTY ": 162,
+    "PRICE": 15,
+    "DATE": "3/27/2026"
+  },
+  {
+    "NAME": "Speman tab(Himalaya)",
+    "QTY ": 6,
+    "PRICE": 150,
+    "DATE": "6/27/2026"
+  },
+  {
+    "NAME": "Evecare syrup 200ml(Himalaya)",
+    "QTY ": 8,
+    "PRICE": 200,
+    "DATE": "6/28/2026"
+  },
+  {
+    "NAME": "Bonnisan syrup(Himalaya)",
+    "QTY ": 2,
+    "PRICE": 70,
+    "DATE": "7/28/2026"
+  },
+  {
+    "NAME": "Pilex Tab(Himalaya)",
+    "QTY ": 2,
+    "PRICE": 70,
+    "DATE": "7/28/2026"
+  },
+  {
+    "NAME": "Cystone tab(Himalaya)",
+    "QTY ": 3,
+    "PRICE": 110,
+    "DATE": "11/27/2026"
+  },
+  {
+    "NAME": "Confido tab(Himalaya)",
+    "QTY ": 6,
+    "PRICE": 220,
+    "DATE": "6/28/2026"
+  },
+  {
+    "NAME": "Mentat tab(Himalaya)",
+    "QTY ": 1,
+    "PRICE": 100,
+    "DATE": "2/27/2026"
+  },
+  {
+    "NAME": "septilin tab9himalaya)",
+    "QTY ": 2,
+    "PRICE": 120,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "NO 10 LIVER SALT",
+    "QTY ": 150,
+    "PRICE": 2.5,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "RAPINOL",
+    "QTY ": 600,
+    "PRICE": 3,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "CITRO C",
+    "QTY ": 125,
+    "PRICE": 5,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "MAGACID TAB",
+    "QTY ": 150,
+    "PRICE": 5,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "MARTINS LIVER SALT",
+    "QTY ": 50,
+    "PRICE": 2.5,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "DOWNWELL TAB",
+    "QTY ": 150,
+    "PRICE": 2,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "PELADOL EXTRA",
+    "QTY ": 807,
+    "PRICE": 5,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "ZULU PLUS",
+    "QTY ": 16,
+    "PRICE": 20,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "ZULU-100",
+    "QTY ": 74,
+    "PRICE": 10,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "DIPEX",
+    "QTY ": 23,
+    "PRICE": 5,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "FENBASE EXTRA",
+    "QTY ": 34,
+    "PRICE": 10,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "DICLOFENAC TAB 50 MG",
+    "QTY ": 86,
+    "PRICE": 10,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "NURODOL EXTRA",
+    "QTY ": 81,
+    "PRICE": 20,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "NURODOL FORTE",
+    "QTY ": 53,
+    "PRICE": 20,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "NURODOL",
+    "QTY ": 130,
+    "PRICE": 20,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "FAMA -CAP",
+    "QTY ": 13,
+    "PRICE": 10,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "TABUCAP",
+    "QTY ": 15,
+    "PRICE": 10,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "GEBEDOL",
+    "QTY ": 180,
+    "PRICE": 5,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": " GEBEDOL EXTRA",
+    "QTY ": 37,
+    "PRICE": 15,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "GEBEDOL PLUS",
+    "QTY ": 35,
+    "PRICE": 10,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "POFINAC",
+    "QTY ": 17,
+    "PRICE": 15,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "ROXIDOL",
+    "QTY ": 17,
+    "PRICE": 15,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "RONAXICAM 20 MG",
+    "QTY ": 86,
+    "PRICE": 10,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "PARAFENAC",
+    "QTY ": 54,
+    "PRICE": 10,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "PIROXILEX",
+    "QTY ": 46,
+    "PRICE": 10,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "TRADICLO-P",
+    "QTY ": 20,
+    "PRICE": 10,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "FIRST CALL PLASTER",
+    "QTY ": 498,
+    "PRICE": 1,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "ABYCAP",
+    "QTY ": 43,
+    "PRICE": 10,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "PICRON FORTE",
+    "QTY ": 50,
+    "PRICE": 10,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "PELODOL EXTRA FORTE",
+    "QTY ": 30,
+    "PRICE": 10,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "PELADOL EXTRA FIZZI-D",
+    "QTY ": 11,
+    "PRICE": 15,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "PAINGAY",
+    "QTY ": 13,
+    "PRICE": 10,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "DICLOFENAC TAB 100 MG",
+    "QTY ": 41,
+    "PRICE": 10,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "DICLOLEX  TAB 50 MG",
+    "QTY ": 9,
+    "PRICE": 10,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "LETACAM 20 MG",
+    "QTY ": 210,
+    "PRICE": 3,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "POCUMOL EXTRA",
+    "QTY ": 28,
+    "PRICE": 15,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "RONFIT FORTE",
+    "QTY ": 16,
+    "PRICE": 5,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "RONFIT MAX",
+    "QTY ": 8,
+    "PRICE": 10,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "TAVANIC INFUSION 500MG",
+    "QTY ": 3,
+    "PRICE": 450,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "METRONIDAZOLE INFUSION 100ML",
+    "QTY ": 40,
+    "PRICE": 10,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "CIPROFLOXACIN INFUSION 200MG",
+    "QTY ": 9,
+    "PRICE": 40,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "TROGE PARACETAMOL INFUSION 10MG",
+    "QTY ": 7,
+    "PRICE": 40,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "BROADPAN PARACETAMOL INFUSION",
+    "QTY ": 2,
+    "PRICE": 40,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "NORMAL SALINE INFUSION",
+    "QTY ": 12,
+    "PRICE": 25,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "RINGERS LACTATE INFUSION 500ML",
+    "QTY ": 19,
+    "PRICE": 25,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "GLUCOSE 5% INFUSION 500ML",
+    "QTY ": 10,
+    "PRICE": 25,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "DEXTROSE 5% NORMAL SALINE",
+    "QTY ": 16,
+    "PRICE": 25,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "MOSQUITO NET",
+    "QTY ": 5,
+    "PRICE": 80,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "MATERNITY PAD",
+    "QTY ": 5,
+    "PRICE": 40,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "PERMETHRIN CREAM 5% W/W",
+    "QTY ": 5,
+    "PRICE": 100,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "PERMETHRIN CREAM 5% W/W MORNING SIDE",
+    "QTY ": 2,
+    "PRICE": 240,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "APHASULF 30G",
+    "QTY ": 5,
+    "PRICE": 20,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "HYDROCORTISONE CREAM PINEWOOD",
+    "QTY ": 1,
+    "PRICE": 130,
+    "DATE": "1/1/2030"
+  },
+  {
+    "NAME": "HYDROCORTISONE CREAM SOVEREIGN",
+    "QTY ": 3,
+    "PRICE": 50,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "AMIDERM CREAM",
+    "QTY ": 20,
+    "PRICE": 20,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "ABYDERMCREAM",
+    "QTY ": 12,
+    "PRICE": 20,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "MILZOL PLUS",
+    "QTY ": 2,
+    "PRICE": 20,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "ESKYZOLE CREAM",
+    "QTY ": 13,
+    "PRICE": 20,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "NOVOLINDA FACIAL SERUM",
+    "QTY ": 5,
+    "PRICE": 120,
+    "DATE": "11/1/2028"
+  },
+  {
+    "NAME": "BONJELA ADULT",
+    "QTY ": 4,
+    "PRICE": 150,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "BONJELA CHILDREN",
+    "QTY ": 2,
+    "PRICE": 150,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "FUNBACT-A ",
+    "QTY ": 22,
+    "PRICE": 20,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "DERMIRON-PLUS",
+    "QTY ": 18,
+    "PRICE": 30,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "LEXSPORN OINTEMENT",
+    "QTY ": 3,
+    "PRICE": 70,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "MUPIROCIN CREAM",
+    "QTY ": 6,
+    "PRICE": 75,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "CANDIDERM CREAM",
+    "QTY ": 12,
+    "PRICE": 45,
+    "DATE": "2/27/2026"
+  },
+  {
+    "NAME": "NECLOBET 3 CREAM",
+    "QTY ": 40,
+    "PRICE": 30,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "MYCOLEX CREAM",
+    "QTY ": 3,
+    "PRICE": 50,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "MYCOLEX 3 CREAM",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "CLOBET CREAM ",
+    "QTY ": 8,
+    "PRICE": 20,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "SURFAZ-SN CREAM ",
+    "QTY ": 8,
+    "PRICE": 40,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "PENICILLIN OINTMENT",
+    "QTY ": 4,
+    "PRICE": 20,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "ACLOVIR CREAM",
+    "QTY ": 9,
+    "PRICE": 50,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "BACTROBAN MUPIROSIN",
+    "QTY ": 16,
+    "PRICE": 150,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "KETAZOL CREAM SHALINA",
+    "QTY ": 5,
+    "PRICE": 35,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "KETOCONAZOLE CREAM",
+    "QTY ": 10,
+    "PRICE": 20,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "NIZOROL KETOCONAZOLE",
+    "QTY ": 4,
+    "PRICE": 80,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "TERBINAFINE CREAM",
+    "QTY ": 6,
+    "PRICE": 150,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "S-ZIFASIL CREAM",
+    "QTY ": 3,
+    "PRICE": 50,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "DEMACOT CREAM",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "MYCOCORT",
+    "QTY ": 17,
+    "PRICE": 70,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "RONBACT-F",
+    "QTY ": 23,
+    "PRICE": 20,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "EPIDERM CREAM",
+    "QTY ": 11,
+    "PRICE": 20,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "LIDOCAINE GEL BP",
+    "QTY ": 18,
+    "PRICE": 50,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "TRETINON CREAM",
+    "QTY ": 7,
+    "PRICE": 100,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "SKINZ SHAVING CREAM",
+    "QTY ": 3,
+    "PRICE": 65,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "CYPRODINE SYRUP 200ML",
+    "QTY ": 35,
+    "PRICE": 140,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "LUFART DS TAB",
+    "QTY ": 161,
+    "PRICE": 35,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "LONART DS TAB",
+    "QTY ": 23,
+    "PRICE": 45,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "COARTEM 80/480",
+    "QTY ": 9,
+    "PRICE": 130,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "MALAR-2 FORTE TAB",
+    "QTY ": 8,
+    "PRICE": 35,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "ASNAC-SR 75 ",
+    "QTY ": 92,
+    "PRICE": 25,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "GLODIUM",
+    "QTY ": 110,
+    "PRICE": 10,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "LETADIUM",
+    "QTY ": 100,
+    "PRICE": 5,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "ORS",
+    "QTY ": 125,
+    "PRICE": 5,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "P-ALAXIN 120/960",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "ARFAN 20/120",
+    "QTY ": 44,
+    "PRICE": 15,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "MALARONE 250MG",
+    "QTY ": 2,
+    "PRICE": 1000,
+    "DATE": "11/1/2029"
+  },
+  {
+    "NAME": "TRAFAN",
+    "QTY ": 25,
+    "PRICE": 7,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "DINAC-100",
+    "QTY ": 148,
+    "PRICE": 10,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "RONAK HERBAL INHALER",
+    "QTY ": 70,
+    "PRICE": 10,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "LUEX INHALER",
+    "QTY ": 8,
+    "PRICE": 15,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "RIDCOLD TAB",
+    "QTY ": 57,
+    "PRICE": 15,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "BEECHAMS",
+    "QTY ": 2,
+    "PRICE": 170,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "ACTIFED TAB",
+    "QTY ": 6,
+    "PRICE": 200,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "DAY AND NIGHT COLD&FLU",
+    "QTY ": 8,
+    "PRICE": 120,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "COLDRILIF TAB",
+    "QTY ": 65,
+    "PRICE": 10,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "ZUDREX",
+    "QTY ": 3,
+    "PRICE": 20,
+    "DATE": "8/1/2029"
+  },
+  {
+    "NAME": "COLDRID FLU TAB",
+    "QTY ": 317,
+    "PRICE": 3,
+    "DATE": "3/1/2029"
+  },
+  {
+    "NAME": "PROCOLD FLU TAB",
+    "QTY ": 83,
+    "PRICE": 15,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "FAMACOLD TAB",
+    "QTY ": 235,
+    "PRICE": 3,
+    "DATE": "12/1/2029"
+  },
+  {
+    "NAME": "FLUREST COLD TAB",
+    "QTY ": 51,
+    "PRICE": 60,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "FLUCOR DAY",
+    "QTY ": 2,
+    "PRICE": 80,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "MIXTAB FLU TAB",
+    "QTY ": 149,
+    "PRICE": 3,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "ZUBES LOZENGES",
+    "QTY ": 300,
+    "PRICE": 5,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "POLYFER SYRUP SMALL",
+    "QTY ": 9,
+    "PRICE": 10,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "HEPTOLIF SYRUP SMALL",
+    "QTY ": 8,
+    "PRICE": 10,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "BEXTRIZIN CETIRIZINE TAB",
+    "QTY ": 268,
+    "PRICE": 10,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "LERZIN TAB CETIRIZINE ",
+    "QTY ": 70,
+    "PRICE": 3,
+    "DATE": "9/1/2029"
+  },
+  {
+    "NAME": "KOFOF BABY SYRUP 100ML",
+    "QTY ": 20,
+    "PRICE": 30,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "CANPED ADULT DIAPERS MEDIUM",
+    "QTY ": 2,
+    "PRICE": 150,
+    "DATE": "10/1/2029"
+  },
+  {
+    "NAME": "CANPED ADULT DIAPERS LARGE B/S",
+    "QTY ": 2,
+    "PRICE": 250,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "CANPED ADULT DIAPERS LARGE S/S",
+    "QTY ": 2,
+    "PRICE": 170,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "PUREFIT ADULT DIAPERS L/S",
+    "QTY ": 1,
+    "PRICE": 120,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "FLORA KIDS DIAPERS ",
+    "QTY ": 1,
+    "PRICE": 100,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "CUETTIC DIAPER KID",
+    "QTY ": 3,
+    "PRICE": 55,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "SOFT CARE BABY DIAPERS SMALL L/S",
+    "QTY ": 2,
+    "PRICE": 100,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "SOFT CARE BABY DIAPERS S/S",
+    "QTY ": 1,
+    "PRICE": 45,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "SOFT CARE BABY DIAPERS M/M",
+    "QTY ": 2,
+    "PRICE": 75,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "SOFT CARE BABY DIAPER MEDIUM L/S",
+    "QTY ": 2,
+    "PRICE": 100,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "BELAVIT SYRUP",
+    "QTY ": 30,
+    "PRICE": 40,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "APETATRUST SYRUP",
+    "QTY ": 4,
+    "PRICE": 40,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "CYPEP FORTE 200ML",
+    "QTY ": 15,
+    "PRICE": 40,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "PHOPAIN SYRUP",
+    "QTY ": 60,
+    "PRICE": 35,
+    "DATE": "2/1/2029"
+  },
+  {
+    "NAME": "DYNEWELL SYRUP",
+    "QTY ": 9,
+    "PRICE": 10,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "CONGESTYL SYRUP",
+    "QTY ": 18,
+    "PRICE": 40,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "SALO COLD",
+    "QTY ": 4,
+    "PRICE": 30,
+    "DATE": "2/1/2029"
+  },
+  {
+    "NAME": "RIDCOLD SYRUP",
+    "QTY ": 18,
+    "PRICE": 30,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "HAEMOGLOBIN SYRUP LETAP",
+    "QTY ": 44,
+    "PRICE": 10,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "TEEDAR SYRUP",
+    "QTY ": 30,
+    "PRICE": 25,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "CAFALGIN JUNIOR SYRUP 100ML",
+    "QTY ": 8,
+    "PRICE": 25,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "COLDRILIF SYRUP 60 ML",
+    "QTY ": 13,
+    "PRICE": 30,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "EFPAC JUNIOR",
+    "QTY ": 3,
+    "PRICE": 30,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "FAMACOLD SYRUP",
+    "QTY ": 23,
+    "PRICE": 30,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "COLDRID SYRUP",
+    "QTY ": 58,
+    "PRICE": 30,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "PARACETAMOL ELIXIR SYRUP",
+    "QTY ": 50,
+    "PRICE": 20,
+    "DATE": "11/1/2028"
+  },
+  {
+    "NAME": "RIDDLES PARACETAMOL SYRUP",
+    "QTY ": 59,
+    "PRICE": 30,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "LETAMOL PARACETAMOL SYRUP",
+    "QTY ": 27,
+    "PRICE": 10,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "KAFTONE PLUS",
+    "QTY ": 13,
+    "PRICE": 50,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "RIDDLES BABY COUGH SYRUP",
+    "QTY ": 56,
+    "PRICE": 25,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "LETALIN COUGH SYRUP",
+    "QTY ": 24,
+    "PRICE": 10,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "MALIN BABY COUGH SYRUP",
+    "QTY ": 15,
+    "PRICE": 30,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "MALIN JUNIOR COUGH SYRUP",
+    "QTY ": 18,
+    "PRICE": 30,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "MALIN ADULT COUGH SYRUP",
+    "QTY ": 11,
+    "PRICE": 30,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "RIDDLES COUGH SYRUP ADULT",
+    "QTY ": 56,
+    "PRICE": 35,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "VITAMIN C KAFNAM SYRUP",
+    "QTY ": 52,
+    "PRICE": 30,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "TOBCEE VITAMIN C SYRUP",
+    "QTY ": 15,
+    "PRICE": 30,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "IMMUNID VITAMIN C",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "CITRO-C SYRUP",
+    "QTY ": 10,
+    "PRICE": 30,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "ECL VITAMIN B COMPLEX SYRUP",
+    "QTY ": 24,
+    "PRICE": 25,
+    "DATE": "1/28/2026"
+  },
+  {
+    "NAME": "REEDY VITAMIN C SYRUP",
+    "QTY ": 16,
+    "PRICE": 50,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "BELLS MULTIVATAMIN SYRUP",
+    "QTY ": 11,
+    "PRICE": 95,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "ECL MULTIVATIMIN SYRUP",
+    "QTY ": 11,
+    "PRICE": 30,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "MGP HAEMOGLOBIN",
+    "QTY ": 4,
+    "PRICE": 20,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "BIOGLOBIN SYRUP",
+    "QTY ": 8,
+    "PRICE": 50,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "GLO POWER MULTIVITAMIN SYRUP",
+    "QTY ": 3,
+    "PRICE": 30,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "ACYPRON PLUS SYRUP",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "HEPTOLIP SYRUP B/S",
+    "QTY ": 7,
+    "PRICE": 35,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "AYRTON HAEMOGLOBIN SYRUP",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "TRUSTMIN SYRUP",
+    "QTY ": 30,
+    "PRICE": 50,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "GUDAPET SYRUP",
+    "QTY ": 10,
+    "PRICE": 30,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "KAPIDYNE SYRUP",
+    "QTY ": 27,
+    "PRICE": 40,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "ABYVITA SYRUP ",
+    "QTY ": 3,
+    "PRICE": 35,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "MAJOR LIVEPLEX SYRUP",
+    "QTY ": 10,
+    "PRICE": 50,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "ODYMIN SYRUP 200ML",
+    "QTY ": 6,
+    "PRICE": 35,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "NEXCOFER BLOOD TONIC ",
+    "QTY ": 9,
+    "PRICE": 40,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "LEENA SYRUP",
+    "QTY ": 11,
+    "PRICE": 40,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "AMINO PEP FORTE MULTIVAMIN ",
+    "QTY ": 6,
+    "PRICE": 60,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "SUPER VITONE BLOOD TONIC",
+    "QTY ": 1,
+    "PRICE": 40,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "MB-FORTE BLOOD TONIC ",
+    "QTY ": 8,
+    "PRICE": 40,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "CIROTAMIN SYRUP",
+    "QTY ": 9,
+    "PRICE": 35,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "ASTYFER BLOOD TONIC",
+    "QTY ": 5,
+    "PRICE": 40,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "JOYCYP SYRUP",
+    "QTY ": 7,
+    "PRICE": 50,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "DUROL TONIC B/S",
+    "QTY ": 1,
+    "PRICE": 40,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "ZIPFERON BLOOD TONIC ",
+    "QTY ": 6,
+    "PRICE": 30,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "VIROL BLOOD TONIC",
+    "QTY ": 13,
+    "PRICE": 30,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "MUCOTIN ADULT",
+    "QTY ": 14,
+    "PRICE": 35,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "AMCOF ADULT COUGH SYRUP",
+    "QTY ": 7,
+    "PRICE": 30,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "STOPKOF ADULT SYRUP",
+    "QTY ": 15,
+    "PRICE": 30,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "MY BABY COUGH SYRUP",
+    "QTY ": 13,
+    "PRICE": 25,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "ROMEX COUGH SYRUP",
+    "QTY ": 4,
+    "PRICE": 30,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "MENTHOX COUGH SYRUP CHILDREN",
+    "QTY ": 10,
+    "PRICE": 20,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "KOFFEX JUNIOR SYRUP",
+    "QTY ": 11,
+    "PRICE": 20,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "MENTHOX COUGH SYRUP ADULT",
+    "QTY ": 10,
+    "PRICE": 25,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "HONEYKOF COUGH SYRUP",
+    "QTY ": 9,
+    "PRICE": 50,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "DEXALYN CHESTY COUGH SYRUP",
+    "QTY ": 17,
+    "PRICE": 30,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "POKAKOF SYRUP ADULT ",
+    "QTY ": 6,
+    "PRICE": 25,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "KOFOF ADULT COUGH SYRUP",
+    "QTY ": 7,
+    "PRICE": 30,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "LINCTUS COUGH SYRUP",
+    "QTY ": 10,
+    "PRICE": 30,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "KELCUF JUNIOR COUGH SYRUP",
+    "QTY ": 19,
+    "PRICE": 30,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "KELCUF BABY COUGH SYRUP",
+    "QTY ": 19,
+    "PRICE": 30,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "MUCOTIN CHILD COGH SYRUP",
+    "QTY ": 1,
+    "PRICE": 30,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "POFAKOF BABY COUGH SYRUP",
+    "QTY ": 11,
+    "PRICE": 20,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "KOFFEX ADULT COUGH SYRUP ",
+    "QTY ": 20,
+    "PRICE": 20,
+    "DATE": "7/1/2029"
+  },
+  {
+    "NAME": "GO COUGH ",
+    "QTY ": 5,
+    "PRICE": 25,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "ZUBES CHILDREN COUGH SYRUP",
+    "QTY ": 7,
+    "PRICE": 30,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "ZUBES ADULT EXPEXTORANT",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "ZUBES EXTRA STRONG ADULT",
+    "QTY ": 12,
+    "PRICE": 60,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "MUCULYN JUNIOR",
+    "QTY ": 14,
+    "PRICE": 20,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "MUCULYN ADULT",
+    "QTY ": 20,
+    "PRICE": 25,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "ABICOF COUGH SYRUP",
+    "QTY ": 4,
+    "PRICE": 40,
+    "DATE": "12/26/2026"
+  },
+  {
+    "NAME": "LIFETONE BLOOD TONIC SYRUP",
+    "QTY ": 23,
+    "PRICE": 35,
+    "DATE": "8/27/2026"
+  },
+  {
+    "NAME": "ABYCO SYRUP ",
+    "QTY ": 19,
+    "PRICE": 35,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "ABYTNE FORTE SYRUP",
+    "QTY ": 3,
+    "PRICE": 35,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "VIGORIX SYRUP ",
+    "QTY ": 8,
+    "PRICE": 35,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "BECOACTIN SYRUP",
+    "QTY ": 7,
+    "PRICE": 30,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "TRES-ORIX SMALL",
+    "QTY ": 5,
+    "PRICE": 35,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "TRES-ORIX BIG",
+    "QTY ": 6,
+    "PRICE": 65,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "DUROL SMALL",
+    "QTY ": 3,
+    "PRICE": 25,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "BONAPLEX SYROP",
+    "QTY ": 9,
+    "PRICE": 70,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "NESPRODINE SYRUP",
+    "QTY ": 6,
+    "PRICE": 40,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "FOLIVITE SYRUP",
+    "QTY ": 9,
+    "PRICE": 50,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "CITY BLOOD TONIC",
+    "QTY ": 5,
+    "PRICE": 40,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "POLYFER SYRUP BIG",
+    "QTY ": 7,
+    "PRICE": 30,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "FERROLIFE BLOOD TONIC ",
+    "QTY ": 26,
+    "PRICE": 40,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "APTIZOOOM",
+    "QTY ": 7,
+    "PRICE": 75,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "BABYVITE SYRUP",
+    "QTY ": 19,
+    "PRICE": 25,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "VITAKIDS SYRUP",
+    "QTY ": 3,
+    "PRICE": 70,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "BABYVITE TONIC B/S",
+    "QTY ": 9,
+    "PRICE": 50,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "KIDDYVITE SYRUP",
+    "QTY ": 7,
+    "PRICE": 45,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "CHERRIPEP SYRUP",
+    "QTY ": 4,
+    "PRICE": 70,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "HALIBORANGE MULTIVITAMIN SYRUP",
+    "QTY ": 4,
+    "PRICE": 150,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "HALIBORANGE MULTIVITAMIN & OMEGA 3 GUMMIES",
+    "QTY ": 3,
+    "PRICE": 150,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "JARIFAN-2 DROPS",
+    "QTY ": 9,
+    "PRICE": 40,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "FERROFANT MULTIVITAMIN DROPS",
+    "QTY ": 7,
+    "PRICE": 60,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "ZINCOVIT MULTIVITAMIN DROPS",
+    "QTY ": 4,
+    "PRICE": 40,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "TINY-VITE MULTIVITAMIN DROPS ",
+    "QTY ": 4,
+    "PRICE": 100,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "ICHGLOBIN-12 SYRUP",
+    "QTY ": 15,
+    "PRICE": 80,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "BABYVITE DROPS",
+    "QTY ": 13,
+    "PRICE": 40,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "JOYFER SYRUP",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "7/27/2026"
+  },
+  {
+    "NAME": "HAEMATOVITE SYRUP",
+    "QTY ": 5,
+    "PRICE": 30,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "MAYFER SYRUP ",
+    "QTY ": 9,
+    "PRICE": 30,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "FOLIGROW TONIC SYRUP",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "DEXORANGE PLUS SYRUP",
+    "QTY ": 5,
+    "PRICE": 60,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "ASTYMIN SYRUP",
+    "QTY ": 5,
+    "PRICE": 60,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "FERROLEX SYRUP",
+    "QTY ": 3,
+    "PRICE": 70,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "VITAFORCE SYRUP",
+    "QTY ": 5,
+    "PRICE": 75,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "CALCIUM B12 SUSPENSION",
+    "QTY ": 10,
+    "PRICE": 20,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "NESTERIX FORTE",
+    "QTY ": 7,
+    "PRICE": 40,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "JARIFAN-2 B/S",
+    "QTY ": 7,
+    "PRICE": 40,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "MINAROLMULTIVITAMIN SYRUP",
+    "QTY ": 13,
+    "PRICE": 30,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "BELLA COUGH SYRUP",
+    "QTY ": 16,
+    "PRICE": 30,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "SAMALIN COUGH SYRUP ADULT",
+    "QTY ": 11,
+    "PRICE": 30,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "SAMALIN COUGH SYRUP ADULT NON DROWSY",
+    "QTY ": 22,
+    "PRICE": 30,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "SAMALIN JUNIOR COUGH SYRUP",
+    "QTY ": 15,
+    "PRICE": 20,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "STOPKOF CHILD SYRUP",
+    "QTY ": 12,
+    "PRICE": 20,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "SAMALIN JUNIOR COUGH SYRUP NON DROWSY",
+    "QTY ": 15,
+    "PRICE": 25,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "ECL BABY COUGH LINCTUS",
+    "QTY ": 37,
+    "PRICE": 25,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "KELCUF ADULT COUGH SYRUP",
+    "QTY ": 20,
+    "PRICE": 30,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": " LINCTUS JUNIOR NON DROWSY",
+    "QTY ": 17,
+    "PRICE": 30,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "TRA-QUININE SYRUP",
+    "QTY ": 59,
+    "PRICE": 30,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "LUFART SUSPENSION",
+    "QTY ": 8,
+    "PRICE": 30,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "RIDDLES JUNIOR COUGH SYRUP",
+    "QTY ": 60,
+    "PRICE": 30,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "QUININE SYRUP",
+    "QTY ": 9,
+    "PRICE": 20,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "LUMETRUST SUSPENSION",
+    "QTY ": 20,
+    "PRICE": 35,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "LUMETTRUST FORTE TAB",
+    "QTY ": 60,
+    "PRICE": 40,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "LONART SUSPENSION",
+    "QTY ": 8,
+    "PRICE": 35,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "MALAR-2 SUSPENSION",
+    "QTY ": 6,
+    "PRICE": 30,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "MACRAFOLIN FOLIC ACID SYRUP",
+    "QTY ": 3,
+    "PRICE": 30,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "ZINOL SUSPENSION",
+    "QTY ": 5,
+    "PRICE": 30,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "ENAFEN SUSPENSION",
+    "QTY ": 8,
+    "PRICE": 30,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "TEETHING SYRUP ERNEST",
+    "QTY ": 5,
+    "PRICE": 30,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "ESSENTIAL CALCIUM TAB 500MG",
+    "QTY ": 369,
+    "PRICE": 3.7,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "OSTEOCARE LIQUID",
+    "QTY ": 5,
+    "PRICE": 150,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "PARACETAMOL SUSPENSION PINEWOOD",
+    "QTY ": 10,
+    "PRICE": 66,
+    "DATE": "2/1/2030"
+  },
+  {
+    "NAME": "AUNTIE MARY'S GRIPE MIXTURE",
+    "QTY ": 22,
+    "PRICE": 30,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "CALPOL PARACETAMOL SUSPENSION",
+    "QTY ": 3,
+    "PRICE": 100,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "IBUPROFEN PINEWOOD SUSPENSION",
+    "QTY ": 11,
+    "PRICE": 100,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "8 HOUR FEVER COLD SYRUP",
+    "QTY ": 2,
+    "PRICE": 100,
+    "DATE": "2/1/2030"
+  },
+  {
+    "NAME": "INFACOL SIMETICONE SYRUP",
+    "QTY ": 4,
+    "PRICE": 160,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "GALPHARM IBUPROFEN SUSPENSION",
+    "QTY ": 1,
+    "PRICE": 80,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "VEGA IBUPROFEN SUSPENSION",
+    "QTY ": 2,
+    "PRICE": 60,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "CALPROFEN IBUPROFEN SUSPENSION",
+    "QTY ": 4,
+    "PRICE": 100,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "RESCOFER BLOOD TONIC",
+    "QTY ": 2,
+    "PRICE": 60,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "AYRTONS COD LIVER OIL SYRUP",
+    "QTY ": 4,
+    "PRICE": 170,
+    "DATE": "4/1/2030"
+  },
+  {
+    "NAME": "MINAMINO SYRUP",
+    "QTY ": 5,
+    "PRICE": 140,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "ORLISTAT  120MG CAPSULES",
+    "QTY ": 60,
+    "PRICE": 10,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "FEROGLOBIN SYRUP S/S",
+    "QTY ": 2,
+    "PRICE": 120,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "FEROGLOBIN SYRUP PLUS",
+    "QTY ": 4,
+    "PRICE": 240,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "FEROGLOBIN SYRUP B/S",
+    "QTY ": 3,
+    "PRICE": 350,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "ZINCOFER SYRUP",
+    "QTY ": 5,
+    "PRICE": 70,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "ZINCOVIT SYRUP",
+    "QTY ": 2,
+    "PRICE": 60,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "TEETHING POWDER",
+    "QTY ": 83,
+    "PRICE": 7,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "VITANE MULTIVITAMIN DROPS",
+    "QTY ": 5,
+    "PRICE": 170,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "ZENTOKID DROPS",
+    "QTY ": 2,
+    "PRICE": 120,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "HALIBORANGE OMEGA 3 SYRUP",
+    "QTY ": 4,
+    "PRICE": 250,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "ABIDEC MULTIVITAMIN SYRUP",
+    "QTY ": 4,
+    "PRICE": 160,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "WELLKID MULTIVITAMIN SYRUP",
+    "QTY ": 2,
+    "PRICE": 180,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "WELLBABY MULTI VITAMIN DROPS",
+    "QTY ": 8,
+    "PRICE": 230,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "KIDDYVITE MULTIVITAMIN DROPS ",
+    "QTY ": 5,
+    "PRICE": 45,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "WELLBABBY MULTIVITAMIN SYRUP",
+    "QTY ": 3,
+    "PRICE": 240,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "ZENTOKID SYRUP",
+    "QTY ": 2,
+    "PRICE": 120,
+    "DATE": "9/27/2026"
+  },
+  {
+    "NAME": "SIX. AM",
+    "QTY ": 99,
+    "PRICE": 10,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "TRIHEPTA SYRUP",
+    "QTY ": 5,
+    "PRICE": 40,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "CYFEN SYRUP",
+    "QTY ": 11,
+    "PRICE": 40,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "APETAMIN SYRUP",
+    "QTY ": 7,
+    "PRICE": 60,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "VITA APETI SYRUP",
+    "QTY ": 11,
+    "PRICE": 40,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "HEPTOPEP SYRUP",
+    "QTY ": 9,
+    "PRICE": 55,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "ODYYNE CAPSULES",
+    "QTY ": 5,
+    "PRICE": 80,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "ODYYNE SYRUP",
+    "QTY ": 7,
+    "PRICE": 80,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "LEENA CAPSULE",
+    "QTY ": 41,
+    "PRICE": 12,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "ABYTONE CAPSULES",
+    "QTY ": 72,
+    "PRICE": 10,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "ZINCOMIN-F CAPSULES",
+    "QTY ": 21,
+    "PRICE": 20,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "VITARONAMIN CAPSULES",
+    "QTY ": 15,
+    "PRICE": 10,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "BECOOCTIN TAB",
+    "QTY ": 10,
+    "PRICE": 40,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "GLO POWER CAPSULES",
+    "QTY ": 12,
+    "PRICE": 30,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "HAEMATOVITE CAPSULES",
+    "QTY ": 27,
+    "PRICE": 10,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "POLYFER CAPSULES",
+    "QTY ": 12,
+    "PRICE": 10,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "SOFTHEALTH COD LIVER OIL CAPSULES",
+    "QTY ": 36,
+    "PRICE": 10,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "VIGORIX FORTE CAPSULES",
+    "QTY ": 9,
+    "PRICE": 10,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "NEXCOFER CAPSULES",
+    "QTY ": 45,
+    "PRICE": 10,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "ABYVITA CAPSULES",
+    "QTY ": 31,
+    "PRICE": 7,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "FOLIGROW CAPSULES",
+    "QTY ": 52,
+    "PRICE": 25,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "GYPRONE PLUS ",
+    "QTY ": 39,
+    "PRICE": 10,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "ACYPRON PLUS",
+    "QTY ": 18,
+    "PRICE": 17,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "ABYTONE FORTE CAPSULES",
+    "QTY ": 60,
+    "PRICE": 7,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "D & E LUBRICANT",
+    "QTY ": 6,
+    "PRICE": 75,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "COKELIFE LUBRICANT",
+    "QTY ": 20,
+    "PRICE": 80,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "K Y GEL LUBRICANT",
+    "QTY ": 7,
+    "PRICE": 150,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "K -NECT LUBRICANT",
+    "QTY ": 2,
+    "PRICE": 200,
+    "DATE": "5/1/2026"
+  },
+  {
+    "NAME": "VITATOL MULTIVITAMIN TAB",
+    "QTY ": 8,
+    "PRICE": 50,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "GINKGO BILOBA CAPSULES",
+    "QTY ": 6,
+    "PRICE": 150,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "VITAMIN B CO STRONG",
+    "QTY ": 8,
+    "PRICE": 50,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "OMEGA 3 FISH OIL ZANZE",
+    "QTY ": 6,
+    "PRICE": 80,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "VALUPAK VITAMIN E CAPSULES",
+    "QTY ": 5,
+    "PRICE": 85,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "HAEMODEN CAPSULES",
+    "QTY ": 14,
+    "PRICE": 150,
+    "DATE": "10/27/2026"
+  },
+  {
+    "NAME": "VALUMAN CAPSULES",
+    "QTY ": 8,
+    "PRICE": 200,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "PROMAN CAPSULES ",
+    "QTY ": 2,
+    "PRICE": 170,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "NEUROMIND TAB",
+    "QTY ": 2,
+    "PRICE": 300,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "VALUWOMAN TCAPSULES ",
+    "QTY ": 4,
+    "PRICE": 200,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "VALUVITE PREGNATIVE TAB",
+    "QTY ": 5,
+    "PRICE": 250,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "PREGNACARE PLUS TAB",
+    "QTY ": 3,
+    "PRICE": 320,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "PREGNACARE B4 CONCEPTION",
+    "QTY ": 2,
+    "PRICE": 200,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "PREGNACARE MAX TAB",
+    "QTY ": 3,
+    "PRICE": 500,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "PREGNACARE ORIGINAL",
+    "QTY ": 3,
+    "PRICE": 170,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "PREGNACARE BREASTFEEDING",
+    "QTY ": 4,
+    "PRICE": 350,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "PREGNACARE NEW MUM",
+    "QTY ": 5,
+    "PRICE": 350,
+    "DATE": "10/27/2026"
+  },
+  {
+    "NAME": "WELLMAN ORIGINAL TAB",
+    "QTY ": 4,
+    "PRICE": 210,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "FITMAN MULTIVITAMIN TAB",
+    "QTY ": 3,
+    "PRICE": 180,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "WELLMAN PLUS TAB",
+    "QTY ": 7,
+    "PRICE": 350,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "WELLMAN MAX TAB ",
+    "QTY ": 3,
+    "PRICE": 450,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "PROMAN 50+ CAPSULES ",
+    "QTY ": 1,
+    "PRICE": 200,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "STREPSILS",
+    "QTY ": 30,
+    "PRICE": 120,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "FISHERMAN'S FRIEND",
+    "QTY ": 18,
+    "PRICE": 30,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "DURAMAX",
+    "QTY ": 32,
+    "PRICE": 20,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "ZANZA VITAMIN E",
+    "QTY ": 5,
+    "PRICE": 100,
+    "DATE": "10/1/2025"
+  },
+  {
+    "NAME": "TOT'HEMA",
+    "QTY ": 15,
+    "PRICE": 80,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "TOTYLEM",
+    "QTY ": 15,
+    "PRICE": 67,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "FEROGLOBIN CAPSULES",
+    "QTY ": 15,
+    "PRICE": 150,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "PROWOMAN PLUS",
+    "QTY ": 5,
+    "PRICE": 280,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "VITABIOTICS PROBIOTICS EXTRA STRENGHT",
+    "QTY ": 3,
+    "PRICE": 750,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "VITABIOTICS PROBIOTIS LIFE CULTURES",
+    "QTY ": 2,
+    "PRICE": 550,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "DUROMINE 30",
+    "QTY ": 55,
+    "PRICE": 40,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "PERFECTIL ORIGINAL",
+    "QTY ": 4,
+    "PRICE": 200,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "BIO-Q10",
+    "QTY ": 3,
+    "PRICE": 320,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "PERFECTIL PLATIUM B/S",
+    "QTY ": 2,
+    "PRICE": 610,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "PERFECTIL PLATINUM S/S",
+    "QTY ": 5,
+    "PRICE": 450,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "PERFECTIL SKIN",
+    "QTY ": 2,
+    "PRICE": 390,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "PERFECTIL MAX",
+    "QTY ": 1,
+    "PRICE": 550,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "PERFECTIL PLATINUM COLLAGEN SKIN",
+    "QTY ": 1,
+    "PRICE": 1000,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "GLOW REX VITAMIN E BODY OIL",
+    "QTY ": 5,
+    "PRICE": 100,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "CLINDAX LOTION",
+    "QTY ": 4,
+    "PRICE": 100,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "LIBIDO BOOSTER (WOMAN)",
+    "QTY ": 3,
+    "PRICE": 200,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "VALUPAK EVENING PRIMROSE CAPSULES",
+    "QTY ": 4,
+    "PRICE": 80,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "APPLE CIDER VINEGAR GUMMIES",
+    "QTY ": 4,
+    "PRICE": 200,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "FLAT TUMMY GUMMIES",
+    "QTY ": 7,
+    "PRICE": 250,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "HALIBORANGE VITAMIN D3 ADULT GUMMIES",
+    "QTY ": 5,
+    "PRICE": 200,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "ICHPOWER CAPSULES",
+    "QTY ": 5,
+    "PRICE": 170,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "VALUVITE OMEGA 3 FISH OIL",
+    "QTY ": 8,
+    "PRICE": 200,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "ICHVITA WOMAN TAB",
+    "QTY ": 2,
+    "PRICE": 165,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "VALUVITE OSTEOLIFE",
+    "QTY ": 5,
+    "PRICE": 200,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "VALUVITE IMMULIFE",
+    "QTY ": 6,
+    "PRICE": 200,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "VALULIFE MENOCARE",
+    "QTY ": 5,
+    "PRICE": 200,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "VITAMIN  A 5000 I.E",
+    "QTY ": 3,
+    "PRICE": 370,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "VITAMIN D3 5000 I.E",
+    "QTY ": 1,
+    "PRICE": 350,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "VITAMIN D3 2000 I.E ",
+    "QTY ": 2,
+    "PRICE": 550,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "DUOZI MEN POWER MACA GUMMIES",
+    "QTY ": 3,
+    "PRICE": 250,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "MAN-UP ADVANCED CAPSULES",
+    "QTY ": 2,
+    "PRICE": 400,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "FREE FLEX CAPSULES",
+    "QTY ": 2,
+    "PRICE": 400,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "BIOFIN WITH COLLAGEN & KERATIN",
+    "QTY ": 3,
+    "PRICE": 250,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "HALIBORANGE BEAUTY COLLAGEN GUMMIES",
+    "QTY ": 4,
+    "PRICE": 250,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "NATURE'S BOUNTY GUMMIES",
+    "QTY ": 3,
+    "PRICE": 550,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "BOOTY CURVE MACA GUMMIES",
+    "QTY ": 4,
+    "PRICE": 250,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "WELLWOMAN GUMMIES",
+    "QTY ": 3,
+    "PRICE": 350,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "SUPER COLLAGEN TAB",
+    "QTY ": 2,
+    "PRICE": 350,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "CREATINEMONDYDRATE POWDER",
+    "QTY ": 3,
+    "PRICE": 1000,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "WHEY PROTEIN POWDER ",
+    "QTY ": 2,
+    "PRICE": 750,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "CYPRODINE CAPSULES",
+    "QTY ": 12,
+    "PRICE": 140,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "JET 2 INHALER",
+    "QTY ": 8,
+    "PRICE": 20,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "ENAT 400",
+    "QTY ": 5,
+    "PRICE": 160,
+    "DATE": "9/1/2030"
+  },
+  {
+    "NAME": "BENZATHINE INJECTION",
+    "QTY ": 47,
+    "PRICE": 25,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "ESKY PAN HYOSAINE INJECTION",
+    "QTY ": 28,
+    "PRICE": 20,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "GENTAMICIN INJECTION",
+    "QTY ": 83,
+    "PRICE": 10,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "ARTESUNATE 120MG INJECTION SKYTEM",
+    "QTY ": 4,
+    "PRICE": 60,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "VITAMIN B 12 INJECTION",
+    "QTY ": 49,
+    "PRICE": 10,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "PROMETHAZIN INJECTION",
+    "QTY ": 6,
+    "PRICE": 10,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "RABIES VACINE SURE RAB",
+    "QTY ": 18,
+    "PRICE": 180,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "DEPO PROVERA CONTRACEPTIVE INJECTION 150MG",
+    "QTY ": 8,
+    "PRICE": 45,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "CEFURMOON INJECTION 750",
+    "QTY ": 12,
+    "PRICE": 86,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "CORSKY INJECTION",
+    "QTY ": 10,
+    "PRICE": 20,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "SKYTEM 60 ARTESUNATE INJECTION",
+    "QTY ": 6,
+    "PRICE": 40,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "RONSUNATE 120 ARTESUNATE",
+    "QTY ": 2,
+    "PRICE": 60,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "METROCLOPRAMIDE 5MG INJECTION BP",
+    "QTY ": 19,
+    "PRICE": 40,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "METROCLOPRAMIDE 10MG/2ML INJECTION ",
+    "QTY ": 28,
+    "PRICE": 40,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "ARTENATE-30 ARTESUNATE INJECTION",
+    "QTY ": 1,
+    "PRICE": 35,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "LIDOCAINE INJECTION",
+    "QTY ": 10,
+    "PRICE": 40,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "ABNAYRAB RABIES VACINE",
+    "QTY ": 2,
+    "PRICE": 750,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "FRUMEDI FEROSEMIDE INJECTION",
+    "QTY ": 20,
+    "PRICE": 15,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "KENALOG INJECTION",
+    "QTY ": 2,
+    "PRICE": 150,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "ALBENDAZOLE 400MG",
+    "QTY ": 59,
+    "PRICE": 10,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "ABYMED-500",
+    "QTY ": 140,
+    "PRICE": 30,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "TRUST ZOLE SUSPENSION ",
+    "QTY ": 108,
+    "PRICE": 20,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "NISIWORM SUSPENSION",
+    "QTY ": 75,
+    "PRICE": 15,
+    "DATE": "5/1/2026"
+  },
+  {
+    "NAME": "NISIWORM 400 TAB",
+    "QTY ": 35,
+    "PRICE": 20,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "ROCEPHIN INJECTION (IG)",
+    "QTY ": 2,
+    "PRICE": 300,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "ROCEPHIN INJECTION (2G)",
+    "QTY ": 3,
+    "PRICE": 450,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "PROCAINE PENICILLIN INJECTION",
+    "QTY ": 34,
+    "PRICE": 15,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "CEFOTAXIME INJECTION (1G)",
+    "QTY ": 22,
+    "PRICE": 25,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "STREPTOMYCIN INJECTION (1G)",
+    "QTY ": 46,
+    "PRICE": 15,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "GVITHER FORTE INJ.(ARTHEMETER)",
+    "QTY ": 243,
+    "PRICE": 20,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "AMPICILLIN INJ.",
+    "QTY ": 34,
+    "PRICE": 10,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "TRAMADOL INJ.2ML",
+    "QTY ": 50,
+    "PRICE": 60,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "XYFUROX CEFUROXINE INJ.",
+    "QTY ": 23,
+    "PRICE": 25,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "MORPHINE SULFATE INJ.",
+    "QTY ": 6,
+    "PRICE": 50,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "ARAUCLAV 1200 AMOKSIKLAV INJ.",
+    "QTY ": 4,
+    "PRICE": 60,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "VITAMIN B (B-CO) INJ.",
+    "QTY ": 19,
+    "PRICE": 20,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "CLODOL DICLOFENAC INJ.",
+    "QTY ": 36,
+    "PRICE": 20,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "XONOSKY CEFTRIAXONE INJ.",
+    "QTY ": 12,
+    "PRICE": 25,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "KEFTRA 1GM CEFTRIAXONE",
+    "QTY ": 20,
+    "PRICE": 25,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "SKYCID OMEPRAZOLE INJ.",
+    "QTY ": 15,
+    "PRICE": 35,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "LAVICID OMEPRAZOLE INJ.",
+    "QTY ": 2,
+    "PRICE": 40,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "INNO-CEFBACTUM CEFTRIAXONE INJ.",
+    "QTY ": 1,
+    "PRICE": 35,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "ZYTOCIN OXYTOCIN INJ.",
+    "QTY ": 46,
+    "PRICE": 15,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "NEXUM ESOMEPRAZOLE INJ.",
+    "QTY ": 10,
+    "PRICE": 300,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "LIDOCAINE INJ.",
+    "QTY ": 2,
+    "PRICE": 40,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "TROGUE AMOKSICLAV INJ.",
+    "QTY ": 1,
+    "PRICE": 20,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "CLINDAMYCIN (300MG) INJ.",
+    "QTY ": 14,
+    "PRICE": 35,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "PETHIDINE INJ.",
+    "QTY ": 31,
+    "PRICE": 80,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "JARZEPAM DIAZEPAM INJ.",
+    "QTY ": 11,
+    "PRICE": 15,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "SKYTRAX TRANAXEMIC ACID INJ.",
+    "QTY ": 5,
+    "PRICE": 100,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "AMIKACIN SULFATE INJ.",
+    "QTY ": 5,
+    "PRICE": 80,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "EXAFLOX FLUCLOXACILIN INJ.",
+    "QTY ": 3,
+    "PRICE": 20,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "TRUST ZOLE TAB",
+    "QTY ": 36,
+    "PRICE": 15,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "ZINCORIT",
+    "QTY ": 2,
+    "PRICE": 35,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "VERMOX MEBENDAZOLE 500MG",
+    "QTY ": 18,
+    "PRICE": 30,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "TANZOL SUSPENSION",
+    "QTY ": 24,
+    "PRICE": 10,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "TANZOL TABLETS ",
+    "QTY ": 44,
+    "PRICE": 10,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "WORMPLEX 400",
+    "QTY ": 67,
+    "PRICE": 25,
+    "DATE": "2/1/2025"
+  },
+  {
+    "NAME": "FLUCLOXACILINE ",
+    "QTY ": 50,
+    "PRICE": 10,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "EPICROM 2%",
+    "QTY ": 5,
+    "PRICE": 80,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "NATURATE TEARS ALCON",
+    "QTY ": 8,
+    "PRICE": 100,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "BLUCIDEX EYE/EAR DROPS",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "TOBREX",
+    "QTY ": 9,
+    "PRICE": 100,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "TRAVATAN",
+    "QTY ": 4,
+    "PRICE": 230,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "SYSTANE EYE DROP",
+    "QTY ": 2,
+    "PRICE": 220,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "ABBVIE PRED FORTE",
+    "QTY ": 1,
+    "PRICE": 150,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "CHLORHYDRATE DE TETRACYCLINE 1%",
+    "QTY ": 5,
+    "PRICE": 20,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "VISIONACE ORIGINAL",
+    "QTY ": 2,
+    "PRICE": 200,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "DEXATROL ",
+    "QTY ": 9,
+    "PRICE": 65,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "EXETOMOL",
+    "QTY ": 12,
+    "PRICE": 35,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "ABBVIE REFRESH TEARS",
+    "QTY ": 6,
+    "PRICE": 200,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "VEGA LATANOPROST EYE DROP",
+    "QTY ": 5,
+    "PRICE": 180,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "EXETER LATANOPROST EYE DROP",
+    "QTY ": 5,
+    "PRICE": 150,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "EXETER OLOPATADINE",
+    "QTY ": 25,
+    "PRICE": 60,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "OLOPATT EYE DROPS",
+    "QTY ": 2,
+    "PRICE": 65,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "EYECOPEN",
+    "QTY ": 4,
+    "PRICE": 100,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "CEECUVITE CAPASULES",
+    "QTY ": 5,
+    "PRICE": 250,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "ZENTEL SUSPENSION",
+    "QTY ": 9,
+    "PRICE": 50,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "ZENTEL TABLETS",
+    "QTY ": 12,
+    "PRICE": 30,
+    "DATE": "5/1/2030"
+  },
+  {
+    "NAME": "EPHEDRINE 0.5% NASAL DROPS",
+    "QTY ": 34,
+    "PRICE": 20,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "KAFNUM EPHEDRINE NASAL DROPS",
+    "QTY ": 29,
+    "PRICE": 30,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "EXERIN NASAL DROPS CHILDREN",
+    "QTY ": 14,
+    "PRICE": 40,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "EXCLEAR SALINE NASAL DROPS",
+    "QTY ": 17,
+    "PRICE": 40,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "EXERIN NASAL DROPS ADULT",
+    "QTY ": 19,
+    "PRICE": 40,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "LAVINA SALINE NASAL DROPS ",
+    "QTY ": 17,
+    "PRICE": 20,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "MUOME NASAL SPRAY",
+    "QTY ": 5,
+    "PRICE": 100,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "ABSORBANT COTTON WOOL 200G",
+    "QTY ": 2,
+    "PRICE": 45,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "ABSORBANT COTTON WOOL 100G",
+    "QTY ": 2,
+    "PRICE": 20,
+    "DATE": "8/1/2030"
+  },
+  {
+    "NAME": "ABSORBANT COTTON WOOL 500G",
+    "QTY ": 1,
+    "PRICE": 80,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "PANADOL ADVANCE 500MG",
+    "QTY ": 30,
+    "PRICE": 80,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "PANADOL EXTRA",
+    "QTY ": 3,
+    "PRICE": 100,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "PARACETAMOL TABLET (CRESCENT)",
+    "QTY ": 145,
+    "PRICE": 10,
+    "DATE": "9/1/2029"
+  },
+  {
+    "NAME": "PANADOL EXTRA (HALEON)",
+    "QTY ": 10,
+    "PRICE": 75,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "PAREDENK SUPPOSITORY",
+    "QTY ": 10,
+    "PRICE": 45,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "PARAMED SUPPOSITORY 1 GM",
+    "QTY ": 22,
+    "PRICE": 25,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "PARAMED SUPPOSITORY 500MG",
+    "QTY ": 16,
+    "PRICE": 20,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "DULCOLAX ADULT TABLETS",
+    "QTY ": 11,
+    "PRICE": 60,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "DULCOLAX 12 PLUS SUPPOSITORY",
+    "QTY ": 10,
+    "PRICE": 90,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "DICLO-DENK 100 SUPPOSITORY",
+    "QTY ": 13,
+    "PRICE": 50,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "VODOM 10 DOMPERIDONE SUPPOSITORY",
+    "QTY ": 7,
+    "PRICE": 30,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "DOMI-30 DOMPERIDONE SUPPOSITORY",
+    "QTY ": 3,
+    "PRICE": 60,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "ENTRAMOL 125MG SUPPOSITORY",
+    "QTY ": 57,
+    "PRICE": 15,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "ENTRAMOL 250MG SUPPOSITORY",
+    "QTY ": 30,
+    "PRICE": 15,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "DICNAC-100 SUPPOSITORY",
+    "QTY ": 21,
+    "PRICE": 15,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "DEEP HEAT SPRAY",
+    "QTY ": 11,
+    "PRICE": 170,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "DEEP FREEZE SPRAY",
+    "QTY ": 8,
+    "PRICE": 150,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "DEXATROL EYE/EAR SUSPENSION",
+    "QTY ": 12,
+    "PRICE": 65,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "MAXITROL OINTMENT",
+    "QTY ": 10,
+    "PRICE": 90,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "OPTISOFT COOLIN EYE DROPS",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "OPTISOFT MOISTURIZING EYE DROPS",
+    "QTY ": 9,
+    "PRICE": 50,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "OPTISOFT REDINESS EYE DROPS",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "OPTISOFT LUBRICANTING & REWETTING EYE DROPS",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "SE'CLEAR EYE DROPS",
+    "QTY ": 23,
+    "PRICE": 40,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "ZINCOVIT",
+    "QTY ": 24,
+    "PRICE": 35,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "ACTILIFE ",
+    "QTY ": 12,
+    "PRICE": 50,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "DEEP FREE OINTMENT",
+    "QTY ": 6,
+    "PRICE": 150,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "DEEP HEAT B/S OINTMENT",
+    "QTY ": 5,
+    "PRICE": 120,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "DEEP HEAT S/S OINTMENT",
+    "QTY ": 3,
+    "PRICE": 150,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "NOSOL 0.05% INFANT",
+    "QTY ": 7,
+    "PRICE": 45,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "NOSOL ADULT",
+    "QTY ": 9,
+    "PRICE": 45,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "NEOVITA FORTIFIED CAPS",
+    "QTY ": 3,
+    "PRICE": 250,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "AVAMYS",
+    "QTY ": 6,
+    "PRICE": 350,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "SYNUX NASAL SPRAY",
+    "QTY ": 10,
+    "PRICE": 150,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "OTRIVIN NASAL DROPS CHILDREN",
+    "QTY ": 10,
+    "PRICE": 120,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "OTRIVIN NASAL DROPS ADULTS",
+    "QTY ": 10,
+    "PRICE": 120,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "OTRIVINE HALEON CHILD NASAL DROPS",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "OTRIVINE HALEON ADULTNASAL DROPS",
+    "QTY ": 3,
+    "PRICE": 50,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "CALPOL SALONE NASAL DROPS ",
+    "QTY ": 1,
+    "PRICE": 150,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "MAJOR NASAL DROPS",
+    "QTY ": 8,
+    "PRICE": 75,
+    "DATE": "8/1/2029"
+  },
+  {
+    "NAME": "ESSENTIAL FOLIC ACID ",
+    "QTY ": 21,
+    "PRICE": 75,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "VALUEPAK FOLIC ACID",
+    "QTY ": 6,
+    "PRICE": 40,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "NATURE MADE VITAMIN B/12 TAB",
+    "QTY ": 4,
+    "PRICE": 800,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "SLEEP 3 MELATONIN",
+    "QTY ": 3,
+    "PRICE": 100,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "SEVEN SEAS COD-LIVER OIL B/S CAPS",
+    "QTY ": 2,
+    "PRICE": 350,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "SEVEN SEAS COD-LIVER OIL S/S CAPS",
+    "QTY ": 3,
+    "PRICE": 190,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "ULTRA OMEGA 3.6.9",
+    "QTY ": 3,
+    "PRICE": 270,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "SEVEN SEAS JOINT CARE ESSENTIAL",
+    "QTY ": 4,
+    "PRICE": 250,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "EASY LIFE MULTIVITAMIN",
+    "QTY ": 18,
+    "PRICE": 60,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "EASYLIFE SOLUBLE VITAMIN C",
+    "QTY ": 8,
+    "PRICE": 60,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "VITAMIN C STORE",
+    "QTY ": 7,
+    "PRICE": 60,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "EASY LIFE SOLUBLE",
+    "QTY ": 6,
+    "PRICE": 85,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "DICLOLEXPOWER SPRAY ",
+    "QTY ": 3,
+    "PRICE": 130,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "CONTRA 72 CONTRACEPTIVE",
+    "QTY ": 28,
+    "PRICE": 10,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "SECURE CONTRACEPTIVE",
+    "QTY ": 32,
+    "PRICE": 10,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "LEVON 2 CONTRACEPTIVE",
+    "QTY ": 7,
+    "PRICE": 20,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "LYDIA DAILY CONTRACEPTIVE ",
+    "QTY ": 55,
+    "PRICE": 5,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "LYDIA POSTPILL CONTRACEPTIVE",
+    "QTY ": 217,
+    "PRICE": 20,
+    "DATE": "6/1/2029"
+  },
+  {
+    "NAME": "CHLO I CHLORAMPHENICOL EYE DROP",
+    "QTY ": 26,
+    "PRICE": 20,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "CHLORTRUST EYE/EAR DROP",
+    "QTY ": 25,
+    "PRICE": 20,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "POSTINOR 2 CONTRACEPTIVE",
+    "QTY ": 167,
+    "PRICE": 5,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "HABICHLOR CHLORAMPHENICOL EAR DROP",
+    "QTY ": 19,
+    "PRICE": 20,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "GENTA TRUST EYE/EYE DROP",
+    "QTY ": 20,
+    "PRICE": 20,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "PRIMOLUT N TAB",
+    "QTY ": 10,
+    "PRICE": 50,
+    "DATE": "3/1/2030"
+  },
+  {
+    "NAME": "CIPROFLOXACIN 0.3% EYE/EYE DROPS",
+    "QTY ": 10,
+    "PRICE": 30,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "CIPROLEX EYE/EEAR DROP",
+    "QTY ": 10,
+    "PRICE": 50,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "EXCIPRO CIPROFLOXACIN EYE/EAR DROP",
+    "QTY ": 3,
+    "PRICE": 35,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "LAVINA TETRACYCLINE EYE OINT.",
+    "QTY ": 5,
+    "PRICE": 20,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "BLUFENAC DICLO EYE DROP",
+    "QTY ": 8,
+    "PRICE": 40,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "KLARO EYE DROP",
+    "QTY ": 7,
+    "PRICE": 35,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "LACI EYE DROP METHYLCELLULOSE SYE DROP",
+    "QTY ": 10,
+    "PRICE": 70,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "CIPROLEX EYE OINT.",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "NEO HYCOLEX EYE/EAR/NOSE DROP",
+    "QTY ": 11,
+    "PRICE": 50,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "COOL EYES ARTIFICIAL TEARS DROP",
+    "QTY ": 8,
+    "PRICE": 95,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "CYFEN TAB",
+    "QTY ": 100,
+    "PRICE": 2.5,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "CO-TRIMOXAZOLE (SEPTRIN) TAB",
+    "QTY ": 100,
+    "PRICE": 5,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "OXYTETRACYCLINE TAB 250MG",
+    "QTY ": 150,
+    "PRICE": 5,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "O-METRO 400MG TAB",
+    "QTY ": 400,
+    "PRICE": 10,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "ALUMINIUM HYDROXICIDE(G) TAB",
+    "QTY ": 100,
+    "PRICE": 3,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "AMOXICILLIN 500MG CAP (EXETER)",
+    "QTY ": 20,
+    "PRICE": 50,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "AMOXICILLIN 250MG CAP (LETAP)",
+    "QTY ": 150,
+    "PRICE": 5,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "INDOMETHACIN CAPS(LETAP)",
+    "QTY ": 84,
+    "PRICE": 3,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "CLOXACILLIN CAPS",
+    "QTY ": 510,
+    "PRICE": 15,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "FOLIC ACID 5MG TAB",
+    "QTY ": 280,
+    "PRICE": 1,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "AMITRIPTYLINE 100",
+    "QTY ": 100,
+    "PRICE": 10,
+    "DATE": "8/1/2029"
+  },
+  {
+    "NAME": "KWIK ACTION ",
+    "QTY ": 100,
+    "PRICE": 3,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "CPM 4MG TABS",
+    "QTY ": 70,
+    "PRICE": 3,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "PERDNISOLONE 5MG TAB",
+    "QTY ": 70,
+    "PRICE": 3,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "YOGU +",
+    "QTY ": 8,
+    "PRICE": 15,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "YOGOKIDS",
+    "QTY ": 4,
+    "PRICE": 15,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "CANDEREL TAB",
+    "QTY ": 4,
+    "PRICE": 15,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "GREEK ESTILO",
+    "QTY ": 7,
+    "PRICE": 20,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "PASCUAL BLUEBERRY",
+    "QTY ": 22,
+    "PRICE": 15,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "TOM MILK ",
+    "QTY ": 12,
+    "PRICE": 15,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "AMBROSIA",
+    "QTY ": 8,
+    "PRICE": 25,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "NAN OPTI PRO 1",
+    "QTY ": 6,
+    "PRICE": 135,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "NAN OPTI PRO 2",
+    "QTY ": 7,
+    "PRICE": 150,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "S.M.A.GOLD 1",
+    "QTY ": 2,
+    "PRICE": 165,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "S.M.A.GOLD 2",
+    "QTY ": 7,
+    "PRICE": 175,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "CERELAC MAIZE",
+    "QTY ": 11,
+    "PRICE": 60,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "CERELAC RICE",
+    "QTY ": 3,
+    "PRICE": 60,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "CERELAC WHEAT",
+    "QTY ": 3,
+    "PRICE": 60,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "REFLEX",
+    "QTY ": 26,
+    "PRICE": 25,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "APTAMIL 1",
+    "QTY ": 8,
+    "PRICE": 45,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "APTAMIL 2",
+    "QTY ": 14,
+    "PRICE": 45,
+    "DATE": "4/1/2026"
+  },
+  {
+    "NAME": "APTAMIL POWDER 2",
+    "QTY ": 2,
+    "PRICE": 350,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "LACTOGEN 1",
+    "QTY ": 1,
+    "PRICE": 110,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "LACTOGEN 2",
+    "QTY ": 3,
+    "PRICE": 125,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "NIDO 1 +",
+    "QTY ": 3,
+    "PRICE": 130,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "NIDO ",
+    "QTY ": 3,
+    "PRICE": 135,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "MILO ",
+    "QTY ": 9,
+    "PRICE": 70,
+    "DATE": "5/1/2026"
+  },
+  {
+    "NAME": "REFLEX MOUTH WASH ANTISEPTIC",
+    "QTY ": 6,
+    "PRICE": 30,
+    "DATE": "6/1/2029"
+  },
+  {
+    "NAME": "REFLEX MOUTH WASH ALOE VERA",
+    "QTY ": 7,
+    "PRICE": 30,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "LISTERINE MOUTH WASH 250ML",
+    "QTY ": 8,
+    "PRICE": 65,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "LISTERINE MOUTH WASH 600ML",
+    "QTY ": 3,
+    "PRICE": 110,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "LISTERINE MOUTH WASH 500ML",
+    "QTY ": 2,
+    "PRICE": 100,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "CORSODYL DAILY MOUTH WASH",
+    "QTY ": 1,
+    "PRICE": 120,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "SAVLON ANTIDEPTIC 500ML",
+    "QTY ": 4,
+    "PRICE": 95,
+    "DATE": "3/1/2029"
+  },
+  {
+    "NAME": "SAVLON ANTIDEPTIC 250ML",
+    "QTY ": 8,
+    "PRICE": 65,
+    "DATE": "5/1/2029"
+  },
+  {
+    "NAME": "DETTOL M/SIZE",
+    "QTY ": 6,
+    "PRICE": 40,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "DETTOL B/SIZE",
+    "QTY ": 3,
+    "PRICE": 75,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "CAMEL S/SIZE",
+    "QTY ": 3,
+    "PRICE": 20,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "CAMEL B/SIZE",
+    "QTY ": 6,
+    "PRICE": 75,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "MALARIA TEST",
+    "QTY ": 6,
+    "PRICE": 15,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "REDSUN CONDOM",
+    "QTY ": 17,
+    "PRICE": 10,
+    "DATE": "7/1/2029"
+  },
+  {
+    "NAME": "HIV TEST KIT",
+    "QTY ": 21,
+    "PRICE": 10,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "ARISE CONDOM",
+    "QTY ": 11,
+    "PRICE": 10,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "ROCK ON CONDOM",
+    "QTY ": 10,
+    "PRICE": 15,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "KISS CONDOM",
+    "QTY ": 7,
+    "PRICE": 10,
+    "DATE": "5/1/2030"
+  },
+  {
+    "NAME": "NATURAL CONDOM",
+    "QTY ": 43,
+    "PRICE": 5,
+    "DATE": "9/1/2029"
+  },
+  {
+    "NAME": "DUREX CONDOM",
+    "QTY ": 28,
+    "PRICE": 40,
+    "DATE": "3/1/2029"
+  },
+  {
+    "NAME": "ROUGH RIDER CONDOM",
+    "QTY ": 32,
+    "PRICE": 30,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "ZINC OXIDE PLASTER",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "8/1/2029"
+  },
+  {
+    "NAME": "ADHESIVE PLASTER 7.5/5 YARD",
+    "QTY ": 6,
+    "PRICE": 50,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "ADHESIVE PLASTER 10CM/5",
+    "QTY ": 12,
+    "PRICE": 60,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "KAMACLOX MOUTHWASH ",
+    "QTY ": 5,
+    "PRICE": 40,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "GUMEX ANTESEPTIC",
+    "QTY ": 8,
+    "PRICE": 110,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "BORGES APPLE CIDER",
+    "QTY ": 2,
+    "PRICE": 220,
+    "DATE": "2/1/2030"
+  },
+  {
+    "NAME": "BORGES APPLE CIDER VINEGER",
+    "QTY ": 2,
+    "PRICE": 80,
+    "DATE": "11/1/2029"
+  },
+  {
+    "NAME": "BRAGG APPLE CIDER ",
+    "QTY ": 4,
+    "PRICE": 170,
+    "DATE": "2/1/2023"
+  },
+  {
+    "NAME": "EPSOM SALT",
+    "QTY ": 2,
+    "PRICE": 70,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "HEAVEN MOSQUITO SPRAY",
+    "QTY ": 6,
+    "PRICE": 50,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "ADHESIVE PLASTER 5CM/5",
+    "QTY ": 1,
+    "PRICE": 35,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "FATALA MOSQUITO SPRAY",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "SASO MOSQUITO SPRAY",
+    "QTY ": 5,
+    "PRICE": 50,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "MEDI SOFT",
+    "QTY ": 13,
+    "PRICE": 20,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "BABY POWDER",
+    "QTY ": 3,
+    "PRICE": 35,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "JOHNSONS  500ML",
+    "QTY ": 5,
+    "PRICE": 140,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "JOHNSONS  300ML",
+    "QTY ": 4,
+    "PRICE": 100,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "ALGO FEEDING BOTTLE",
+    "QTY ": 3,
+    "PRICE": 40,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "SMART BABY BOTTLE",
+    "QTY ": 4,
+    "PRICE": 25,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "LEVON 2 GEL ",
+    "QTY ": 9,
+    "PRICE": 50,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "ON CALL SUGAR TEST KIT",
+    "QTY ": 3,
+    "PRICE": 300,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "HEALTH SENSE",
+    "QTY ": 4,
+    "PRICE": 700,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "JOHNSONS BABY CREAM",
+    "QTY ": 4,
+    "PRICE": 120,
+    "DATE": "7/1/2028"
+  },
+  {
+    "NAME": "SENSODYNE PRONAMEL",
+    "QTY ": 3,
+    "PRICE": 180,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "TOUCH & GO",
+    "QTY ": 5,
+    "PRICE": 80,
+    "DATE": "6/1/2029"
+  },
+  {
+    "NAME": "SADOER VITAMIN C TOOTH PASTE",
+    "QTY ": 29,
+    "PRICE": 50,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "COLGATE HERBAL TOOTH PASTE",
+    "QTY ": 4,
+    "PRICE": 45,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "EUTHYMOL TOOTH PASTE",
+    "QTY ": 2,
+    "PRICE": 65,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "REFLEX TOOTH PASTE",
+    "QTY ": 2,
+    "PRICE": 60,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "LONG RICH TOOTH PASTE B/SIZE",
+    "QTY ": 30,
+    "PRICE": 80,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "LON RICH TOOTH PASTE S/SIZE",
+    "QTY ": 19,
+    "PRICE": 55,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "B.OTI ACTIVATED CHARCOAL",
+    "QTY ": 4,
+    "PRICE": 60,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "ACTIVATED CHARCOAL",
+    "QTY ": 5,
+    "PRICE": 200,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "V.I.P TOOTH BRUSH",
+    "QTY ": 9,
+    "PRICE": 10,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "COLGATE TOOTH BRUSH",
+    "QTY ": 2,
+    "PRICE": 20,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "SENSODYNE RAPID RELIEF TOOTH PASTE",
+    "QTY ": 2,
+    "PRICE": 300,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "SENSODYBE COMPLETE PROTECTION",
+    "QTY ": 3,
+    "PRICE": 220,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "VIKIL",
+    "QTY ": 3,
+    "PRICE": 40,
+    "DATE": "5/1/2026"
+  },
+  {
+    "NAME": "KEL CUF BABY SYRUP",
+    "QTY ": 4,
+    "PRICE": 20,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "ANGEL ROCK",
+    "QTY ": 3,
+    "PRICE": 60,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "MUCOTIN ENFANT SYRUP",
+    "QTY ": 1,
+    "PRICE": 30,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "ZESTRIL",
+    "QTY ": 1,
+    "PRICE": 220,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "GILOBA",
+    "QTY ": 3,
+    "PRICE": 40,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "VASELINE GAUZE",
+    "QTY ": 15,
+    "PRICE": 60,
+    "DATE": "12/1/2029"
+  },
+  {
+    "NAME": "SHALTOUX NATURAL",
+    "QTY ": 400,
+    "PRICE": 0.5,
+    "DATE": "11/1/2028"
+  },
+  {
+    "NAME": "ADAMS SECRET",
+    "QTY ": 17,
+    "PRICE": 70,
+    "DATE": "12/1/2029"
+  },
+  {
+    "NAME": "IMAX DELAY SPRAY",
+    "QTY ": 9,
+    "PRICE": 90,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "VIGA SPRAY",
+    "QTY ": 5,
+    "PRICE": 100,
+    "DATE": "4/1/2029"
+  },
+  {
+    "NAME": "DRAGON SPRAY ",
+    "QTY ": 14,
+    "PRICE": 70,
+    "DATE": "4/1/2030"
+  },
+  {
+    "NAME": "AIROFRANIL TABS",
+    "QTY ": 91,
+    "PRICE": 10,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "DRAGON LOZENGES",
+    "QTY ": 81,
+    "PRICE": 15,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "DRAGON TAB",
+    "QTY ": 17,
+    "PRICE": 20,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "TIME HERBASOUL",
+    "QTY ": 78,
+    "PRICE": 25,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "P FORCE",
+    "QTY ": 48,
+    "PRICE": 20,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "BLUMOON",
+    "QTY ": 51,
+    "PRICE": 10,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "REDSUN GEL",
+    "QTY ": 34,
+    "PRICE": 5,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "MR. Q",
+    "QTY ": 49,
+    "PRICE": 15,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "UNCLE JACK SYRUP",
+    "QTY ": 7,
+    "PRICE": 10,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "COMMIT -50",
+    "QTY ": 58,
+    "PRICE": 10,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "BIG PENIS",
+    "QTY ": 3,
+    "PRICE": 30,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "REDSUN CAPSULES",
+    "QTY ": 24,
+    "PRICE": 5,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "APTAMIL POWERDER 1",
+    "QTY ": 2,
+    "PRICE": 350,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "BIO OIL 25ML",
+    "QTY ": 10,
+    "PRICE": 60,
+    "DATE": "1/1/2031"
+  },
+  {
+    "NAME": "BIO OIL 125ML",
+    "QTY ": 4,
+    "PRICE": 150,
+    "DATE": "1/1/2031"
+  },
+  {
+    "NAME": "BIO OIL 200ML",
+    "QTY ": 4,
+    "PRICE": 180,
+    "DATE": "1/1/2031"
+  },
+  {
+    "NAME": "SABROSO OIL 500ML",
+    "QTY ": 2,
+    "PRICE": 110,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "SABROSO OIL 100ML",
+    "QTY ": 10,
+    "PRICE": 50,
+    "DATE": "7/1/2029"
+  },
+  {
+    "NAME": "COLLAGEN HAND& BODY LOTION",
+    "QTY ": 2,
+    "PRICE": 100,
+    "DATE": "2/1/2030"
+  },
+  {
+    "NAME": "COLAGEN OIL",
+    "QTY ": 1,
+    "PRICE": 70,
+    "DATE": "11/1/2029"
+  },
+  {
+    "NAME": "ATWOOD'S LAXATIVE BITTERS",
+    "QTY ": 4,
+    "PRICE": 120,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "CASTOR OIL ",
+    "QTY ": 6,
+    "PRICE": 70,
+    "DATE": "2/1/2029"
+  },
+  {
+    "NAME": "PARAFFIN LIQUID",
+    "QTY ": 5,
+    "PRICE": 150,
+    "DATE": "11/1/2028"
+  },
+  {
+    "NAME": "BORGES OLIVE OIL",
+    "QTY ": 1,
+    "PRICE": 55,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "BORGES OLIVE OIL 500ML",
+    "QTY ": 9,
+    "PRICE": 195,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "TETMOSOL SOAP",
+    "QTY ": 12,
+    "PRICE": 15,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "MERCY SOAP",
+    "QTY ": 3,
+    "PRICE": 20,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "PHARMADERM",
+    "QTY ": 20,
+    "PRICE": 30,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "GAUZE BANDAGE M/S",
+    "QTY ": 25,
+    "PRICE": 5,
+    "DATE": "4/1/2029"
+  },
+  {
+    "NAME": "GAUZE BANDAGE S/S",
+    "QTY ": 36,
+    "PRICE": 3,
+    "DATE": "3/1/2030"
+  },
+  {
+    "NAME": "GAUZE BANDAGE B/S",
+    "QTY ": 38,
+    "PRICE": 7,
+    "DATE": "12/1/2028"
+  },
+  {
+    "NAME": "CLAVUMED 626 MG TAB",
+    "QTY ": 12,
+    "PRICE": 100,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "AMOKSIKLAV",
+    "QTY ": 33,
+    "PRICE": 100,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "TAVANC 500MG TAB",
+    "QTY ": 3,
+    "PRICE": 380,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "LEROFLOXACIN 500MG TAB",
+    "QTY ": 10,
+    "PRICE": 120,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "ZINNAT 500MG TAB",
+    "QTY ": 4,
+    "PRICE": 250,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "AUGMENTIN 1G TAB",
+    "QTY ": 1,
+    "PRICE": 320,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "AUGMENTIN 625MG TAB",
+    "QTY ": 7,
+    "PRICE": 235,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "CIPROLEX-TZ",
+    "QTY ": 8,
+    "PRICE": 85,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "CIPRO- DENK 500MG CAPS",
+    "QTY ": 12,
+    "PRICE": 170,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "ABYMED-500MG CAPS",
+    "QTY ": 17,
+    "PRICE": 30,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "O-CIP TZ",
+    "QTY ": 21,
+    "PRICE": 60,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "ITRACONAZOLE 100MG CAPS",
+    "QTY ": 7,
+    "PRICE": 120,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "NEXIUM 20MG TAB",
+    "QTY ": 56,
+    "PRICE": 25,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "NEXIUM 10MG SACHETS",
+    "QTY ": 7,
+    "PRICE": 50,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "NEXIUM 40MG TAB",
+    "QTY ": 7,
+    "PRICE": 29,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "DOXYCYCLINE CAPS",
+    "QTY ": 57,
+    "PRICE": 20,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "CLONDAMYCIN 150MG CAPS",
+    "QTY ": 9,
+    "PRICE": 30,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "DACILLIN-300 CLINDAMYCIN CAPS",
+    "QTY ": 30,
+    "PRICE": 40,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "VEGA CLINDAMYCIN 300MG CAPS",
+    "QTY ": 24,
+    "PRICE": 50,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "GUCEFOR 500MG TAB",
+    "QTY ": 3,
+    "PRICE": 80,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "SKYCOF CEFUROXIME 250MG TAB",
+    "QTY ": 11,
+    "PRICE": 35,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "FOXITIL-250 CEFUROXIME TAB",
+    "QTY ": 20,
+    "PRICE": 50,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "FOXITIL-500 CEFUROXIME TAB",
+    "QTY ": 16,
+    "PRICE": 70,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "S-FIX200 MG CEFIXIME TAB",
+    "QTY ": 2,
+    "PRICE": 60,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "NITROFURANTION 500MG CAPS",
+    "QTY ": 4,
+    "PRICE": 120,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "O-FLUZOLE 150MG ",
+    "QTY ": 36,
+    "PRICE": 20,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "T-SEC SECNIDAZOLE TAB",
+    "QTY ": 2,
+    "PRICE": 40,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "FLUCONA-DENK 150MG ",
+    "QTY ": 4,
+    "PRICE": 70,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "TEVA FLUCONAZOLE 150MG CAPS",
+    "QTY ": 22,
+    "PRICE": 30,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "MYCOSTAT FLUCONAZOLE",
+    "QTY ": 16,
+    "PRICE": 15,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "TAGERA FORTE SECNIDAZOLE TAB",
+    "QTY ": 20,
+    "PRICE": 50,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "DALACIN C 300MG CAPS",
+    "QTY ": 6,
+    "PRICE": 250,
+    "DATE": "3/1/2029"
+  },
+  {
+    "NAME": "ZYMAX 500MG CAPS",
+    "QTY ": 58,
+    "PRICE": 50,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "ZYMAX 250MG CAPS",
+    "QTY ": 30,
+    "PRICE": 40,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "ZITHROMAX SUSPENSION",
+    "QTY ": 3,
+    "PRICE": 200,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "ZITHROMAX CAPS.",
+    "QTY ": 4,
+    "PRICE": 200,
+    "DATE": "10/1/2029"
+  },
+  {
+    "NAME": "B-CLAR CLARITHTHROMYCIN",
+    "QTY ": 55,
+    "PRICE": 80,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "ENCEPHABOL LIQUID (PYRITINOL)",
+    "QTY ": 2,
+    "PRICE": 300,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "ENACEF 125MG/5ML CEFUROXIME SUSPENSION",
+    "QTY ": 7,
+    "PRICE": 50,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "KLABEX CLARITHROMYCIN SUSP.",
+    "QTY ": 4,
+    "PRICE": 200,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "ZINNAT 125MG CEFUROXIME SUSP. B/S",
+    "QTY ": 5,
+    "PRICE": 350,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "XIN-A CIPROFLOXACIN",
+    "QTY ": 2,
+    "PRICE": 100,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "VEGA CEFIXIME SUSP.",
+    "QTY ": 10,
+    "PRICE": 100,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "ORELOX 200MG TAB.",
+    "QTY ": 3,
+    "PRICE": 350,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "ORELOX 400MG/5ML CEFPODOXIME",
+    "QTY ": 2,
+    "PRICE": 400,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "AUGMENTIN 457MG/5ML SUSP.",
+    "QTY ": 5,
+    "PRICE": 190,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "AUGMENTIN 228MG/5ML",
+    "QTY ": 2,
+    "PRICE": 160,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "CLAVUMED 228.5MG/5ML SUSP.",
+    "QTY ": 11,
+    "PRICE": 70,
+    "DATE": "3/1/2028"
+  },
+  {
+    "NAME": "ACERUX ACYCLOR SYROP",
+    "QTY ": 5,
+    "PRICE": 200,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "NEFLUCON FLUCONAZOLE 10MG/1ML SUSP.",
+    "QTY ": 6,
+    "PRICE": 100,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "MORPHINE ORAL SOLUTION 10MG/5ML",
+    "QTY ": 5,
+    "PRICE": 350,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "ORAMORPH ORAL SOLUTION 10MG/5ML",
+    "QTY ": 4,
+    "PRICE": 200,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "VEGINAX CREAM",
+    "QTY ": 8,
+    "PRICE": 20,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "GYNO-MYCOLEX PESSAIRES",
+    "QTY ": 15,
+    "PRICE": 65,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "INFA-V PESSARIES ",
+    "QTY ": 9,
+    "PRICE": 60,
+    "DATE": "11/1/2026"
+  },
+  {
+    "NAME": "GOGYMAX CREAM",
+    "QTY ": 7,
+    "PRICE": 20,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "DREZ-V GEL",
+    "QTY ": 6,
+    "PRICE": 100,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "RIMA CLOTRIMAZOLE CREAM",
+    "QTY ": 6,
+    "PRICE": 20,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "VAGID-CL",
+    "QTY ": 8,
+    "PRICE": 65,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "URO VAGINAL PROBIOTIC",
+    "QTY ": 4,
+    "PRICE": 400,
+    "DATE": "8/1/2028"
+  },
+  {
+    "NAME": "KLOVINAL PESSARIES",
+    "QTY ": 8,
+    "PRICE": 75,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "ENZOLE V PESSARIES",
+    "QTY ": 10,
+    "PRICE": 65,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "LAVET FEMININE HYGIENE WASH",
+    "QTY ": 4,
+    "PRICE": 60,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "POLYGNAX PESSARIES",
+    "QTY ": 3,
+    "PRICE": 140,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "LEVON 2 FEMININE INTIMATE WASH B/S",
+    "QTY ": 5,
+    "PRICE": 75,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "LEVON 2 FEMININE INTIMATE WASH S/S",
+    "QTY ": 4,
+    "PRICE": 50,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "BORIC ACID NUTRABLAST",
+    "QTY ": 9,
+    "PRICE": 100,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "GOGYNAX VAGINAL PESSARIES",
+    "QTY ": 10,
+    "PRICE": 20,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "TODAY FEMININE WASH",
+    "QTY ": 1,
+    "PRICE": 50,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "KLENZ-V",
+    "QTY ": 10,
+    "PRICE": 100,
+    "DATE": "4/5/2026"
+  },
+  {
+    "NAME": "LUCKY V-CARE MIXTURE",
+    "QTY ": 4,
+    "PRICE": 40,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "PROMECINE SYROP",
+    "QTY ": 13,
+    "PRICE": 15,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "CHLORAMPHENICOL",
+    "QTY ": 5,
+    "PRICE": 20,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "GRISEOMOON",
+    "QTY ": 9,
+    "PRICE": 40,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "LETARIN",
+    "QTY ": 8,
+    "PRICE": 35,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "LAVI AMOSKIKLAV SUSP.",
+    "QTY ": 2,
+    "PRICE": 35,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "METRONIDAZOLE SUSP.",
+    "QTY ": 6,
+    "PRICE": 15,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "METAGYL 200",
+    "QTY ": 8,
+    "PRICE": 25,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "FUMET SUSP.",
+    "QTY ": 18,
+    "PRICE": 20,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "METROMED SYRUP",
+    "QTY ": 5,
+    "PRICE": 30,
+    "DATE": "8/1/2025"
+  },
+  {
+    "NAME": "METROLEX-F SUSP.",
+    "QTY ": 7,
+    "PRICE": 50,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "FLUCLOXACILLINE SUSP.",
+    "QTY ": 10,
+    "PRICE": 20,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "NESTRIN CO-TRIMOXAZOLE",
+    "QTY ": 20,
+    "PRICE": 20,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "EVECARE TAPS (HIMALAYA)",
+    "QTY ": 11,
+    "PRICE": 140,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "MENTAT SYRUP(HIMALAYA)",
+    "QTY ": 6,
+    "PRICE": 100,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "SEPTILIN SYRUP(HIMALAYA)",
+    "QTY ": 8,
+    "PRICE": 100,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "KOFLEX SYRUP (HIMALAYA)",
+    "QTY ": 2,
+    "PRICE": 55,
+    "DATE": "11/1/2027"
+  },
+  {
+    "NAME": "LIV 52 SYRUP (IMALAYA)",
+    "QTY ": 11,
+    "PRICE": 105,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "LIV 52 TAB. (HIMALAYA)",
+    "QTY ": 7,
+    "PRICE": 135,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "PILEX OINTMENT(HIMALAYA)",
+    "QTY ": 4,
+    "PRICE": 110,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "CAFEGOT TAB.(ERGOTAMIN)",
+    "QTY ": 23,
+    "PRICE": 12,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "NAT B CAPS",
+    "QTY ": 4,
+    "PRICE": 170,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "QUINONIC HYDROCHLORINE TAB 200MG",
+    "QTY ": 6,
+    "PRICE": 30,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "TRAMADOL 50MG",
+    "QTY ": 12,
+    "PRICE": 25,
+    "DATE": "1/1/2029"
+  },
+  {
+    "NAME": "VOLTFAST 50MG POWDER",
+    "QTY ": 28,
+    "PRICE": 10,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "VIT B DENK TAB.",
+    "QTY ": 18,
+    "PRICE": 50,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "NEUROMIN PLUS TAB",
+    "QTY ": 15,
+    "PRICE": 30,
+    "DATE": "4/1/2027"
+  },
+  {
+    "NAME": "DICLO DENK TAB",
+    "QTY ": 27,
+    "PRICE": 50,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "MENOTA TAB.",
+    "QTY ": 88,
+    "PRICE": 30,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "CYCLOGEST PROGESTERONE PESSERIES 400MG",
+    "QTY ": 2,
+    "PRICE": 500,
+    "DATE": "4/1/2029"
+  },
+  {
+    "NAME": "CO-CODAMOL TAB 30/500MG(BRISTOL)",
+    "QTY ": 10,
+    "PRICE": 30,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "CO-CODAMOL TAB ERNEST CHEMIST",
+    "QTY ": 1,
+    "PRICE": 50,
+    "DATE": "7/1/2026"
+  },
+  {
+    "NAME": "GOFFEX 400 TAB",
+    "QTY ": 3,
+    "PRICE": 35,
+    "DATE": "9/1/2028"
+  },
+  {
+    "NAME": "PROGEVERA 10MG TAB. (PFIZER)",
+    "QTY ": 5,
+    "PRICE": 59,
+    "DATE": "7/1/2029"
+  },
+  {
+    "NAME": "CYTOTEC 200 (PFIZER)",
+    "QTY ": 26,
+    "PRICE": 35,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "ORTHOCARE CAPS.(FOREST HERBS)",
+    "QTY ": 5,
+    "PRICE": 170,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "IMPRESSER OIL CAPS",
+    "QTY ": 10,
+    "PRICE": 140,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "IMPRESSER OIL ",
+    "QTY ": 3,
+    "PRICE": 140,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "ARTHROTEC 75MG DICLO TAB",
+    "QTY ": 40,
+    "PRICE": 20,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "THIAMINE HYDROCHLRIDE TAB",
+    "QTY ": 6,
+    "PRICE": 30,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "OSTEOCARE ORIGINAL TAB",
+    "QTY ": 2,
+    "PRICE": 170,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "JOINTACE CHONDROTIN TAB.",
+    "QTY ": 6,
+    "PRICE": 250,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "NEUROPAT FORTE TAB",
+    "QTY ": 2,
+    "PRICE": 150,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "VALUVITE ARTHROFLEX PLUS TAB",
+    "QTY ": 3,
+    "PRICE": 200,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "OSTEODIEN CHONDROITON  TAB",
+    "QTY ": 8,
+    "PRICE": 170,
+    "DATE": "10/1/2028"
+  },
+  {
+    "NAME": "CO-TRIMOXAZOLE SUSP.",
+    "QTY ": 18,
+    "PRICE": 15,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "LETAP'S AMOXICILLIN",
+    "QTY ": 21,
+    "PRICE": 20,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "PERMOXYL AMOXYCILLINE 125MG",
+    "QTY ": 17,
+    "PRICE": 25,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "LETAP AMCICLOX SUSP.",
+    "QTY ": 9,
+    "PRICE": 20,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "ENAMYCIN ERYTHROMYCIN SUSP.",
+    "QTY ": 26,
+    "PRICE": 20,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "XYFLUX FLUCLOXACILLIN",
+    "QTY ": 1,
+    "PRICE": 20,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "ZYMAX AZITHROMYCIN SUSP.",
+    "QTY ": 2,
+    "PRICE": 50,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "MENTHODEX COUGH SUSP.S/S",
+    "QTY ": 10,
+    "PRICE": 55,
+    "DATE": "11/1/2028"
+  },
+  {
+    "NAME": "MENTHODEX COUGH SUSP.B/S",
+    "QTY ": 6,
+    "PRICE": 85,
+    "DATE": "9/1/2025"
+  },
+  {
+    "NAME": "BEEHIVE BALSAM COUGH SYRUP",
+    "QTY ": 8,
+    "PRICE": 100,
+    "DATE": "10/1/2029"
+  },
+  {
+    "NAME": "ZINNAT 250MG",
+    "QTY ": 1,
+    "PRICE": 200,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "COVONIA DRY &TICKLY COUGH SYRUP",
+    "QTY ": 4,
+    "PRICE": 180,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "BRONCHOLIN SALBUTAMOL SYRUP LETAP",
+    "QTY ": 10,
+    "PRICE": 20,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "VENTOLIN SYRUP",
+    "QTY ": 5,
+    "PRICE": 150,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "SALBUTALIN SYRUP (ERNEST CHEMIST)",
+    "QTY ": 11,
+    "PRICE": 50,
+    "DATE": "11/1/2028"
+  },
+  {
+    "NAME": "2 B LOTION",
+    "QTY ": 4,
+    "PRICE": 40,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "DREZ SOLUTION S/S",
+    "QTY ": 4,
+    "PRICE": 40,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "DREZ SOLUTION B/S",
+    "QTY ": 3,
+    "PRICE": 60,
+    "DATE": "8/1/2027"
+  },
+  {
+    "NAME": "DREZ POWDER S/S",
+    "QTY ": 3,
+    "PRICE": 35,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "DREZ OINTMENT B/S",
+    "QTY ": 10,
+    "PRICE": 50,
+    "DATE": "4/1/2028"
+  },
+  {
+    "NAME": "DREZ OINTMENT S/S",
+    "QTY ": 16,
+    "PRICE": 35,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "TIXYLIX CHILDREN'S COUGH SYRUP",
+    "QTY ": 1,
+    "PRICE": 160,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "BENYLIN INFANT'S COUGH SYRUP",
+    "QTY ": 4,
+    "PRICE": 120,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "CALCOUGH GLYCEROL SYRUP",
+    "QTY ": 3,
+    "PRICE": 170,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "BELL'S BABY COUGH SYRUP",
+    "QTY ": 1,
+    "PRICE": 75,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "BENYLIN ORIGINAL",
+    "QTY ": 5,
+    "PRICE": 150,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "BENYLIN CHILDREN'S DRY COUGH",
+    "QTY ": 3,
+    "PRICE": 130,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "BENYLIN HERBAL CHESTY COUGH'S",
+    "QTY ": 5,
+    "PRICE": 170,
+    "DATE": "5/1/2027"
+  },
+  {
+    "NAME": "BENYLIN CHESTY COUGH NON DROWSY",
+    "QTY ": 6,
+    "PRICE": 150,
+    "DATE": "7/1/2027"
+  },
+  {
+    "NAME": "BENYLIN 4 FLU S/S",
+    "QTY ": 6,
+    "PRICE": 100,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "BENYLIN DRY&TICKLY COUGH SYRUP",
+    "QTY ": 5,
+    "PRICE": 170,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "VISCOF EXPEDORANT",
+    "QTY ": 5,
+    "PRICE": 60,
+    "DATE": "6/1/2026"
+  },
+  {
+    "NAME": "VISCOF-S EXPEDORANT",
+    "QTY ": 8,
+    "PRICE": 60,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "VISCOF D SYRUP",
+    "QTY ": 6,
+    "PRICE": 60,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "MENSTROGEN TAB",
+    "QTY ": 65,
+    "PRICE": 40,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "UNSODEOXYCHOLIC ACID CAPS",
+    "QTY ": 6,
+    "PRICE": 250,
+    "DATE": "2/1/2028"
+  },
+  {
+    "NAME": "CARDIOPAT CAPS.",
+    "QTY ": 4,
+    "PRICE": 100,
+    "DATE": "9/1/2026"
+  },
+  {
+    "NAME": "BICALUTAMIDE 50MG",
+    "QTY ": 1,
+    "PRICE": 100,
+    "DATE": "1/1/2027"
+  },
+  {
+    "NAME": "ALLOPURINOL TAB 300MG",
+    "QTY ": 2,
+    "PRICE": 45,
+    "DATE": "10/1/2026"
+  },
+  {
+    "NAME": "ALLOPURINOL TAB 100MG",
+    "QTY ": 3,
+    "PRICE": 45,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "OXYBUTYNIN HYDROCHLORIDE TAB 2.5MG",
+    "QTY ": 6,
+    "PRICE": 15,
+    "DATE": "8/1/2026"
+  },
+  {
+    "NAME": "TEGRETOL CR 400(CARBAMZEPIN)",
+    "QTY ": 3,
+    "PRICE": 90,
+    "DATE": "2/1/2027"
+  },
+  {
+    "NAME": "DARAPRIM 25MG TAB",
+    "QTY ": 2,
+    "PRICE": 650,
+    "DATE": "1/1/2028"
+  },
+  {
+    "NAME": "LIVOPAT CAPS",
+    "QTY ": 6,
+    "PRICE": 150,
+    "DATE": "3/1/2027"
+  },
+  {
+    "NAME": "VENTOLIN INHALER",
+    "QTY ": 4,
+    "PRICE": 150,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "SERETIDE 50/250 MCG",
+    "QTY ": 3,
+    "PRICE": 400,
+    "DATE": "12/1/2026"
+  },
+  {
+    "NAME": "TRANEXAMIC 500MG (VEGA)",
+    "QTY ": 1,
+    "PRICE": 100,
+    "DATE": "5/1/2028"
+  },
+  {
+    "NAME": "NO-SPA 40MG",
+    "QTY ": 3,
+    "PRICE": 30,
+    "DATE": "6/1/2027"
+  },
+  {
+    "NAME": "TRAMEXAMIC ACID 500MG(TILLOMED)",
+    "QTY ": 18,
+    "PRICE": 100,
+    "DATE": "10/1/2027"
+  },
+  {
+    "NAME": "STUGERON(CINNARIZINE)TAB",
+    "QTY ": 25,
+    "PRICE": 25,
+    "DATE": "12/1/2027"
+  },
+  {
+    "NAME": "GINSOMIN GINSING CAPS.",
+    "QTY ": 8,
+    "PRICE": 60,
+    "DATE": "6/1/2028"
+  },
+  {
+    "NAME": "METOCLOPRAMIDE TAB 10MG",
+    "QTY ": 15,
+    "PRICE": 20,
+    "DATE": "9/1/2027"
+  },
+  {
+    "NAME": "TYLENOL CAPLET",
+    "QTY ": 247,
+    "PRICE": 3,
+    "DATE": "4/1/2029"
+  }
+]

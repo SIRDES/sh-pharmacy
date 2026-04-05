@@ -46,24 +46,24 @@ productSchema.post("save", function (error: any, doc: any, next: any) {
 
 
 // Pre-save hook to auto-generate unique sequential sku
-productSchema.pre("save", async function (next) {
-  const doc = this as any;
-  if (doc.isNew) {
-    try {
-      const counter = await Counter.findOneAndUpdate(
-        { id: "productSKU" },
-        { $inc: { seq: 1 } },
-        { new: true, upsert: true }
-      );
-      doc.sku = counter.seq;
-      next();
-    } catch (error: any) {
-      next(error);
-    }
-  } else {
-    next();
-  }
-});
+// productSchema.pre("save", async function (next) {
+//   const doc = this as any;
+//   if (doc.isNew) {
+//     try {
+//       const counter = await Counter.findOneAndUpdate(
+//         { id: "productSKU" },
+//         { $inc: { seq: 1 } },
+//         { new: true, upsert: true }
+//       );
+//       doc.sku = counter.seq;
+//       next();
+//     } catch (error: any) {
+//       next(error);
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 
 const Product: Model<IProduct> =

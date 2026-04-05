@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../authOptions";
 import { addAProductStockHistory, addMultipleProductStockHistories } from "./ProductStockHistory";
 import ShopProduct from "@/models/ShopProduct";
+import Counter from "@/models/Counter";
 
 // get the cuurently logined user from the session in server side
 
@@ -17,7 +18,7 @@ export const getCurrentUser = async () => {
 
 export const getAllProducts = async ({
   page = 1,
-  limit = 50,
+  limit = 2000,
   search = "",
   filter = "all",
 }: {
@@ -115,8 +116,8 @@ export const addProduct = async (
 
 
     // Get the latest SKU to continue numbering
-    // const lastProduct = await Product.findOne().sort({ _id: -1 });
-    // let nextSku = lastProduct?.sku ? lastProduct.sku + 1 : 1;
+    const lastProduct = await Counter.findOne({ id: "productSKU" })
+    let nextSku = lastProduct?.seq ? lastProduct.seq + 1 : 1;
 
     const productsToInsert = [];
     const stockHistoriesToInsert: {
@@ -149,16 +150,22 @@ export const addProduct = async (
         costPrice,
         sellingPrice,
         currentStock,
-        // sku: nextSku++,
+        sku: nextSku++,
         expiryDate,
       });
     }
 
-    const addedProducts = await Product.create(productsToInsert);
+    const addedProducts = await Product.insertMany(productsToInsert);
 
     if (!addedProducts || addedProducts.length === 0) {
       return { success: false, message: "No products added" };
     }
+
+    await Counter.updateOne(
+      { id: "productSKU" },
+      { $set: { seq: nextSku - 1 } },
+      { upsert: true }
+    )
 
     for (const product of addedProducts) {
       stockHistoriesToInsert.push({

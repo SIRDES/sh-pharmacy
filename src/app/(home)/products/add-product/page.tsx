@@ -167,7 +167,7 @@ export default function AddProductsPage() {
         <Typography variant="body1" gutterBottom>
           Add Products
         </Typography>
-        <Button onClick={handleAddStock}>Add Stock</Button>
+        {/* <Button onClick={handleAddStock}>Add Stock</Button> */}
 
         <form onSubmit={handleSubmit(onSubmit)}>
           {fields.map((field, index) => (

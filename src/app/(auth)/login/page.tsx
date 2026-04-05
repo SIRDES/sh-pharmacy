@@ -35,8 +35,8 @@ export default function Login() {
   const router = useRouter();
   const session = useSession();
   const [showPassword, setShowPassword] = React.useState(false);
-  const posAuth = (window as any)?.pos?.auth
-  console.log("posAuth>>>>", posAuth?.isFromElectron());
+  // const posAuth = (window as any)?.pos?.auth
+  // console.log("posAuth>>>>", posAuth?.isFromElectron());
   const [loading, setLoading] = useState(false);
   const [snackbar, setSnackbar] = useState<SnackbarType>({
     open: false,

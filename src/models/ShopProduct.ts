@@ -5,7 +5,7 @@ export type IShopProduct = mongoose.Document & {
   shopId: Types.ObjectId;
   productId: Types.ObjectId;
   quantity: number;
-  
+
   isDeleted: boolean;
   isSuspended: boolean;
 };

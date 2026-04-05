@@ -26,13 +26,13 @@ import LoadingAlert from "@/components/LoadingAlert";
 import Link from "next/link";
 import { currencyFormatter } from "@/utils/services/utils";
 import { StyledTableCell, StyledTableRow } from "@/theme/table";
-import { deletedProduct, getProuctById, updateProduct, updateProductsStock } from "@/utils/serverActions/Product";
+import { deletedProduct, getAllProducts, getProuctById, updateMultipleProductsStock, updateProduct, updateProductsStock } from "@/utils/serverActions/Product";
 import dayjs from "dayjs";
 import ManageStockModal from "@/components/products/ManageStockModal";
 import { useRouter } from "next/navigation";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import ManageShopStockModal from "@/components/products/ManageShopStockModal";
-import { addShopProduct, getAllShopProducts, updateShopProduct, updateShopProductStock } from "@/utils/serverActions/ShopProduct";
+import { addMultipleShopProducts, addShopProduct, getAllShopProducts, updateShopProduct, updateShopProductStock } from "@/utils/serverActions/ShopProduct";
 import { getSalesItemsByProductId } from "@/utils/serverActions/SalesItem";
 import { addAProductStockHistory, getAllProductStockHistoriesByProductId } from "@/utils/serverActions/ProductStockHistory";
 import { useSession } from "next-auth/react";
@@ -421,6 +421,69 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       setLoading(false);
     }
   };
+  const handleManageMultipleShopStock = async (shopId: string) => {
+    handleCloseManageShopStockModal();
+    if (!shopId || shopId === "") {
+      showAlert({
+        title: "Error",
+        text: "Please select a shop",
+        severity: "error",
+      })
+      return
+    }
+    try {
+
+      setLoading(true);
+      // const shopId = "69ce2dfa19fe312efc8ce7b9"
+
+      const products = await getAllProducts()
+
+      const shopProductsData = products?.data?.map((product: any) => {
+        return {
+          // shopId: shopId,
+          productId: product._id as string,
+          quantity: product.currentStock,
+          // userId: currentUser?._id as string,
+        }
+      })
+
+      console.log("shopProductsData", shopProductsData)
+      await addMultipleShopProducts({ shopId: shopId, userId: currentUser?._id as string, products: shopProductsData })
+
+
+      const productsStockUpdates = products?.data?.map((product: any) => {
+        return {
+          productId: product._id as string,
+          currentStock: 0,
+          initialQuantity: product.currentStock,
+          addedQuantity: product.currentStock,
+          operation: "subtract",
+          userId: currentUser?._id as string,
+        }
+      })
+
+      await updateMultipleProductsStock(productsStockUpdates)
+
+      showAlert({
+        title: "Success",
+        text: "Stock updated successfully",
+        severity: "success",
+      })
+
+      fetchProductData();
+      fetchProductStockHistory();
+      fetchShopProductStockHistory();
+    } catch (error: any) {
+      // console.log("error", error);
+      showAlert({
+        title: "Error",
+        text: error?.message || "An error occurred while updating product stock",
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleDeleteProduct = async () => {
     handleCloseDeleteProductModal();
@@ -509,6 +572,14 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
             <Typography variant="body1" fontWeight={700} gutterBottom>
               Product Details
             </Typography>
+            {/* <Button
+              variant="contained"
+              disableElevation
+              onClick={() => handleManageMultipleShopStock("")}
+              size="small"
+            >
+              Manage Multiple Shop Stock
+            </Button> */}
             <Box>
               {isAdmin && orderData?._id && (
 

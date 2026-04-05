@@ -110,6 +110,66 @@ export const addShopProduct = async (data: {
     return { success: false, message: err?.message || "An error occurred" };
   }
 };
+export const addMultipleShopProducts = async (data: {
+  shopId: string;
+  products: {
+    productId: string;
+    quantity: number;
+  }[];
+  userId: string;
+}) => {
+  try {
+    await connectDB();
+    // console.log("data", data);
+    const { shopId, products, userId } = data;
+
+    if (!shopId || !products || products.length === 0) {
+      return { success: false, message: "All fields are required" };
+    }
+
+    const shopProducts = products.map((product) => ({
+      shopId,
+      productId: product.productId,
+      quantity: product.quantity,
+    }));
+
+    console.log("shopProducts", shopProducts)
+
+    const result = await ShopProduct.insertMany(shopProducts);
+    console.log("result object", result);
+
+    // shopId: string;
+    // productId: string;
+    // shopProductId: string;
+    // initialQuantity: number;
+    // addedQuantity: number;
+    // operation: "add" | "subtract";
+    // userId: string;
+
+    const resultData = JSON.parse(JSON.stringify(result))
+
+    console.log("resultData", resultData)
+
+    const stockHistories = resultData.map((product: any) => ({
+      shopProductId: product._id,
+      shopId: shopId,
+      productId: product.productId,
+      initialQuantity: 0,
+      addedQuantity: product.quantity,
+      operation: "add" as "add" | "subtract",
+      userId: userId,
+    }));
+
+    console.log("stockHistories", stockHistories)
+
+    await addMultipleShopProductStockHistories(stockHistories);
+
+    return { success: true, shopProductId: JSON.parse(JSON.stringify(result))._id, message: "Product quantity added successfullu" };
+  } catch (err: any) {
+    console.log(err);
+    return { success: false, message: err?.message || "An error occurred" };
+  }
+};
 
 
 // update shop product

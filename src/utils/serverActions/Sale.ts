@@ -4,10 +4,11 @@ import { connectDB } from "@/lib/mongodb";
 import Sale from "@/models/Sale";
 import SalesItem from "@/models/SalesItem";
 import ShopProduct from "@/models/ShopProduct";
+import { ORDER_STATUS } from "@/types/constants";
 import mongoose from "mongoose";
-export const addNewSale = async (sale: { total_amount: number, profit: number, createdBy: string, shopId: string, discount: number, sub_total: number }) => {
+export const addNewSale = async (sale: { total_amount: number, profit: number, createdBy: string, shopId: string, discount: number, sub_total: number, status?: string }) => {
     try {
-        const { shopId, total_amount, profit, createdBy, discount, sub_total } = sale;
+        const { shopId, total_amount, profit, createdBy, discount, sub_total, status = ORDER_STATUS.DELIVERED } = sale;
         await connectDB();
         const newSale = await Sale.create({
             shopId,
@@ -15,6 +16,7 @@ export const addNewSale = async (sale: { total_amount: number, profit: number, c
             sub_total,
             discount,
             profit,
+            status,
             createdBy,
             updatedBy: []
         });
@@ -90,13 +92,14 @@ export const getAllSales = async (body?: { startDate?: string; endDate?: string 
 
 
 // get all sales
-export const getAllShopSales = async (body?: { shopId: string; startDate?: string; endDate?: string }) => {
+export const getAllShopSales = async (body: { shopId: string; startDate?: string; endDate?: string }) => {
     try {
-        const { startDate, endDate, shopId } = body || {};
+        const { startDate, endDate, shopId } = body;
         await connectDB();
         const shopIdObjectId = new mongoose.Types.ObjectId(shopId);
         const filter: any = {
             shopId: shopIdObjectId,
+            status: ORDER_STATUS.DELIVERED,
             isDeleted: false,
             isSuspended: false
         };
@@ -152,7 +155,68 @@ export const getAllShopSales = async (body?: { shopId: string; startDate?: strin
     }
 };
 
+export const getAllShopDraftSales = async (body: { shopId: string }) => {
+    try {
+        const { shopId } = body;
+        await connectDB();
+        const shopIdObjectId = new mongoose.Types.ObjectId(shopId);
+        const filter: any = {
+            shopId: shopIdObjectId,
+            status: ORDER_STATUS.DRAFT,
+            isDeleted: false,
+            isSuspended: false
+        };
+        const now = new Date();
+        const startOfDay = new Date(now.setHours(0, 0, 0, 0));
+        const endOfDay = new Date(now.setHours(23, 59, 59, 999));
+        filter.createdAt = { $gte: startOfDay, $lte: endOfDay };
 
+        // delete all DRAFT sales whose createdAt is not today, before getting todays DRAFT sales
+        await Sale.deleteMany({
+            shopId: shopIdObjectId,
+            status: ORDER_STATUS.DRAFT,
+            createdAt: { $lt: startOfDay, $gt: endOfDay }
+        });
+
+        const sales = await Sale.aggregate([
+            { $match: filter },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "createdBy",
+                    foreignField: "_id",
+                    as: "createdBy"
+                }
+            },
+            {
+                $unwind: {
+                    path: "$createdBy",
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+            {
+                $lookup: {
+                    from: "shops",
+                    localField: "shopId",
+                    foreignField: "_id",
+                    as: "shopId"
+                }
+            },
+            {
+                $unwind: {
+                    path: "$shopId",
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+            { $sort: { createdAt: -1 } }
+        ]);
+
+        return { success: true, data: JSON.parse(JSON.stringify(sales)) };
+    } catch (err: any) {
+        console.log(err);
+        return { success: false, message: err?.message || "An error occurred" };
+    }
+};
 
 // get sale by id
 export const getSaleById = async (id: string) => {
@@ -311,6 +375,42 @@ export const deleteSale = async (saleId: string) => {
         return {
             success: true,
             data: JSON.parse(JSON.stringify(updatedSale)),
+            message: "Sale deleted successfully"
+        };
+    } catch (err: any) {
+        console.log(err);
+        return { success: false, message: err?.message || "An error occurred" };
+    }
+}
+
+
+// delete draft sale
+export const deleteDraftSale = async (saleId: string) => {
+    try {
+        await connectDB();
+
+        // 1. Fetch all SalesItems for this sale to revert stock
+        const salesItems = await SalesItem.find({ saleId });
+
+        if (salesItems.length > 0) {
+            // 2. Revert stock in ShopProduct
+            const bulkUpdates = salesItems.map((item) => ({
+                updateOne: {
+                    filter: { _id: item.shopProductId },
+                    update: { $inc: { quantity: item.qty } },
+                },
+            }));
+            await ShopProduct.bulkWrite(bulkUpdates);
+
+            // 3. Mark SalesItems as deleted and suspended
+            await SalesItem.deleteMany({ saleId });
+        }
+
+        // 4. Mark Sale as deleted and suspended
+        await Sale.findByIdAndDelete(saleId);
+
+        return {
+            success: true,
             message: "Sale deleted successfully"
         };
     } catch (err: any) {

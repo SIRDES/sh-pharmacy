@@ -29,7 +29,7 @@ import ConfirmationModal from "../ConfirmationModal";
 import { useRouter } from "next/navigation";
 import { showAlert } from "../Alerts";
 import { ORDER_STATUS } from "@/types/constants";
-import { currencyFormatter, formatDate } from "@/utils/services/utils";
+import { currencyFormatter } from "@/utils/services/utils";
 import { getAllProductStockHistories } from "@/utils/serverActions/ProductStockHistory";
 import { useSession } from "next-auth/react";
 import { deleteDraftSale, getAllShopDraftSales } from "@/utils/serverActions/Sale";
@@ -139,8 +139,8 @@ export default function AllDrafts({ handleEditDraft }: any) {
 
     const handleSortByIDAsc = () => {
         const sortedOrders = orders.sort((a: any, b: any) => {
-            const orderA = a.salesNumber
-            const orderB = b.salesNumber
+            const orderA = a.id
+            const orderB = b.id
             if (sortAsc) {
                 if (orderA > orderB) return -1;
                 else if (orderA < orderB) return 1;
@@ -238,7 +238,7 @@ export default function AllDrafts({ handleEditDraft }: any) {
                 message={`Are you sure you want to delete this sale from draft?`}
                 title={"Delete Sale from draft"}
             />
-            {/* <Box
+            <Box
                 display={"flex"}
                 justifyContent={"space-between"}
                 mb={2}
@@ -261,9 +261,9 @@ export default function AllDrafts({ handleEditDraft }: any) {
                     />
                 </Box>
 
-            </Box> */}
-            {/* <Divider /> */}
-            <Box mb={4}>
+            </Box>
+            <Divider />
+            <Box mt={2} px={{ xs: 1, sm: 2, md: 3 }} mb={4}>
                 <TableContainer component={Paper}>
                     <Table
                         stickyHeader
@@ -291,10 +291,12 @@ export default function AllDrafts({ handleEditDraft }: any) {
                                         />
                                     </Tooltip>
                                 </StyledTableCell>
-                                {/* <StyledTableCell>Name</StyledTableCell> */}
+                                <StyledTableCell>Name</StyledTableCell>
                                 <StyledTableCell>
                                     Total Amount{" "}
                                 </StyledTableCell>
+                                <StyledTableCell>Contact</StyledTableCell>
+                                <StyledTableCell>Address</StyledTableCell>
                                 <StyledTableCell>Date</StyledTableCell>
                                 <StyledTableCell>Status</StyledTableCell>
                                 <StyledTableCell></StyledTableCell>
@@ -310,17 +312,23 @@ export default function AllDrafts({ handleEditDraft }: any) {
 
                                         >
                                             <StyledTableCell>
-                                                {order?.salesNumber}
+                                                {order?.id}
                                             </StyledTableCell>
-
+                                            <StyledTableCell>
+                                                {`${order?.customer_name}`.toUpperCase()}
+                                            </StyledTableCell>
                                             <StyledTableCell>
                                                 {currencyFormatter(order?.total_amount || 0)}
                                             </StyledTableCell>
 
-
-
                                             <StyledTableCell>
-                                                {formatDate(order?.createdAt)}
+                                                {order?.customer_phoneNumber}
+                                            </StyledTableCell>
+                                            <StyledTableCell>
+                                                {order?.customer_address}
+                                            </StyledTableCell>
+                                            <StyledTableCell>
+                                                {order?.createdAt}
                                             </StyledTableCell>
                                             <StyledTableCell>
                                                 {order?.status}

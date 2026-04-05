@@ -346,7 +346,7 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
 
       showAlert({
         title: "Success",
-        text: "Order created successfully",
+        text: "Sales updated successfully",
         severity: "success",
         handleConfirmButtonClick() {
           router.back()
@@ -571,8 +571,19 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
                               size="small"
                               color="error"
                               onClick={() => {
-                                setOrderProducts((prev: any) => prev.filter((p: any) => p._id !== product._id));
-                                setSelectedOrderProductsSKU((prev: any) => prev.filter((id: any) => id !== product._id));
+                                setOrderProducts((prev: any) =>
+                                  prev.filter(
+                                    (selectedProduct: any) =>
+                                      selectedProduct?._id !==
+                                      product._id
+                                  )
+                                );
+                                setSelectedOrderProductsSKU((prev: number[]) =>
+                                  prev.filter(
+                                    (selectedProduct: number) =>
+                                      selectedProduct !== product.shopProductId
+                                  )
+                                );
                               }}
                             >
                               <DeleteIcon fontSize="small" />

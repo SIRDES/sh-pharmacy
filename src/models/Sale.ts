@@ -1,5 +1,6 @@
 import mongoose, { Model, Types } from "mongoose";
 import Counter from "./Counter"; // Import Counter model
+import { ORDER_STATUS } from "@/types/constants";
 
 export type ISale = mongoose.Document & {
   _id: string;
@@ -9,6 +10,7 @@ export type ISale = mongoose.Document & {
   profit: number;
   sub_total?: number;
   discount?: number;
+  status: string;
   createdBy: Types.ObjectId | null;
   updatedBy: Types.ObjectId[] | null;
   isDeleted: boolean;
@@ -23,6 +25,7 @@ const saleSchema = new mongoose.Schema(
     discount: { type: Number, required: true },
     shopId: { type: Types.ObjectId, ref: "Shop", required: true, index: true },
     profit: { type: Number, required: true },
+    status: { type: String, enum: ORDER_STATUS, required: true, index: true },
     createdBy: {
       type: Types.ObjectId,
       ref: "User",

@@ -36,6 +36,7 @@ import { addSalesItems } from "@/utils/serverActions/SalesItem";
 import { addNewSale } from "@/utils/serverActions/Sale";
 import { useReactToPrint } from "react-to-print";
 import SaleRecieptPDF from "./SaleReciept";
+import { ORDER_STATUS } from "@/types/constants";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -237,7 +238,7 @@ function AddNewOrder() {
   };
 
 
-  const Submit = async (e: any, shouldPrint: boolean = false) => {
+  const Submit = async (e: any, shouldPrint: boolean = false, status: string = ORDER_STATUS.DELIVERED) => {
     if (e) e.preventDefault();
     try {
       // console.log("orderProducts", orderProducts)
@@ -250,6 +251,7 @@ function AddNewOrder() {
         sub_total: generateOrderSubTotalAmount(),
         createdBy: currentUser?._id || "",
         shopId: currentUser?.assignedShop?._id as string,
+        status: status,
       };
 
       setLoading(true);
@@ -301,10 +303,10 @@ function AddNewOrder() {
             ...item,
             product: products.find((p: any) => p?.product?._id === item.productId)?.product
           })),
-          shopId: products.find((p: any) => p?.shopId === currentUser?.assignedShop?._id)?.shopId || { 
+          shopId: products.find((p: any) => p?.shopId === currentUser?.assignedShop?._id)?.shopId || {
             name: currentUser?.assignedShop?.name,
             tin: (currentUser?.assignedShop as any)?.tin,
-            tel: (currentUser?.assignedShop as any)?.tel 
+            tel: (currentUser?.assignedShop as any)?.tel
           },
           createdBy: { name: currentUser?.name }
         };
@@ -314,14 +316,15 @@ function AddNewOrder() {
       setOrderProducts([]);
       setSelectedOrderProductsSKU([]);
       setSelectedProduct(null);
+      fetchProductsData();
 
       showAlert({
         title: "Success",
         text: "Sales saved successfully",
         severity: "success",
-        handleConfirmButtonClick() {
-          router.back()
-        },
+        // handleConfirmButtonClick() {
+        //   router.back()
+        // },
       })
     } catch (error: unknown) {
       // Generic error handling
@@ -488,8 +491,9 @@ function AddNewOrder() {
                   <Button
                     fullWidth
                     variant="outlined"
+
                     onClick={() => router.back()}
-                    sx={{ py: 1.5, borderRadius: 2 }}
+                    sx={{ p: 0.2, borderRadius: 2 }}
                   >
                     Cancel
                   </Button>
@@ -498,10 +502,21 @@ function AddNewOrder() {
                     variant="contained"
                     type="button"
                     disabled={loading || !orderProducts?.length}
-                    onClick={(e) => Submit(e, false)}
-                    sx={{ py: 1.5, borderRadius: 2, boxShadow: 2 }}
+                    onClick={(e) => Submit(e, false, ORDER_STATUS.DELIVERED)}
+                    sx={{ p: 0.2, borderRadius: 2, boxShadow: 2 }}
                   >
                     Save
+                  </Button>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="warning"
+                    type="button"
+                    disabled={loading || !orderProducts?.length}
+                    onClick={(e) => Submit(e, false, ORDER_STATUS.DRAFT)}
+                    sx={{ p: 0.2, borderRadius: 2, boxShadow: 2 }}
+                  >
+                    Save as draft
                   </Button>
                   <Button
                     fullWidth
@@ -509,8 +524,8 @@ function AddNewOrder() {
                     color="success"
                     type="button"
                     disabled={loading || !orderProducts?.length}
-                    onClick={(e) => Submit(e, true)}
-                    sx={{ py: 1.5, borderRadius: 2, boxShadow: 2, whiteSpace: "nowrap" }}
+                    onClick={(e) => Submit(e, true, ORDER_STATUS.DELIVERED)}
+                    sx={{ p: 0.2, borderRadius: 2, boxShadow: 2, fontSize: "0.8rem" }}
                   >
                     Save & Print
                   </Button>
@@ -617,7 +632,7 @@ function AddNewOrder() {
           </Card>
         </Grid>
       </Grid>
-      
+
       {/* Hidden Receipt for Printing */}
       <Box sx={{ display: "none" }}>
         {printingData && (

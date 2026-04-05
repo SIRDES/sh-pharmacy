@@ -1,4 +1,5 @@
 import mongoose, { Model, Types } from "mongoose";
+import Counter from "./Counter";
 
 export type IProduct = mongoose.Document & {
   _id: string;
@@ -40,6 +41,27 @@ productSchema.post("save", function (error: any, doc: any, next: any) {
     next(new Error("Product name already exist"));
   } else {
     next(error);
+  }
+});
+
+
+// Pre-save hook to auto-generate unique sequential sku
+productSchema.pre("save", async function (next) {
+  const doc = this as any;
+  if (doc.isNew) {
+    try {
+      const counter = await Counter.findOneAndUpdate(
+        { id: "productSKU" },
+        { $inc: { seq: 1 } },
+        { new: true, upsert: true }
+      );
+      doc.sku = counter.seq;
+      next();
+    } catch (error: any) {
+      next(error);
+    }
+  } else {
+    next();
   }
 });
 

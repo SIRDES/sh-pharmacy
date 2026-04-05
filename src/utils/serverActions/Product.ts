@@ -68,6 +68,7 @@ export const addProduct = async (
     // Get the latest SKU to continue numbering
     const lastProduct = await Product.findOne().sort({ _id: -1 });
     let nextSku = lastProduct?.sku ? lastProduct.sku + 1 : 1;
+    
     const productsToInsert = [];
     const stockHistoriesToInsert: {
       productId: string;

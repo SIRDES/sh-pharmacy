@@ -56,11 +56,12 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
     // const vat = vatExclusive * 0.15;
 
     const receiptStyles: CSSProperties = {
-        width: "80mm",
+        width: "79mm",
         padding: "10mm 4mm",
+        paddingTop: "8px",
         backgroundColor: "#fff",
         color: "#000",
-        fontFamily: "'Courier New', Courier, monospace",
+        fontFamily: "Roboto, Helvetica, Arial, sans-serif",
         fontSize: "12px",
         lineHeight: "1.4",
         margin: "0 auto",
@@ -69,7 +70,7 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
 
     const sectionDivider: CSSProperties = {
         borderTop: "1px dashed #000",
-        margin: "8px 0"
+        margin: "2px 0"
     };
 
     const textCenter: CSSProperties = { textAlign: "center" };
@@ -81,8 +82,8 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
         <div style={receiptStyles} id="sale-receipt">
             {/* Header */}
             <div style={textCenter}>
-                <div style={{ textDecoration: "underline", marginBottom: "4px" }}>Sale Receipt</div>
-                <div style={{ ...bold, fontSize: "16px", textTransform: "uppercase" }}>
+                <div style={{ textDecoration: "underline", marginBottom: "2px", paddingBottom: "4px" }}>Sale Receipt</div>
+                <div style={{ ...bold, fontSize: "12px", textTransform: "uppercase" }}>
                     STEVHENS PHARMACY
                     {/* {shopId?.name || "MAXMART 37"} */}
                 </div>
@@ -112,10 +113,10 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
                 <tbody>
                     {salesItems.map((item, index) => (
                         <tr key={index} style={{ verticalAlign: "top" }}>
-                            <td style={textLeft}>{item.product.name.toUpperCase()}</td>
-                            <td style={textCenter}>{item.qty.toFixed(2)}</td>
-                            <td style={textRight}>{item.unit_price.toFixed(2)}</td>
-                            <td style={textRight}>{item.total_amount.toFixed(2)}</td>
+                            <td style={{ ...textLeft, fontSize: "10px" }}>{item.product.name.toUpperCase()}</td>
+                            <td style={{ ...textCenter, fontSize: "10px" }}>{item.qty.toFixed(2)}</td>
+                            <td style={{ ...textRight, fontSize: "10px" }}>{item.unit_price.toFixed(2)}</td>
+                            <td style={{ ...textRight, fontSize: "10px" }}>{item.total_amount.toFixed(2)}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -163,7 +164,7 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
 
             <div style={{ margin: "8px 0" }}></div>
 
-            {/* <div style={{ ...bold, display: "flex", justifyContent: "space-between", fontSize: "14px" }}>
+            {/* <div style={{ ...bold, display: "flex", justifyContent: "space-between", fontSize: "12px" }}>
                 <span>VAT Inclusive</span>
                 <span>GHS {total_amount.toFixed(2)}</span>
             </div> */}
@@ -190,7 +191,7 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
             {/* <div>TOTAL AMOUNT BEFORE DISCOUNT: {sub_total.toFixed(2)}</div> */}
             {/* </div> */}
 
-            <div style={{ ...textCenter, marginTop: "12px", fontSize: "10px" }}>
+            <div style={{ ...textCenter, marginTop: "12px", fontSize: "12px" }}>
                 {/* <div>Order online maxmartonline.com / IOS / Playstore</div> */}
                 <div>Your Assistant Was {createdBy?.name || "GRACE"}</div>
                 <div style={bold}>THANKS FOR SHOPPING WITH US</div>

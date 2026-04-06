@@ -360,37 +360,6 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
 
             if (shouldPrint) {
 
-                // orderData: {
-                //     _id: string;
-                //     createdAt: string;
-                //     total_amount: number;
-                //     sub_total: number;
-                //     discount: number;
-                //     shopId ?: {
-                //         name: string;
-                //         tin?: string;
-                //         tel?: string;
-                //     };
-                //     createdBy ?: {
-                //         name: string;
-                //     };
-                //     salesItems: Array<{
-                //         product: {
-                //             name: string;
-                //         };
-                //         qty: number;
-                //         unit_price: number;
-                //         total_amount: number;
-                //     }>;
-                //     cashReceived ?: number;
-                //     changeReturned ?: number;
-                //     drawer ?: string;
-                //     mrc ?: string;
-                //     salesNumber: number;
-                // };
-
-
-
                 const fullOrderData = {
                     ...orderResponse.data,
                     salesItems: items,
@@ -402,7 +371,8 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                     createdBy: { name: orderDetails?.createdBy?.name || "N/A" }
                 };
                 setPrintingData(fullOrderData);
-                return
+                // setHideAllButton(true);
+                // return
             }
 
             showAlert({
@@ -638,6 +608,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                                         Save & Print
                                     </Button>
                                 </Box>
+
                             </Box>
                         </form>
                     </Card>

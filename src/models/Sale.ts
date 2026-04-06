@@ -38,16 +38,21 @@ const saleSchema = new mongoose.Schema(
     isDeleted: {
       type: Boolean,
       default: false,
+      index: true
     },
     isSuspended: {
       type: Boolean,
       default: false,
+      index: true
     },
   },
   {
     timestamps: true,
   }
 );
+
+// Compound index for optimized filtering on sales list
+saleSchema.index({ shopId: 1, status: 1, isDeleted: 1, isSuspended: 1, createdAt: -1 });
 
 // Pre-save hook to auto-generate unique sequential salesNumber
 saleSchema.pre("save", async function (next) {
@@ -68,6 +73,7 @@ saleSchema.pre("save", async function (next) {
     next();
   }
 });
+
 
 const Sale: Model<ISale> =
   mongoose.models.Sale || mongoose.model<ISale>("Sale", saleSchema);

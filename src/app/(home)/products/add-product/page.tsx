@@ -263,6 +263,7 @@ export default function AddProductsPage() {
                           <DatePicker
                             {...field}
                             label="Expiry Date"
+                            views={['year', 'month', 'day']}
                             value={dayjs(field.value)}
                             onChange={(date) => field.onChange(date?.toDate())}
                           />

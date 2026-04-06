@@ -151,6 +151,9 @@ export const addSalesItems = async ({
             saleId: saleObjectId,
         }));
 
+        // Insert all sale items
+        await SalesItem.insertMany(saleItemsWithSaleId);
+
         // Prepare bulk update operations for ShopProduct
         const bulkUpdates = salesItems.map((item) => ({
             updateOne: {
@@ -159,24 +162,10 @@ export const addSalesItems = async ({
             },
         }));
 
-        const session = await mongoose.startSession();
-        try {
-            await session.withTransaction(async () => {
-                // Insert all sale items within the transaction
-                await SalesItem.insertMany(saleItemsWithSaleId, { session });
+        await ShopProduct.bulkWrite(bulkUpdates);
 
-                // Update product inventory within the transaction
-                await ShopProduct.bulkWrite(bulkUpdates, { session });
-            });
-            return { success: true };
-        } catch (txnError: any) {
-            console.error("Transaction failed in addSalesItems:", txnError);
-            throw txnError; // Let the outer catch handle it
-        } finally {
-            await session.endSession();
-        }
+        return { success: true };
     } catch (error: any) {
-        console.error("Error in addSalesItems:", error);
         return {
             success: false,
             message: error?.message || "An error occurred",

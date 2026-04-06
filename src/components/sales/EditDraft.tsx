@@ -47,7 +47,8 @@ import { currencyFormatter } from "@/utils/services/utils";
 import { getSaleById, updateSale } from "@/utils/serverActions/Sale";
 import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
 import { addSalesItems, deleteSalesItems } from "@/utils/serverActions/SalesItem";
-
+import { useReactToPrint } from "react-to-print";
+import SaleRecieptPDF from "./SaleReciept";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -106,6 +107,8 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
     >([]);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [discount, setDiscount] = useState("")
+    const [printingData, setPrintingData] = useState<any>(null);
+    const componentRef = useRef<HTMLDivElement>(null);
 
     const menuRef = useRef(null);
     const handleMenuClick = () => {
@@ -115,6 +118,20 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
     useEffect(() => {
         handleMenuClick()
     }, [])
+
+    const handlePrint = useReactToPrint({
+        contentRef: componentRef,
+    });
+
+    useEffect(() => {
+        if (printingData) {
+            handlePrint();
+            // Optionally clear printing data after a delay or success
+            // setPrintingData(null);
+        }
+    }, [printingData, handlePrint]);
+
+
     const fetchOrderData = async () => {
         setProducts([]);
 
@@ -214,7 +231,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
             setSelectedProduct(null);
             return;
         }
-        setSelectedProduct({ ...value, total_amount: 0, qty: 0, profilt: 0 });
+        setSelectedProduct({ ...value, total_amount: 0, qty: 0, profit: 0 });
     };
     const handleAddProduct = () => {
         console.log("selectedProduct", selectedProduct)
@@ -277,22 +294,19 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
         return total;
     };
 
-    const Submit = async (e: any) => {
+
+    console.log("orderProducts >>>>>>>>", orderProducts)
+    console.log("old orderDetails >>>>>>>>", orderDetails)
+    const Submit = async (e: any, shouldPrint: boolean = false, status: string = ORDER_STATUS.DELIVERED) => {
         e.preventDefault();
         setLoading(true);
         try {
-
-            // console.log("orderProducts", orderProducts)
-
-
-            // add order
-            // order.customerId, order.total_amount, order.subtotal_amount, order.status, order.createdBy
-
             const orderData = {
                 total_amount: generateOrderTotalAmount(),
                 profit: generateOrderProfit(),
                 discount: +discount,
                 sub_total: generateOrderSubTotalAmount(),
+                status: status,
                 updatedBy: [
                     ...(orderDetails.updatedBy || []),
                     ...(currentUser?._id ? [currentUser._id] : []),
@@ -300,15 +314,15 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                 // shopId: currentUser?.assignedShop?._id as string,
             };
             const orderResponse = await updateSale({ saleId: orderDetails._id, saleData: orderData })
-            // console.log("orderResponse", orderResponse)
-            if (!orderResponse.success) {
-                showAlert({
-                    title: "Error",
-                    text: orderResponse?.message || "An error occurred!",
-                    severity: "error"
-                })
-                return
-            }
+            console.log("updateSale orderResponse", orderResponse)
+            // if (!orderResponse.success) {
+            //     showAlert({
+            //         title: "Error",
+            //         text: orderResponse?.message || "An error occurred!",
+            //         severity: "error"
+            //     })
+            //     return
+            // }
 
 
             await deleteSalesItems(orderDetails.salesItems)
@@ -318,27 +332,76 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
             // item.productId, item.quantity, item.totalAmount
             // posOrderItems
             const items: any[] = []
+            console.log("orderProducts >>>>>>>>", orderProducts)
             for (const item of orderProducts) {
                 items.push({
                     shopProductId: item._id,
                     productId: item.product._id,
                     total_amount: item.total_amount,
+                    product: { name: item?.product?.name || "N/A" },
                     unit_price: item?.product?.sellingPrice,
                     profit: item.profit,
                     qty: item.qty,
                     createdBy: currentUser?._id || ""
                 })
             }
-            // console.log("addSalesItems>>>>", items)
+            console.log("addSalesItems>>>>", items)
             const orderItemsResponse = await addSalesItems({ saleId: orderResponse?.data?._id as string, salesItems: items })
-            // console.log("orderItemsResponse", orderItemsResponse)
+            console.log("addSalesItems orderItemsResponse", orderItemsResponse)
 
-            if (!orderItemsResponse.success) {
-                showAlert({
-                    title: "Error",
-                    text: orderItemsResponse?.message || "An error occurred!",
-                    severity: "error"
-                })
+            // if (!orderItemsResponse.success) {
+            //     showAlert({
+            //         title: "Error",
+            //         text: orderItemsResponse?.message || "An error occurred!",
+            //         severity: "error"
+            //     })
+            //     return
+            // }
+
+            if (shouldPrint) {
+
+                // orderData: {
+                //     _id: string;
+                //     createdAt: string;
+                //     total_amount: number;
+                //     sub_total: number;
+                //     discount: number;
+                //     shopId ?: {
+                //         name: string;
+                //         tin?: string;
+                //         tel?: string;
+                //     };
+                //     createdBy ?: {
+                //         name: string;
+                //     };
+                //     salesItems: Array<{
+                //         product: {
+                //             name: string;
+                //         };
+                //         qty: number;
+                //         unit_price: number;
+                //         total_amount: number;
+                //     }>;
+                //     cashReceived ?: number;
+                //     changeReturned ?: number;
+                //     drawer ?: string;
+                //     mrc ?: string;
+                //     salesNumber: number;
+                // };
+
+
+
+                const fullOrderData = {
+                    ...orderResponse.data,
+                    salesItems: items,
+                    shopId: {
+                        name: orderDetails?.shopId?.name || "N/A",
+                        // tin: (currentUser?.assignedShop as any)?.tin,
+                        // tel: (currentUser?.assignedShop as any)?.tel
+                    },
+                    createdBy: { name: orderDetails?.createdBy?.name || "N/A" }
+                };
+                setPrintingData(fullOrderData);
                 return
             }
 
@@ -373,6 +436,14 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
     return (
         <Box sx={{ p: 2 }}>
             <LoadingAlert open={loading} />
+            {/* Hidden Receipt for Printing */}
+            <Box sx={{ display: "none" }}>
+                {printingData && (
+                    <div ref={componentRef}>
+                        <SaleRecieptPDF orderData={printingData} />
+                    </div>
+                )}
+            </Box>
 
             <Box sx={{ mb: 2, display: "flex", alignItems: "center", gap: 2 }}>
                 <IconButton
@@ -509,7 +580,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                                     </Grid>
                                 </Grid>
 
-                                <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
+                                {/* <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
                                     <Button fullWidth variant="outlined" onClick={handleGoToDrafts} sx={{ py: 1.5, borderRadius: 2 }}>
                                         Cancel
                                     </Button>
@@ -521,6 +592,50 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                                         sx={{ py: 1.5, borderRadius: 2, boxShadow: 2 }}
                                     >
                                         Save Changes
+                                    </Button>
+                                </Box> */}
+
+                                <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
+                                    <Button
+                                        fullWidth
+                                        variant="outlined"
+
+                                        onClick={handleGoToDrafts}
+                                        sx={{ p: 0.2, borderRadius: 2 }}
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        fullWidth
+                                        variant="contained"
+                                        type="button"
+                                        disabled={loading || !orderProducts?.length}
+                                        onClick={(e) => Submit(e, false, ORDER_STATUS.DELIVERED)}
+                                        sx={{ p: 0.2, borderRadius: 2, boxShadow: 2 }}
+                                    >
+                                        Save
+                                    </Button>
+                                    <Button
+                                        fullWidth
+                                        variant="contained"
+                                        color="warning"
+                                        type="button"
+                                        disabled={loading || !orderProducts?.length}
+                                        onClick={(e) => Submit(e, false, ORDER_STATUS.DRAFT)}
+                                        sx={{ p: 0.2, borderRadius: 2, boxShadow: 2 }}
+                                    >
+                                        Save as draft
+                                    </Button>
+                                    <Button
+                                        fullWidth
+                                        variant="contained"
+                                        color="success"
+                                        type="button"
+                                        disabled={loading || !orderProducts?.length}
+                                        onClick={(e) => Submit(e, true, ORDER_STATUS.DELIVERED)}
+                                        sx={{ p: 0.2, borderRadius: 2, boxShadow: 2, fontSize: "0.8rem" }}
+                                    >
+                                        Save & Print
                                     </Button>
                                 </Box>
                             </Box>

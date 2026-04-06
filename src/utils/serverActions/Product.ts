@@ -18,7 +18,7 @@ export const getCurrentUser = async () => {
 
 export const getAllProducts = async ({
   page = 1,
-  limit = 2000,
+  limit = 50,
   search = "",
   filter = "all",
 }: {

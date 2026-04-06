@@ -288,6 +288,7 @@ export default function EditProduct({ params }: { params: Promise<{ id: string }
                     <DatePicker
                       value={selectedDate}
                       onChange={hanldleExpiryDateChange}
+                      views={['year', 'month', 'day']}
                       minDate={dayjs(new Date())}
                       slotProps={{
                         textField: {

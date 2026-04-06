@@ -215,7 +215,7 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
       setSelectedProduct(null);
       return;
     }
-    setSelectedProduct({ ...value, total_amount: 0, qty: 0, profilt: 0 });
+    setSelectedProduct({ ...value, total_amount: 0, qty: 0, profit: 0 });
   };
   const handleAddProduct = () => {
     console.log("selectedProduct", selectedProduct)

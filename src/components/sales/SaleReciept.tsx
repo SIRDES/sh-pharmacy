@@ -84,7 +84,7 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
             <div style={textCenter}>
                 <div style={{ textDecoration: "underline", marginBottom: "2px", paddingBottom: "4px" }}>Sale Receipt</div>
                 <div style={{ ...bold, fontSize: "12px", textTransform: "uppercase" }}>
-                    STEVHENS PHARMACY
+                    STEVHANS PHARMACY
                     {/* {shopId?.name || "MAXMART 37"} */}
                 </div>
                 {/* <div>TIN: {shopId?.tin || "C0003946258"}</div> */}

@@ -4,11 +4,14 @@ import {
   Box,
   Button,
   Divider,
+  FormControl,
   InputAdornment,
+  InputLabel,
   ListItem,
   Menu,
   MenuItem,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -69,6 +72,11 @@ export default function Products() {
   // console.log("currentUser", currentUser)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalCount, setTotalCount] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [filter, setFilter] = useState<"all" | "expiringSoon" | "expired">("all");
 
   const [loading, setLoading] = useState(false);
 
@@ -104,12 +112,22 @@ export default function Products() {
     setPage(0);
   };
 
-  const fetchProductsData = async () => {
+  const fetchProductsData = async (
+    currentPage = page,
+    limit = rowsPerPage,
+    searchQuery = search,
+    filterStatus = filter
+  ) => {
     setLoading(true);
-    setFetchedOrders([]);
-    setOrders([]);
+    // setFetchedOrders([]);
+    // setOrders([]);
     try {
-      const res = await getAllProducts();
+      const res = await getAllProducts({
+        page: currentPage + 1,
+        limit,
+        search: searchQuery,
+        filter: filterStatus,
+      });
       // console.log("res", res);
       if (!res.success) {
         showAlert({
@@ -122,6 +140,8 @@ export default function Products() {
       // console.log("all products", res?.data)
       setFetchedOrders(res?.data);
       setOrders(res?.data);
+      setTotalCount(res?.metadata?.totalCount || 0);
+      setTotalPages(res?.metadata?.totalPages || 0);
     } catch (error: any) {
       console.log("error", error);
       showAlert({
@@ -134,9 +154,22 @@ export default function Products() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (searchInput.length >= 3 || searchInput.length === 0) {
+        setSearch(searchInput);
+      } else {
+        setSearch("");
+      }
+    }, 500);
+
+    return () => clearTimeout(handler);
+  }, [searchInput]);
+
   useEffect(() => {
     fetchProductsData();
-  }, []);
+  }, [page, rowsPerPage, search, filter]);
 
   const handleProductStockConfirm = async () => {
     setOpenManageProductStockModal(false);
@@ -223,13 +256,13 @@ export default function Products() {
 
 
   const handleSearchByProductNameOrOrderNumber = (e: any) => {
-    const value = e.target.value;
-    const filteredOrders = fetchedOrders.filter(
-      (order: any) =>
-        order?.name?.toUpperCase().includes(value.toUpperCase()) ||
-        order?.sku?.toString().includes(value)
-    );
-    setOrders(filteredOrders);
+    setSearchInput(e.target.value);
+    setPage(0);
+  };
+
+  const handleFilterChange = (event: any) => {
+    setFilter(event.target.value);
+    setPage(0);
   };
 
   const handleCloseManageShopStockModal = () => {
@@ -287,9 +320,10 @@ export default function Products() {
           {/* <Button variant="contained" onClick={handleUpdateProductName}>handleUpdateProductName</Button> */}
           <Box display={"flex"} gap={3}>
             <TextField
-              fullWidth
+              sx={{ minWidth: 250 }}
               size="small"
               placeholder="Search product"
+              value={searchInput}
               onChange={handleSearchByProductNameOrOrderNumber}
               InputProps={{
                 startAdornment: (
@@ -299,7 +333,20 @@ export default function Products() {
                 ),
               }}
             />
-
+            <FormControl size="small" sx={{ minWidth: 200 }}>
+              <InputLabel id="expiry-filter-label">Expiry Status</InputLabel>
+              <Select
+                labelId="expiry-filter-label"
+                id="expiry-filter"
+                value={filter}
+                label="Expiry Status"
+                onChange={handleFilterChange}
+              >
+                <MenuItem value="all">All Products</MenuItem>
+                <MenuItem value="expiringSoon">Expiring Soon</MenuItem>
+                <MenuItem value="expired">Expired</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
           {currentUser?.role === USER_ROLES.ADMIN && (
             <Box>
@@ -401,75 +448,73 @@ export default function Products() {
               <TableBody>
                 {orders &&
                   !!orders?.length &&
-                  orders
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((order: any, index: number) => (
-                      <StyledTableRow
-                        key={index}
-                        onClick={() =>
-                          // isAdmin &&
-                          router.push(`/products/${order?._id}`)
-                        }
-                        // sx={{ cursor: isAdmin ? "pointer" : "default" }}
-                        sx={{ cursor: "pointer" }}
-                      >
+                  orders.map((order: any, index: number) => (
+                    <StyledTableRow
+                      key={index}
+                      onClick={() =>
+                        // isAdmin &&
+                        router.push(`/products/${order?._id}`)
+                      }
+                      // sx={{ cursor: isAdmin ? "pointer" : "default" }}
+                      sx={{ cursor: "pointer" }}
+                    >
 
-                        <StyledTableCell align="center">
-                          {order?.sku}
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          {`${order?.name}`?.toUpperCase()}
-                        </StyledTableCell>
-                        {isAdmin && <StyledTableCell>
-                          {currencyFormatter(order?.costPrice || 0)}
-                        </StyledTableCell>}
+                      <StyledTableCell align="center">
+                        {order?.sku}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {`${order?.name}`?.toUpperCase()}
+                      </StyledTableCell>
+                      {isAdmin && <StyledTableCell>
+                        {currencyFormatter(order?.costPrice || 0)}
+                      </StyledTableCell>}
 
 
-                        <StyledTableCell>
-                          {currencyFormatter(order?.sellingPrice || 0)}
-                        </StyledTableCell>
+                      <StyledTableCell>
+                        {currencyFormatter(order?.sellingPrice || 0)}
+                      </StyledTableCell>
 
 
 
-                        {!isAdmin && <StyledTableCell>
-                          {order?.shopProducts?.length > 0 ? order?.shopProducts?.find((shopProduct: any) => shopProduct?.shopId === currentUser?.assignedShop?._id)?.quantity || 0 : 0}
-                        </StyledTableCell>}
+                      {!isAdmin && <StyledTableCell>
+                        {order?.shopProducts?.length > 0 ? order?.shopProducts?.find((shopProduct: any) => shopProduct?.shopId === currentUser?.assignedShop?._id)?.quantity || 0 : 0}
+                      </StyledTableCell>}
 
-                        {isAdmin && <StyledTableCell align="center">
-                          {order?.currentStock}
-                        </StyledTableCell>}
+                      {isAdmin && <StyledTableCell align="center">
+                        {order?.currentStock}
+                      </StyledTableCell>}
 
-                        {isAdmin && <StyledTableCell align="center">
-                          {order?.shopProducts?.length > 0 ? order?.shopProducts?.map((shopProduct: any) => shopProduct?.quantity).reduce((a: number, b: number) => a + b, 0) : 0}
-                        </StyledTableCell>}
-                        <StyledTableCell>
-                          {order?.expiryDate ? dayjs(order.expiryDate).format("ddd DD MMM YYYY") : ""}
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          {order?.expiryDate
-                            ? (() => {
-                              const today = dayjs();
-                              const expiry = dayjs(order.expiryDate);
-                              if (expiry.isBefore(today, "day") || expiry.isSame(today, "day")) {
-                                return "Expired";
-                              } else if (expiry.isBefore(today.add(3, "month"), "day")) {
-                                return "Expiring soon";
-                              } else {
-                                return "Not yet";
-                              }
-                            })()
-                            : ""}
-                        </StyledTableCell>
+                      {isAdmin && <StyledTableCell align="center">
+                        {order?.shopProducts?.length > 0 ? order?.shopProducts?.map((shopProduct: any) => shopProduct?.quantity).reduce((a: number, b: number) => a + b, 0) : 0}
+                      </StyledTableCell>}
+                      <StyledTableCell>
+                        {order?.expiryDate ? dayjs(order.expiryDate).format("ddd DD MMM YYYY") : ""}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {order?.expiryDate
+                          ? (() => {
+                            const today = dayjs();
+                            const expiry = dayjs(order.expiryDate);
+                            if (expiry.isBefore(today, "day") || expiry.isSame(today, "day")) {
+                              return "Expired";
+                            } else if (expiry.isBefore(today.add(3, "month"), "day")) {
+                              return "Expiring soon";
+                            } else {
+                              return "Not yet";
+                            }
+                          })()
+                          : ""}
+                      </StyledTableCell>
 
-                      </StyledTableRow>
-                    ))}
+                    </StyledTableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={orders?.length || 0}
+            count={totalCount}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

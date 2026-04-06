@@ -32,8 +32,8 @@ export const getAllProducts = async ({
 
     const skip = (page - 1) * limit;
     const now = new Date();
-    const thirtyDaysFromNow = new Date();
-    thirtyDaysFromNow.setDate(now.getDate() + 30);
+    const threeMonthsFromNow = new Date();
+    threeMonthsFromNow.setMonth(now.getMonth() + 3);
 
     const matchStage: any = { isDeleted: { $ne: true } };
 
@@ -44,7 +44,7 @@ export const getAllProducts = async ({
     if (filter === "expired") {
       matchStage.expiryDate = { $lt: now };
     } else if (filter === "expiringSoon") {
-      matchStage.expiryDate = { $gte: now, $lte: thirtyDaysFromNow };
+      matchStage.expiryDate = { $gte: now, $lte: threeMonthsFromNow };
     }
 
     const result = await Product.aggregate([

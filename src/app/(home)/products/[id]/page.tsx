@@ -800,7 +800,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                       >
                         <Typography variant="body1">Created at:</Typography>
                         <Typography variant="body1" fontWeight={700}>
-                          {orderData?.updatedAt ? dayjs(orderData.updatedAt).format("ddd DD MMM YYYY HH:mm:ss A") : ""}
+                          {orderData?.createdAt ? dayjs(orderData.createdAt).format("ddd DD MMM YYYY HH:mm:ss A") : ""}
                         </Typography>
                       </Grid>
                       {/* Updated at */}

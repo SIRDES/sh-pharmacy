@@ -213,7 +213,7 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
           // px={{ xs: 1, sm: 2, md: 3 }}
           >
             <Typography variant="body1" fontWeight={700} gutterBottom>
-              Customer Details
+              Sales Details
             </Typography>
             <Box display="flex" gap={1}>
               {((checkIfSameDayAsToday(orderData?.createdAt) &&

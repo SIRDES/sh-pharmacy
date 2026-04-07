@@ -336,6 +336,7 @@ export default function EditProduct({ params }: { params: Promise<{ id: string }
                     type="number"
                     min="0"
                     fullWidth
+                    onWheel={(e) => (e.target as HTMLInputElement).blur()}
                     variant="standard"
                     placeholder="Enter cost price"
                     inputProps={{
@@ -375,6 +376,7 @@ export default function EditProduct({ params }: { params: Promise<{ id: string }
                     type="number"
                     min="0"
                     fullWidth
+                    onWheel={(e) => (e.target as HTMLInputElement).blur()}
                     variant="standard"
                     placeholder="Enter unit price"
                     inputProps={{

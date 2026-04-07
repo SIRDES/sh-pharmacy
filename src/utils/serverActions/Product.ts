@@ -161,7 +161,7 @@ export const addProduct = async (
       return { success: false, message: "No products added" };
     }
 
-    await Counter.updateOne(
+    await Counter.findOneAndUpdate(
       { id: "productSKU" },
       { $set: { seq: nextSku - 1 } },
       { upsert: true }

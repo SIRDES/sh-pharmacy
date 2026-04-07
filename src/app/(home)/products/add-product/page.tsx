@@ -212,6 +212,7 @@ export default function AddProductsPage() {
                         <TextField
                           {...field}
                           type="number"
+                          onWheel={(e) => (e.target as HTMLInputElement).blur()}
                           label="Cost Price"
                           fullWidth
                           error={!!errors.products?.[index]?.costPrice}
@@ -228,6 +229,7 @@ export default function AddProductsPage() {
                         <TextField
                           {...field}
                           type="number"
+                          onWheel={(e) => (e.target as HTMLInputElement).blur()}
                           label="Selling Price"
                           fullWidth
                           error={!!errors.products?.[index]?.sellingPrice}
@@ -240,9 +242,11 @@ export default function AddProductsPage() {
                     <Controller
                       name={`products.${index}.currentStock`}
                       control={control}
+
                       render={({ field }) => (
                         <TextField
                           {...field}
+                          onWheel={(e) => (e.target as HTMLInputElement).blur()}
                           type="number"
                           label="Total Stock"
                           fullWidth

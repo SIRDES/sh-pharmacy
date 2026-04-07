@@ -237,6 +237,7 @@ function AddNewOrder() {
     return total;
   };
 
+  console.log("orderProducts >>>>>>>>", orderProducts)
 
   const Submit = async (e: any, shouldPrint: boolean = false, status: string = ORDER_STATUS.DELIVERED) => {
     if (e) e.preventDefault();

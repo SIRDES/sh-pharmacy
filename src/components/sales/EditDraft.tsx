@@ -222,7 +222,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
         reason: AutocompleteChangeReason,
         details?: AutocompleteChangeDetails<any> | undefined
     ) => {
-        // console.log(value, reason, details);
+        console.log(value, reason, details);
         if (reason === "clear") {
             setSelectedProduct(null);
             return;
@@ -231,7 +231,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
             setSelectedProduct(null);
             return;
         }
-        setSelectedProduct({ ...value, total_amount: 0, qty: 0, profit: 0 });
+        setSelectedProduct({ ...value, shopProductId: value._id, total_amount: 0, qty: 0, profit: 0 });
     };
     const handleAddProduct = () => {
         console.log("selectedProduct", selectedProduct)

@@ -323,12 +323,13 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
       const items: any[] = []
       for (const item of orderProducts) {
         items.push({
-          shopProductId: item._id,
-          productId: item.product._id,
-          total_amount: item.total_amount,
+          ...item,
+          // shopProductId: item._id,
+          // productId: item.product._id,
+          // total_amount: item.total_amount,
           unit_price: item?.product?.sellingPrice,
-          profit: item.profit,
-          qty: item.qty,
+          // profit: item.profit,
+          // qty: item.qty,
           createdBy: currentUser?._id || ""
         })
       }

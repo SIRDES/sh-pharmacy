@@ -384,13 +384,13 @@ export default function Products() {
                   href={"/products/add-product"}>
                   Add Products
                 </MenuItem>
-                <MenuItem
+                {/* <MenuItem
                   // component={Link}
                   onClick={handleOpenManageProductStockModal}
                 >
                   Manage stock
-                </MenuItem>
-                <MenuItem
+                </MenuItem> */}
+                {/* <MenuItem
                   // component={Link}
                   onClick={() => {
                     handleClose();
@@ -398,7 +398,7 @@ export default function Products() {
                   }}
                 >
                   Manage Shop Qty
-                </MenuItem>
+                </MenuItem> */}
               </Menu>
             </Box>
           )}

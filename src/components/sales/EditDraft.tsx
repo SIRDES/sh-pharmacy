@@ -335,13 +335,14 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
             console.log("orderProducts >>>>>>>>", orderProducts)
             for (const item of orderProducts) {
                 items.push({
-                    shopProductId: item._id,
-                    productId: item.product._id,
-                    total_amount: item.total_amount,
+                    ...item,
+                    // shopProductId: item.shopProductId,
+                    // productId: item.product._id,
+                    // total_amount: item.total_amount,
                     product: { name: item?.product?.name || "N/A" },
                     unit_price: item?.product?.sellingPrice,
-                    profit: item.profit,
-                    qty: item.qty,
+                    // profit: item.profit,
+                    // qty: item.qty,
                     createdBy: currentUser?._id || ""
                 })
             }

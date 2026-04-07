@@ -277,7 +277,8 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
     }
     return total;
   };
-
+  console.log("orderProducts >>>>>>>>", orderProducts)
+  console.log("old orderDetails >>>>>>>>", orderDetails)
   const Submit = async (e: any) => {
     e.preventDefault();
     setLoading(true);

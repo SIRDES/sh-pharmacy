@@ -88,7 +88,7 @@ export default function SaleRecieptPDF({ orderData }: SaleRecieptPDFProps) {
                     {/* {shopId?.name || "MAXMART 37"} */}
                 </div>
                 {/* <div>TIN: {shopId?.tin || "C0003946258"}</div> */}
-                <div>Tel: {shopId?.tel || "0302999979"}</div>
+                <div>Tel: {shopId?.tel || "0249613902 / 0559006318"}</div>
                 <div>Receipt #: {salesNumber || "N/A"}</div>
                 {/* <div>Evat Invoice Number:</div>
                 <div style={{ fontSize: "10px", wordBreak: "break-all" }}>

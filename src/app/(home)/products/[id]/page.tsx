@@ -38,6 +38,7 @@ import { addAProductStockHistory, getAllProductStockHistoriesByProductId } from 
 import { useSession } from "next-auth/react";
 import { addShopProductStockHistory, getAllShopProductStockHistoriesByShopIdAndProductId } from "@/utils/serverActions/ShopProductStockHistory";
 import { USER_ROLES } from "@/types/constants";
+import { useShopsContext } from "@/context/ShopsContext";
 
 
 
@@ -48,10 +49,13 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
   const currentUser = session?.user;
   const isAdmin = currentUser?.role === USER_ROLES.ADMIN;
   const router = useRouter();
+  const {
+    selectedShop,
+  } = useShopsContext();
   const [orderData, setOrderData] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [loadingShopProducts, setLoadingShopProducts] = useState(false);
-  const [fetchShopProductsHasError, setFetchShopProductsHasError] = useState(false);
+  // const [fetchShopProductsHasError, setFetchShopProductsHasError] = useState(false);
   const [salesHistory, setSalesHistory] = useState<any[]>([]);
   const [salesTotal, setSalesTotal] = useState(0);
   const [salesPage, setSalesPage] = useState(0);
@@ -159,7 +163,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
     try {
       const orderResponse = await getAllShopProductStockHistoriesByShopIdAndProductId({
         productId: id as string,
-        shopId: currentUser?.assignedShop?._id as string,
+        shopId: isAdmin ? selectedShop?._id as string : currentUser?.assignedShop?._id as string,
         page: shopProductStockHistoryPage + 1,
         // limit: salesRowsPerPage,
       });
@@ -199,7 +203,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
     if (!id) return;
     fetchShopProductStockHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, shopProductStockHistoryPage]);
+  }, [id, shopProductStockHistoryPage, selectedShop]);
 
 
   const handleFetchShopProducts = async () => {
@@ -955,60 +959,58 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                   </Paper></>
               )}
 
-              {!isAdmin && (
-                <>
-                  <Typography variant="body1" fontWeight={700} mb={2}>
-                    Shop Stock History
-                  </Typography>
-                  <Paper sx={{ width: "100%", overflow: "hidden", mb: 2 }}>
-                    <TableContainer sx={{ maxHeight: 500 }}>
-                      <Table stickyHeader aria-label="shop stock history table">
-                        <TableHead>
-                          <TableRow>
-                            <StyledTableCell>Date</StyledTableCell>
-                            <StyledTableCell>User</StyledTableCell>
-                            <StyledTableCell>Initial Qty</StyledTableCell>
-                            <StyledTableCell>Operation</StyledTableCell>
-                            <StyledTableCell>Value</StyledTableCell>
-                            <StyledTableCell>Final Qty</StyledTableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {shopProductStockHistory?.length !== 0 &&
-                            shopProductStockHistory.map((item: any, index: number) => (
-                              <StyledTableRow key={index}>
-                                <StyledTableCell>
-                                  {dayjs(item?.createdAt).format("DD MMM YYYY HH:mm A")}
-                                </StyledTableCell>
-                                <StyledTableCell>
-                                  {item?.user?.name?.toUpperCase() || item?.user?.username?.toUpperCase() || "N/A"}
-                                </StyledTableCell>
-                                <StyledTableCell>{item?.initialQuantity}</StyledTableCell>
-                                <StyledTableCell sx={{ color: item?.operation === "add" ? "green" : "red", fontWeight: 700 }}>
-                                  {item?.operation?.toUpperCase()}
-                                </StyledTableCell>
-                                <StyledTableCell>{item?.addedQuantity}</StyledTableCell>
-                                <StyledTableCell>
-                                  {item?.operation === "add"
-                                    ? item?.initialQuantity + item?.addedQuantity
-                                    : item?.initialQuantity - item?.addedQuantity}
-                                </StyledTableCell>
-                              </StyledTableRow>
-                            ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                    <TablePagination
-                      rowsPerPageOptions={[]}
-                      component="div"
-                      count={shopProductStockHistoryTotal}
-                      rowsPerPage={50}
-                      page={shopProductStockHistoryPage}
-                      onPageChange={(e, newPage) => setShopProductStockHistoryPage(newPage)}
-                    />
-                  </Paper>
-                </>
-              )}
+
+              <Typography variant="body1" fontWeight={700} mb={2}>
+                Shop Stock History
+              </Typography>
+              <Paper sx={{ width: "100%", overflow: "hidden", mb: 2 }}>
+                <TableContainer sx={{ maxHeight: 500 }}>
+                  <Table stickyHeader aria-label="shop stock history table">
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell>Date</StyledTableCell>
+                        <StyledTableCell>User</StyledTableCell>
+                        <StyledTableCell>Initial Qty</StyledTableCell>
+                        <StyledTableCell>Operation</StyledTableCell>
+                        <StyledTableCell>Value</StyledTableCell>
+                        <StyledTableCell>Final Qty</StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {shopProductStockHistory?.length !== 0 &&
+                        shopProductStockHistory.map((item: any, index: number) => (
+                          <StyledTableRow key={index}>
+                            <StyledTableCell>
+                              {dayjs(item?.createdAt).format("DD MMM YYYY HH:mm A")}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {item?.user?.name?.toUpperCase() || item?.user?.username?.toUpperCase() || "N/A"}
+                            </StyledTableCell>
+                            <StyledTableCell>{item?.initialQuantity}</StyledTableCell>
+                            <StyledTableCell sx={{ color: item?.operation === "add" ? "green" : "red", fontWeight: 700 }}>
+                              {item?.operation?.toUpperCase()}
+                            </StyledTableCell>
+                            <StyledTableCell>{item?.addedQuantity}</StyledTableCell>
+                            <StyledTableCell>
+                              {item?.operation === "add"
+                                ? item?.initialQuantity + item?.addedQuantity
+                                : item?.initialQuantity - item?.addedQuantity}
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <TablePagination
+                  rowsPerPageOptions={[]}
+                  component="div"
+                  count={shopProductStockHistoryTotal}
+                  rowsPerPage={50}
+                  page={shopProductStockHistoryPage}
+                  onPageChange={(e, newPage) => setShopProductStockHistoryPage(newPage)}
+                />
+              </Paper>
+
             </>
           )}
         </Box>

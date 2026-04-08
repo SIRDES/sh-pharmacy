@@ -637,7 +637,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                     >
                       Manage Shop Qty
                     </MenuItem>
-                    <MenuItem
+                    {/* <MenuItem
                       // component={Link}
                       sx={{ color: "red" }}
                       onClick={() => {
@@ -646,7 +646,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                       }}
                     >
                       Delete Product
-                    </MenuItem>
+                    </MenuItem> */}
                   </Menu>
                 </Box>
               )}

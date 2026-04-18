@@ -6,6 +6,8 @@ import SalesItem from "@/models/SalesItem";
 import ShopProduct from "@/models/ShopProduct";
 import { ORDER_STATUS } from "@/types/constants";
 import mongoose from "mongoose";
+import { startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfDay, endOfDay } from 'date-fns';
+
 export const addNewSale = async (sale: { total_amount: number, profit: number, createdBy: string, shopId: string, discount: number, sub_total: number, status?: string }) => {
     try {
         const { shopId, total_amount, profit, createdBy, discount, sub_total, status = ORDER_STATUS.DELIVERED } = sale;
@@ -152,6 +154,84 @@ export const getAllShopSales = async (body: { shopId: string; startDate?: string
     } catch (err: any) {
         console.log(err);
         return { success: false, message: err?.message || "An error occurred" };
+    }
+};
+
+export const getSalesDashboardStats = async (body: { shopId: string }) => {
+    try {
+        const { shopId } = body;
+        await connectDB();
+        const shopIdObjectId = new mongoose.Types.ObjectId(shopId);
+
+        // Define your date boundaries using date-fns
+        const now = new Date();
+        const weekBounds = {
+            start: startOfWeek(now, { weekStartsOn: 1 }),
+            end: endOfWeek(now, { weekStartsOn: 1 })
+        };
+        const monthBounds = {
+            start: startOfMonth(now),
+            end: endOfMonth(now)
+        };
+        // const todayBounds = {
+        //     start: startOfDay(now),
+        //     end: endOfDay(now)
+        // };
+
+        const stats = await Sale.aggregate([
+            {
+                $match: {
+                    shopId: shopIdObjectId,
+                    status: ORDER_STATUS.DELIVERED,
+                    isDeleted: false,
+                    isSuspended: false
+                }
+            },
+            {
+                $facet: {
+                    // today: [
+                    //     { $match: { createdAt: { $gte: todayBounds.start, $lte: todayBounds.end } } },
+                    //     { $group: { _id: null, amount: { $sum: "$total_amount" }, profit: { $sum: "$profit" }, count: { $sum: 1 } } }
+                    // ],
+                    thisWeek: [
+                        { $match: { createdAt: { $gte: weekBounds.start, $lte: weekBounds.end } } },
+                        { $group: { _id: null, amount: { $sum: "$total_amount" }, profit: { $sum: "$profit" }, discount: { $sum: "$discount" }, count: { $sum: 1 } } }
+                    ],
+                    thisMonth: [
+                        { $match: { createdAt: { $gte: monthBounds.start, $lte: monthBounds.end } } },
+                        { $group: { _id: null, amount: { $sum: "$total_amount" }, profit: { $sum: "$profit" }, discount: { $sum: "$discount" }, count: { $sum: 1 } } }
+                    ]
+                }
+            }
+        ]);
+
+        if (!stats || stats.length === 0) {
+            return { success: false, message: "No sales data found" };
+        }
+
+        // check if thisWeek and thisMonth is empty
+        if (stats[0].thisWeek.length === 0) {
+            stats[0].thisWeek = [{ amount: 0, profit: 0, discount: 0, count: 0 }];
+        }
+        if (stats[0].thisMonth.length === 0) {
+            stats[0].thisMonth = [{ amount: 0, profit: 0, discount: 0, count: 0 }];
+        }
+
+        // console.log("stats", JSON.stringify(stats, null, 2));
+
+        const format = (arr: any[]) => arr[0] || { amount: 0, profit: 0, discount: 0, count: 0 };
+
+        return {
+            success: true,
+            data: {
+                // today: stats[0].today,
+                thisWeek: format(stats[0].thisWeek),
+                thisMonth: format(stats[0].thisMonth)
+            }
+        };
+    } catch (err: any) {
+        console.log("err", err);
+        return { success: false, message: err?.message };
     }
 };
 

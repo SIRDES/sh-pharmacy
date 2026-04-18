@@ -26,7 +26,7 @@ import LoadingAlert from "@/components/LoadingAlert";
 import { currencyFormatter, formatDate, getTotalOrderAmount, getTotalOrderDiscount, getTotalOrderProfit } from "@/utils/services/utils";
 import { StyledTableCell, StyledTableRow } from "@/theme/table";
 import { useSession } from "next-auth/react";
-import { getAllSales, getAllShopSales } from "@/utils/serverActions/Sale";
+import { getAllShopSales, getSalesDashboardStats } from "@/utils/serverActions/Sale";
 import { useShopsContext } from "@/context/ShopsContext";
 
 export default function Dashboard() {
@@ -39,18 +39,14 @@ export default function Dashboard() {
   const open = Boolean(anchorEl);
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState<any>([]);
-  const [thisWeekOrders, setthisWeekOrders] = useState<any>([]);
-  const [thisMonthOrders, setThisMonthOrders] = useState<any>([]);
+  // const [thisWeekOrders, setthisWeekOrders] = useState<any>([]);
+  // const [thisMonthOrders, setThisMonthOrders] = useState<any>([]);
+  const [dashboardStats, setDashboardStats] = useState<{ thisWeek: { amount: number, profit: number, discount: number, count: number }, thisMonth: { amount: number, profit: number, discount: number, count: number } } | null>(null);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  // console.log("selectedShop", selectedShop)
-  // console.log("this weeks start date", startOfWeek(new Date(), { weekStartsOn: 1 }));
-  // console.log("this weeks end date", endOfWeek(new Date(), { weekStartsOn: 1 }));
-  // console.log("this months start date", startOfMonth(new Date()));
-  // console.log("this months end date", endOfMonth(new Date()));
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -70,11 +66,10 @@ export default function Dashboard() {
 
       if (currentUser?.role === "admin") {
         orderResponse = await getAllShopSales({ shopId: selectedShop?._id as string, startDate, endDate });
-        // orderResponse = await getAllSales({ shopId: currentUser?.assignedShop?._id as string, startDate, endDate });
       } else {
         orderResponse = await getAllShopSales({ shopId: currentUser?.assignedShop?._id, startDate, endDate });
       }
-      console.log("orderResponse", orderResponse);
+      // console.log("orderResponse", orderResponse);
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -103,42 +98,40 @@ export default function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, selectedShop]);
 
-  const fetchThisWeekOrderData = async () => {
-    setthisWeekOrders([]);
-    try {
-      let orderResponse
-      if (currentUser?.role === "admin") {
-        orderResponse = await getAllShopSales({ shopId: selectedShop?._id as string, startDate: startOfWeek(new Date(), { weekStartsOn: 1 })?.toString(), endDate: endOfWeek(new Date(), { weekStartsOn: 1 })?.toString() });
-        // orderResponse = await getAllSales({ startDate: startOfWeek(new Date(), { weekStartsOn: 1 })?.toString(), endDate: endOfWeek(new Date(), { weekStartsOn: 1 })?.toString() });
-      } else {
-        orderResponse = await getAllShopSales({ shopId: currentUser?.assignedShop?._id, startDate: startOfWeek(new Date(), { weekStartsOn: 1 })?.toString(), endDate: endOfWeek(new Date(), { weekStartsOn: 1 })?.toString() });
-      }
-      console.log("orderResponse", orderResponse);
-      if (!orderResponse.success) {
-        return
-      }
+  // const fetchThisWeekOrderData = async () => {
+  //   setthisWeekOrders([]);
+  //   try {
+  //     let orderResponse
+  //     if (currentUser?.role === "admin") {
+  //       orderResponse = await getAllShopSales({ shopId: selectedShop?._id as string, startDate: startOfWeek(new Date(), { weekStartsOn: 1 })?.toString(), endDate: endOfWeek(new Date(), { weekStartsOn: 1 })?.toString() });
+  //     } else {
+  //       orderResponse = await getAllShopSales({ shopId: currentUser?.assignedShop?._id, startDate: startOfWeek(new Date(), { weekStartsOn: 1 })?.toString(), endDate: endOfWeek(new Date(), { weekStartsOn: 1 })?.toString() });
+  //     }
+  //     console.log("orderResponse", orderResponse);
+  //     if (!orderResponse.success) {
+  //       return
+  //     }
 
-      setthisWeekOrders(orderResponse?.data || []);
-    } catch (error: any) {
+  //     setthisWeekOrders(orderResponse?.data || []);
+  //   } catch (error: any) {
 
-    }
-  };
-  const fetchThisMonthOrderData = async () => {
-    setThisMonthOrders([]);
+  //   }
+  // };
+  const fetchDashboardStats = async () => {
+    setDashboardStats(null);
     try {
       let orderResponse;
 
       if (currentUser?.role === "admin") {
-        orderResponse = await getAllShopSales({ shopId: selectedShop?._id as string, startDate: startOfMonth(new Date())?.toString(), endDate: endOfMonth(new Date())?.toString() });
-        // orderResponse = await getAllSales({ startDate: startOfMonth(new Date())?.toString(), endDate: endOfMonth(new Date())?.toString() });
+        orderResponse = await getSalesDashboardStats({ shopId: selectedShop?._id as string });
       } else {
-        orderResponse = await getAllShopSales({ shopId: currentUser?.assignedShop?._id, startDate: startOfMonth(new Date())?.toString(), endDate: endOfMonth(new Date())?.toString() });
+        orderResponse = await getSalesDashboardStats({ shopId: currentUser?.assignedShop?._id });
       }
-      console.log("orderResponse", orderResponse);
+      // console.log("getSalesDashboardStats orderResponse", orderResponse);
       if (!orderResponse.success) {
         return
       }
-      setThisMonthOrders(orderResponse?.data || []);
+      setDashboardStats(orderResponse?.data || null);
     } catch (error: any) {
 
     }
@@ -148,8 +141,7 @@ export default function Dashboard() {
     if (currentUser === null || currentUser === undefined || currentUser === undefined || currentUser === null) {
       return
     }
-    fetchThisWeekOrderData();
-    fetchThisMonthOrderData();
+    fetchDashboardStats();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, selectedShop]);
 
@@ -219,17 +211,17 @@ export default function Dashboard() {
                 <Typography variant="body2">
                   Sales this Week
                 </Typography>
-                <Typography variant="h6">{currencyFormatter(getTotalOrderAmount(thisWeekOrders))}</Typography>
+                <Typography variant="h6">{currencyFormatter(dashboardStats?.thisWeek?.amount || dashboardStats?.thisWeek?.amount || 0)}</Typography>
                 {currentUser?.role === "admin" && (
                   <>
                     <Typography variant="body2">
                       Discount
                     </Typography>
-                    <Typography variant="h6" >{currencyFormatter(getTotalOrderDiscount(thisWeekOrders))}</Typography>
+                    <Typography variant="h6" >{currencyFormatter(dashboardStats?.thisWeek?.discount || dashboardStats?.thisWeek?.discount || 0)}</Typography>
                     <Typography variant="body2">
                       Profit
                     </Typography>
-                    <Typography variant="h6" >{currencyFormatter(getTotalOrderProfit(thisWeekOrders))}</Typography>
+                    <Typography variant="h6" >{currencyFormatter(dashboardStats?.thisWeek?.profit || dashboardStats?.thisWeek?.profit || 0)}</Typography>
                   </>
                 )}
               </CardContent>
@@ -241,17 +233,17 @@ export default function Dashboard() {
                 <Typography variant="body2">
                   Sales this Month
                 </Typography>
-                <Typography variant="h6">{currencyFormatter(getTotalOrderAmount(thisMonthOrders))}</Typography>
+                <Typography variant="h6">{currencyFormatter(dashboardStats?.thisMonth?.amount || dashboardStats?.thisMonth?.amount || 0)}</Typography>
                 {currentUser?.role === "admin" && (
                   <>
                     <Typography variant="body2">
                       Discount
                     </Typography>
-                    <Typography variant="h6">{currencyFormatter(getTotalOrderDiscount(thisMonthOrders))}</Typography>
+                    <Typography variant="h6">{currencyFormatter(dashboardStats?.thisMonth?.discount || dashboardStats?.thisMonth?.discount || 0)}</Typography>
                     <Typography variant="body2">
                       Profit
                     </Typography>
-                    <Typography variant="h6">{currencyFormatter(getTotalOrderProfit(thisMonthOrders))}</Typography>
+                    <Typography variant="h6">{currencyFormatter(dashboardStats?.thisMonth?.profit || dashboardStats?.thisMonth?.profit || 0)}</Typography>
                   </>
                 )}
               </CardContent>

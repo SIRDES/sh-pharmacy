@@ -26,7 +26,8 @@ import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 
 import EditIcon from "@mui/icons-material/Edit";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowBack";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { showAlert } from "@/components/Alerts";
@@ -44,7 +45,7 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
   // const theme = useTheme();
   const { id } = use(params);
   const router = useRouter();
-  const posCategories = (window as any).pos?.categories
+  // const posCategories = (window as any).pos?.categories
   const [categoryData, setCategoryData] = useState<any>({});
   const [fetchedCategoryData, setFetchedCategoryData] = useState<any>({});
   const [loading, setLoading] = useState(false);
@@ -55,6 +56,7 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
   const [openDeleteConfirmationModal, setOpenDeleteConfirmationModal] = useState(false);
+  const [sortAsc, setSortAsc] = useState(false);
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -72,11 +74,21 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
     setAnchorEl(null);
   };
   const fetchShopData = async () => {
+    if (!id) {
+      showAlert({
+        title: "Error",
+        text: "Invalid shop id",
+        severity: "error",
+      })
+
+      return
+    };
+
     setLoading(true);
     setCategoryData({});
     try {
       const res = await getAShopById(id as string);
-      console.log("res", res);
+      // console.log("res", res);
       if (!res.success) {
         showAlert({
           title: "Error",
@@ -106,7 +118,8 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
   useEffect(() => {
     fetchShopData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, []);
+
   const handleOpenDeleteConfirmationModal = () => {
     setOpenDeleteConfirmationModal(true);
   };
@@ -146,15 +159,31 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
   };
   const handleSearchByProductNameOrProductSKU = (e: any) => {
     const value = e.target.value;
-    console.log("value", value);
-    console.log("fetchedCategoryData", fetchedCategoryData);
+    // console.log("value", value);
+    // console.log("fetchedCategoryData", fetchedCategoryData);
     const filteredOrders = fetchedCategoryData?.shopProducts?.filter(
       (product: any) =>
         product?.product?.name?.toLowerCase()?.includes(value.toLowerCase()) ||
         product?.product?.sku?.toString()?.includes(value)
     );
-    console.log("filteredOrders", filteredOrders);
+    // console.log("filteredOrders", filteredOrders);
     setCategoryData({ ...categoryData, shopProducts: filteredOrders });
+  };
+  const handleSortByIDAsc = () => {
+    setLoading(true);
+    setSortAsc(!sortAsc);
+    const sortedProducts = fetchedCategoryData?.shopProducts?.sort((a: any, b: any) => {
+      if (!sortAsc) {
+        return a?.quantity - b?.quantity;
+      } else {
+        return b?.quantity - a?.quantity;
+      }
+    });
+
+    setTimeout(() => {
+      setLoading(false);
+      setCategoryData({ ...categoryData, shopProducts: sortedProducts });
+    }, 300);
   };
   return (
     <>
@@ -190,7 +219,7 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
                 gap: "5px",
               }}
             >
-              <ArrowUpwardIcon />
+              <ArrowBackIcon />
               Shops
             </Box>
           </Link>
@@ -319,7 +348,22 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
                         <StyledTableCell>SKU </StyledTableCell>
                         <StyledTableCell>Name</StyledTableCell>
                         <StyledTableCell>PRICE </StyledTableCell>
-                        <StyledTableCell>Qty </StyledTableCell>
+                        <StyledTableCell>Qty  <Tooltip
+                          title={`${sortAsc ? "high to low" : "low to high"}`}
+                        >
+                          <ArrowUpwardIcon
+                            sx={{
+                              cursor: "pointer",
+                              fontSize: "12px",
+                              marginLeft: "5px",
+                              transition: "all 0.3s ease",
+                              transform: sortAsc
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)",
+                            }}
+                            onClick={handleSortByIDAsc}
+                          />
+                        </Tooltip> </StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>

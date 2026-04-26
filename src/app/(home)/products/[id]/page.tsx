@@ -880,7 +880,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                             salesHistory?.map((item: any, index: number) => (
                               <StyledTableRow key={index}>
                                 <StyledTableCell>
-                                  {dayjs(item?.createdAt).format("DD MMM YYYY")}
+                                  {dayjs(item?.createdAt).format("DD MMM YYYY hh:mm A")}
                                 </StyledTableCell>
                                 <StyledTableCell>
                                   {item?.saleId?.shopId?.name?.toUpperCase()}

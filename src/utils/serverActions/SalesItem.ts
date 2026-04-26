@@ -126,6 +126,7 @@ interface SalesItemInput {
     profit: number;
     qty: number;
     createdBy: string;
+    createdAt?: Date;
 }
 
 export const addSalesItems = async ({
@@ -149,6 +150,7 @@ export const addSalesItems = async ({
             qty: item.qty,
             createdBy: item.createdBy,
             saleId: saleObjectId,
+            ...(item.createdAt ? { createdAt: item.createdAt } : {})
         }));
 
         // Prepare bulk update operations for ShopProduct

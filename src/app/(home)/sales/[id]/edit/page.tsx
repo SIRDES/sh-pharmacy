@@ -330,7 +330,8 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
           unit_price: item?.product?.sellingPrice,
           // profit: item.profit,
           // qty: item.qty,
-          createdBy: currentUser?._id || ""
+          createdBy: currentUser?._id || "",
+          createdAt: new Date(orderDetails?.createdAt),
         })
       }
       // console.log("addSalesItems>>>>", items)

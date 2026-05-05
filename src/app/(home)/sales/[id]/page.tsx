@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Box,
@@ -34,7 +34,11 @@ import { useReactToPrint } from "react-to-print";
 import SaleRecieptPDF from "@/components/sales/SaleReciept";
 import PrintIcon from "@mui/icons-material/Print";
 import { useRef } from "react";
-import { checkIfSameDayAsToday, currencyFormatter, formatDate } from "@/utils/services/utils";
+import {
+  checkIfSameDayAsToday,
+  currencyFormatter,
+  formatDate,
+} from "@/utils/services/utils";
 import { USER_ROLES } from "@/types/constants";
 import { deleteSale, getSaleById } from "@/utils/serverActions/Sale";
 import ConfirmationModal from "@/components/ConfirmationModal";
@@ -63,13 +67,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function OrderDetails({ params }: { params: Promise<{ id: string }> }) {
+export default function OrderDetails({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   // const theme = useTheme();
   const { id } = use(params);
   const router = useRouter();
-  const { data: session } = useSession()
-  const currentUser = session?.user
-  const posOrders = (window as any)?.pos?.orders
+  const { data: session } = useSession();
+  const currentUser = session?.user;
+  const posOrders = (window as any)?.pos?.orders;
   const [orderData, setOrderData] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false);
@@ -92,16 +100,15 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
     setLoading(true);
     setOrderData({});
     try {
-
-      const orderResponse = await getSaleById(id as string)
-      console.log("orderResponse", orderResponse)
+      const orderResponse = await getSaleById(id as string);
+      console.log("orderResponse", orderResponse);
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
           text: orderResponse?.message || "An error occurred!",
-          severity: "error"
-        })
-        return
+          severity: "error",
+        });
+        return;
       }
       setOrderData(orderResponse?.data || {});
       // setOrderData({ id: res[0].id, ...res[0].data(), orderItems: list });
@@ -109,12 +116,9 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
       console.log("error", error);
       showAlert({
         title: "Error",
-        text: error.message ||
-          error.data ||
-          "An error occurred",
-        severity: "error"
-      })
-
+        text: error.message || error.data || "An error occurred",
+        severity: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -217,7 +221,8 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
             </Typography>
             <Box display="flex" gap={1}>
               {((checkIfSameDayAsToday(orderData?.createdAt) &&
-                currentUser?.role === USER_ROLES.SALES_PERSONEL) || currentUser?.role === USER_ROLES.ADMIN) && (
+                currentUser?.role === USER_ROLES.SALES_PERSONEL) ||
+                currentUser?.role === USER_ROLES.ADMIN) && (
                   <Box display="flex" gap={1}>
                     <Button
                       variant="contained"
@@ -251,14 +256,25 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
               >
                 Print
               </Button>
-
             </Box>
           </Box>
           {Object.keys(orderData).length !== 0 && (
             <>
               <Card sx={{ p: 2 }}>
                 <Grid container spacing={2}>
-                  {/* Amount Paid */}
+
+                  <Grid
+                    size={{ xs: 12, sm: 6, md: 4 }}
+                    sx={{
+                      display: "flex",
+                      gap: "5px",
+                    }}
+                  >
+                    <Typography variant="body1">Sale Number:</Typography>
+                    <Typography variant="body1" fontWeight={700}>
+                      {orderData?.salesNumber || 0}
+                    </Typography>
+                  </Grid>
                   <Grid
                     size={{ xs: 12, sm: 6, md: 4 }}
                     sx={{
@@ -297,7 +313,7 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                   </Grid>
                   {/* Profit Paid */}
                   {currentUser?.role === USER_ROLES.ADMIN && (
-                    < Grid
+                    <Grid
                       size={{ xs: 12, sm: 6, md: 4 }}
                       sx={{
                         display: "flex",
@@ -312,7 +328,6 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                   )}
 
                   <Grid
-
                     size={{ xs: 12, sm: 12, md: 6 }}
                     sx={{ display: "flex", gap: "10px" }}
                   >
@@ -323,7 +338,6 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                   </Grid>
                   {/* Date updated */}
                   <Grid
-
                     size={{ xs: 12, sm: 12, md: 6 }}
                     sx={{ display: "flex", gap: "10px" }}
                   >
@@ -332,7 +346,6 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                       {formatDate(orderData?.updatedAt)}
                     </Typography>
                   </Grid>
-
                 </Grid>
               </Card>
               <Box
@@ -374,7 +387,7 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                       {orderData?.salesItems?.length !== 0 &&
                         orderData?.salesItems?.map(
                           (product: any, index: number) => (
-                            <StyledTableRow key={product?._id}>
+                            <StyledTableRow key={product?._id + index}>
                               <StyledTableCell>
                                 {product?.product?.name?.toUpperCase()}
                               </StyledTableCell>
@@ -419,7 +432,9 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                               </StyledTableCell>
 
                               <StyledTableCell align="center">
-                                {currencyFormatter(product?.product?.sellingPrice || 0)}
+                                {currencyFormatter(
+                                  product?.product?.sellingPrice || 0,
+                                )}
                               </StyledTableCell>
                               <StyledTableCell align="center">
                                 {currencyFormatter(product?.total_amount || 0)}
@@ -430,9 +445,8 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
                                   {currencyFormatter(product?.profit || 0)}
                                 </StyledTableCell>
                               )}
-
                             </StyledTableRow>
-                          )
+                          ),
                         )}
                     </TableBody>
                   </Table>
@@ -441,7 +455,7 @@ export default function OrderDetails({ params }: { params: Promise<{ id: string 
             </>
           )}
         </Box>
-      </Box >
+      </Box>
 
       {/* Hidden Receipt for Printing */}
       <Box sx={{ display: "none" }}>

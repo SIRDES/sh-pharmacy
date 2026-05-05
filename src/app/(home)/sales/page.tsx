@@ -104,7 +104,7 @@ export default function Orders() {
         orderResponse = await getAllShopSales({ shopId: currentUser?.assignedShop?._id, startDate, endDate });
       }
 
-      // console.log("orderResponse", orderResponse)
+      console.log("orderResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -265,6 +265,7 @@ export default function Orders() {
                   <StyledTableCell>Address</StyledTableCell> */}
                   <StyledTableCell>Date</StyledTableCell>
                   <StyledTableCell>Sales Number</StyledTableCell>
+                  <StyledTableCell>Items Sold</StyledTableCell>
                   {/* <StyledTableCell>Status</StyledTableCell> */}
                 </TableRow>
               </TableHead>
@@ -300,6 +301,9 @@ export default function Orders() {
                         </StyledTableCell>
                         <StyledTableCell>
                           {order?.salesNumber || "N/A"}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          {order?.salesItems?.length || 0}
                         </StyledTableCell>
                         {/* <StyledTableCell>
                           {order?.status}

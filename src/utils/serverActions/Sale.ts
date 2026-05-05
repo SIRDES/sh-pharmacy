@@ -179,6 +179,19 @@ export const getAllShopSales = async (body: {
           preserveNullAndEmptyArrays: true,
         },
       },
+      {
+        $lookup: {
+          from: "salesitems",
+          localField: "_id",
+          foreignField: "saleId",
+          as: "salesItems",
+        },
+      },
+      {
+        $addFields: {
+          itemCount: { $size: "$salesItems" },
+        },
+      },
       { $sort: { createdAt: -1 } },
     ]);
 

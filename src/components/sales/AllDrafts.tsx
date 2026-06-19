@@ -30,7 +30,7 @@ import { useRouter } from "next/navigation";
 import { showAlert } from "../Alerts";
 import { ORDER_STATUS } from "@/types/constants";
 import { currencyFormatter, formatDate } from "@/utils/services/utils";
-import { getAllProductStockHistories } from "@/utils/serverActions/ProductStockHistory";
+
 import { useSession } from "next-auth/react";
 import { deleteDraftSale, getAllShopDraftSales } from "@/utils/serverActions/Sale";
 

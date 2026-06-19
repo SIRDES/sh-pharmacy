@@ -32,7 +32,6 @@ import { showAlert } from "../Alerts";
 import LoadingAlert from "../LoadingAlert";
 import { currencyFormatter } from "@/utils/services/utils";
 import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
-import { addSalesItems } from "@/utils/serverActions/SalesItem";
 import { addNewSale } from "@/utils/serverActions/Sale";
 import { useReactToPrint } from "react-to-print";
 import SaleRecieptPDF from "./SaleReciept";
@@ -142,10 +141,10 @@ function AddNewOrder() {
         })
         return
       }
-      console.log("all products", res?.data)
+      // console.log("all products", res?.data)
       setProducts(res?.data);
     } catch (error: any) {
-      console.log("error", error);
+      // console.log("error", error);
       showAlert({
         title: "Error",
         text: error?.message || "An error occured",
@@ -237,7 +236,7 @@ function AddNewOrder() {
     return total;
   };
 
-  console.log("orderProducts >>>>>>>>", orderProducts)
+  // console.log("orderProducts >>>>>>>>", orderProducts)
 
   const Submit = async (e: any, shouldPrint: boolean = false, status: string = ORDER_STATUS.DELIVERED) => {
     if (e) e.preventDefault();
@@ -255,8 +254,21 @@ function AddNewOrder() {
         status: status,
       };
 
+      const items: any[] = []
+      for (const item of orderProducts) {
+        items.push({
+          shopProductId: item._id,
+          productId: item.product._id,
+          total_amount: item.total_amount,
+          unit_price: item?.product?.sellingPrice,
+          profit: item.profit,
+          qty: item.qty,
+          createdBy: currentUser?._id || ""
+        })
+      }
+
       setLoading(true);
-      const orderResponse = await addNewSale({ ...orderData })
+      const orderResponse = await addNewSale({ ...orderData, salesItems: items })
       // console.log("orderResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
@@ -271,31 +283,31 @@ function AddNewOrder() {
       // orderId, productId, quantity, totalAmount
       // item.productId, item.quantity, item.totalAmount
       // posOrderItems
-      const items: any[] = []
-      for (const item of orderProducts) {
-        items.push({
-          shopProductId: item._id,
-          productId: item.product._id,
-          total_amount: item.total_amount,
-          unit_price: item?.product?.sellingPrice,
-          profit: item.profit,
-          qty: item.qty,
-          createdBy: currentUser?._id || ""
-        })
-      }
+      // const items: any[] = []
+      // for (const item of orderProducts) {
+      //   items.push({
+      //     shopProductId: item._id,
+      //     productId: item.product._id,
+      //     total_amount: item.total_amount,
+      //     unit_price: item?.product?.sellingPrice,
+      //     profit: item.profit,
+      //     qty: item.qty,
+      //     createdBy: currentUser?._id || ""
+      //   })
+      // }
 
-      const orderItemsResponse = await addSalesItems({ saleId: orderResponse?.data?._id as string, salesItems: items })
-      console.log("orderItemsResponse", orderItemsResponse)
+      // const orderItemsResponse = await addSalesItems({ saleId: orderResponse?.data?._id as string, salesItems: items })
+      // console.log("orderItemsResponse", orderItemsResponse)
 
       // update stock
-      if (!orderItemsResponse.success) {
-        showAlert({
-          title: "Error",
-          text: orderItemsResponse?.message || "An error occurred!",
-          severity: "error"
-        })
-        return
-      }
+      // if (!orderItemsResponse.success) {
+      //   showAlert({
+      //     title: "Error",
+      //     text: orderItemsResponse?.message || "An error occurred!",
+      //     severity: "error"
+      //   })
+      //   return
+      // }
 
       if (shouldPrint) {
         const fullOrderData = {

@@ -24,10 +24,7 @@ import {
   Typography,
 } from "@mui/material";
 import { SyntheticEvent, use, useEffect, useRef, useState } from "react";
-import { InferType, object, string } from "yup";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -46,7 +43,6 @@ import LoadingAlert from "@/components/LoadingAlert";
 import { currencyFormatter } from "@/utils/services/utils";
 import { getSaleById, updateSale } from "@/utils/serverActions/Sale";
 import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
-import { addSalesItems, deleteSalesItems } from "@/utils/serverActions/SalesItem";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -121,7 +117,7 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
 
     try {
       const orderResponse = await getSaleById(id as string)
-      console.log("orderResponse", orderResponse)
+      // console.log("orderResponse", orderResponse)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -130,7 +126,7 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
         })
         return
       }
-      console.log("draft Order details", orderResponse?.data)
+      // console.log("draft Order details", orderResponse?.data)
       setOrderDetails(orderResponse?.data);
     } catch (error: any) {
       console.log("error", error);
@@ -153,7 +149,7 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
 
   useEffect(() => {
     if (Object.keys(orderDetails).length > 0) {
-      console.log("data", orderDetails);
+      // console.log("data", orderDetails);
       const items = []
       for (const item of orderDetails?.salesItems) {
         items.push({ ...item })
@@ -277,8 +273,8 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
     }
     return total;
   };
-  console.log("orderProducts >>>>>>>>", orderProducts)
-  console.log("old orderDetails >>>>>>>>", orderDetails)
+  // console.log("orderProducts >>>>>>>>", orderProducts)
+  // console.log("old orderDetails >>>>>>>>", orderDetails)
   const Submit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
@@ -301,25 +297,7 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
         ],
         // shopId: currentUser?.assignedShop?._id as string,
       };
-      const orderResponse = await updateSale({ saleId: orderDetails._id, saleData: orderData })
-      // console.log("orderResponse", orderResponse)
-      if (!orderResponse.success) {
-        showAlert({
-          title: "Error",
-          text: orderResponse?.message || "An error occurred!",
-          severity: "error"
-        })
-        return
-      }
 
-
-      const deletePrevsalesItemsRes = await deleteSalesItems(orderDetails.salesItems)
-      // console.log("deletePrevsalesItemsRes", deletePrevsalesItemsRes)
-
-      // add order items
-      // orderId, productId, quantity, totalAmount
-      // item.productId, item.quantity, item.totalAmount
-      // posOrderItems
       const items: any[] = []
       for (const item of orderProducts) {
         items.push({
@@ -334,18 +312,51 @@ function EditSalePage({ params }: { params: Promise<{ id: string }> }) {
           createdAt: new Date(orderDetails?.createdAt),
         })
       }
-      // console.log("addSalesItems>>>>", items)
-      const orderItemsResponse = await addSalesItems({ saleId: orderResponse?.data?._id as string, salesItems: items })
-      // console.log("orderItemsResponse", orderItemsResponse)
-
-      if (!orderItemsResponse.success) {
+      const orderResponse = await updateSale({ saleId: orderDetails._id, saleData: orderData, salesItemsToDelete: orderDetails.salesItems, salesItemsToAdd: items })
+      // console.log("orderResponse", orderResponse)
+      if (!orderResponse.success) {
         showAlert({
           title: "Error",
-          text: orderItemsResponse?.message || "An error occurred!",
+          text: orderResponse?.message || "An error occurred!",
           severity: "error"
         })
         return
       }
+
+
+      // const deletePrevsalesItemsRes = await deleteSalesItems(orderDetails.salesItems)
+      // console.log("deletePrevsalesItemsRes", deletePrevsalesItemsRes)
+
+      // add order items
+      // orderId, productId, quantity, totalAmount
+      // item.productId, item.quantity, item.totalAmount
+      // posOrderItems
+      // const items: any[] = []
+      // for (const item of orderProducts) {
+      //   items.push({
+      //     ...item,
+      //     // shopProductId: item._id,
+      //     // productId: item.product._id,
+      //     // total_amount: item.total_amount,
+      //     unit_price: item?.product?.sellingPrice,
+      //     // profit: item.profit,
+      //     // qty: item.qty,
+      //     createdBy: currentUser?._id || "",
+      //     createdAt: new Date(orderDetails?.createdAt),
+      //   })
+      // }
+      // console.log("addSalesItems>>>>", items)
+      // const orderItemsResponse = await addSalesItems({ saleId: orderResponse?.data?._id as string, salesItems: items })
+      // console.log("orderItemsResponse", orderItemsResponse)
+
+      // if (!orderItemsResponse.success) {
+      //   showAlert({
+      //     title: "Error",
+      //     text: orderItemsResponse?.message || "An error occurred!",
+      //     severity: "error"
+      //   })
+      //   return
+      // }
 
       showAlert({
         title: "Success",

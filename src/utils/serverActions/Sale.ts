@@ -14,6 +14,7 @@ import {
   startOfDay,
   endOfDay,
 } from "date-fns";
+import { SalesItemInput } from "./SalesItem";
 
 export const addNewSale = async (sale: {
   total_amount: number;
@@ -23,6 +24,7 @@ export const addNewSale = async (sale: {
   discount: number;
   sub_total: number;
   status?: string;
+  salesItems: SalesItemInput[];
 }) => {
   try {
     const {
@@ -33,23 +35,71 @@ export const addNewSale = async (sale: {
       discount,
       sub_total,
       status = ORDER_STATUS.DELIVERED,
+      salesItems,
     } = sale;
+
+
     await connectDB();
-    const newSale = await Sale.create({
-      shopId,
-      total_amount,
-      sub_total,
-      discount,
-      profit,
-      status,
-      createdBy,
-      updatedBy: [],
-    });
-    return {
-      success: true,
-      message: "Sale added successfully",
-      data: JSON.parse(JSON.stringify(newSale)),
-    };
+    const session = await mongoose.startSession();
+
+
+    session.startTransaction();
+
+    try {
+
+      const newSale = new Sale({
+        shopId,
+        total_amount,
+        sub_total,
+        discount,
+        profit,
+        status,
+        createdBy,
+        updatedBy: [],
+      });
+      await newSale.save({ session });
+
+      // Prepare sale items with the saleId reference
+      const saleObjectId = new mongoose.Types.ObjectId(newSale._id.toString());
+      const saleItemsWithSaleId = salesItems.map((item) => ({
+        shopProductId: item.shopProductId,
+        productId: item.productId,
+        total_amount: item.total_amount,
+        unit_price: item.unit_price,
+        profit: item.profit,
+        qty: item.qty,
+        createdBy: item.createdBy,
+        saleId: saleObjectId
+      }));
+
+      // Prepare bulk update operations for ShopProduct
+      const bulkUpdates = salesItems.map((item) => ({
+        updateOne: {
+          filter: { _id: new mongoose.Types.ObjectId(item.shopProductId) },
+          update: { $inc: { quantity: -item.qty } },
+        },
+      }));
+
+      await SalesItem.insertMany(saleItemsWithSaleId, { session });
+
+      // Update product inventory within the transaction
+      await ShopProduct.bulkWrite(bulkUpdates, { session });
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return {
+        success: true,
+        message: "Sale added successfully",
+        data: JSON.parse(JSON.stringify(newSale)),
+      };
+
+    } catch (err: any) {
+      await session.abortTransaction();
+      session.endSession();
+      throw err;
+    }
+
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };
@@ -322,11 +372,45 @@ export const getAllShopDraftSales = async (body: { shopId: string }) => {
     filter.createdAt = { $gte: startOfDay, $lte: endOfDay };
 
     // delete all DRAFT sales whose createdAt is not today, before getting todays DRAFT sales
-    await Sale.deleteMany({
+    const draftSalesToDelete = await Sale.find({
       shopId: shopIdObjectId,
       status: ORDER_STATUS.DRAFT,
-      createdAt: { $lt: startOfDay, $gt: endOfDay },
-    });
+      $or: [
+        { createdAt: { $lt: startOfDay } },
+        { createdAt: { $gt: endOfDay } }
+      ]
+    }).select("_id");
+
+    const deletedSaleIds = draftSalesToDelete?.map((sale) => sale._id);
+
+    if (deletedSaleIds?.length > 0) {
+      const session = await mongoose.startSession();
+      session.startTransaction();
+
+      try {
+        const salesItems = await SalesItem.find({ saleId: { $in: deletedSaleIds } }).session(session);
+
+        if (salesItems?.length > 0) {
+          const bulkUpdates = salesItems?.map((item) => ({
+            updateOne: {
+              filter: { _id: item.shopProductId },
+              update: { $inc: { quantity: item.qty } },
+            },
+          }));
+          await ShopProduct.bulkWrite(bulkUpdates, { session });
+          await SalesItem.deleteMany({ saleId: { $in: deletedSaleIds } }, { session });
+        }
+
+        await Sale.deleteMany({ _id: { $in: deletedSaleIds } }, { session });
+
+        await session.commitTransaction();
+        session.endSession();
+      } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+        throw error;
+      }
+    }
 
     const sales = await Sale.aggregate([
       { $match: filter },
@@ -361,7 +445,7 @@ export const getAllShopDraftSales = async (body: { shopId: string }) => {
       { $sort: { createdAt: -1 } },
     ]);
 
-    return { success: true, data: JSON.parse(JSON.stringify(sales)) };
+    return { success: true, data: JSON.parse(JSON.stringify(sales)), deletedDraftSaleIds: JSON.parse(JSON.stringify(deletedSaleIds)) };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };
@@ -480,24 +564,85 @@ export const getSaleById = async (id: string) => {
 export const updateSale = async ({
   saleId,
   saleData,
+  salesItemsToDelete,
+  salesItemsToAdd
 }: {
   saleId: string;
   saleData: any;
+  salesItemsToDelete: SalesItemInput[],
+  salesItemsToAdd: SalesItemInput[],
 }) => {
   try {
     await connectDB();
-    // Find the sale by ID and update their details
-    const updatedSale = await Sale.findByIdAndUpdate(
-      saleId,
-      {
-        ...saleData,
+
+    const bulkUpdatesShopProductAfterDelete = salesItemsToDelete.map((item) => ({
+      updateOne: {
+        filter: { _id: new mongoose.Types.ObjectId(item.shopProductId) },
+        update: { $inc: { quantity: item.qty } },
       },
-      { new: true }, // Return the updated document
-    );
-    if (!updatedSale) {
-      return { success: false, message: "Sale not found" };
+    }));
+
+
+    const saleObjectId = new mongoose.Types.ObjectId(saleId);
+    const saleItemsWithSaleId = salesItemsToAdd.map((item) => ({
+      shopProductId: item.shopProductId,
+      productId: item.productId,
+      total_amount: item.total_amount,
+      unit_price: item.unit_price,
+      profit: item.profit,
+      qty: item.qty,
+      createdBy: item.createdBy,
+      saleId: saleObjectId,
+      ...(item.createdAt ? { createdAt: item.createdAt } : {})
+    }));
+
+    // Prepare bulk update operations for ShopProduct
+    const bulkUpdatesShopProductAfterAdding = salesItemsToAdd.map((item) => ({
+      updateOne: {
+        filter: { _id: new mongoose.Types.ObjectId(item.shopProductId) },
+        update: { $inc: { quantity: -item.qty } },
+      },
+    }));
+
+    const session = await mongoose.startSession();
+
+    session.startTransaction();
+
+    try {
+      // Find the sale by ID and update their details
+      const updatedSale = await Sale.findByIdAndUpdate(
+        saleId,
+        {
+          ...saleData,
+        },
+        { new: true, session }, // Return the updated document
+      );
+      // if (!updatedSale) {
+      //   return { success: false, message: "Sale not found" };
+      // }
+
+
+
+      await ShopProduct.bulkWrite(bulkUpdatesShopProductAfterDelete, { session });
+
+      await SalesItem.deleteMany({ _id: { $in: salesItemsToDelete.map((item) => item._id) } }, { session });
+
+      // Insert all sale items within the transaction
+      await SalesItem.insertMany(saleItemsWithSaleId, { session });
+
+      // Update product inventory within the transaction
+      await ShopProduct.bulkWrite(bulkUpdatesShopProductAfterAdding, { session });
+
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return { success: true, data: JSON.parse(JSON.stringify(updatedSale)) };
+    } catch (err: any) {
+      await session.abortTransaction();
+      session.endSession();
+      throw err;
     }
-    return { success: true, data: JSON.parse(JSON.stringify(updatedSale)) };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };
@@ -512,39 +657,51 @@ export const deleteSale = async (saleId: string) => {
     // 1. Fetch all SalesItems for this sale to revert stock
     const salesItems = await SalesItem.find({ saleId });
 
-    if (salesItems.length > 0) {
-      // 2. Revert stock in ShopProduct
-      const bulkUpdates = salesItems.map((item) => ({
-        updateOne: {
-          filter: { _id: item.shopProductId },
-          update: { $inc: { quantity: item.qty } },
-        },
-      }));
-      await ShopProduct.bulkWrite(bulkUpdates);
+    const session = await mongoose.startSession();
 
-      // 3. Mark SalesItems as deleted and suspended
-      await SalesItem.updateMany(
-        { saleId },
+    session.startTransaction();
+    try {
+      if (salesItems.length > 0) {
+        // 2. Revert stock in ShopProduct
+        const bulkUpdates = salesItems.map((item) => ({
+          updateOne: {
+            filter: { _id: item.shopProductId },
+            update: { $inc: { quantity: item.qty } },
+          },
+        }));
+        await ShopProduct.bulkWrite(bulkUpdates, { session });
+
+        // 3. Mark SalesItems as deleted and suspended
+        await SalesItem.updateMany(
+          { saleId },
+          { isDeleted: true, isSuspended: true }, { session }
+        );
+      }
+
+      // 4. Mark Sale as deleted and suspended
+      const updatedSale = await Sale.findByIdAndUpdate(
+        saleId,
         { isDeleted: true, isSuspended: true },
+        { new: true, session },
       );
+
+      // if (!updatedSale) {
+      //   return { success: false, message: "Sale not found" };
+      // }
+      await session.commitTransaction();
+      session.endSession();
+
+      return {
+        success: true,
+        data: JSON.parse(JSON.stringify(updatedSale)),
+        message: "Sale deleted successfully",
+      };
+
+    } catch (err: any) {
+      await session.abortTransaction();
+      session.endSession();
+      throw err;
     }
-
-    // 4. Mark Sale as deleted and suspended
-    const updatedSale = await Sale.findByIdAndUpdate(
-      saleId,
-      { isDeleted: true, isSuspended: true },
-      { new: true },
-    );
-
-    if (!updatedSale) {
-      return { success: false, message: "Sale not found" };
-    }
-
-    return {
-      success: true,
-      data: JSON.parse(JSON.stringify(updatedSale)),
-      message: "Sale deleted successfully",
-    };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };

@@ -46,7 +46,6 @@ import LoadingAlert from "@/components/LoadingAlert";
 import { currencyFormatter } from "@/utils/services/utils";
 import { getSaleById, updateSale } from "@/utils/serverActions/Sale";
 import { getAllShopProducts } from "@/utils/serverActions/ShopProduct";
-import { addSalesItems, deleteSalesItems } from "@/utils/serverActions/SalesItem";
 import { useReactToPrint } from "react-to-print";
 import SaleRecieptPDF from "./SaleReciept";
 
@@ -137,7 +136,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
 
         try {
             const orderResponse = await getSaleById(draftId as string)
-            console.log("orderResponse", orderResponse)
+            // console.log("orderResponse", orderResponse)
             if (!orderResponse.success) {
                 showAlert({
                     title: "Error",
@@ -146,7 +145,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                 })
                 return
             }
-            console.log("draft Order details", orderResponse?.data)
+            // console.log("draft Order details", orderResponse?.data)
             setOrderDetails(orderResponse?.data);
         } catch (error: any) {
             console.log("error", error);
@@ -169,7 +168,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
 
     useEffect(() => {
         if (Object.keys(orderDetails).length > 0) {
-            console.log("data", orderDetails);
+            // console.log("data", orderDetails);
             const items = []
             for (const item of orderDetails?.salesItems) {
                 items.push({ ...item })
@@ -197,10 +196,10 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                 })
                 return
             }
-            console.log("all products", res?.data)
+            // console.log("all products", res?.data)
             setProducts(res?.data);
         } catch (error: any) {
-            console.log("error", error);
+            // console.log("error", error);
             showAlert({
                 title: "Error",
                 text: error?.message || "An error occured",
@@ -222,7 +221,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
         reason: AutocompleteChangeReason,
         details?: AutocompleteChangeDetails<any> | undefined
     ) => {
-        console.log(value, reason, details);
+        // console.log(value, reason, details);
         if (reason === "clear") {
             setSelectedProduct(null);
             return;
@@ -234,7 +233,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
         setSelectedProduct({ ...value, shopProductId: value._id, total_amount: 0, qty: 0, profit: 0 });
     };
     const handleAddProduct = () => {
-        console.log("selectedProduct", selectedProduct)
+        // console.log("selectedProduct", selectedProduct)
         if (
             selectedProduct === null ||
             !selectedProduct.quantity ||
@@ -295,8 +294,8 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
     };
 
 
-    console.log("orderProducts >>>>>>>>", orderProducts)
-    console.log("old orderDetails >>>>>>>>", orderDetails)
+    // console.log("orderProducts >>>>>>>>", orderProducts)
+    // console.log("old orderDetails >>>>>>>>", orderDetails)
     const Submit = async (e: any, shouldPrint: boolean = false, status: string = ORDER_STATUS.DELIVERED) => {
         e.preventDefault();
         setLoading(true);
@@ -313,26 +312,10 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                 ],
                 // shopId: currentUser?.assignedShop?._id as string,
             };
-            const orderResponse = await updateSale({ saleId: orderDetails._id, saleData: orderData })
-            console.log("updateSale orderResponse", orderResponse)
-            // if (!orderResponse.success) {
-            //     showAlert({
-            //         title: "Error",
-            //         text: orderResponse?.message || "An error occurred!",
-            //         severity: "error"
-            //     })
-            //     return
-            // }
 
 
-            await deleteSalesItems(orderDetails.salesItems)
-
-            // add order items
-            // orderId, productId, quantity, totalAmount
-            // item.productId, item.quantity, item.totalAmount
-            // posOrderItems
             const items: any[] = []
-            console.log("orderProducts >>>>>>>>", orderProducts)
+            // console.log("orderProducts >>>>>>>>", orderProducts)
             for (const item of orderProducts) {
                 items.push({
                     ...item,
@@ -346,9 +329,29 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                     createdBy: currentUser?._id || ""
                 })
             }
-            console.log("addSalesItems>>>>", items)
-            const orderItemsResponse = await addSalesItems({ saleId: orderResponse?.data?._id as string, salesItems: items })
-            console.log("addSalesItems orderItemsResponse", orderItemsResponse)
+
+            const orderResponse = await updateSale({ saleId: orderDetails._id, saleData: orderData, salesItemsToDelete: orderDetails.salesItems, salesItemsToAdd: items })
+            // console.log("updateSale orderResponse", orderResponse)
+            // if (!orderResponse.success) {
+            //     showAlert({
+            //         title: "Error",
+            //         text: orderResponse?.message || "An error occurred!",
+            //         severity: "error"
+            //     })
+            //     return
+            // }
+
+
+            // await deleteSalesItems(orderDetails.salesItems)
+
+            // add order items
+            // orderId, productId, quantity, totalAmount
+            // item.productId, item.quantity, item.totalAmount
+            // posOrderItems
+
+            // console.log("addSalesItems>>>>", items)
+            // const orderItemsResponse = await addSalesItems({ saleId: orderResponse?.data?._id as string, salesItems: items })
+            // console.log("addSalesItems orderItemsResponse", orderItemsResponse)
 
             // if (!orderItemsResponse.success) {
             //     showAlert({
@@ -392,7 +395,7 @@ function EditDraftPage({ draftId, handleGoToDrafts }: { draftId: string | null, 
                 error instanceof Error
                     ? error.message
                     : "An error occurred, please try again";
-            console.error("Add order error:", error);
+            // console.error("Add order error:", error);
 
             showAlert({
                 title: "Error",

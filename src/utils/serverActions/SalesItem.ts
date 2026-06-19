@@ -117,7 +117,7 @@ export const getSalesItemsByProductId = async ({ productId, page = 1, shopId }: 
 
 
 // add multiple salesItem
-interface SalesItemInput {
+export interface SalesItemInput {
     _id: string;
     shopProductId: string;
     productId: string;

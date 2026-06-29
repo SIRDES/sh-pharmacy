@@ -365,23 +365,57 @@ export const updateMultipleProductsStock = async (products: {
 };
 
 // delete a product
-export const deletedProduct = async (productId: string) => {
+export const deleteProduct = async (productId: string) => {
   try {
     await connectDB();
 
-    // find all shopProducts that has this productId and delete them as well
+    const session = await mongoose.startSession();
+    session.startTransaction();
 
-    const deletedProduct = await Product.findByIdAndDelete(productId);
-    if (!deletedProduct) {
-      return { success: false, message: "Product not found" };
+    try {
+      // find all shopProducts that has this productId and delete them as well
+      const product = await Product.findById(productId).session(session);
+      if (!product) {
+        await session.abortTransaction();
+        session.endSession();
+        return { success: false, message: "Product not found" };
+      }
+
+      const timeStamp = Date.now();
+      let baseName = product.name;
+      if (product.name.includes("_(DELETED)_")) {
+        baseName = product.name.split("_(DELETED)_")[0];
+      } else if (product.name.includes("(DELETED)")) {
+        baseName = product.name.replace(" (DELETED)", "").replace("(DELETED)", "").trim();
+      }
+      const newName = `${baseName}_(DELETED)_${timeStamp}`.toUpperCase();
+
+      const deletedProduct = await Product.findByIdAndUpdate(
+        productId,
+        { isDeleted: true, isSuspended: true, name: newName },
+        { new: true, session }
+      );
+      if (!deletedProduct) {
+        await session.abortTransaction();
+        session.endSession();
+        return { success: false, message: "Product not found" };
+      }
+      // delete all shopProducts that has this productId
+      await ShopProduct.updateMany({ productId }, { isDeleted: true, isSuspended: true }, { session });
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return {
+        success: true,
+        data: JSON.parse(JSON.stringify(deletedProduct)),
+        message: "Product deleted successfully",
+      };
+    } catch (err: any) {
+      await session.abortTransaction();
+      session.endSession();
+      throw err;
     }
-    // delete all shopProducts that has this productId
-    const deletedShopProducts = await ShopProduct.deleteMany({ productId });
-    return {
-      success: true,
-      data: JSON.parse(JSON.stringify(deletedProduct)),
-      message: "Product deleted successfully",
-    };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };

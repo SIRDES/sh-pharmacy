@@ -18,7 +18,10 @@ export const getAllShopProducts = async ({ shopId, productId }: { shopId?: strin
   try {
     await connectDB();
     // Use aggregation to fetch shop products with populated shop and product details
-    const matchStage: any = {};
+    const matchStage: any = {
+      isDeleted: false,
+      isSuspended: false,
+    };
     if (shopId) matchStage.shopId = new mongoose.Types.ObjectId(shopId);
     if (productId) matchStage.productId = new mongoose.Types.ObjectId(productId);
 
@@ -286,8 +289,8 @@ export const updateMultipleShopProduct = async (shopProducts: {
 export const deleteShopProduct = async (shopProductId: string) => {
   try {
     await connectDB();
-    const deletedProduct = await ShopProduct.findByIdAndDelete(shopProductId);
-    if (!deletedProduct) {
+    const deletedShopProduct = await ShopProduct.findByIdAndDelete(shopProductId);
+    if (!deletedShopProduct) {
       return { success: false, message: "Shop Product not found" };
     }
     return { success: true, message: "Shop Product deleted successfully" };

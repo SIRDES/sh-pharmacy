@@ -59,6 +59,14 @@ export const getAShopById = async (id: string) => {
                     from: "shopproducts",
                     localField: "_id",
                     foreignField: "shopId",
+                    pipeline: [
+                        {
+                            $match: {
+                                isDeleted: false,
+                                isSuspended: false
+                            }
+                        }
+                    ],
                     as: "shopProducts"
                 }
             },

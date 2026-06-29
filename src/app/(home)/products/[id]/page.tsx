@@ -26,7 +26,7 @@ import LoadingAlert from "@/components/LoadingAlert";
 import Link from "next/link";
 import { currencyFormatter } from "@/utils/services/utils";
 import { StyledTableCell, StyledTableRow } from "@/theme/table";
-import { deletedProduct, getAllProducts, getProuctById, updateMultipleProductsStock, updateProduct, updateProductsStock } from "@/utils/serverActions/Product";
+import { deleteProduct, getAllProducts, getProuctById, updateMultipleProductsStock, updateProduct, updateProductsStock } from "@/utils/serverActions/Product";
 import dayjs from "dayjs";
 import ManageStockModal from "@/components/products/ManageStockModal";
 import { useRouter } from "next/navigation";
@@ -493,7 +493,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
     handleCloseDeleteProductModal();
     try {
       setLoading(true);
-      const orderResponse = await deletedProduct(id as string)
+      const orderResponse = await deleteProduct(id as string)
       if (!orderResponse.success) {
         showAlert({
           title: "Error",
@@ -641,7 +641,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                     >
                       Manage Shop Qty
                     </MenuItem>
-                    {/* <MenuItem
+                    <MenuItem
                       // component={Link}
                       sx={{ color: "red" }}
                       onClick={() => {
@@ -650,7 +650,7 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
                       }}
                     >
                       Delete Product
-                    </MenuItem> */}
+                    </MenuItem>
                   </Menu>
                 </Box>
               )}

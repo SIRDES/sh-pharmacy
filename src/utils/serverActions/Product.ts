@@ -8,6 +8,7 @@ import { authOptions } from "../authOptions";
 import { addAProductStockHistory, addMultipleProductStockHistories } from "./ProductStockHistory";
 import ShopProduct from "@/models/ShopProduct";
 import Counter from "@/models/Counter";
+import { requireAdmin, requireAuth } from "../auth";
 
 // get the cuurently logined user from the session in server side
 
@@ -28,6 +29,7 @@ export const getAllProducts = async ({
   filter?: "expiringSoon" | "expired" | "all";
 } = {}) => {
   try {
+    await requireAuth();
     await connectDB();
 
     const skip = (page - 1) * limit;
@@ -107,6 +109,7 @@ export const addProduct = async (
   }[]
 ) => {
   try {
+    await requireAdmin();
     await connectDB();
 
     if (!Array.isArray(data) || data.length === 0) {
@@ -192,6 +195,7 @@ export const addProduct = async (
 // get product by id
 export const getProuctById = async (id: string) => {
   try {
+    await requireAuth();
     await connectDB();
     const product = await Product.aggregate([
       { $match: { _id: new mongoose.Types.ObjectId(id) } },
@@ -290,6 +294,7 @@ export const updateProduct = async ({
   productData: any;
 }) => {
   try {
+    await requireAdmin();
     await connectDB();
     // Find the user by ID and update their details
     const updatedProduct = await Product.findByIdAndUpdate(
@@ -320,14 +325,8 @@ export const updateProductsStock = async (product: {
   userId: string;
 }) => {
   try {
+    await requireAdmin();
     await connectDB();
-    //  prepare stock update operations
-    // const updateOperations = products.map((product) => ({
-    //   updateOne: {
-    //     filter: { _id: product.productId },
-    //     update: { $set: { currentStock: product.currentStock } },
-    //   },
-    // }));
 
     const updatedProducts = await Product.findByIdAndUpdate(product.productId, { currentStock: product.currentStock });
     await addAProductStockHistory(product)
@@ -346,6 +345,7 @@ export const updateMultipleProductsStock = async (products: {
   userId: string;
 }[]) => {
   try {
+    await requireAdmin();
     await connectDB();
     //  prepare stock update operations
     const updateOperations = products.map((product) => ({
@@ -367,6 +367,7 @@ export const updateMultipleProductsStock = async (products: {
 // delete a product
 export const deleteProduct = async (productId: string) => {
   try {
+    await requireAdmin();
     await connectDB();
 
     const session = await mongoose.startSession();

@@ -4,9 +4,11 @@ import { connectDB } from "@/lib/mongodb";
 import Shop from "@/models/Shop";
 import User from "@/models/User";
 import mongoose from "mongoose";
+import { requireAdmin, requireAuth } from "../auth";
 
 export const getAllShops = async () => {
     try {
+        await requireAuth();
         await connectDB();
         const shops = await Shop.find().sort({ createdAt: 1 });
 
@@ -25,6 +27,7 @@ export const AddShop = async (data: {
     name: string;
 }) => {
     try {
+        await requireAdmin();
         await connectDB();
         // console.log("data", data);
         const { name } = data;
@@ -42,6 +45,7 @@ export const AddShop = async (data: {
 
 export const getAShopById = async (id: string) => {
     try {
+        await requireAuth();
         await connectDB();
 
         const shop = await Shop.aggregate([
@@ -139,6 +143,7 @@ export const getAShopById = async (id: string) => {
 // update shop
 export const updateShop = async ({ shopId, shopData }: { shopId: string, shopData: any }) => {
     try {
+        await requireAdmin();
         await connectDB();
         // Find the shop by ID and update their details
         const updatedShop = await Shop.findByIdAndUpdate(
@@ -161,6 +166,7 @@ export const updateShop = async ({ shopId, shopData }: { shopId: string, shopDat
 // delete a shop
 export const deleteShop = async (shopId: string) => {
     try {
+        await requireAdmin();
         await connectDB();
         const deletedShop = await Shop.findByIdAndDelete(shopId);
         if (!deletedShop) {

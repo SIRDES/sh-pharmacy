@@ -1,6 +1,7 @@
 "use server";
 import { connectDB } from "@/lib/mongodb";
 import AdminSetting from "@/models/AdminSettings";
+import { requireAdmin, requireAuth } from "../auth";
 
 export const addAdminSetting
   = async () => {
@@ -15,6 +16,7 @@ export const addAdminSetting
         },
       ];
       // console.log("batch", batch);
+      await requireAdmin();
       await connectDB();
       const result = await AdminSetting.insertMany(batch);
       // console.log("result", result);
@@ -26,6 +28,7 @@ export const addAdminSetting
   };
 export const getAdminSettings = async () => {
   try {
+    await requireAuth();
     await connectDB();
     const batches = await AdminSetting.find().sort({ createdAt: 1 });
 

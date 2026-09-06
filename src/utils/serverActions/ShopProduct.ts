@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../authOptions";
 import { addMultipleShopProductStockHistories, addShopProductStockHistory } from "./ShopProductStockHistory";
+import { requireAdmin, requireAuth } from "../auth";
 
 // get the cuurently logined user from the session in server side
 
@@ -16,6 +17,7 @@ export const getCurrentUser = async () => {
 
 export const getAllShopProducts = async ({ shopId, productId }: { shopId?: string, productId?: string }) => {
   try {
+    await requireAuth();
     await connectDB();
     // Use aggregation to fetch shop products with populated shop and product details
     const matchStage: any = {
@@ -75,6 +77,7 @@ export const addShopProduct = async (data: {
   userId: string;
 }) => {
   try {
+    await requireAdmin();
     await connectDB();
     // console.log("data", data);
     const { shopId, productId, quantity, userId } = data;
@@ -122,6 +125,7 @@ export const addMultipleShopProducts = async (data: {
   userId: string;
 }) => {
   try {
+    await requireAdmin();
     await connectDB();
     // console.log("data", data);
     const { shopId, products, userId } = data;
@@ -178,6 +182,7 @@ export const addMultipleShopProducts = async (data: {
 // update shop product
 export const updateShopProduct = async ({ shopProductId, productData }: { shopProductId: string, productData: any }) => {
   try {
+    await requireAdmin();
     await connectDB();
     const updatedProduct = await ShopProduct.findByIdAndUpdate(
       shopProductId,
@@ -209,19 +214,8 @@ export const updateShopProductStock = async (shopProducts: {
   quantity: number;
 }) => {
   try {
+    await requireAdmin();
     await connectDB();
-    //  prepare update operations
-    // const updateOperations = shopProducts.map((product) => ({
-    //   updateOne: {
-    //     filter: { _id: product.shopProductId },
-    //     update: { $set: { quantity: product.quantity } }
-    //   }
-    // }))
-
-    // updateOne: {
-    //   filter: { _id: product.productId },
-    //   update: { $set: { currentStock: product.currentStock } },
-    // },
 
     const updatedProduct = await ShopProduct.findByIdAndUpdate(
       shopProducts.shopProductId,
@@ -261,6 +255,7 @@ export const updateMultipleShopProduct = async (shopProducts: {
   quantity: number;
 }[]) => {
   try {
+    await requireAdmin();
     await connectDB();
     //  prepare update operations
     const updateOperations = shopProducts.map((product) => ({
@@ -269,11 +264,6 @@ export const updateMultipleShopProduct = async (shopProducts: {
         update: { $set: { quantity: product.quantity } }
       }
     }))
-
-    // updateOne: {
-    //   filter: { _id: product.productId },
-    //   update: { $set: { currentStock: product.currentStock } },
-    // },
 
     const updatedProducts = await ShopProduct.bulkWrite(updateOperations);
 
@@ -288,6 +278,7 @@ export const updateMultipleShopProduct = async (shopProducts: {
 // delete a product
 export const deleteShopProduct = async (shopProductId: string) => {
   try {
+    await requireAdmin();
     await connectDB();
     const deletedShopProduct = await ShopProduct.findByIdAndDelete(shopProductId);
     if (!deletedShopProduct) {

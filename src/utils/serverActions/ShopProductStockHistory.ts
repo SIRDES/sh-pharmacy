@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../authOptions";
 import ProductStockHistory from "@/models/ProductStockHistory";
 import ShopProductStockHistory from "@/models/ShopProductStockHistory";
+import { requireAuth } from "../auth";
 
 // get the currently logged in user from the session in server side
 
@@ -19,6 +20,7 @@ export const getAllShopProductStockHistoryByProductId = async (
   productId: string
 ) => {
   try {
+    await requireAuth();
     await connectDB();
     // const currentUser = await getCurrentUser();
     const ProductStockHistories = await ShopProductStockHistory.aggregate([
@@ -99,6 +101,7 @@ export const getAllShopProductStockHistoriesByShopIdAndProductId = async (
   { shopId, productId, page = 1 }: { shopId: string, productId: string, page?: number }
 ) => {
   try {
+    await requireAuth();
     await connectDB();
     const skip = (page - 1) * 50;
 
@@ -227,8 +230,6 @@ export const addMultipleShopProductStockHistories = async (data: {
 }[]) => {
   try {
     await connectDB();
-    // const { shopId, productId, shopProductId, initialQuantity, addedQuantity, operation, userId } = data;
-    // console.log("data", data)
 
     if (!Array.isArray(data) || data.length === 0) {
       return { success: false, message: "No product stock histories to add" };

@@ -15,6 +15,7 @@ import {
   endOfDay,
 } from "date-fns";
 import { SalesItemInput } from "./SalesItem";
+import { requireAdmin, requireAuth } from "../auth";
 
 export const addNewSale = async (sale: {
   total_amount: number;
@@ -39,6 +40,7 @@ export const addNewSale = async (sale: {
     } = sale;
 
 
+    await requireAuth();
     await connectDB();
     const session = await mongoose.startSession();
 
@@ -113,6 +115,7 @@ export const getAllSales = async (body?: {
 }) => {
   try {
     const { startDate, endDate } = body || {};
+    await requireAuth();
     await connectDB();
 
     const filter: any = {
@@ -179,6 +182,7 @@ export const getAllShopSales = async (body: {
 }) => {
   try {
     const { startDate, endDate, shopId } = body;
+    await requireAuth();
     await connectDB();
     const shopIdObjectId = new mongoose.Types.ObjectId(shopId);
     const filter: any = {
@@ -255,6 +259,7 @@ export const getAllShopSales = async (body: {
 export const getSalesDashboardStats = async (body: { shopId: string }) => {
   try {
     const { shopId } = body;
+    await requireAuth();
     await connectDB();
     const shopIdObjectId = new mongoose.Types.ObjectId(shopId);
 
@@ -358,6 +363,7 @@ export const getSalesDashboardStats = async (body: { shopId: string }) => {
 export const getAllShopDraftSales = async (body: { shopId: string }) => {
   try {
     const { shopId } = body;
+    await requireAuth();
     await connectDB();
     const shopIdObjectId = new mongoose.Types.ObjectId(shopId);
     const filter: any = {
@@ -455,6 +461,7 @@ export const getAllShopDraftSales = async (body: { shopId: string }) => {
 // get sale by id
 export const getSaleById = async (id: string) => {
   try {
+    await requireAuth();
     await connectDB();
 
     const sale = await Sale.aggregate([
@@ -573,6 +580,7 @@ export const updateSale = async ({
   salesItemsToAdd: SalesItemInput[],
 }) => {
   try {
+    await requireAuth();
     await connectDB();
 
     const bulkUpdatesShopProductAfterDelete = salesItemsToDelete.map((item) => ({
@@ -652,6 +660,7 @@ export const updateSale = async ({
 // delete sale (soft delete)
 export const deleteSale = async (saleId: string) => {
   try {
+    await requireAuth();
     await connectDB();
 
     // 1. Fetch all SalesItems for this sale to revert stock
@@ -711,6 +720,7 @@ export const deleteSale = async (saleId: string) => {
 // delete draft sale
 export const deleteDraftSale = async (saleId: string) => {
   try {
+    await requireAuth();
     await connectDB();
 
     // 1. Fetch all SalesItems for this sale to revert stock

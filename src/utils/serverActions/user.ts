@@ -5,8 +5,7 @@ import User from "@/models/User";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../authOptions";
-
-// get the cuurently logined user from the session in server side
+import { requireAdmin, requireAuth } from "../auth";
 
 export const getCurrentUser = async () => {
   const session = await getServerSession(authOptions);
@@ -15,6 +14,7 @@ export const getCurrentUser = async () => {
 
 export const getAllUsers = async () => {
   try {
+    await requireAdmin();
     await connectDB();
     const currentUser = await getCurrentUser();
     const usersWithShop = await User.aggregate([
@@ -51,9 +51,6 @@ export const getAllUsers = async () => {
   }
 };
 
-
-
-
 export const AddUser = async (data: {
   name: string;
   role: string;
@@ -65,6 +62,7 @@ export const AddUser = async (data: {
   assignedShop?: string;
 }) => {
   try {
+    await requireAdmin();
     await connectDB();
     // console.log("data", data);
     const { name, role, username, password, assignedShop, gender, phoneNumber } = data;
@@ -90,6 +88,7 @@ export const AddUser = async (data: {
 // get user by id
 export const getUserById = async (id: string) => {
   try {
+    await requireAdmin();
     await connectDB();
     const user = await User.aggregate([
       { $match: { _id: new mongoose.Types.ObjectId(id) } },
@@ -124,10 +123,10 @@ export const getUserById = async (id: string) => {
   }
 }
 
-
 // update user
 export const updateUser = async ({ userId, userData }: { userId: string, userData: any }) => {
   try {
+    await requireAdmin();
     await connectDB();
     console.log("userData", userData);
     // Find the user by ID and update their details
@@ -152,6 +151,7 @@ export const updateUser = async ({ userId, userData }: { userId: string, userDat
 // delete a user
 export const deleteUser = async (userId: string) => {
   try {
+    await requireAdmin();
     await connectDB();
     const deletedUser = await User.findByIdAndDelete(userId);
     if (!deletedUser) {
@@ -168,6 +168,7 @@ export const deleteUser = async (userId: string) => {
 // change password
 export const changePassword = async ({ oldPassword, password }: { password: string, oldPassword: string }) => {
   try {
+    await requireAuth();
     await connectDB();
     const currentuser = await getCurrentUser();
 
@@ -205,6 +206,7 @@ export const changePassword = async ({ oldPassword, password }: { password: stri
 // reset a user password by an admin. Verify the admin password first
 export const resetUserPassword = async ({ adminPassword, userId, password }: { userId: string, password: string, adminPassword: string }) => {
   try {
+    await requireAdmin();
     await connectDB();
     const currentuser = await getCurrentUser();
     // verify to check if the requester is an admin

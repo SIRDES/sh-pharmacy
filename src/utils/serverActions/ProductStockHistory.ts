@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../authOptions";
 import ProductStockHistory from "@/models/ProductStockHistory";
+import { requireAdmin, requireAuth } from "../auth";
 
 // get the currently logged in user from the session in server side
 
@@ -16,6 +17,7 @@ export const getCurrentUser = async () => {
 
 export const getAllProductStockHistories = async ({ page = 1, limit = 10 }: { page?: number, limit?: number }) => {
   try {
+    await requireAuth();
     await connectDB();
     const skip = (page - 1) * limit;
 
@@ -75,6 +77,7 @@ export const getAllProductStockHistoriesByProductId = async ({
   // limit?: number;
 }) => {
   try {
+    await requireAuth();
     await connectDB();
     const skip = (page - 1) * 50;
 

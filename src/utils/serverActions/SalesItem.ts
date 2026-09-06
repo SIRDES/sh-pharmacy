@@ -4,10 +4,12 @@ import { connectDB } from "@/lib/mongodb";
 import SalesItem from "@/models/SalesItem";
 import ShopProduct from "@/models/ShopProduct";
 import mongoose from "mongoose";
+import { requireAuth } from "../auth";
 
 
 export const getSaleItemsBySaleId = async (saleId: string) => {
     try {
+        await requireAuth();
         await connectDB();
         const saleItems = await SalesItem.aggregate([
             { $match: { saleId: new mongoose.Types.ObjectId(saleId) } },
@@ -30,6 +32,7 @@ export const getSaleItemsBySaleId = async (saleId: string) => {
 
 export const getSalesItemsByProductId = async ({ productId, page = 1, shopId }: { productId: string, page?: number, shopId?: string }) => {
     try {
+        await requireAuth();
         await connectDB();
         const skip = (page - 1) * 50;
 
@@ -137,6 +140,7 @@ export const addSalesItems = async ({
     salesItems: SalesItemInput[];
 }): Promise<{ success: boolean; message?: string }> => {
     try {
+        await requireAuth();
         await connectDB();
 
         // Prepare sale items with the saleId reference
@@ -190,6 +194,7 @@ export const addSalesItems = async ({
 // delete salesItems
 export const deleteSalesItems = async (salesItems: SalesItemInput[]) => {
     try {
+        await requireAuth();
         await connectDB();
         const bulkUpdates = salesItems.map((item) => ({
             updateOne: {

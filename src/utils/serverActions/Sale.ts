@@ -567,6 +567,15 @@ export const getSaleById = async (id: string) => {
   }
 };
 
+export interface UpdateSaleData {
+  total_amount?: number;
+  sub_total?: number;
+  discount?: number;
+  profit?: number;
+  status?: string;
+  updatedBy?: (string | mongoose.Types.ObjectId)[];
+}
+
 // update sale details
 export const updateSale = async ({
   saleId,
@@ -575,13 +584,29 @@ export const updateSale = async ({
   salesItemsToAdd
 }: {
   saleId: string;
-  saleData: any;
-  salesItemsToDelete: SalesItemInput[],
-  salesItemsToAdd: SalesItemInput[],
+  saleData: UpdateSaleData;
+  salesItemsToDelete: SalesItemInput[];
+  salesItemsToAdd: SalesItemInput[];
 }) => {
   try {
     await requireAuth();
     await connectDB();
+
+    const allowedFields = [
+      "total_amount",
+      "sub_total",
+      "discount",
+      "profit",
+      "status",
+      "updatedBy",
+    ] as const;
+
+    const sanitizedData: Record<string, any> = {};
+    for (const field of allowedFields) {
+      if ((saleData as any)[field] !== undefined) {
+        sanitizedData[field] = (saleData as any)[field];
+      }
+    }
 
     const bulkUpdatesShopProductAfterDelete = salesItemsToDelete.map((item) => ({
       updateOne: {
@@ -620,9 +645,7 @@ export const updateSale = async ({
       // Find the sale by ID and update their details
       const updatedSale = await Sale.findByIdAndUpdate(
         saleId,
-        {
-          ...saleData,
-        },
+        { $set: sanitizedData },
         { new: true, session }, // Return the updated document
       );
       // if (!updatedSale) {

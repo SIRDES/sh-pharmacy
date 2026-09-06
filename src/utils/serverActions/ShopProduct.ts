@@ -179,28 +179,50 @@ export const addMultipleShopProducts = async (data: {
 };
 
 
+export interface UpdateShopProductData {
+  quantity?: number;
+  isSuspended?: boolean;
+}
+
 // update shop product
-export const updateShopProduct = async ({ shopProductId, productData }: { shopProductId: string, productData: any }) => {
+export const updateShopProduct = async ({
+  shopProductId,
+  productData,
+}: {
+  shopProductId: string;
+  productData: UpdateShopProductData;
+}) => {
   try {
     await requireAdmin();
     await connectDB();
+
+    const allowedFields = ["quantity", "isSuspended"] as const;
+    const sanitizedData: Record<string, any> = {};
+    for (const field of allowedFields) {
+      if ((productData as any)[field] !== undefined) {
+        sanitizedData[field] = (productData as any)[field];
+      }
+    }
+
     const updatedProduct = await ShopProduct.findByIdAndUpdate(
       shopProductId,
-      {
-        ...productData,
-      },
+      { $set: sanitizedData },
       { new: true } // Return the updated document
     );
 
     if (!updatedProduct) {
       return { success: false, message: "Shop Product not found" };
     }
-    return { success: true, shopProductId: JSON.parse(JSON.stringify(updatedProduct))._id, data: JSON.parse(JSON.stringify(updatedProduct)) };
+    return {
+      success: true,
+      shopProductId: JSON.parse(JSON.stringify(updatedProduct))._id,
+      data: JSON.parse(JSON.stringify(updatedProduct)),
+    };
   } catch (err: any) {
     console.log(err);
     return { success: false, message: err?.message || "An error occurred" };
   }
-}
+};
 
 
 export const updateShopProductStock = async (shopProducts: {

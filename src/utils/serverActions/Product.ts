@@ -285,23 +285,47 @@ export const getProuctById = async (id: string) => {
   }
 };
 
+export interface UpdateProductData {
+  name?: string;
+  costPrice?: number;
+  sellingPrice?: number;
+  currentStock?: number;
+  expiryDate?: Date | string;
+  isSuspended?: boolean;
+}
+
 // update product
 export const updateProduct = async ({
   productId,
   productData,
 }: {
   productId: string;
-  productData: any;
+  productData: UpdateProductData;
 }) => {
   try {
     await requireAdmin();
     await connectDB();
-    // Find the user by ID and update their details
+
+    const allowedFields = [
+      "name",
+      "costPrice",
+      "sellingPrice",
+      "currentStock",
+      "expiryDate",
+      "isSuspended",
+    ] as const;
+
+    const sanitizedData: Record<string, any> = {};
+    for (const field of allowedFields) {
+      if ((productData as any)[field] !== undefined) {
+        sanitizedData[field] = (productData as any)[field];
+      }
+    }
+
+    // Find the product by ID and update details
     const updatedProduct = await Product.findByIdAndUpdate(
       productId,
-      {
-        ...productData,
-      },
+      { $set: sanitizedData },
       { new: true } // Return the updated document
     );
     // console.log("updatedProduct", updatedProduct)

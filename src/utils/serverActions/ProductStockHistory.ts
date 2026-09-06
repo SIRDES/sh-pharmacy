@@ -215,21 +215,32 @@ export const addMultipleProductStockHistories = async (
   }
 };
 
+export interface UpdateProductStockHistoryData {
+  initialQuantity?: number;
+  addedQuantity?: number;
+  operation?: "add" | "subtract";
+}
+
 // not in use
 export const updateAProductStockHistory = async (
   id: string,
-  data: {
-    initialQuantity?: number;
-    addedQuantity?: number;
-    operation?: "add" | "subtract";
-  }
+  data: UpdateProductStockHistoryData
 ) => {
   try {
+    await requireAdmin();
     await connectDB();
+
+    const allowedFields = ["initialQuantity", "addedQuantity", "operation"] as const;
+    const sanitizedData: Record<string, any> = {};
+    for (const field of allowedFields) {
+      if ((data as any)[field] !== undefined) {
+        sanitizedData[field] = (data as any)[field];
+      }
+    }
 
     const updatedHistory = await ProductStockHistory.findByIdAndUpdate(
       id,
-      { $set: data },
+      { $set: sanitizedData },
       { new: true }
     );
 
@@ -251,6 +262,7 @@ export const updateAProductStockHistory = async (
 // not in use
 export const deleteAProductStockHistory = async (id: string) => {
   try {
+    await requireAdmin();
     await connectDB();
 
     const deletedHistory = await ProductStockHistory.findByIdAndDelete(id);

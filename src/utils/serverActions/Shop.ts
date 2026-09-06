@@ -140,17 +140,29 @@ export const getAShopById = async (id: string) => {
 };
 
 
+export interface UpdateShopData {
+    name?: string;
+    isSuspended?: boolean;
+}
+
 // update shop
-export const updateShop = async ({ shopId, shopData }: { shopId: string, shopData: any }) => {
+export const updateShop = async ({ shopId, shopData }: { shopId: string, shopData: UpdateShopData }) => {
     try {
         await requireAdmin();
         await connectDB();
+
+        const allowedFields = ["name", "isSuspended"] as const;
+        const sanitizedData: Record<string, any> = {};
+        for (const field of allowedFields) {
+            if ((shopData as any)[field] !== undefined) {
+                sanitizedData[field] = (shopData as any)[field];
+            }
+        }
+
         // Find the shop by ID and update their details
         const updatedShop = await Shop.findByIdAndUpdate(
             shopId,
-            {
-                ...shopData,
-            },
+            { $set: sanitizedData },
             { new: true } // Return the updated document
         );
         if (!updatedShop) {

@@ -123,18 +123,48 @@ export const getUserById = async (id: string) => {
   }
 }
 
+export interface UpdateUserData {
+  name?: string;
+  username?: string;
+  phoneNumber?: string | null;
+  gender?: string | null;
+  role?: string;
+  assignedShop?: string | null;
+  isSuspended?: boolean;
+}
+
 // update user
-export const updateUser = async ({ userId, userData }: { userId: string, userData: any }) => {
+export const updateUser = async ({ userId, userData }: { userId: string, userData: UpdateUserData }) => {
   try {
-    await requireAdmin();
+    const caller = await requireAuth();
     await connectDB();
-    console.log("userData", userData);
+
+    const isAdmin = caller.role === "admin";
+    // Non-admins can only update their own profile
+    if (!isAdmin && caller._id?.toString() !== userId?.toString()) {
+      throw new Error("Forbidden: You can only update your own profile");
+    }
+
+    // Define allowed fields based on role to prevent privilege escalation
+    const allowedFields = isAdmin
+      ? ["name", "username", "phoneNumber", "gender", "role", "assignedShop", "isSuspended"]
+      : ["name", "username", "phoneNumber", "gender"];
+
+    const sanitizedData: Record<string, any> = {};
+    for (const field of allowedFields) {
+      if ((userData as any)[field] !== undefined) {
+        if (field === "assignedShop") {
+          sanitizedData.assignedShop = (userData as any).assignedShop ? (userData as any).assignedShop : null;
+        } else {
+          sanitizedData[field] = (userData as any)[field];
+        }
+      }
+    }
+
     // Find the user by ID and update their details
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      {
-        ...userData,
-      },
+      { $set: sanitizedData },
       { new: true } // Return the updated document
     );
     // console.log("updatedUser", updatedUser)

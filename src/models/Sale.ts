@@ -4,7 +4,7 @@ import { ORDER_STATUS } from "@/types/constants";
 
 export type ISale = mongoose.Document & {
   _id: string;
-  salesNumber: number; // Added salesNumber field
+  salesNumber: number;
   shopId: Types.ObjectId;
   total_amount: number;
   profit: number;
@@ -19,7 +19,7 @@ export type ISale = mongoose.Document & {
 
 const saleSchema = new mongoose.Schema(
   {
-    salesNumber: { type: Number, unique: true }, // Added salesNumber to schema
+    salesNumber: { type: Number, unique: true },
     total_amount: { type: Number, required: true },
     sub_total: { type: Number, required: true },
     discount: { type: Number, required: true },

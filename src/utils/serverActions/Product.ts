@@ -22,11 +22,13 @@ export const getAllProducts = async ({
   limit = 50,
   search = "",
   filter = "all",
+  fetchAll = false,
 }: {
   page?: number;
   limit?: number;
   search?: string;
   filter?: "expiringSoon" | "expired" | "all";
+  fetchAll?: boolean;
 } = {}) => {
   try {
     await requireAuth();
@@ -49,23 +51,27 @@ export const getAllProducts = async ({
       matchStage.expiryDate = { $gte: now, $lte: threeMonthsFromNow };
     }
 
+    const dataPipeline: any[] = [
+      {
+        $lookup: {
+          from: "shopproducts",
+          localField: "_id",
+          foreignField: "productId",
+          as: "shopProducts",
+        },
+      },
+      { $sort: { name: 1 } },
+    ];
+
+    if (!fetchAll) {
+      dataPipeline.push({ $skip: skip }, { $limit: limit });
+    }
+
     const result = await Product.aggregate([
       { $match: matchStage },
       {
         $facet: {
-          data: [
-            {
-              $lookup: {
-                from: "shopproducts",
-                localField: "_id",
-                foreignField: "productId",
-                as: "shopProducts",
-              },
-            },
-            { $sort: { name: 1 } },
-            { $skip: skip },
-            { $limit: limit },
-          ],
+          data: dataPipeline,
           totalCount: [{ $count: "count" }],
         },
       },
@@ -73,7 +79,7 @@ export const getAllProducts = async ({
 
     const products = result[0].data || [];
     const totalCount = result[0].totalCount[0]?.count || 0;
-    const totalPages = Math.ceil(totalCount / limit);
+    const totalPages = fetchAll ? 1 : Math.ceil(totalCount / limit);
 
     if (!products || products.length === 0) {
       return {

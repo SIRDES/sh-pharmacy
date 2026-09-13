@@ -26,6 +26,8 @@ import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
 import AddIcon from "@mui/icons-material/Add";
+import TableChartIcon from "@mui/icons-material/TableChart";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { showAlert } from "@/components/Alerts";
@@ -38,6 +40,7 @@ import dayjs from "dayjs";
 import ManageShopsStockModal from "@/components/ManageShopsStockModal";
 import { updateMultipleShopProduct } from "@/utils/serverActions/ShopProduct";
 import ManageProductStockModal from "@/components/ManageProductStockModal";
+import { exportProductsToPDF, exportProductsToXLSX } from "@/utils/services/exportProducts";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   padding: "9px 8px",
@@ -174,11 +177,7 @@ export default function Products() {
   const handleProductStockConfirm = async () => {
     setOpenManageProductStockModal(false);
     setLoading(true);
-    // console.log("selectedProducts", selectedProducts)
     const products = selectedProducts.map((product: any) => ({ productId: product._id, currentStock: product.currentStock, initialQuantity: product.initialQuantity, addedQuantity: product.addedQuantity, operation: stockOperation === "ADD" ? "add" : "subtract" as "add" | "subtract", userId: currentUser?._id as string }))
-
-    // console.log("products", products)
-
 
     try {
       const res = await updateMultipleProductsStock(products)
@@ -213,13 +212,8 @@ export default function Products() {
   const handleShopProductStockConfirm = async () => {
     setOpenManageShopStockModal(false);
     setLoading(true);
-    // console.log("selectedShopProducts", selectedShopProducts)
-    // const shopProducts = selectedShopProducts.map((product: any) => ({ _id: product._id, quantity: product.quantity }))
 
     const shopProducts = selectedShopProducts.map((product: any) => ({ shopId: product.shopId, productId: product.productId, shopProductId: product._id, initialQuantity: product.initialQuantity, addedQuantity: product.addedQuantity, operation: stockOperation === "ADD" ? "add" : "subtract" as "add" | "subtract", userId: currentUser?._id as string, quantity: product.quantity }))
-
-    // console.log("shopProducts", shopProducts)
-
 
     const products = selectedShopProducts.map((product: any) => ({ productId: product.productId, currentStock: product.product.currentStock, initialQuantity: product.product.initialQuantity, addedQuantity: product.product.addedQuantity, operation: stockOperation === "ADD" ? "subtract" : "add" as "add" | "subtract", userId: currentUser?._id as string }))
 
@@ -267,23 +261,68 @@ export default function Products() {
 
   const handleCloseManageShopStockModal = () => {
     setOpenManageShopStockModal(false);
-    // setStockValue("");
-    // setStockOperation("ADD");
-    // setSelectedShopProduct(null);
-    // setSelectedShopId(null);
   };
   const handleCloseManageProductStockModal = () => {
     setOpenManageProductStockModal(false);
     setStockValue("");
     setStockOperation("ADD");
-    // setSelectedShopProduct(null);
-    // setSelectedShopId(null);
   };
   const handleOpenManageProductStockModal = () => {
     setSelectedProducts([]);
     handleClose()
     setOpenManageProductStockModal(true)
   };
+  const handleExport = async (format: "xlsx" | "pdf") => {
+    handleClose();
+    setLoading(true);
+    try {
+      const res = await getAllProducts({
+        search,
+        filter,
+        fetchAll: true,
+      });
+
+      if (!res.success) {
+        showAlert({
+          title: "Error",
+          text: res?.message || "An error occurred while fetching products for export",
+          severity: "error",
+        });
+        return;
+      }
+
+      if (!res.data || res.data.length === 0) {
+        showAlert({
+          title: "No Products",
+          text: "No products found to export",
+          severity: "warning",
+        });
+        return;
+      }
+
+      if (format === "xlsx") {
+        exportProductsToXLSX(res.data, filter);
+      } else {
+        exportProductsToPDF(res.data, filter);
+      }
+
+      showAlert({
+        title: "Success",
+        text: `Exported ${res.data.length} product(s) as ${format.toUpperCase()} successfully`,
+        severity: "success",
+      });
+    } catch (error: any) {
+      console.error("Export error:", error);
+      showAlert({
+        title: "Error",
+        text: error?.message || "An error occurred while exporting products",
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const isAdmin = currentUser?.role === USER_ROLES.ADMIN
 
   return (
@@ -297,7 +336,6 @@ export default function Products() {
         setSelectedShopProducts={setSelectedShopProducts}
         setStockOperation={setStockOperation}
         stockOperation={stockOperation}
-      // setStockValue={setStockValue}
       />
       <ManageProductStockModal
         open={openManageProductStockModal}
@@ -317,7 +355,6 @@ export default function Products() {
           mt={2}
           px={{ xs: 1, sm: 2, md: 3 }}
         >
-          {/* <Button variant="contained" onClick={handleUpdateProductName}>handleUpdateProductName</Button> */}
           <Box display={"flex"} gap={3}>
             <TextField
               sx={{ minWidth: 250 }}
@@ -380,18 +417,34 @@ export default function Products() {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem component={Link}
-                  href={"/products/add-product"}>
+                <MenuItem
+                  component={Link}
+                  href={"/products/add-product"}
+                  sx={{ display: "flex", alignItems: "center", gap: 1.5 }}
+                >
+                  <AddIcon fontSize="small" />
                   Add Products
                 </MenuItem>
+                <MenuItem
+                  onClick={() => handleExport("xlsx")}
+                  sx={{ display: "flex", alignItems: "center", gap: 1.5 }}
+                >
+                  <TableChartIcon fontSize="small" color="primary" />
+                  Export as xlsx
+                </MenuItem>
+                <MenuItem
+                  onClick={() => handleExport("pdf")}
+                  sx={{ display: "flex", alignItems: "center", gap: 1.5 }}
+                >
+                  <PictureAsPdfIcon fontSize="small" color="error" />
+                  Export as pdf
+                </MenuItem>
                 {/* <MenuItem
-                  // component={Link}
                   onClick={handleOpenManageProductStockModal}
                 >
                   Manage stock
                 </MenuItem> */}
                 {/* <MenuItem
-                  // component={Link}
                   onClick={() => {
                     handleClose();
                     setOpenManageShopStockModal(true)
@@ -402,7 +455,6 @@ export default function Products() {
               </Menu>
             </Box>
           )}
-
 
         </Box>
         <Divider />

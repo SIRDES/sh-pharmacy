@@ -3,70 +3,54 @@
 import {
   Box,
   Button,
-  Card,
   Divider,
   IconButton,
   InputAdornment,
-  ListItem,
   Menu,
+  MenuItem,
   Paper,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
   TextField,
   Tooltip,
   Typography,
 } from "@mui/material";
 import React, { use, useEffect, useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
-
+import TableChartIcon from "@mui/icons-material/TableChart";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import DeleteIcon from "@mui/icons-material/Delete";
 import { showAlert } from "@/components/Alerts";
 import { useRouter } from "next/navigation";
 import LoadingAlert from "@/components/LoadingAlert";
 import EditCategoryModal from "@/components/shops/EditCategory";
-import ConfirmationModal from "@/components/ConfirmationModal";
 import Link from "next/link";
 import { StyledTableCell, StyledTableRow } from "@/theme/table";
 import { currencyFormatter } from "@/utils/services/utils";
-import { getAllShops, getAShopById } from "@/utils/serverActions/Shop";
-import { signOut, useSession } from "next-auth/react";
-// import { deleteShopProduct } from "@/utils/serverActions/ShopProduct";
+import { getAShopById } from "@/utils/serverActions/Shop";
+import { useSession } from "next-auth/react";
+import { exportShopProductsToPDF, exportShopProductsToXLSX } from "@/utils/services/exportProducts";
+import { USER_ROLES } from "@/types/constants";
 export default function CategoryDetails({ params }: { params: Promise<{ id: string }> }) {
-  // const theme = useTheme();
   const { id } = use(params);
   const router = useRouter();
-  // const posCategories = (window as any).pos?.categories
+  const { data: session } = useSession();
+  const currentUser = session?.user;
+  const isAdmin = currentUser?.role === USER_ROLES.ADMIN;
   const [categoryData, setCategoryData] = useState<any>({});
   const [fetchedCategoryData, setFetchedCategoryData] = useState<any>({});
   const [loading, setLoading] = useState(false);
-
-
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
   const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
-  const [openDeleteConfirmationModal, setOpenDeleteConfirmationModal] = useState(false);
   const [sortAsc, setSortAsc] = useState(false);
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -120,43 +104,6 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOpenDeleteConfirmationModal = () => {
-    setOpenDeleteConfirmationModal(true);
-  };
-  const handleCloseDeleteConfirmationModal = () => {
-    setOpenDeleteConfirmationModal(false);
-  };
-  const handleDeleteCategory = async () => {
-    try {
-      // const res = await deleteShopProduct(id as string);
-      // if (!res.success) {
-      //   showAlert({
-      //     title: "Error",
-      //     text: res?.message || "An error occurred",
-      //     severity: "error",
-      //   });
-      //   return;
-      // }
-      // showAlert({
-      //   title: "Success",
-      //   text: res?.message || "Category deleted successfully",
-      //   severity: "success",
-      //   handleConfirmButtonClick: () => {
-      //     router.back();
-      //   }
-      // });
-
-    } catch (error: any) {
-      console.log("error", error);
-      showAlert({
-        title: "Error",
-        text: error.message || error.data || "An error occurred",
-        severity: "error",
-      });
-    } finally {
-      setOpenDeleteConfirmationModal(false);
-    }
-  };
   const handleSearchByProductNameOrProductSKU = (e: any) => {
     const value = e.target.value;
     // console.log("value", value);
@@ -185,6 +132,50 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
       setCategoryData({ ...categoryData, shopProducts: sortedProducts });
     }, 300);
   };
+
+  const handleExport = (format: "xlsx" | "pdf") => {
+    handleClose();
+    const productsToExport = categoryData?.shopProducts || [];
+
+    if (!productsToExport.length) {
+      showAlert({
+        title: "No Products",
+        text: "No products available to export for this shop",
+        severity: "warning",
+      });
+      return;
+    }
+
+    try {
+      if (format === "xlsx") {
+        exportShopProductsToXLSX(
+          productsToExport,
+          categoryData?.name || "Shop",
+          isAdmin
+        );
+      } else {
+        exportShopProductsToPDF(
+          productsToExport,
+          categoryData?.name || "Shop",
+          isAdmin
+        );
+      }
+
+      showAlert({
+        title: "Success",
+        text: `Shop products exported as ${format.toUpperCase()} successfully`,
+        severity: "success",
+      });
+    } catch (error: any) {
+      console.error("Export error:", error);
+      showAlert({
+        title: "Error",
+        text: error?.message || "An error occurred while exporting shop products",
+        severity: "error",
+      });
+    }
+  };
+
   return (
     <>
       <LoadingAlert open={loading} />
@@ -195,14 +186,6 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
         refetchFunction={fetchShopData}
         categoryData={categoryData}
       />
-      {/* <ConfirmationModal
-        open={openDeleteConfirmationModal}
-        onClose={handleCloseDeleteConfirmationModal}
-        onConfirm={handleDeleteCategory}
-        title="Delete Shop"
-        message="Are you sure you want to delete this shop product?"
-        confirmButtonText="Delete"
-      /> */}
       <Box mb={10}>
         <Box mb={1} mt={1} px={{ xs: 1, sm: 2, md: 3 }}>
           <Link
@@ -231,72 +214,25 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
         >
           <Box
             display={"flex"}
-            // flexDirection={{ xs: "column", md: "row" }}
             gap={{ xs: 1, sm: 2, md: 3 }}
             justifyContent={"space-between"}
             alignItems={"center"}
             mb={1}
             mt={1}
             px={{ xs: 1, sm: 2, md: 3 }}
-
-
           >
             <Typography variant="body1" fontWeight={700} gutterBottom>
               Shop - {categoryData?.name?.toUpperCase()}
             </Typography>
             <Box display="flex">
               {categoryData && (
-                <Box>
-                  <Tooltip title="Edit">
-                    <IconButton onClick={() => setOpenEditCategoryModal(true)}>
-                      <EditIcon />
-                    </IconButton>
-                  </Tooltip>
-                  {/* <Tooltip title="Delete">
-                    <IconButton onClick={handleOpenDeleteConfirmationModal}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip> */}
-                </Box>
-
-              )}
-              {/* <>
-
-                <Tooltip title="Add Product">
-                  <IconButton onClick={handleMenuClick}>
-                    <AddIcon />
+                <Tooltip title="Edit">
+                  <IconButton onClick={() => setOpenEditCategoryModal(true)}>
+                    <EditIcon />
                   </IconButton>
                 </Tooltip>
-                <Menu
-                  id="menu-batch"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <ListItem
-                    component={Link}
-                    href={`/products/new?categoryId=${id}`}
-                    sx={{ color: "text.primary" }}
-                  >
-                    Single
-                  </ListItem>
-                  <ListItem
-                  // sx={{ fontSize: "12px" }}
-                  // onClick={handleExcelClick}
-                  >
-                    From excel
-                  </ListItem>
-                </Menu>
-              </> */}
+              )}
+
             </Box>
           </Box>
           <Divider />
@@ -324,6 +260,52 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
                       ),
                     }}
                   />
+                </Box>
+                <Box>
+                  <Button
+                    variant="contained"
+                    disableElevation
+                    onClick={(event) =>
+                      handleMenuClick(event)
+                    }
+                    size="small"
+                  >
+                    Action
+                  </Button>
+
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    transformOrigin={{
+                      horizontal: "right",
+                      vertical: "top",
+                    }}
+                    anchorOrigin={{
+                      horizontal: "right",
+                      vertical: "bottom",
+                    }}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    <MenuItem
+                      onClick={() => handleExport("xlsx")}
+                      sx={{ display: "flex", alignItems: "center", gap: 1.5 }}
+                    >
+                      <TableChartIcon fontSize="small" color="primary" />
+                      Export as xlsx
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => handleExport("pdf")}
+                      sx={{ display: "flex", alignItems: "center", gap: 1.5 }}
+                    >
+                      <PictureAsPdfIcon fontSize="small" color="error" />
+                      Export as pdf
+                    </MenuItem>
+
+                  </Menu>
                 </Box>
               </Box>
               <Divider />

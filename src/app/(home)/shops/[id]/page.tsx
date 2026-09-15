@@ -32,7 +32,7 @@ import LoadingAlert from "@/components/LoadingAlert";
 import EditCategoryModal from "@/components/shops/EditCategory";
 import Link from "next/link";
 import { StyledTableCell, StyledTableRow } from "@/theme/table";
-import { currencyFormatter } from "@/utils/services/utils";
+import { currencyFormatter, formatDateWithoutTime, getExpiryStatus } from "@/utils/services/utils";
 import { getAShopById } from "@/utils/serverActions/Shop";
 import { useSession } from "next-auth/react";
 import { exportShopProductsToPDF, exportShopProductsToXLSX } from "@/utils/services/exportProducts";
@@ -187,55 +187,61 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
         categoryData={categoryData}
       />
       <Box mb={10}>
-        <Box mb={1} mt={1} px={{ xs: 1, sm: 2, md: 3 }}>
-          <Link
-            href={"/shops"}
-            style={{
-              textDecoration: "none",
-              color: "black",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-              }}
-            >
-              <ArrowBackIcon />
-              Shops
+        {currentUser?.role === USER_ROLES.ADMIN && (
+          <>
+            <Box mb={1} mt={1} px={{ xs: 1, sm: 2, md: 3 }}>
+              <Link
+                href={"/shops"}
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
+                  <ArrowBackIcon />
+                  Shops
+                </Box>
+              </Link>
             </Box>
-          </Link>
-        </Box>
-        <Divider />
-        <Box
-          mb={2}
+            <Divider />
+          </>
+        )}
+        <Box mb={2}>
+          {currentUser?.role === USER_ROLES.ADMIN && (
+            <>
+              <Box
+                display={"flex"}
+                gap={{ xs: 1, sm: 2, md: 3 }}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                mb={1}
+                mt={1}
+                px={{ xs: 1, sm: 2, md: 3 }}
+              >
+                <Typography variant="body1" fontWeight={700} gutterBottom>
+                  Shop - {categoryData?.name?.toUpperCase()}
+                </Typography>
+                <Box display="flex">
+                  {categoryData && (
+                    <Tooltip title="Edit">
+                      <IconButton onClick={() => setOpenEditCategoryModal(true)}>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                  )}
 
-        >
-          <Box
-            display={"flex"}
-            gap={{ xs: 1, sm: 2, md: 3 }}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            mb={1}
-            mt={1}
-            px={{ xs: 1, sm: 2, md: 3 }}
-          >
-            <Typography variant="body1" fontWeight={700} gutterBottom>
-              Shop - {categoryData?.name?.toUpperCase()}
-            </Typography>
-            <Box display="flex">
-              {categoryData && (
-                <Tooltip title="Edit">
-                  <IconButton onClick={() => setOpenEditCategoryModal(true)}>
-                    <EditIcon />
-                  </IconButton>
-                </Tooltip>
-              )}
+                </Box>
+              </Box>
+              <Divider />
+            </>
+          )}
 
-            </Box>
-          </Box>
-          <Divider />
           {Object.keys(categoryData).length !== 0 && (
             <>
               <Box
@@ -346,6 +352,8 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
                             onClick={handleSortByIDAsc}
                           />
                         </Tooltip> </StyledTableCell>
+                        <StyledTableCell>Expiry Date</StyledTableCell>
+                        <StyledTableCell>Exp. Status</StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -370,6 +378,12 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
                               </StyledTableCell>
                               <StyledTableCell>
                                 {product?.quantity || 0}
+                              </StyledTableCell>
+                              <StyledTableCell>
+                                {formatDateWithoutTime(product?.product?.expiryDate)}
+                              </StyledTableCell>
+                              <StyledTableCell>
+                                {getExpiryStatus(product?.product?.expiryDate)}
                               </StyledTableCell>
 
                             </StyledTableRow>

@@ -9,7 +9,7 @@ declare module "next-auth" {
       name: string;
       username: string;
       phoneNumber: string;
-      role: "admin" | "shopkeeper";
+      role: "admin" | "user";
       assignedShop?: any;
       isSuspended: boolean;
       gender: string;

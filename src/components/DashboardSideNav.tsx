@@ -55,13 +55,10 @@ const StyledNavItem = styled(
 
 export default function DashboardSideNav({
   sideNavWidth,
-  setSideNavWidth,
-  userType,
-  // navLists,
+  setSideNavWidth
 }: {
   sideNavWidth: string;
   setSideNavWidth: React.Dispatch<React.SetStateAction<string>>;
-  userType: string;
   // navLists: { id: number; name: string; href: string }[];
 }) {
   const { data: session } = useSession();
@@ -113,6 +110,7 @@ export default function DashboardSideNav({
   };
 
   const isAdmin = currentUser?.role === "admin";
+  const isUser = currentUser?.role === "user";
 
   type NavItem = {
     id: number;
@@ -131,7 +129,7 @@ export default function DashboardSideNav({
       name: "Sales",
       href: "/sales",
     },
-    {
+    isAdmin && {
       id: 3,
       name: "Products",
       href: "/products",
@@ -145,6 +143,11 @@ export default function DashboardSideNav({
       id: 5,
       name: "Users",
       href: "/users",
+    },
+    isUser && {
+      id: 6,
+      name: "Shop Products",
+      href: `/shops/${currentUser?.assignedShop?._id}`,
     },
   ].filter(Boolean) as NavItem[];
 

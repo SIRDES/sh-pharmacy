@@ -26,11 +26,31 @@ export const currencyFormatter = (value: number | bigint) => {
   return formatter.format(value);
 };
 
+// returns  Expired | Not expired | Not yet | N/A
+export const getExpiryStatus = (expiryDate: Date | string | undefined | null) => {
+  if (!expiryDate) {
+    return "N/A";
+  }
+  const today = dayjs();
+  const expiry = dayjs(expiryDate);
+  if (expiry.isBefore(today, "day") || expiry.isSame(today, "day")) {
+    return "Expired";
+  } else if (expiry.isBefore(today.add(3, "month"), "day")) {
+    return "Expiring soon";
+  } else {
+    return "Not yet";
+  }
+};
+
 
 // dayjs(orderData.createdAt).format("ddd DD MMM YYYY HH:mm:ss A")
 // format date
 export const formatDate = (date: Date) => {
   return date ? dayjs(date).format("ddd DD MMM YYYY HH:mm:ss A") : "";
+};
+export const formatDateWithoutTime = (date: Date | string | undefined | null) => {
+  if (!date) return "N/A";
+  return dayjs(date).format("ddd DD MMM YYYY");
 };
 
 export function isGreaterThan24HourAgo(date: Date) {

@@ -2,7 +2,6 @@
 import DashboardSideNav from "@/components/DashboardSideNav";
 import LoadingAlert from "@/components/LoadingAlert";
 import PageHeader from "@/components/PageHeader";
-import { adminNavLists } from "@/utils/mainNavLists";
 import { Box, Stack } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -28,8 +27,6 @@ export default function AdminLayout({
       <DashboardSideNav
         sideNavWidth={sideNavWidth}
         setSideNavWidth={setSideNavWidth}
-        userType="admin"
-      // navLists={adminNavLists}
       />
       <Box
         sx={{

@@ -34,7 +34,7 @@ import { showAlert } from "@/components/Alerts";
 import LoadingAlert from "@/components/LoadingAlert";
 import { USER_ROLES } from "@/types/constants";
 import Link from "next/link";
-import { currencyFormatter } from "@/utils/services/utils";
+import { currencyFormatter, formatDateWithoutTime, getExpiryStatus } from "@/utils/services/utils";
 import { getAllProducts, updateMultipleProductsStock, updateProduct } from "@/utils/serverActions/Product";
 import dayjs from "dayjs";
 import ManageShopsStockModal from "@/components/ManageShopsStockModal";
@@ -540,22 +540,10 @@ export default function Products() {
                         {order?.shopProducts?.length > 0 ? order?.shopProducts?.map((shopProduct: any) => shopProduct?.quantity).reduce((a: number, b: number) => a + b, 0) : 0}
                       </StyledTableCell>}
                       <StyledTableCell>
-                        {order?.expiryDate ? dayjs(order.expiryDate).format("ddd DD MMM YYYY") : ""}
+                        {formatDateWithoutTime(order?.expiryDate)}
                       </StyledTableCell>
                       <StyledTableCell>
-                        {order?.expiryDate
-                          ? (() => {
-                            const today = dayjs();
-                            const expiry = dayjs(order.expiryDate);
-                            if (expiry.isBefore(today, "day") || expiry.isSame(today, "day")) {
-                              return "Expired";
-                            } else if (expiry.isBefore(today.add(3, "month"), "day")) {
-                              return "Expiring soon";
-                            } else {
-                              return "Not yet";
-                            }
-                          })()
-                          : ""}
+                        {getExpiryStatus(order?.expiryDate)}
                       </StyledTableCell>
 
                     </StyledTableRow>

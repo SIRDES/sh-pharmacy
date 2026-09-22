@@ -366,6 +366,10 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
                           .map((product: any, index: number) => (
                             <StyledTableRow
                               key={product?._id}
+                              onClick={() =>
+                                router.push(`/products/${product?.product?._id}`)
+                              }
+                              sx={{ cursor: "pointer" }}
                             >
                               <StyledTableCell>
                                 {product?.product?.sku}

@@ -540,11 +540,12 @@ export default function ProductDetails({ params }: { params: Promise<{ id: strin
       <Box mb={10}>
         <Box mb={1} mt={1} px={{ xs: 1, sm: 2, md: 3 }}>
           <Link
-            href={"/products"}
+            onClick={() => router.back()}
             style={{
               textDecoration: "none",
               color: "black",
             }}
+            href={"#"}
           >
             <Box
               sx={{

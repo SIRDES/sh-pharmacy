@@ -308,7 +308,7 @@ export default function Products() {
 
       showAlert({
         title: "Success",
-        text: `Exported ${res.data.length} product(s) as ${format.toUpperCase()} successfully`,
+        text: `Exported ${res.data.length} product(s) as ${format === "xlsx" ? "Excel" : format.toUpperCase()} successfully`,
         severity: "success",
       });
     } catch (error: any) {

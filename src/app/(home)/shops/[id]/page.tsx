@@ -163,7 +163,7 @@ export default function CategoryDetails({ params }: { params: Promise<{ id: stri
 
       showAlert({
         title: "Success",
-        text: `Shop products exported as ${format.toUpperCase()} successfully`,
+        text: `Shop products exported as ${format === "xlsx" ? "Excel" : format.toUpperCase()} successfully`,
         severity: "success",
       });
     } catch (error: any) {
